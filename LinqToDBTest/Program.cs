@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using DataModels;
+using LinqToDB.Data;
 
 namespace LinqToDBTest
 {
@@ -12,6 +14,10 @@ namespace LinqToDBTest
     {
         static void Main(string[] args)
         {
+#if DEBUG
+            DataConnection.TurnTraceSwitchOn();
+            DataConnection.WriteTraceLine = (msg, context) => Debug.WriteLine(msg, context);
+#endif
             using (var db = new AdventureWorks2016DB())
             {
                 var q =

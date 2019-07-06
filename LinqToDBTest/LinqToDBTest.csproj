@@ -57,6 +57,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AdventureWorks2016.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModels\Peppapig1.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Peppapig.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
@@ -85,6 +90,10 @@
     <Content Include="DataModels\AdventureWorks2016.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AdventureWorks20161.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModels\Peppapig.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Peppapig1.generated.cs</LastGenOutput>
     </Content>
     <Content Include="LinqToDB.Templates\CopyMe.SqlServer.tt.txt" />
     <Content Include="SqlServerTypes\readme.htm" />

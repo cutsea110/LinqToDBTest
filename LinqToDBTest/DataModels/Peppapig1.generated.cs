@@ -68,7 +68,7 @@ namespace DataModels
 	/// <summary>
 	/// アカウント
 	/// </summary>
-	[Table(Schema="base", Name="Account")]
+	[Table(Schema="Common", Name="Account")]
 	public partial class Account
 	{
 		/// <summary>
@@ -150,7 +150,7 @@ namespace DataModels
 	/// <summary>
 	/// 住所
 	/// </summary>
-	[Table(Schema="base", Name="Address")]
+	[Table(Schema="HumanResource", Name="Address")]
 	public partial class Address
 	{
 		/// <summary>
@@ -270,7 +270,7 @@ namespace DataModels
 	/// <summary>
 	/// 住所種別
 	/// </summary>
-	[Table(Schema="base", Name="AddressType")]
+	[Table(Schema="Common", Name="AddressType")]
 	public partial class AddressType
 	{
 		/// <summary>
@@ -332,7 +332,7 @@ namespace DataModels
 	/// <summary>
 	/// 連絡先
 	/// </summary>
-	[Table(Schema="base", Name="Contact")]
+	[Table(Schema="HumanResource", Name="Contact")]
 	public partial class Contact
 	{
 		/// <summary>
@@ -424,7 +424,7 @@ namespace DataModels
 	/// <summary>
 	/// 連絡先種別
 	/// </summary>
-	[Table(Schema="base", Name="ContactType")]
+	[Table(Schema="Common", Name="ContactType")]
 	public partial class ContactType
 	{
 		/// <summary>
@@ -486,7 +486,7 @@ namespace DataModels
 	/// <summary>
 	/// 職員
 	/// </summary>
-	[Table(Schema="base", Name="Staff")]
+	[Table(Schema="HumanResource", Name="Staff")]
 	public partial class Staff
 	{
 		/// <summary>

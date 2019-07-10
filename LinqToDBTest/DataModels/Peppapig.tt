@@ -2,6 +2,7 @@
 <#@ output extension=".generated.cs"                                                  #>
 <#@ include file="$(LinqToDBT4SqlServerTemplatesDirectory)LinqToDB.SqlServer.Tools.ttinclude" #>
 <#@ include file="$(LinqToDBT4SqlServerTemplatesDirectory)PluralizationService.ttinclude"     #>
+<#@ include file="$(LinqToDBT4SqlServerTemplatesDirectory)NotifyPropertyChanged.ttinclude"    #>
 <# //@ include file="$(ProjectDir)LinqToDB.Templates\LinqToDB.SqlServer.Tools.ttinclude" #>
 <# //@ include file="$(ProjectDir)LinqToDB.Templates\PluralizationService.ttinclude"     #>
 <#
@@ -47,6 +48,11 @@
 	*/
 
 	NamespaceName = "DataModels";
+    GenerateSchemaAsType = false;
+    PrefixTableMappingWithSchema = true;
+    GenerateDataTypes = true;
+    GenerateDbTypes = true;
+    NormalizeNames = false;
 
 //	LoadSqlServerMetadata("MyServer", "MyDatabase", "User", "Password");
 //	LoadSqlServerMetadata(".", "MyDatabase"); // Integrated Security

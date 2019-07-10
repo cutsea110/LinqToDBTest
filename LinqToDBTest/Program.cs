@@ -18,14 +18,14 @@ namespace LinqToDBTest
             DataConnection.TurnTraceSwitchOn();
             DataConnection.WriteTraceLine = (msg, context) => Debug.WriteLine(msg, context);
 #endif
-            using (var db = new AdventureWorks2016DB())
+            using (var db = new peppaDB())
             {
                 var q =
-                    from c in db.Customers
+                    from c in db.Accounts
                     select new
                     {
-                        CustomerName = $"{c.Person.FirstName} {c.Person.MiddleName} {c.Person.LastName}",
-                        OrderCount = c.SalesOrderHeaderCustomerIds.Count(),
+                        c.account_id,
+                        c.is_valid
                     };
 
                 foreach (var c in q)

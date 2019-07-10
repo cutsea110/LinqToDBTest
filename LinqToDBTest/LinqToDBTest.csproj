@@ -52,11 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataModels\AdventureWorks20161.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AdventureWorks2016.tt</DependentUpon>
-    </Compile>
+    <Compile Include="DataModels\DbContext.cs" />
     <Compile Include="DataModels\Peppapig1.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,10 +83,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataModels\AdventureWorks2016.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AdventureWorks20161.generated.cs</LastGenOutput>
-    </Content>
     <Content Include="DataModels\Peppapig.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Peppapig1.generated.cs</LastGenOutput>

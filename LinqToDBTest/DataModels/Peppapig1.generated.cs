@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 using LinqToDB;
@@ -21,7 +22,7 @@ namespace DataModels
 	/// Data Source    : localhost
 	/// Server Version : 13.00.4224
 	/// </summary>
-	public partial class PeppaDB : LinqToDB.Data.DataConnection
+	public partial class peppaDB : LinqToDB.Data.DataConnection
 	{
 		/// <summary>
 		/// アカウント
@@ -44,17 +45,25 @@ namespace DataModels
 		/// </summary>
 		public ITable<ContactType> ContactTypes { get { return this.GetTable<ContactType>(); } }
 		/// <summary>
+		/// エラーログ
+		/// </summary>
+		public ITable<ErrorLog>    ErrorLogs    { get { return this.GetTable<ErrorLog>(); } }
+		/// <summary>
 		/// 職員
 		/// </summary>
 		public ITable<Staff>       Staffs       { get { return this.GetTable<Staff>(); } }
+		/// <summary>
+		/// テスト
+		/// </summary>
+		public ITable<Test>        Tests        { get { return this.GetTable<Test>(); } }
 
-		public PeppaDB()
+		public peppaDB()
 		{
 			InitDataContext();
 			InitMappingSchema();
 		}
 
-		public PeppaDB(string configuration)
+		public peppaDB(string configuration)
 			: base(configuration)
 		{
 			InitDataContext();
@@ -69,80 +78,761 @@ namespace DataModels
 	/// アカウント
 	/// </summary>
 	[Table(Schema="Common", Name="Account")]
-	public partial class Account
+	public partial class Account : INotifyPropertyChanged
 	{
+		#region uid : int
+
+		private int _uid;
 		/// <summary>
 		/// ユニークID
 		/// </summary>
-		[Column("uid"),                                                    PrimaryKey,  Identity] public int       Uid            { get; set; } // int
+		[Column(DbType="int",          DataType=DataType.Int32)    , PrimaryKey, Identity]
+		public  int  uid // int
+		{
+			get { return _uid; }
+			set
+			{
+				if (_uid != value)
+				{
+					BeforeuidChanged(value);
+					_uid = value;
+					AfteruidChanged();
+
+					OnuidChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeuidChanged(int newValue);
+		partial void AfteruidChanged ();
+
+		public const string NameOfuid = "uid";
+
+		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
+
+		private void OnuidChanged()
+		{
+			OnPropertyChanged(_uidChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region account_id : int
+
+		private int _account_id;
 		/// <summary>
 		/// アカウントID
 		/// </summary>
-		[Column("account_id"),                                             NotNull              ] public int       AccountId      { get; set; } // int
+		[Column(DbType="int",          DataType=DataType.Int32)    , NotNull]
+		public  int  account_id // int
+		{
+			get { return _account_id; }
+			set
+			{
+				if (_account_id != value)
+				{
+					Beforeaccount_idChanged(value);
+					_account_id = value;
+					Afteraccount_idChanged();
+
+					Onaccount_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeaccount_idChanged(int newValue);
+		partial void Afteraccount_idChanged ();
+
+		public const string NameOfaccount_id = "account_id";
+
+		private static readonly PropertyChangedEventArgs _account_idChangedEventArgs = new PropertyChangedEventArgs(NameOfaccount_id);
+
+		private void Onaccount_idChanged()
+		{
+			OnPropertyChanged(_account_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region staff_no : string
+
+		private string _staff_no;
 		/// <summary>
 		/// 職員番号
 		/// </summary>
-		[Column("staff_no"),                                                  Nullable          ] public string    StaffNo        { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  staff_no // varchar(16)
+		{
+			get { return _staff_no; }
+			set
+			{
+				if (_staff_no != value)
+				{
+					Beforestaff_noChanged(value);
+					_staff_no = value;
+					Afterstaff_noChanged();
+
+					Onstaff_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforestaff_noChanged(string newValue);
+		partial void Afterstaff_noChanged ();
+
+		public const string NameOfstaff_no = "staff_no";
+
+		private static readonly PropertyChangedEventArgs _staff_noChangedEventArgs = new PropertyChangedEventArgs(NameOfstaff_no);
+
+		private void Onstaff_noChanged()
+		{
+			OnPropertyChanged(_staff_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region teacher_no : string
+
+		private string _teacher_no;
 		/// <summary>
 		/// 教員番号
 		/// </summary>
-		[Column("teacher_no"),                                                Nullable          ] public string    TeacherNo      { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  teacher_no // varchar(16)
+		{
+			get { return _teacher_no; }
+			set
+			{
+				if (_teacher_no != value)
+				{
+					Beforeteacher_noChanged(value);
+					_teacher_no = value;
+					Afterteacher_noChanged();
+
+					Onteacher_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeteacher_noChanged(string newValue);
+		partial void Afterteacher_noChanged ();
+
+		public const string NameOfteacher_no = "teacher_no";
+
+		private static readonly PropertyChangedEventArgs _teacher_noChangedEventArgs = new PropertyChangedEventArgs(NameOfteacher_no);
+
+		private void Onteacher_noChanged()
+		{
+			OnPropertyChanged(_teacher_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region student_no : string
+
+		private string _student_no;
 		/// <summary>
 		/// 学生番号
 		/// </summary>
-		[Column("student_no"),                                                Nullable          ] public string    StudentNo      { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  student_no // varchar(16)
+		{
+			get { return _student_no; }
+			set
+			{
+				if (_student_no != value)
+				{
+					Beforestudent_noChanged(value);
+					_student_no = value;
+					Afterstudent_noChanged();
+
+					Onstudent_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforestudent_noChanged(string newValue);
+		partial void Afterstudent_noChanged ();
+
+		public const string NameOfstudent_no = "student_no";
+
+		private static readonly PropertyChangedEventArgs _student_noChangedEventArgs = new PropertyChangedEventArgs(NameOfstudent_no);
+
+		private void Onstudent_noChanged()
+		{
+			OnPropertyChanged(_student_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region out_student_no : string
+
+		private string _out_student_no;
 		/// <summary>
 		/// 除籍生番号
 		/// </summary>
-		[Column("out_student_no"),                                            Nullable          ] public string    OutStudentNo   { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  out_student_no // varchar(16)
+		{
+			get { return _out_student_no; }
+			set
+			{
+				if (_out_student_no != value)
+				{
+					Beforeout_student_noChanged(value);
+					_out_student_no = value;
+					Afterout_student_noChanged();
+
+					Onout_student_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeout_student_noChanged(string newValue);
+		partial void Afterout_student_noChanged ();
+
+		public const string NameOfout_student_no = "out_student_no";
+
+		private static readonly PropertyChangedEventArgs _out_student_noChangedEventArgs = new PropertyChangedEventArgs(NameOfout_student_no);
+
+		private void Onout_student_noChanged()
+		{
+			OnPropertyChanged(_out_student_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region parent_no : string
+
+		private string _parent_no;
 		/// <summary>
 		/// 保護者番号
 		/// </summary>
-		[Column("parent_no"),                                                 Nullable          ] public string    ParentNo       { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  parent_no // varchar(16)
+		{
+			get { return _parent_no; }
+			set
+			{
+				if (_parent_no != value)
+				{
+					Beforeparent_noChanged(value);
+					_parent_no = value;
+					Afterparent_noChanged();
+
+					Onparent_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeparent_noChanged(string newValue);
+		partial void Afterparent_noChanged ();
+
+		public const string NameOfparent_no = "parent_no";
+
+		private static readonly PropertyChangedEventArgs _parent_noChangedEventArgs = new PropertyChangedEventArgs(NameOfparent_no);
+
+		private void Onparent_noChanged()
+		{
+			OnPropertyChanged(_parent_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region user_id : string
+
+		private string _user_id;
 		/// <summary>
 		/// 利用者番号
 		/// </summary>
-		[Column("user_id"),                                                   Nullable          ] public string    UserId         { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  user_id // varchar(16)
+		{
+			get { return _user_id; }
+			set
+			{
+				if (_user_id != value)
+				{
+					Beforeuser_idChanged(value);
+					_user_id = value;
+					Afteruser_idChanged();
+
+					Onuser_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeuser_idChanged(string newValue);
+		partial void Afteruser_idChanged ();
+
+		public const string NameOfuser_id = "user_id";
+
+		private static readonly PropertyChangedEventArgs _user_idChangedEventArgs = new PropertyChangedEventArgs(NameOfuser_id);
+
+		private void Onuser_idChanged()
+		{
+			OnPropertyChanged(_user_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region auth_method_type : int
+
+		private int _auth_method_type;
 		/// <summary>
 		/// 認証方式
 		/// </summary>
-		[Column("auth_method_type"),                                       NotNull              ] public int       AuthMethodType { get; set; } // int
+		[Column(DbType="int",          DataType=DataType.Int32)    , NotNull]
+		public  int  auth_method_type // int
+		{
+			get { return _auth_method_type; }
+			set
+			{
+				if (_auth_method_type != value)
+				{
+					Beforeauth_method_typeChanged(value);
+					_auth_method_type = value;
+					Afterauth_method_typeChanged();
+
+					Onauth_method_typeChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeauth_method_typeChanged(int newValue);
+		partial void Afterauth_method_typeChanged ();
+
+		public const string NameOfauth_method_type = "auth_method_type";
+
+		private static readonly PropertyChangedEventArgs _auth_method_typeChangedEventArgs = new PropertyChangedEventArgs(NameOfauth_method_type);
+
+		private void Onauth_method_typeChanged()
+		{
+			OnPropertyChanged(_auth_method_typeChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region is_valid : int
+
+		private int _is_valid;
 		/// <summary>
 		/// 有効フラグ
 		/// </summary>
-		[Column("is_valid"),                                               NotNull              ] public int       IsValid        { get; set; } // int
+		[Column(DbType="int",          DataType=DataType.Int32)    , NotNull]
+		public  int  is_valid // int
+		{
+			get { return _is_valid; }
+			set
+			{
+				if (_is_valid != value)
+				{
+					Beforeis_validChanged(value);
+					_is_valid = value;
+					Afteris_validChanged();
+
+					Onis_validChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeis_validChanged(int newValue);
+		partial void Afteris_validChanged ();
+
+		public const string NameOfis_valid = "is_valid";
+
+		private static readonly PropertyChangedEventArgs _is_validChangedEventArgs = new PropertyChangedEventArgs(NameOfis_valid);
+
+		private void Onis_validChanged()
+		{
+			OnPropertyChanged(_is_validChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_at : DateTime
+
+		private DateTime _created_at;
 		/// <summary>
 		/// 作成日時
 		/// </summary>
-		[Column("created_at"),                                             NotNull              ] public DateTime  CreatedAt      { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  created_at // datetime2(7)
+		{
+			get { return _created_at; }
+			set
+			{
+				if (_created_at != value)
+				{
+					Beforecreated_atChanged(value);
+					_created_at = value;
+					Aftercreated_atChanged();
+
+					Oncreated_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_atChanged(DateTime newValue);
+		partial void Aftercreated_atChanged ();
+
+		public const string NameOfcreated_at = "created_at";
+
+		private static readonly PropertyChangedEventArgs _created_atChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_at);
+
+		private void Oncreated_atChanged()
+		{
+			OnPropertyChanged(_created_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_by : string
+
+		private string _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column("created_by"),                                             NotNull              ] public string    CreatedBy      { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  created_by // varchar(16)
+		{
+			get { return _created_by; }
+			set
+			{
+				if (_created_by != value)
+				{
+					Beforecreated_byChanged(value);
+					_created_by = value;
+					Aftercreated_byChanged();
+
+					Oncreated_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_byChanged(string newValue);
+		partial void Aftercreated_byChanged ();
+
+		public const string NameOfcreated_by = "created_by";
+
+		private static readonly PropertyChangedEventArgs _created_byChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_by);
+
+		private void Oncreated_byChanged()
+		{
+			OnPropertyChanged(_created_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_at : DateTime
+
+		private DateTime _modified_at;
 		/// <summary>
 		/// 更新日時
 		/// </summary>
-		[Column("modified_at"),                                            NotNull              ] public DateTime  ModifiedAt     { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  modified_at // datetime2(7)
+		{
+			get { return _modified_at; }
+			set
+			{
+				if (_modified_at != value)
+				{
+					Beforemodified_atChanged(value);
+					_modified_at = value;
+					Aftermodified_atChanged();
+
+					Onmodified_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_atChanged(DateTime newValue);
+		partial void Aftermodified_atChanged ();
+
+		public const string NameOfmodified_at = "modified_at";
+
+		private static readonly PropertyChangedEventArgs _modified_atChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_at);
+
+		private void Onmodified_atChanged()
+		{
+			OnPropertyChanged(_modified_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_by : string
+
+		private string _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column("modified_by"),                                            NotNull              ] public string    ModifiedBy     { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  modified_by // varchar(16)
+		{
+			get { return _modified_by; }
+			set
+			{
+				if (_modified_by != value)
+				{
+					Beforemodified_byChanged(value);
+					_modified_by = value;
+					Aftermodified_byChanged();
+
+					Onmodified_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_byChanged(string newValue);
+		partial void Aftermodified_byChanged ();
+
+		public const string NameOfmodified_by = "modified_by";
+
+		private static readonly PropertyChangedEventArgs _modified_byChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_by);
+
+		private void Onmodified_byChanged()
+		{
+			OnPropertyChanged(_modified_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region removed_at : DateTime?
+
+		private DateTime? _removed_at;
 		/// <summary>
 		/// 削除日時
 		/// </summary>
-		[Column("removed_at"),                                                Nullable          ] public DateTime? RemovedAt      { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7),    Nullable]
+		public  DateTime?  removed_at // datetime2(7)
+		{
+			get { return _removed_at; }
+			set
+			{
+				if (_removed_at != value)
+				{
+					Beforeremoved_atChanged(value);
+					_removed_at = value;
+					Afterremoved_atChanged();
+
+					Onremoved_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeremoved_atChanged(DateTime? newValue);
+		partial void Afterremoved_atChanged ();
+
+		public const string NameOfremoved_at = "removed_at";
+
+		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
+
+		private void Onremoved_atChanged()
+		{
+			OnPropertyChanged(_removed_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region row_version : byte[]
+
+		private byte[] _row_version;
 		/// <summary>
 		/// 版
 		/// </summary>
-		[Column("row_version",      SkipOnInsert=true, SkipOnUpdate=true), NotNull              ] public byte[]    RowVersion     { get; set; } // timestamp
+		[Column(DbType="timestamp",    DataType=DataType.Timestamp, SkipOnInsert=true, SkipOnUpdate=true), NotNull]
+		public  byte[]  row_version // timestamp
+		{
+			get { return _row_version; }
+			set
+			{
+				if (_row_version != value)
+				{
+					Beforerow_versionChanged(value);
+					_row_version = value;
+					Afterrow_versionChanged();
+
+					Onrow_versionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerow_versionChanged(byte[] newValue);
+		partial void Afterrow_versionChanged ();
+
+		public const string NameOfrow_version = "row_version";
+
+		private static readonly PropertyChangedEventArgs _row_versionChangedEventArgs = new PropertyChangedEventArgs(NameOfrow_version);
+
+		private void Onrow_versionChanged()
+		{
+			OnPropertyChanged(_row_versionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
 
 		#region Associations
 
+		#region Staff : Staff
+
+		private Staff _staff;
 		/// <summary>
 		/// FK_Account_Staff
 		/// </summary>
-		[Association(ThisKey="StaffNo", OtherKey="StaffNo", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_Account_Staff", BackReferenceName="Accounts")]
-		public Staff Staff { get; set; }
+		[Association(ThisKey="staff_no", OtherKey="staff_no", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_Account_Staff", BackReferenceName="Accounts")]
+		public  Staff  Staff
+		{
+			get { return _staff; }
+			set
+			{
+				if (_staff != value)
+				{
+					BeforeStaffChanged(value);
+					_staff = value;
+					AfterStaffChanged();
+
+					OnStaffChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeStaffChanged(Staff newValue);
+		partial void AfterStaffChanged ();
+
+		public const string NameOfStaff = "Staff";
+
+		private static readonly PropertyChangedEventArgs _staffChangedEventArgs = new PropertyChangedEventArgs(NameOfStaff);
+
+		private void OnStaffChanged()
+		{
+			OnPropertyChanged(_staffChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#endregion
+
+		#region INotifyPropertyChanged support
+
+#if !SILVERLIGHT
+		[field : NonSerialized]
+#endif
+		public virtual event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged(string propertyName)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, new PropertyChangedEventArgs(propertyName));
+						});
+#else
+				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+#endif
+			}
+		}
+
+		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, arg);
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, arg);
+						});
+#else
+				propertyChanged(this, arg);
+#endif
+			}
+		}
 
 		#endregion
 	}
@@ -151,118 +841,1130 @@ namespace DataModels
 	/// 住所
 	/// </summary>
 	[Table(Schema="HumanResource", Name="Address")]
-	public partial class Address
+	public partial class Address : INotifyPropertyChanged
 	{
+		#region uid : int
+
+		private int _uid;
 		/// <summary>
 		/// ユニークID
 		/// </summary>
-		[Column("uid"),                                                   PrimaryKey,  Identity] public int       Uid            { get; set; } // int
+		[Column(DbType="int",            DataType=DataType.Int32)    , PrimaryKey, Identity]
+		public  int  uid // int
+		{
+			get { return _uid; }
+			set
+			{
+				if (_uid != value)
+				{
+					BeforeuidChanged(value);
+					_uid = value;
+					AfteruidChanged();
+
+					OnuidChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeuidChanged(int newValue);
+		partial void AfteruidChanged ();
+
+		public const string NameOfuid = "uid";
+
+		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
+
+		private void OnuidChanged()
+		{
+			OnPropertyChanged(_uidChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region staff_no : string
+
+		private string _staff_no;
 		/// <summary>
 		/// 職員番号
 		/// </summary>
-		[Column("staff_no"),                                                 Nullable          ] public string    StaffNo        { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  staff_no // varchar(16)
+		{
+			get { return _staff_no; }
+			set
+			{
+				if (_staff_no != value)
+				{
+					Beforestaff_noChanged(value);
+					_staff_no = value;
+					Afterstaff_noChanged();
+
+					Onstaff_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforestaff_noChanged(string newValue);
+		partial void Afterstaff_noChanged ();
+
+		public const string NameOfstaff_no = "staff_no";
+
+		private static readonly PropertyChangedEventArgs _staff_noChangedEventArgs = new PropertyChangedEventArgs(NameOfstaff_no);
+
+		private void Onstaff_noChanged()
+		{
+			OnPropertyChanged(_staff_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region teacher_no : string
+
+		private string _teacher_no;
 		/// <summary>
 		/// 教員番号
 		/// </summary>
-		[Column("teacher_no"),                                               Nullable          ] public string    TeacherNo      { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  teacher_no // varchar(16)
+		{
+			get { return _teacher_no; }
+			set
+			{
+				if (_teacher_no != value)
+				{
+					Beforeteacher_noChanged(value);
+					_teacher_no = value;
+					Afterteacher_noChanged();
+
+					Onteacher_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeteacher_noChanged(string newValue);
+		partial void Afterteacher_noChanged ();
+
+		public const string NameOfteacher_no = "teacher_no";
+
+		private static readonly PropertyChangedEventArgs _teacher_noChangedEventArgs = new PropertyChangedEventArgs(NameOfteacher_no);
+
+		private void Onteacher_noChanged()
+		{
+			OnPropertyChanged(_teacher_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region student_no : string
+
+		private string _student_no;
 		/// <summary>
 		/// 学生番号
 		/// </summary>
-		[Column("student_no"),                                               Nullable          ] public string    StudentNo      { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  student_no // varchar(16)
+		{
+			get { return _student_no; }
+			set
+			{
+				if (_student_no != value)
+				{
+					Beforestudent_noChanged(value);
+					_student_no = value;
+					Afterstudent_noChanged();
+
+					Onstudent_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforestudent_noChanged(string newValue);
+		partial void Afterstudent_noChanged ();
+
+		public const string NameOfstudent_no = "student_no";
+
+		private static readonly PropertyChangedEventArgs _student_noChangedEventArgs = new PropertyChangedEventArgs(NameOfstudent_no);
+
+		private void Onstudent_noChanged()
+		{
+			OnPropertyChanged(_student_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region out_student_no : string
+
+		private string _out_student_no;
 		/// <summary>
 		/// 除籍生番号
 		/// </summary>
-		[Column("out_student_no"),                                           Nullable          ] public string    OutStudentNo   { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  out_student_no // varchar(16)
+		{
+			get { return _out_student_no; }
+			set
+			{
+				if (_out_student_no != value)
+				{
+					Beforeout_student_noChanged(value);
+					_out_student_no = value;
+					Afterout_student_noChanged();
+
+					Onout_student_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeout_student_noChanged(string newValue);
+		partial void Afterout_student_noChanged ();
+
+		public const string NameOfout_student_no = "out_student_no";
+
+		private static readonly PropertyChangedEventArgs _out_student_noChangedEventArgs = new PropertyChangedEventArgs(NameOfout_student_no);
+
+		private void Onout_student_noChanged()
+		{
+			OnPropertyChanged(_out_student_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region parent_no : string
+
+		private string _parent_no;
 		/// <summary>
 		/// 保護者番号
 		/// </summary>
-		[Column("parent_no"),                                                Nullable          ] public string    ParentNo       { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  parent_no // varchar(16)
+		{
+			get { return _parent_no; }
+			set
+			{
+				if (_parent_no != value)
+				{
+					Beforeparent_noChanged(value);
+					_parent_no = value;
+					Afterparent_noChanged();
+
+					Onparent_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeparent_noChanged(string newValue);
+		partial void Afterparent_noChanged ();
+
+		public const string NameOfparent_no = "parent_no";
+
+		private static readonly PropertyChangedEventArgs _parent_noChangedEventArgs = new PropertyChangedEventArgs(NameOfparent_no);
+
+		private void Onparent_noChanged()
+		{
+			OnPropertyChanged(_parent_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region user_id : string
+
+		private string _user_id;
 		/// <summary>
 		/// 利用者番号
 		/// </summary>
-		[Column("user_id"),                                                  Nullable          ] public string    UserId         { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  user_id // varchar(16)
+		{
+			get { return _user_id; }
+			set
+			{
+				if (_user_id != value)
+				{
+					Beforeuser_idChanged(value);
+					_user_id = value;
+					Afteruser_idChanged();
+
+					Onuser_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeuser_idChanged(string newValue);
+		partial void Afteruser_idChanged ();
+
+		public const string NameOfuser_id = "user_id";
+
+		private static readonly PropertyChangedEventArgs _user_idChangedEventArgs = new PropertyChangedEventArgs(NameOfuser_id);
+
+		private void Onuser_idChanged()
+		{
+			OnPropertyChanged(_user_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region seq : int
+
+		private int _seq;
 		/// <summary>
 		/// 連番
 		/// </summary>
-		[Column("seq"),                                                   NotNull              ] public int       Seq            { get; set; } // int
+		[Column(DbType="int",            DataType=DataType.Int32)    , NotNull]
+		public  int  seq // int
+		{
+			get { return _seq; }
+			set
+			{
+				if (_seq != value)
+				{
+					BeforeseqChanged(value);
+					_seq = value;
+					AfterseqChanged();
+
+					OnseqChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeseqChanged(int newValue);
+		partial void AfterseqChanged ();
+
+		public const string NameOfseq = "seq";
+
+		private static readonly PropertyChangedEventArgs _seqChangedEventArgs = new PropertyChangedEventArgs(NameOfseq);
+
+		private void OnseqChanged()
+		{
+			OnPropertyChanged(_seqChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region address_type_id : int
+
+		private int _address_type_id;
 		/// <summary>
 		/// 住所種別
 		/// </summary>
-		[Column("address_type_id"),                                       NotNull              ] public int       AddressTypeId  { get; set; } // int
+		[Column(DbType="int",            DataType=DataType.Int32)    , NotNull]
+		public  int  address_type_id // int
+		{
+			get { return _address_type_id; }
+			set
+			{
+				if (_address_type_id != value)
+				{
+					Beforeaddress_type_idChanged(value);
+					_address_type_id = value;
+					Afteraddress_type_idChanged();
+
+					Onaddress_type_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeaddress_type_idChanged(int newValue);
+		partial void Afteraddress_type_idChanged ();
+
+		public const string NameOfaddress_type_id = "address_type_id";
+
+		private static readonly PropertyChangedEventArgs _address_type_idChangedEventArgs = new PropertyChangedEventArgs(NameOfaddress_type_id);
+
+		private void Onaddress_type_idChanged()
+		{
+			OnPropertyChanged(_address_type_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region postal_code : string
+
+		private string _postal_code;
 		/// <summary>
 		/// 郵便番号
 		/// </summary>
-		[Column("postal_code"),                                           NotNull              ] public string    PostalCode     { get; set; } // varchar(7)
+		[Column(DbType="varchar(7)",     DataType=DataType.VarChar,   Length=7), NotNull]
+		public  string  postal_code // varchar(7)
+		{
+			get { return _postal_code; }
+			set
+			{
+				if (_postal_code != value)
+				{
+					Beforepostal_codeChanged(value);
+					_postal_code = value;
+					Afterpostal_codeChanged();
+
+					Onpostal_codeChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforepostal_codeChanged(string newValue);
+		partial void Afterpostal_codeChanged ();
+
+		public const string NameOfpostal_code = "postal_code";
+
+		private static readonly PropertyChangedEventArgs _postal_codeChangedEventArgs = new PropertyChangedEventArgs(NameOfpostal_code);
+
+		private void Onpostal_codeChanged()
+		{
+			OnPropertyChanged(_postal_codeChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region prefecture_code : int
+
+		private int _prefecture_code;
 		/// <summary>
 		/// 都道府県
 		/// </summary>
-		[Column("prefecture_code"),                                       NotNull              ] public int       PrefectureCode { get; set; } // int
+		[Column(DbType="int",            DataType=DataType.Int32)    , NotNull]
+		public  int  prefecture_code // int
+		{
+			get { return _prefecture_code; }
+			set
+			{
+				if (_prefecture_code != value)
+				{
+					Beforeprefecture_codeChanged(value);
+					_prefecture_code = value;
+					Afterprefecture_codeChanged();
+
+					Onprefecture_codeChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeprefecture_codeChanged(int newValue);
+		partial void Afterprefecture_codeChanged ();
+
+		public const string NameOfprefecture_code = "prefecture_code";
+
+		private static readonly PropertyChangedEventArgs _prefecture_codeChangedEventArgs = new PropertyChangedEventArgs(NameOfprefecture_code);
+
+		private void Onprefecture_codeChanged()
+		{
+			OnPropertyChanged(_prefecture_codeChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region address1 : string
+
+		private string _address1;
 		/// <summary>
 		/// 住所1
 		/// </summary>
-		[Column("address1"),                                              NotNull              ] public string    Address1       { get; set; } // nvarchar(32)
+		[Column(DbType="nvarchar(32)",   DataType=DataType.NVarChar,  Length=32), NotNull]
+		public  string  address1 // nvarchar(32)
+		{
+			get { return _address1; }
+			set
+			{
+				if (_address1 != value)
+				{
+					Beforeaddress1Changed(value);
+					_address1 = value;
+					Afteraddress1Changed();
+
+					Onaddress1Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeaddress1Changed(string newValue);
+		partial void Afteraddress1Changed ();
+
+		public const string NameOfaddress1 = "address1";
+
+		private static readonly PropertyChangedEventArgs _address1ChangedEventArgs = new PropertyChangedEventArgs(NameOfaddress1);
+
+		private void Onaddress1Changed()
+		{
+			OnPropertyChanged(_address1ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region address2 : string
+
+		private string _address2;
 		/// <summary>
 		/// 住所2
 		/// </summary>
-		[Column("address2"),                                              NotNull              ] public string    Address2       { get; set; } // nvarchar(32)
+		[Column(DbType="nvarchar(32)",   DataType=DataType.NVarChar,  Length=32), NotNull]
+		public  string  address2 // nvarchar(32)
+		{
+			get { return _address2; }
+			set
+			{
+				if (_address2 != value)
+				{
+					Beforeaddress2Changed(value);
+					_address2 = value;
+					Afteraddress2Changed();
+
+					Onaddress2Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeaddress2Changed(string newValue);
+		partial void Afteraddress2Changed ();
+
+		public const string NameOfaddress2 = "address2";
+
+		private static readonly PropertyChangedEventArgs _address2ChangedEventArgs = new PropertyChangedEventArgs(NameOfaddress2);
+
+		private void Onaddress2Changed()
+		{
+			OnPropertyChanged(_address2ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region address3 : string
+
+		private string _address3;
 		/// <summary>
 		/// 住所3
 		/// </summary>
-		[Column("address3"),                                              NotNull              ] public string    Address3       { get; set; } // nvarchar(32)
+		[Column(DbType="nvarchar(32)",   DataType=DataType.NVarChar,  Length=32), NotNull]
+		public  string  address3 // nvarchar(32)
+		{
+			get { return _address3; }
+			set
+			{
+				if (_address3 != value)
+				{
+					Beforeaddress3Changed(value);
+					_address3 = value;
+					Afteraddress3Changed();
+
+					Onaddress3Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeaddress3Changed(string newValue);
+		partial void Afteraddress3Changed ();
+
+		public const string NameOfaddress3 = "address3";
+
+		private static readonly PropertyChangedEventArgs _address3ChangedEventArgs = new PropertyChangedEventArgs(NameOfaddress3);
+
+		private void Onaddress3Changed()
+		{
+			OnPropertyChanged(_address3ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region latitude : decimal?
+
+		private decimal? _latitude;
 		/// <summary>
 		/// 緯度
 		/// </summary>
-		[Column("latitude"),                                                 Nullable          ] public decimal?  Latitude       { get; set; } // numeric(11, 8)
+		[Column(DbType="decimal(11, 8)", DataType=DataType.Decimal,   Precision=11, Scale=8),    Nullable]
+		public  decimal?  latitude // decimal(11, 8)
+		{
+			get { return _latitude; }
+			set
+			{
+				if (_latitude != value)
+				{
+					BeforelatitudeChanged(value);
+					_latitude = value;
+					AfterlatitudeChanged();
+
+					OnlatitudeChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforelatitudeChanged(decimal? newValue);
+		partial void AfterlatitudeChanged ();
+
+		public const string NameOflatitude = "latitude";
+
+		private static readonly PropertyChangedEventArgs _latitudeChangedEventArgs = new PropertyChangedEventArgs(NameOflatitude);
+
+		private void OnlatitudeChanged()
+		{
+			OnPropertyChanged(_latitudeChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region longitude : decimal?
+
+		private decimal? _longitude;
 		/// <summary>
 		/// 経度
 		/// </summary>
-		[Column("longitude"),                                                Nullable          ] public decimal?  Longitude      { get; set; } // numeric(11, 8)
+		[Column(DbType="decimal(11, 8)", DataType=DataType.Decimal,   Precision=11, Scale=8),    Nullable]
+		public  decimal?  longitude // decimal(11, 8)
+		{
+			get { return _longitude; }
+			set
+			{
+				if (_longitude != value)
+				{
+					BeforelongitudeChanged(value);
+					_longitude = value;
+					AfterlongitudeChanged();
+
+					OnlongitudeChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforelongitudeChanged(decimal? newValue);
+		partial void AfterlongitudeChanged ();
+
+		public const string NameOflongitude = "longitude";
+
+		private static readonly PropertyChangedEventArgs _longitudeChangedEventArgs = new PropertyChangedEventArgs(NameOflongitude);
+
+		private void OnlongitudeChanged()
+		{
+			OnPropertyChanged(_longitudeChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region enter_date : DateTime?
+
+		private DateTime? _enter_date;
 		/// <summary>
 		/// 転入日
 		/// </summary>
-		[Column("enter_date"),                                               Nullable          ] public DateTime? EnterDate      { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)",   DataType=DataType.DateTime2, Precision=7),    Nullable]
+		public  DateTime?  enter_date // datetime2(7)
+		{
+			get { return _enter_date; }
+			set
+			{
+				if (_enter_date != value)
+				{
+					Beforeenter_dateChanged(value);
+					_enter_date = value;
+					Afterenter_dateChanged();
+
+					Onenter_dateChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeenter_dateChanged(DateTime? newValue);
+		partial void Afterenter_dateChanged ();
+
+		public const string NameOfenter_date = "enter_date";
+
+		private static readonly PropertyChangedEventArgs _enter_dateChangedEventArgs = new PropertyChangedEventArgs(NameOfenter_date);
+
+		private void Onenter_dateChanged()
+		{
+			OnPropertyChanged(_enter_dateChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region leave_date : DateTime?
+
+		private DateTime? _leave_date;
 		/// <summary>
 		/// 転出日
 		/// </summary>
-		[Column("leave_date"),                                               Nullable          ] public DateTime? LeaveDate      { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)",   DataType=DataType.DateTime2, Precision=7),    Nullable]
+		public  DateTime?  leave_date // datetime2(7)
+		{
+			get { return _leave_date; }
+			set
+			{
+				if (_leave_date != value)
+				{
+					Beforeleave_dateChanged(value);
+					_leave_date = value;
+					Afterleave_dateChanged();
+
+					Onleave_dateChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeleave_dateChanged(DateTime? newValue);
+		partial void Afterleave_dateChanged ();
+
+		public const string NameOfleave_date = "leave_date";
+
+		private static readonly PropertyChangedEventArgs _leave_dateChangedEventArgs = new PropertyChangedEventArgs(NameOfleave_date);
+
+		private void Onleave_dateChanged()
+		{
+			OnPropertyChanged(_leave_dateChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_at : DateTime
+
+		private DateTime _created_at;
 		/// <summary>
 		/// 作成日時
 		/// </summary>
-		[Column("created_at"),                                            NotNull              ] public DateTime  CreatedAt      { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)",   DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  created_at // datetime2(7)
+		{
+			get { return _created_at; }
+			set
+			{
+				if (_created_at != value)
+				{
+					Beforecreated_atChanged(value);
+					_created_at = value;
+					Aftercreated_atChanged();
+
+					Oncreated_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_atChanged(DateTime newValue);
+		partial void Aftercreated_atChanged ();
+
+		public const string NameOfcreated_at = "created_at";
+
+		private static readonly PropertyChangedEventArgs _created_atChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_at);
+
+		private void Oncreated_atChanged()
+		{
+			OnPropertyChanged(_created_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_by : string
+
+		private string _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column("created_by"),                                            NotNull              ] public string    CreatedBy      { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  created_by // varchar(16)
+		{
+			get { return _created_by; }
+			set
+			{
+				if (_created_by != value)
+				{
+					Beforecreated_byChanged(value);
+					_created_by = value;
+					Aftercreated_byChanged();
+
+					Oncreated_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_byChanged(string newValue);
+		partial void Aftercreated_byChanged ();
+
+		public const string NameOfcreated_by = "created_by";
+
+		private static readonly PropertyChangedEventArgs _created_byChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_by);
+
+		private void Oncreated_byChanged()
+		{
+			OnPropertyChanged(_created_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_at : DateTime
+
+		private DateTime _modified_at;
 		/// <summary>
 		/// 更新日時
 		/// </summary>
-		[Column("modified_at"),                                           NotNull              ] public DateTime  ModifiedAt     { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)",   DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  modified_at // datetime2(7)
+		{
+			get { return _modified_at; }
+			set
+			{
+				if (_modified_at != value)
+				{
+					Beforemodified_atChanged(value);
+					_modified_at = value;
+					Aftermodified_atChanged();
+
+					Onmodified_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_atChanged(DateTime newValue);
+		partial void Aftermodified_atChanged ();
+
+		public const string NameOfmodified_at = "modified_at";
+
+		private static readonly PropertyChangedEventArgs _modified_atChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_at);
+
+		private void Onmodified_atChanged()
+		{
+			OnPropertyChanged(_modified_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_by : string
+
+		private string _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column("modified_by"),                                           NotNull              ] public string    ModifiedBy     { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  modified_by // varchar(16)
+		{
+			get { return _modified_by; }
+			set
+			{
+				if (_modified_by != value)
+				{
+					Beforemodified_byChanged(value);
+					_modified_by = value;
+					Aftermodified_byChanged();
+
+					Onmodified_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_byChanged(string newValue);
+		partial void Aftermodified_byChanged ();
+
+		public const string NameOfmodified_by = "modified_by";
+
+		private static readonly PropertyChangedEventArgs _modified_byChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_by);
+
+		private void Onmodified_byChanged()
+		{
+			OnPropertyChanged(_modified_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region removed_at : DateTime?
+
+		private DateTime? _removed_at;
 		/// <summary>
 		/// 削除日時
 		/// </summary>
-		[Column("removed_at"),                                               Nullable          ] public DateTime? RemovedAt      { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)",   DataType=DataType.DateTime2, Precision=7),    Nullable]
+		public  DateTime?  removed_at // datetime2(7)
+		{
+			get { return _removed_at; }
+			set
+			{
+				if (_removed_at != value)
+				{
+					Beforeremoved_atChanged(value);
+					_removed_at = value;
+					Afterremoved_atChanged();
+
+					Onremoved_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeremoved_atChanged(DateTime? newValue);
+		partial void Afterremoved_atChanged ();
+
+		public const string NameOfremoved_at = "removed_at";
+
+		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
+
+		private void Onremoved_atChanged()
+		{
+			OnPropertyChanged(_removed_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region row_version : byte[]
+
+		private byte[] _row_version;
 		/// <summary>
 		/// 版
 		/// </summary>
-		[Column("row_version",     SkipOnInsert=true, SkipOnUpdate=true), NotNull              ] public byte[]    RowVersion     { get; set; } // timestamp
+		[Column(DbType="timestamp",      DataType=DataType.Timestamp, SkipOnInsert=true, SkipOnUpdate=true), NotNull]
+		public  byte[]  row_version // timestamp
+		{
+			get { return _row_version; }
+			set
+			{
+				if (_row_version != value)
+				{
+					Beforerow_versionChanged(value);
+					_row_version = value;
+					Afterrow_versionChanged();
+
+					Onrow_versionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerow_versionChanged(byte[] newValue);
+		partial void Afterrow_versionChanged ();
+
+		public const string NameOfrow_version = "row_version";
+
+		private static readonly PropertyChangedEventArgs _row_versionChangedEventArgs = new PropertyChangedEventArgs(NameOfrow_version);
+
+		private void Onrow_versionChanged()
+		{
+			OnPropertyChanged(_row_versionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
 
 		#region Associations
 
+		#region address_type : AddressType
+
+		private AddressType _address_type;
 		/// <summary>
 		/// FK_Address_AddressType
 		/// </summary>
-		[Association(ThisKey="AddressTypeId", OtherKey="AddressTypeId", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_Address_AddressType", BackReferenceName="Addresses")]
-		public AddressType AddressType { get; set; }
+		[Association(ThisKey="address_type_id", OtherKey="address_type_id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_Address_AddressType", BackReferenceName="Addresses")]
+		public  AddressType  address_type
+		{
+			get { return _address_type; }
+			set
+			{
+				if (_address_type != value)
+				{
+					Beforeaddress_typeChanged(value);
+					_address_type = value;
+					Afteraddress_typeChanged();
 
+					Onaddress_typeChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeaddress_typeChanged(AddressType newValue);
+		partial void Afteraddress_typeChanged ();
+
+		public const string NameOfaddress_type = "address_type";
+
+		private static readonly PropertyChangedEventArgs _address_typeChangedEventArgs = new PropertyChangedEventArgs(NameOfaddress_type);
+
+		private void Onaddress_typeChanged()
+		{
+			OnPropertyChanged(_address_typeChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region Staff : Staff
+
+		private Staff _staff;
 		/// <summary>
 		/// FK_Address_Staff
 		/// </summary>
-		[Association(ThisKey="StaffNo", OtherKey="StaffNo", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_Address_Staff", BackReferenceName="Addresses")]
-		public Staff Staff { get; set; }
+		[Association(ThisKey="staff_no", OtherKey="staff_no", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_Address_Staff", BackReferenceName="Addresses")]
+		public  Staff  Staff
+		{
+			get { return _staff; }
+			set
+			{
+				if (_staff != value)
+				{
+					BeforeStaffChanged(value);
+					_staff = value;
+					AfterStaffChanged();
+
+					OnStaffChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeStaffChanged(Staff newValue);
+		partial void AfterStaffChanged ();
+
+		public const string NameOfStaff = "Staff";
+
+		private static readonly PropertyChangedEventArgs _staffChangedEventArgs = new PropertyChangedEventArgs(NameOfStaff);
+
+		private void OnStaffChanged()
+		{
+			OnPropertyChanged(_staffChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#endregion
+
+		#region INotifyPropertyChanged support
+
+#if !SILVERLIGHT
+		[field : NonSerialized]
+#endif
+		public virtual event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged(string propertyName)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, new PropertyChangedEventArgs(propertyName));
+						});
+#else
+				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+#endif
+			}
+		}
+
+		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, arg);
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, arg);
+						});
+#else
+				propertyChanged(this, arg);
+#endif
+			}
+		}
 
 		#endregion
 	}
@@ -271,60 +1973,556 @@ namespace DataModels
 	/// 住所種別
 	/// </summary>
 	[Table(Schema="Common", Name="AddressType")]
-	public partial class AddressType
+	public partial class AddressType : INotifyPropertyChanged
 	{
+		#region uid : int
+
+		private int _uid;
 		/// <summary>
 		/// ユニークID
 		/// </summary>
-		[Column("uid"),                                                   PrimaryKey,  Identity] public int       Uid           { get; set; } // int
+		[Column(DbType="int",          DataType=DataType.Int32)    , PrimaryKey, Identity]
+		public  int  uid // int
+		{
+			get { return _uid; }
+			set
+			{
+				if (_uid != value)
+				{
+					BeforeuidChanged(value);
+					_uid = value;
+					AfteruidChanged();
+
+					OnuidChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeuidChanged(int newValue);
+		partial void AfteruidChanged ();
+
+		public const string NameOfuid = "uid";
+
+		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
+
+		private void OnuidChanged()
+		{
+			OnPropertyChanged(_uidChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region address_type_id : int
+
+		private int _address_type_id;
 		/// <summary>
 		/// 住所種別ID
 		/// </summary>
-		[Column("address_type_id"),                                       NotNull              ] public int       AddressTypeId { get; set; } // int
+		[Column(DbType="int",          DataType=DataType.Int32)    , NotNull]
+		public  int  address_type_id // int
+		{
+			get { return _address_type_id; }
+			set
+			{
+				if (_address_type_id != value)
+				{
+					Beforeaddress_type_idChanged(value);
+					_address_type_id = value;
+					Afteraddress_type_idChanged();
+
+					Onaddress_type_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeaddress_type_idChanged(int newValue);
+		partial void Afteraddress_type_idChanged ();
+
+		public const string NameOfaddress_type_id = "address_type_id";
+
+		private static readonly PropertyChangedEventArgs _address_type_idChangedEventArgs = new PropertyChangedEventArgs(NameOfaddress_type_id);
+
+		private void Onaddress_type_idChanged()
+		{
+			OnPropertyChanged(_address_type_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region name : string
+
+		private string _name;
 		/// <summary>
 		/// 名称
 		/// </summary>
-		[Column("name"),                                                  NotNull              ] public string    Name          { get; set; } // nvarchar(10)
+		[Column(DbType="nvarchar(10)", DataType=DataType.NVarChar,  Length=10), NotNull]
+		public  string  name // nvarchar(10)
+		{
+			get { return _name; }
+			set
+			{
+				if (_name != value)
+				{
+					BeforenameChanged(value);
+					_name = value;
+					AfternameChanged();
+
+					OnnameChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforenameChanged(string newValue);
+		partial void AfternameChanged ();
+
+		public const string NameOfname = "name";
+
+		private static readonly PropertyChangedEventArgs _nameChangedEventArgs = new PropertyChangedEventArgs(NameOfname);
+
+		private void OnnameChanged()
+		{
+			OnPropertyChanged(_nameChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region description : string
+
+		private string _description;
 		/// <summary>
 		/// 説明
 		/// </summary>
-		[Column("description"),                                           NotNull              ] public string    Description   { get; set; } // nvarchar(64)
+		[Column(DbType="nvarchar(64)", DataType=DataType.NVarChar,  Length=64), NotNull]
+		public  string  description // nvarchar(64)
+		{
+			get { return _description; }
+			set
+			{
+				if (_description != value)
+				{
+					BeforedescriptionChanged(value);
+					_description = value;
+					AfterdescriptionChanged();
+
+					OndescriptionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforedescriptionChanged(string newValue);
+		partial void AfterdescriptionChanged ();
+
+		public const string NameOfdescription = "description";
+
+		private static readonly PropertyChangedEventArgs _descriptionChangedEventArgs = new PropertyChangedEventArgs(NameOfdescription);
+
+		private void OndescriptionChanged()
+		{
+			OnPropertyChanged(_descriptionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region display_order : int
+
+		private int _display_order;
 		/// <summary>
 		/// 表示順
 		/// </summary>
-		[Column("display_order"),                                         NotNull              ] public int       DisplayOrder  { get; set; } // int
+		[Column(DbType="int",          DataType=DataType.Int32)    , NotNull]
+		public  int  display_order // int
+		{
+			get { return _display_order; }
+			set
+			{
+				if (_display_order != value)
+				{
+					Beforedisplay_orderChanged(value);
+					_display_order = value;
+					Afterdisplay_orderChanged();
+
+					Ondisplay_orderChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforedisplay_orderChanged(int newValue);
+		partial void Afterdisplay_orderChanged ();
+
+		public const string NameOfdisplay_order = "display_order";
+
+		private static readonly PropertyChangedEventArgs _display_orderChangedEventArgs = new PropertyChangedEventArgs(NameOfdisplay_order);
+
+		private void Ondisplay_orderChanged()
+		{
+			OnPropertyChanged(_display_orderChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_at : DateTime
+
+		private DateTime _created_at;
 		/// <summary>
 		/// 作成日時
 		/// </summary>
-		[Column("created_at"),                                            NotNull              ] public DateTime  CreatedAt     { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  created_at // datetime2(7)
+		{
+			get { return _created_at; }
+			set
+			{
+				if (_created_at != value)
+				{
+					Beforecreated_atChanged(value);
+					_created_at = value;
+					Aftercreated_atChanged();
+
+					Oncreated_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_atChanged(DateTime newValue);
+		partial void Aftercreated_atChanged ();
+
+		public const string NameOfcreated_at = "created_at";
+
+		private static readonly PropertyChangedEventArgs _created_atChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_at);
+
+		private void Oncreated_atChanged()
+		{
+			OnPropertyChanged(_created_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_by : string
+
+		private string _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column("created_by"),                                            NotNull              ] public string    CreatedBy     { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  created_by // varchar(16)
+		{
+			get { return _created_by; }
+			set
+			{
+				if (_created_by != value)
+				{
+					Beforecreated_byChanged(value);
+					_created_by = value;
+					Aftercreated_byChanged();
+
+					Oncreated_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_byChanged(string newValue);
+		partial void Aftercreated_byChanged ();
+
+		public const string NameOfcreated_by = "created_by";
+
+		private static readonly PropertyChangedEventArgs _created_byChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_by);
+
+		private void Oncreated_byChanged()
+		{
+			OnPropertyChanged(_created_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_at : DateTime
+
+		private DateTime _modified_at;
 		/// <summary>
 		/// 更新日時
 		/// </summary>
-		[Column("modified_at"),                                           NotNull              ] public DateTime  ModifiedAt    { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  modified_at // datetime2(7)
+		{
+			get { return _modified_at; }
+			set
+			{
+				if (_modified_at != value)
+				{
+					Beforemodified_atChanged(value);
+					_modified_at = value;
+					Aftermodified_atChanged();
+
+					Onmodified_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_atChanged(DateTime newValue);
+		partial void Aftermodified_atChanged ();
+
+		public const string NameOfmodified_at = "modified_at";
+
+		private static readonly PropertyChangedEventArgs _modified_atChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_at);
+
+		private void Onmodified_atChanged()
+		{
+			OnPropertyChanged(_modified_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_by : string
+
+		private string _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column("modified_by"),                                           NotNull              ] public string    ModifiedBy    { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  modified_by // varchar(16)
+		{
+			get { return _modified_by; }
+			set
+			{
+				if (_modified_by != value)
+				{
+					Beforemodified_byChanged(value);
+					_modified_by = value;
+					Aftermodified_byChanged();
+
+					Onmodified_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_byChanged(string newValue);
+		partial void Aftermodified_byChanged ();
+
+		public const string NameOfmodified_by = "modified_by";
+
+		private static readonly PropertyChangedEventArgs _modified_byChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_by);
+
+		private void Onmodified_byChanged()
+		{
+			OnPropertyChanged(_modified_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region removed_at : DateTime?
+
+		private DateTime? _removed_at;
 		/// <summary>
 		/// 削除日時
 		/// </summary>
-		[Column("removed_at"),                                               Nullable          ] public DateTime? RemovedAt     { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7),    Nullable]
+		public  DateTime?  removed_at // datetime2(7)
+		{
+			get { return _removed_at; }
+			set
+			{
+				if (_removed_at != value)
+				{
+					Beforeremoved_atChanged(value);
+					_removed_at = value;
+					Afterremoved_atChanged();
+
+					Onremoved_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeremoved_atChanged(DateTime? newValue);
+		partial void Afterremoved_atChanged ();
+
+		public const string NameOfremoved_at = "removed_at";
+
+		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
+
+		private void Onremoved_atChanged()
+		{
+			OnPropertyChanged(_removed_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region row_version : byte[]
+
+		private byte[] _row_version;
 		/// <summary>
 		/// 版
 		/// </summary>
-		[Column("row_version",     SkipOnInsert=true, SkipOnUpdate=true), NotNull              ] public byte[]    RowVersion    { get; set; } // timestamp
+		[Column(DbType="timestamp",    DataType=DataType.Timestamp, SkipOnInsert=true, SkipOnUpdate=true), NotNull]
+		public  byte[]  row_version // timestamp
+		{
+			get { return _row_version; }
+			set
+			{
+				if (_row_version != value)
+				{
+					Beforerow_versionChanged(value);
+					_row_version = value;
+					Afterrow_versionChanged();
+
+					Onrow_versionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerow_versionChanged(byte[] newValue);
+		partial void Afterrow_versionChanged ();
+
+		public const string NameOfrow_version = "row_version";
+
+		private static readonly PropertyChangedEventArgs _row_versionChangedEventArgs = new PropertyChangedEventArgs(NameOfrow_version);
+
+		private void Onrow_versionChanged()
+		{
+			OnPropertyChanged(_row_versionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
 
 		#region Associations
 
+		#region Addresses : IEnumerable<Address>
+
+		private IEnumerable<Address> _addresses;
 		/// <summary>
 		/// FK_Address_AddressType_BackReference
 		/// </summary>
-		[Association(ThisKey="AddressTypeId", OtherKey="AddressTypeId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<Address> Addresses { get; set; }
+		[Association(ThisKey="address_type_id", OtherKey="address_type_id", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public  IEnumerable<Address>  Addresses
+		{
+			get { return _addresses; }
+			set
+			{
+				if (_addresses != value)
+				{
+					BeforeAddressesChanged(value);
+					_addresses = value;
+					AfterAddressesChanged();
+
+					OnAddressesChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeAddressesChanged(IEnumerable<Address> newValue);
+		partial void AfterAddressesChanged ();
+
+		public const string NameOfAddresses = "Addresses";
+
+		private static readonly PropertyChangedEventArgs _addressesChangedEventArgs = new PropertyChangedEventArgs(NameOfAddresses);
+
+		private void OnAddressesChanged()
+		{
+			OnPropertyChanged(_addressesChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#endregion
+
+		#region INotifyPropertyChanged support
+
+#if !SILVERLIGHT
+		[field : NonSerialized]
+#endif
+		public virtual event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged(string propertyName)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, new PropertyChangedEventArgs(propertyName));
+						});
+#else
+				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+#endif
+			}
+		}
+
+		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, arg);
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, arg);
+						});
+#else
+				propertyChanged(this, arg);
+#endif
+			}
+		}
 
 		#endregion
 	}
@@ -333,90 +2531,843 @@ namespace DataModels
 	/// 連絡先
 	/// </summary>
 	[Table(Schema="HumanResource", Name="Contact")]
-	public partial class Contact
+	public partial class Contact : INotifyPropertyChanged
 	{
+		#region uid : int
+
+		private int _uid;
 		/// <summary>
 		/// ユニークID
 		/// </summary>
-		[Column("uid"),                                                   PrimaryKey,  Identity] public int       Uid            { get; set; } // int
+		[Column(DbType="int",           DataType=DataType.Int32)    , PrimaryKey, Identity]
+		public  int  uid // int
+		{
+			get { return _uid; }
+			set
+			{
+				if (_uid != value)
+				{
+					BeforeuidChanged(value);
+					_uid = value;
+					AfteruidChanged();
+
+					OnuidChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeuidChanged(int newValue);
+		partial void AfteruidChanged ();
+
+		public const string NameOfuid = "uid";
+
+		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
+
+		private void OnuidChanged()
+		{
+			OnPropertyChanged(_uidChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region staff_no : string
+
+		private string _staff_no;
 		/// <summary>
 		/// 職員番号
 		/// </summary>
-		[Column("staff_no"),                                                 Nullable          ] public string    StaffNo        { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  staff_no // varchar(16)
+		{
+			get { return _staff_no; }
+			set
+			{
+				if (_staff_no != value)
+				{
+					Beforestaff_noChanged(value);
+					_staff_no = value;
+					Afterstaff_noChanged();
+
+					Onstaff_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforestaff_noChanged(string newValue);
+		partial void Afterstaff_noChanged ();
+
+		public const string NameOfstaff_no = "staff_no";
+
+		private static readonly PropertyChangedEventArgs _staff_noChangedEventArgs = new PropertyChangedEventArgs(NameOfstaff_no);
+
+		private void Onstaff_noChanged()
+		{
+			OnPropertyChanged(_staff_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region teacher_no : string
+
+		private string _teacher_no;
 		/// <summary>
 		/// 教員番号
 		/// </summary>
-		[Column("teacher_no"),                                               Nullable          ] public string    TeacherNo      { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  teacher_no // varchar(16)
+		{
+			get { return _teacher_no; }
+			set
+			{
+				if (_teacher_no != value)
+				{
+					Beforeteacher_noChanged(value);
+					_teacher_no = value;
+					Afterteacher_noChanged();
+
+					Onteacher_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeteacher_noChanged(string newValue);
+		partial void Afterteacher_noChanged ();
+
+		public const string NameOfteacher_no = "teacher_no";
+
+		private static readonly PropertyChangedEventArgs _teacher_noChangedEventArgs = new PropertyChangedEventArgs(NameOfteacher_no);
+
+		private void Onteacher_noChanged()
+		{
+			OnPropertyChanged(_teacher_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region student_no : string
+
+		private string _student_no;
 		/// <summary>
 		/// 学生番号
 		/// </summary>
-		[Column("student_no"),                                               Nullable          ] public string    StudentNo      { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  student_no // varchar(16)
+		{
+			get { return _student_no; }
+			set
+			{
+				if (_student_no != value)
+				{
+					Beforestudent_noChanged(value);
+					_student_no = value;
+					Afterstudent_noChanged();
+
+					Onstudent_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforestudent_noChanged(string newValue);
+		partial void Afterstudent_noChanged ();
+
+		public const string NameOfstudent_no = "student_no";
+
+		private static readonly PropertyChangedEventArgs _student_noChangedEventArgs = new PropertyChangedEventArgs(NameOfstudent_no);
+
+		private void Onstudent_noChanged()
+		{
+			OnPropertyChanged(_student_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region out_student_no : string
+
+		private string _out_student_no;
 		/// <summary>
 		/// 除籍生番号
 		/// </summary>
-		[Column("out_student_no"),                                           Nullable          ] public string    OutStudentNo   { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  out_student_no // varchar(16)
+		{
+			get { return _out_student_no; }
+			set
+			{
+				if (_out_student_no != value)
+				{
+					Beforeout_student_noChanged(value);
+					_out_student_no = value;
+					Afterout_student_noChanged();
+
+					Onout_student_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeout_student_noChanged(string newValue);
+		partial void Afterout_student_noChanged ();
+
+		public const string NameOfout_student_no = "out_student_no";
+
+		private static readonly PropertyChangedEventArgs _out_student_noChangedEventArgs = new PropertyChangedEventArgs(NameOfout_student_no);
+
+		private void Onout_student_noChanged()
+		{
+			OnPropertyChanged(_out_student_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region parent_no : string
+
+		private string _parent_no;
 		/// <summary>
 		/// 保護者番号
 		/// </summary>
-		[Column("parent_no"),                                                Nullable          ] public string    ParentNo       { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  parent_no // varchar(16)
+		{
+			get { return _parent_no; }
+			set
+			{
+				if (_parent_no != value)
+				{
+					Beforeparent_noChanged(value);
+					_parent_no = value;
+					Afterparent_noChanged();
+
+					Onparent_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeparent_noChanged(string newValue);
+		partial void Afterparent_noChanged ();
+
+		public const string NameOfparent_no = "parent_no";
+
+		private static readonly PropertyChangedEventArgs _parent_noChangedEventArgs = new PropertyChangedEventArgs(NameOfparent_no);
+
+		private void Onparent_noChanged()
+		{
+			OnPropertyChanged(_parent_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region user_id : string
+
+		private string _user_id;
 		/// <summary>
 		/// 利用者番号
 		/// </summary>
-		[Column("user_id"),                                                  Nullable          ] public string    UserId         { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16),    Nullable]
+		public  string  user_id // varchar(16)
+		{
+			get { return _user_id; }
+			set
+			{
+				if (_user_id != value)
+				{
+					Beforeuser_idChanged(value);
+					_user_id = value;
+					Afteruser_idChanged();
+
+					Onuser_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeuser_idChanged(string newValue);
+		partial void Afteruser_idChanged ();
+
+		public const string NameOfuser_id = "user_id";
+
+		private static readonly PropertyChangedEventArgs _user_idChangedEventArgs = new PropertyChangedEventArgs(NameOfuser_id);
+
+		private void Onuser_idChanged()
+		{
+			OnPropertyChanged(_user_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region seq : int
+
+		private int _seq;
 		/// <summary>
 		/// 連番
 		/// </summary>
-		[Column("seq"),                                                   NotNull              ] public int       Seq            { get; set; } // int
+		[Column(DbType="int",           DataType=DataType.Int32)    , NotNull]
+		public  int  seq // int
+		{
+			get { return _seq; }
+			set
+			{
+				if (_seq != value)
+				{
+					BeforeseqChanged(value);
+					_seq = value;
+					AfterseqChanged();
+
+					OnseqChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeseqChanged(int newValue);
+		partial void AfterseqChanged ();
+
+		public const string NameOfseq = "seq";
+
+		private static readonly PropertyChangedEventArgs _seqChangedEventArgs = new PropertyChangedEventArgs(NameOfseq);
+
+		private void OnseqChanged()
+		{
+			OnPropertyChanged(_seqChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region contact_type_id : int
+
+		private int _contact_type_id;
 		/// <summary>
 		/// 連絡先種別
 		/// </summary>
-		[Column("contact_type_id"),                                       NotNull              ] public int       ContactTypeId  { get; set; } // int
+		[Column(DbType="int",           DataType=DataType.Int32)    , NotNull]
+		public  int  contact_type_id // int
+		{
+			get { return _contact_type_id; }
+			set
+			{
+				if (_contact_type_id != value)
+				{
+					Beforecontact_type_idChanged(value);
+					_contact_type_id = value;
+					Aftercontact_type_idChanged();
+
+					Oncontact_type_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecontact_type_idChanged(int newValue);
+		partial void Aftercontact_type_idChanged ();
+
+		public const string NameOfcontact_type_id = "contact_type_id";
+
+		private static readonly PropertyChangedEventArgs _contact_type_idChangedEventArgs = new PropertyChangedEventArgs(NameOfcontact_type_id);
+
+		private void Oncontact_type_idChanged()
+		{
+			OnPropertyChanged(_contact_type_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region contact : string
+
+		private string _contact;
 		/// <summary>
 		/// 連絡先
 		/// </summary>
-		[Column("contact"),                                               NotNull              ] public string    Contact_Column { get; set; } // nvarchar(20)
+		[Column(DbType="nvarchar(20)",  DataType=DataType.NVarChar,  Length=20), NotNull]
+		public  string  contact // nvarchar(20)
+		{
+			get { return _contact; }
+			set
+			{
+				if (_contact != value)
+				{
+					BeforecontactChanged(value);
+					_contact = value;
+					AftercontactChanged();
+
+					OncontactChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforecontactChanged(string newValue);
+		partial void AftercontactChanged ();
+
+		public const string NameOfcontact = "contact";
+
+		private static readonly PropertyChangedEventArgs _contactChangedEventArgs = new PropertyChangedEventArgs(NameOfcontact);
+
+		private void OncontactChanged()
+		{
+			OnPropertyChanged(_contactChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region note : string
+
+		private string _note;
 		/// <summary>
 		/// 備考
 		/// </summary>
-		[Column("note"),                                                  NotNull              ] public string    Note           { get; set; } // nvarchar(200)
+		[Column(DbType="nvarchar(200)", DataType=DataType.NVarChar,  Length=200), NotNull]
+		public  string  note // nvarchar(200)
+		{
+			get { return _note; }
+			set
+			{
+				if (_note != value)
+				{
+					BeforenoteChanged(value);
+					_note = value;
+					AfternoteChanged();
+
+					OnnoteChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforenoteChanged(string newValue);
+		partial void AfternoteChanged ();
+
+		public const string NameOfnote = "note";
+
+		private static readonly PropertyChangedEventArgs _noteChangedEventArgs = new PropertyChangedEventArgs(NameOfnote);
+
+		private void OnnoteChanged()
+		{
+			OnPropertyChanged(_noteChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_at : DateTime
+
+		private DateTime _created_at;
 		/// <summary>
 		/// 作成日時
 		/// </summary>
-		[Column("created_at"),                                            NotNull              ] public DateTime  CreatedAt      { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)",  DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  created_at // datetime2(7)
+		{
+			get { return _created_at; }
+			set
+			{
+				if (_created_at != value)
+				{
+					Beforecreated_atChanged(value);
+					_created_at = value;
+					Aftercreated_atChanged();
+
+					Oncreated_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_atChanged(DateTime newValue);
+		partial void Aftercreated_atChanged ();
+
+		public const string NameOfcreated_at = "created_at";
+
+		private static readonly PropertyChangedEventArgs _created_atChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_at);
+
+		private void Oncreated_atChanged()
+		{
+			OnPropertyChanged(_created_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_by : string
+
+		private string _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column("created_by"),                                            NotNull              ] public string    CreatedBy      { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  created_by // varchar(16)
+		{
+			get { return _created_by; }
+			set
+			{
+				if (_created_by != value)
+				{
+					Beforecreated_byChanged(value);
+					_created_by = value;
+					Aftercreated_byChanged();
+
+					Oncreated_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_byChanged(string newValue);
+		partial void Aftercreated_byChanged ();
+
+		public const string NameOfcreated_by = "created_by";
+
+		private static readonly PropertyChangedEventArgs _created_byChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_by);
+
+		private void Oncreated_byChanged()
+		{
+			OnPropertyChanged(_created_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_at : DateTime
+
+		private DateTime _modified_at;
 		/// <summary>
 		/// 更新日時
 		/// </summary>
-		[Column("modified_at"),                                           NotNull              ] public DateTime  ModifiedAt     { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)",  DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  modified_at // datetime2(7)
+		{
+			get { return _modified_at; }
+			set
+			{
+				if (_modified_at != value)
+				{
+					Beforemodified_atChanged(value);
+					_modified_at = value;
+					Aftermodified_atChanged();
+
+					Onmodified_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_atChanged(DateTime newValue);
+		partial void Aftermodified_atChanged ();
+
+		public const string NameOfmodified_at = "modified_at";
+
+		private static readonly PropertyChangedEventArgs _modified_atChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_at);
+
+		private void Onmodified_atChanged()
+		{
+			OnPropertyChanged(_modified_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_by : string
+
+		private string _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column("modified_by"),                                           NotNull              ] public string    ModifiedBy     { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  modified_by // varchar(16)
+		{
+			get { return _modified_by; }
+			set
+			{
+				if (_modified_by != value)
+				{
+					Beforemodified_byChanged(value);
+					_modified_by = value;
+					Aftermodified_byChanged();
+
+					Onmodified_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_byChanged(string newValue);
+		partial void Aftermodified_byChanged ();
+
+		public const string NameOfmodified_by = "modified_by";
+
+		private static readonly PropertyChangedEventArgs _modified_byChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_by);
+
+		private void Onmodified_byChanged()
+		{
+			OnPropertyChanged(_modified_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region removed_at : DateTime?
+
+		private DateTime? _removed_at;
 		/// <summary>
 		/// 削除日時
 		/// </summary>
-		[Column("removed_at"),                                               Nullable          ] public DateTime? RemovedAt      { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)",  DataType=DataType.DateTime2, Precision=7),    Nullable]
+		public  DateTime?  removed_at // datetime2(7)
+		{
+			get { return _removed_at; }
+			set
+			{
+				if (_removed_at != value)
+				{
+					Beforeremoved_atChanged(value);
+					_removed_at = value;
+					Afterremoved_atChanged();
+
+					Onremoved_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeremoved_atChanged(DateTime? newValue);
+		partial void Afterremoved_atChanged ();
+
+		public const string NameOfremoved_at = "removed_at";
+
+		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
+
+		private void Onremoved_atChanged()
+		{
+			OnPropertyChanged(_removed_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region row_version : byte[]
+
+		private byte[] _row_version;
 		/// <summary>
 		/// 版
 		/// </summary>
-		[Column("row_version",     SkipOnInsert=true, SkipOnUpdate=true), NotNull              ] public byte[]    RowVersion     { get; set; } // timestamp
+		[Column(DbType="timestamp",     DataType=DataType.Timestamp, SkipOnInsert=true, SkipOnUpdate=true), NotNull]
+		public  byte[]  row_version // timestamp
+		{
+			get { return _row_version; }
+			set
+			{
+				if (_row_version != value)
+				{
+					Beforerow_versionChanged(value);
+					_row_version = value;
+					Afterrow_versionChanged();
+
+					Onrow_versionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerow_versionChanged(byte[] newValue);
+		partial void Afterrow_versionChanged ();
+
+		public const string NameOfrow_version = "row_version";
+
+		private static readonly PropertyChangedEventArgs _row_versionChangedEventArgs = new PropertyChangedEventArgs(NameOfrow_version);
+
+		private void Onrow_versionChanged()
+		{
+			OnPropertyChanged(_row_versionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
 
 		#region Associations
 
+		#region contact_type : ContactType
+
+		private ContactType _contact_type;
 		/// <summary>
 		/// FK_Contact_ContactType
 		/// </summary>
-		[Association(ThisKey="ContactTypeId", OtherKey="ContactTypeId", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_Contact_ContactType", BackReferenceName="Contacts")]
-		public ContactType ContactType { get; set; }
+		[Association(ThisKey="contact_type_id", OtherKey="contact_type_id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_Contact_ContactType", BackReferenceName="Contacts")]
+		public  ContactType  contact_type
+		{
+			get { return _contact_type; }
+			set
+			{
+				if (_contact_type != value)
+				{
+					Beforecontact_typeChanged(value);
+					_contact_type = value;
+					Aftercontact_typeChanged();
 
+					Oncontact_typeChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecontact_typeChanged(ContactType newValue);
+		partial void Aftercontact_typeChanged ();
+
+		public const string NameOfcontact_type = "contact_type";
+
+		private static readonly PropertyChangedEventArgs _contact_typeChangedEventArgs = new PropertyChangedEventArgs(NameOfcontact_type);
+
+		private void Oncontact_typeChanged()
+		{
+			OnPropertyChanged(_contact_typeChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region Staff : Staff
+
+		private Staff _staff;
 		/// <summary>
 		/// FK_Contact_Staff
 		/// </summary>
-		[Association(ThisKey="StaffNo", OtherKey="StaffNo", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_Contact_Staff", BackReferenceName="Contacts")]
-		public Staff Staff { get; set; }
+		[Association(ThisKey="staff_no", OtherKey="staff_no", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_Contact_Staff", BackReferenceName="Contacts")]
+		public  Staff  Staff
+		{
+			get { return _staff; }
+			set
+			{
+				if (_staff != value)
+				{
+					BeforeStaffChanged(value);
+					_staff = value;
+					AfterStaffChanged();
+
+					OnStaffChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeStaffChanged(Staff newValue);
+		partial void AfterStaffChanged ();
+
+		public const string NameOfStaff = "Staff";
+
+		private static readonly PropertyChangedEventArgs _staffChangedEventArgs = new PropertyChangedEventArgs(NameOfStaff);
+
+		private void OnStaffChanged()
+		{
+			OnPropertyChanged(_staffChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#endregion
+
+		#region INotifyPropertyChanged support
+
+#if !SILVERLIGHT
+		[field : NonSerialized]
+#endif
+		public virtual event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged(string propertyName)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, new PropertyChangedEventArgs(propertyName));
+						});
+#else
+				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+#endif
+			}
+		}
+
+		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, arg);
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, arg);
+						});
+#else
+				propertyChanged(this, arg);
+#endif
+			}
+		}
 
 		#endregion
 	}
@@ -425,60 +3376,1110 @@ namespace DataModels
 	/// 連絡先種別
 	/// </summary>
 	[Table(Schema="Common", Name="ContactType")]
-	public partial class ContactType
+	public partial class ContactType : INotifyPropertyChanged
 	{
+		#region uid : int
+
+		private int _uid;
 		/// <summary>
 		/// ユニークID
 		/// </summary>
-		[Column("uid"),                                                   PrimaryKey,  Identity] public int       Uid           { get; set; } // int
+		[Column(DbType="int",          DataType=DataType.Int32)    , PrimaryKey, Identity]
+		public  int  uid // int
+		{
+			get { return _uid; }
+			set
+			{
+				if (_uid != value)
+				{
+					BeforeuidChanged(value);
+					_uid = value;
+					AfteruidChanged();
+
+					OnuidChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeuidChanged(int newValue);
+		partial void AfteruidChanged ();
+
+		public const string NameOfuid = "uid";
+
+		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
+
+		private void OnuidChanged()
+		{
+			OnPropertyChanged(_uidChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region contact_type_id : int
+
+		private int _contact_type_id;
 		/// <summary>
 		/// 連絡先種別ID
 		/// </summary>
-		[Column("contact_type_id"),                                       NotNull              ] public int       ContactTypeId { get; set; } // int
+		[Column(DbType="int",          DataType=DataType.Int32)    , NotNull]
+		public  int  contact_type_id // int
+		{
+			get { return _contact_type_id; }
+			set
+			{
+				if (_contact_type_id != value)
+				{
+					Beforecontact_type_idChanged(value);
+					_contact_type_id = value;
+					Aftercontact_type_idChanged();
+
+					Oncontact_type_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecontact_type_idChanged(int newValue);
+		partial void Aftercontact_type_idChanged ();
+
+		public const string NameOfcontact_type_id = "contact_type_id";
+
+		private static readonly PropertyChangedEventArgs _contact_type_idChangedEventArgs = new PropertyChangedEventArgs(NameOfcontact_type_id);
+
+		private void Oncontact_type_idChanged()
+		{
+			OnPropertyChanged(_contact_type_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region name : string
+
+		private string _name;
 		/// <summary>
 		/// 名称
 		/// </summary>
-		[Column("name"),                                                  NotNull              ] public string    Name          { get; set; } // nvarchar(10)
+		[Column(DbType="nvarchar(10)", DataType=DataType.NVarChar,  Length=10), NotNull]
+		public  string  name // nvarchar(10)
+		{
+			get { return _name; }
+			set
+			{
+				if (_name != value)
+				{
+					BeforenameChanged(value);
+					_name = value;
+					AfternameChanged();
+
+					OnnameChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforenameChanged(string newValue);
+		partial void AfternameChanged ();
+
+		public const string NameOfname = "name";
+
+		private static readonly PropertyChangedEventArgs _nameChangedEventArgs = new PropertyChangedEventArgs(NameOfname);
+
+		private void OnnameChanged()
+		{
+			OnPropertyChanged(_nameChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region description : string
+
+		private string _description;
 		/// <summary>
 		/// 説明
 		/// </summary>
-		[Column("description"),                                           NotNull              ] public string    Description   { get; set; } // nvarchar(64)
+		[Column(DbType="nvarchar(64)", DataType=DataType.NVarChar,  Length=64), NotNull]
+		public  string  description // nvarchar(64)
+		{
+			get { return _description; }
+			set
+			{
+				if (_description != value)
+				{
+					BeforedescriptionChanged(value);
+					_description = value;
+					AfterdescriptionChanged();
+
+					OndescriptionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforedescriptionChanged(string newValue);
+		partial void AfterdescriptionChanged ();
+
+		public const string NameOfdescription = "description";
+
+		private static readonly PropertyChangedEventArgs _descriptionChangedEventArgs = new PropertyChangedEventArgs(NameOfdescription);
+
+		private void OndescriptionChanged()
+		{
+			OnPropertyChanged(_descriptionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region display_order : int
+
+		private int _display_order;
 		/// <summary>
 		/// 表示順
 		/// </summary>
-		[Column("display_order"),                                         NotNull              ] public int       DisplayOrder  { get; set; } // int
+		[Column(DbType="int",          DataType=DataType.Int32)    , NotNull]
+		public  int  display_order // int
+		{
+			get { return _display_order; }
+			set
+			{
+				if (_display_order != value)
+				{
+					Beforedisplay_orderChanged(value);
+					_display_order = value;
+					Afterdisplay_orderChanged();
+
+					Ondisplay_orderChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforedisplay_orderChanged(int newValue);
+		partial void Afterdisplay_orderChanged ();
+
+		public const string NameOfdisplay_order = "display_order";
+
+		private static readonly PropertyChangedEventArgs _display_orderChangedEventArgs = new PropertyChangedEventArgs(NameOfdisplay_order);
+
+		private void Ondisplay_orderChanged()
+		{
+			OnPropertyChanged(_display_orderChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_at : DateTime
+
+		private DateTime _created_at;
 		/// <summary>
 		/// 作成日時
 		/// </summary>
-		[Column("created_at"),                                            NotNull              ] public DateTime  CreatedAt     { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  created_at // datetime2(7)
+		{
+			get { return _created_at; }
+			set
+			{
+				if (_created_at != value)
+				{
+					Beforecreated_atChanged(value);
+					_created_at = value;
+					Aftercreated_atChanged();
+
+					Oncreated_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_atChanged(DateTime newValue);
+		partial void Aftercreated_atChanged ();
+
+		public const string NameOfcreated_at = "created_at";
+
+		private static readonly PropertyChangedEventArgs _created_atChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_at);
+
+		private void Oncreated_atChanged()
+		{
+			OnPropertyChanged(_created_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_by : string
+
+		private string _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column("created_by"),                                            NotNull              ] public string    CreatedBy     { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  created_by // varchar(16)
+		{
+			get { return _created_by; }
+			set
+			{
+				if (_created_by != value)
+				{
+					Beforecreated_byChanged(value);
+					_created_by = value;
+					Aftercreated_byChanged();
+
+					Oncreated_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_byChanged(string newValue);
+		partial void Aftercreated_byChanged ();
+
+		public const string NameOfcreated_by = "created_by";
+
+		private static readonly PropertyChangedEventArgs _created_byChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_by);
+
+		private void Oncreated_byChanged()
+		{
+			OnPropertyChanged(_created_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_at : DateTime
+
+		private DateTime _modified_at;
 		/// <summary>
 		/// 更新日時
 		/// </summary>
-		[Column("modified_at"),                                           NotNull              ] public DateTime  ModifiedAt    { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  modified_at // datetime2(7)
+		{
+			get { return _modified_at; }
+			set
+			{
+				if (_modified_at != value)
+				{
+					Beforemodified_atChanged(value);
+					_modified_at = value;
+					Aftermodified_atChanged();
+
+					Onmodified_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_atChanged(DateTime newValue);
+		partial void Aftermodified_atChanged ();
+
+		public const string NameOfmodified_at = "modified_at";
+
+		private static readonly PropertyChangedEventArgs _modified_atChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_at);
+
+		private void Onmodified_atChanged()
+		{
+			OnPropertyChanged(_modified_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_by : string
+
+		private string _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column("modified_by"),                                           NotNull              ] public string    ModifiedBy    { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  modified_by // varchar(16)
+		{
+			get { return _modified_by; }
+			set
+			{
+				if (_modified_by != value)
+				{
+					Beforemodified_byChanged(value);
+					_modified_by = value;
+					Aftermodified_byChanged();
+
+					Onmodified_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_byChanged(string newValue);
+		partial void Aftermodified_byChanged ();
+
+		public const string NameOfmodified_by = "modified_by";
+
+		private static readonly PropertyChangedEventArgs _modified_byChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_by);
+
+		private void Onmodified_byChanged()
+		{
+			OnPropertyChanged(_modified_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region removed_at : DateTime?
+
+		private DateTime? _removed_at;
 		/// <summary>
 		/// 削除日時
 		/// </summary>
-		[Column("removed_at"),                                               Nullable          ] public DateTime? RemovedAt     { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7),    Nullable]
+		public  DateTime?  removed_at // datetime2(7)
+		{
+			get { return _removed_at; }
+			set
+			{
+				if (_removed_at != value)
+				{
+					Beforeremoved_atChanged(value);
+					_removed_at = value;
+					Afterremoved_atChanged();
+
+					Onremoved_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeremoved_atChanged(DateTime? newValue);
+		partial void Afterremoved_atChanged ();
+
+		public const string NameOfremoved_at = "removed_at";
+
+		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
+
+		private void Onremoved_atChanged()
+		{
+			OnPropertyChanged(_removed_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region row_version : byte[]
+
+		private byte[] _row_version;
 		/// <summary>
 		/// 版
 		/// </summary>
-		[Column("row_version",     SkipOnInsert=true, SkipOnUpdate=true), NotNull              ] public byte[]    RowVersion    { get; set; } // timestamp
+		[Column(DbType="timestamp",    DataType=DataType.Timestamp, SkipOnInsert=true, SkipOnUpdate=true), NotNull]
+		public  byte[]  row_version // timestamp
+		{
+			get { return _row_version; }
+			set
+			{
+				if (_row_version != value)
+				{
+					Beforerow_versionChanged(value);
+					_row_version = value;
+					Afterrow_versionChanged();
+
+					Onrow_versionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerow_versionChanged(byte[] newValue);
+		partial void Afterrow_versionChanged ();
+
+		public const string NameOfrow_version = "row_version";
+
+		private static readonly PropertyChangedEventArgs _row_versionChangedEventArgs = new PropertyChangedEventArgs(NameOfrow_version);
+
+		private void Onrow_versionChanged()
+		{
+			OnPropertyChanged(_row_versionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
 
 		#region Associations
 
+		#region Contacts : IEnumerable<Contact>
+
+		private IEnumerable<Contact> _contacts;
 		/// <summary>
 		/// FK_Contact_ContactType_BackReference
 		/// </summary>
-		[Association(ThisKey="ContactTypeId", OtherKey="ContactTypeId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<Contact> Contacts { get; set; }
+		[Association(ThisKey="contact_type_id", OtherKey="contact_type_id", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public  IEnumerable<Contact>  Contacts
+		{
+			get { return _contacts; }
+			set
+			{
+				if (_contacts != value)
+				{
+					BeforeContactsChanged(value);
+					_contacts = value;
+					AfterContactsChanged();
+
+					OnContactsChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeContactsChanged(IEnumerable<Contact> newValue);
+		partial void AfterContactsChanged ();
+
+		public const string NameOfContacts = "Contacts";
+
+		private static readonly PropertyChangedEventArgs _contactsChangedEventArgs = new PropertyChangedEventArgs(NameOfContacts);
+
+		private void OnContactsChanged()
+		{
+			OnPropertyChanged(_contactsChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#endregion
+
+		#region INotifyPropertyChanged support
+
+#if !SILVERLIGHT
+		[field : NonSerialized]
+#endif
+		public virtual event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged(string propertyName)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, new PropertyChangedEventArgs(propertyName));
+						});
+#else
+				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+#endif
+			}
+		}
+
+		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, arg);
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, arg);
+						});
+#else
+				propertyChanged(this, arg);
+#endif
+			}
+		}
+
+		#endregion
+	}
+
+	/// <summary>
+	/// エラーログ
+	/// </summary>
+	[Table(Schema="dbo", Name="ErrorLog")]
+	public partial class ErrorLog : INotifyPropertyChanged
+	{
+		#region uid : int
+
+		private int _uid;
+		/// <summary>
+		/// ユニークID
+		/// </summary>
+		[Column(DbType="int",            DataType=DataType.Int32)    , PrimaryKey, Identity]
+		public  int  uid // int
+		{
+			get { return _uid; }
+			set
+			{
+				if (_uid != value)
+				{
+					BeforeuidChanged(value);
+					_uid = value;
+					AfteruidChanged();
+
+					OnuidChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeuidChanged(int newValue);
+		partial void AfteruidChanged ();
+
+		public const string NameOfuid = "uid";
+
+		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
+
+		private void OnuidChanged()
+		{
+			OnPropertyChanged(_uidChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region category : string
+
+		private string _category;
+		/// <summary>
+		/// カテゴリ
+		/// </summary>
+		[Column(DbType="nvarchar(16)",   DataType=DataType.NVarChar,  Length=16), NotNull]
+		public  string  category // nvarchar(16)
+		{
+			get { return _category; }
+			set
+			{
+				if (_category != value)
+				{
+					BeforecategoryChanged(value);
+					_category = value;
+					AftercategoryChanged();
+
+					OncategoryChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforecategoryChanged(string newValue);
+		partial void AftercategoryChanged ();
+
+		public const string NameOfcategory = "category";
+
+		private static readonly PropertyChangedEventArgs _categoryChangedEventArgs = new PropertyChangedEventArgs(NameOfcategory);
+
+		private void OncategoryChanged()
+		{
+			OnPropertyChanged(_categoryChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region type : string
+
+		private string _type;
+		/// <summary>
+		/// 種別
+		/// </summary>
+		[Column(DbType="nvarchar(16)",   DataType=DataType.NVarChar,  Length=16), NotNull]
+		public  string  type // nvarchar(16)
+		{
+			get { return _type; }
+			set
+			{
+				if (_type != value)
+				{
+					BeforetypeChanged(value);
+					_type = value;
+					AftertypeChanged();
+
+					OntypeChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforetypeChanged(string newValue);
+		partial void AftertypeChanged ();
+
+		public const string NameOftype = "type";
+
+		private static readonly PropertyChangedEventArgs _typeChangedEventArgs = new PropertyChangedEventArgs(NameOftype);
+
+		private void OntypeChanged()
+		{
+			OnPropertyChanged(_typeChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region level : int
+
+		private int _level;
+		/// <summary>
+		/// レベル
+		/// </summary>
+		[Column(DbType="int",            DataType=DataType.Int32)    , NotNull]
+		public  int  level // int
+		{
+			get { return _level; }
+			set
+			{
+				if (_level != value)
+				{
+					BeforelevelChanged(value);
+					_level = value;
+					AfterlevelChanged();
+
+					OnlevelChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforelevelChanged(int newValue);
+		partial void AfterlevelChanged ();
+
+		public const string NameOflevel = "level";
+
+		private static readonly PropertyChangedEventArgs _levelChangedEventArgs = new PropertyChangedEventArgs(NameOflevel);
+
+		private void OnlevelChanged()
+		{
+			OnPropertyChanged(_levelChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region url : string
+
+		private string _url;
+		/// <summary>
+		/// URL
+		/// </summary>
+		[Column(DbType="nvarchar(1024)", DataType=DataType.NVarChar,  Length=1024), NotNull]
+		public  string  url // nvarchar(1024)
+		{
+			get { return _url; }
+			set
+			{
+				if (_url != value)
+				{
+					BeforeurlChanged(value);
+					_url = value;
+					AfterurlChanged();
+
+					OnurlChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeurlChanged(string newValue);
+		partial void AfterurlChanged ();
+
+		public const string NameOfurl = "url";
+
+		private static readonly PropertyChangedEventArgs _urlChangedEventArgs = new PropertyChangedEventArgs(NameOfurl);
+
+		private void OnurlChanged()
+		{
+			OnPropertyChanged(_urlChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region methods : string
+
+		private string _methods;
+		/// <summary>
+		/// 処理
+		/// </summary>
+		[Column(DbType="varchar(200)",   DataType=DataType.VarChar,   Length=200), NotNull]
+		public  string  methods // varchar(200)
+		{
+			get { return _methods; }
+			set
+			{
+				if (_methods != value)
+				{
+					BeforemethodsChanged(value);
+					_methods = value;
+					AftermethodsChanged();
+
+					OnmethodsChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforemethodsChanged(string newValue);
+		partial void AftermethodsChanged ();
+
+		public const string NameOfmethods = "methods";
+
+		private static readonly PropertyChangedEventArgs _methodsChangedEventArgs = new PropertyChangedEventArgs(NameOfmethods);
+
+		private void OnmethodsChanged()
+		{
+			OnPropertyChanged(_methodsChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_at : DateTime
+
+		private DateTime _created_at;
+		/// <summary>
+		/// 作成日時
+		/// </summary>
+		[Column(DbType="datetime2(7)",   DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  created_at // datetime2(7)
+		{
+			get { return _created_at; }
+			set
+			{
+				if (_created_at != value)
+				{
+					Beforecreated_atChanged(value);
+					_created_at = value;
+					Aftercreated_atChanged();
+
+					Oncreated_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_atChanged(DateTime newValue);
+		partial void Aftercreated_atChanged ();
+
+		public const string NameOfcreated_at = "created_at";
+
+		private static readonly PropertyChangedEventArgs _created_atChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_at);
+
+		private void Oncreated_atChanged()
+		{
+			OnPropertyChanged(_created_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_by : string
+
+		private string _created_by;
+		/// <summary>
+		/// 作成者
+		/// </summary>
+		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  created_by // varchar(16)
+		{
+			get { return _created_by; }
+			set
+			{
+				if (_created_by != value)
+				{
+					Beforecreated_byChanged(value);
+					_created_by = value;
+					Aftercreated_byChanged();
+
+					Oncreated_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_byChanged(string newValue);
+		partial void Aftercreated_byChanged ();
+
+		public const string NameOfcreated_by = "created_by";
+
+		private static readonly PropertyChangedEventArgs _created_byChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_by);
+
+		private void Oncreated_byChanged()
+		{
+			OnPropertyChanged(_created_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_at : DateTime
+
+		private DateTime _modified_at;
+		/// <summary>
+		/// 更新日時
+		/// </summary>
+		[Column(DbType="datetime2(7)",   DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  modified_at // datetime2(7)
+		{
+			get { return _modified_at; }
+			set
+			{
+				if (_modified_at != value)
+				{
+					Beforemodified_atChanged(value);
+					_modified_at = value;
+					Aftermodified_atChanged();
+
+					Onmodified_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_atChanged(DateTime newValue);
+		partial void Aftermodified_atChanged ();
+
+		public const string NameOfmodified_at = "modified_at";
+
+		private static readonly PropertyChangedEventArgs _modified_atChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_at);
+
+		private void Onmodified_atChanged()
+		{
+			OnPropertyChanged(_modified_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_by : string
+
+		private string _modified_by;
+		/// <summary>
+		/// 更新者
+		/// </summary>
+		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  modified_by // varchar(16)
+		{
+			get { return _modified_by; }
+			set
+			{
+				if (_modified_by != value)
+				{
+					Beforemodified_byChanged(value);
+					_modified_by = value;
+					Aftermodified_byChanged();
+
+					Onmodified_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_byChanged(string newValue);
+		partial void Aftermodified_byChanged ();
+
+		public const string NameOfmodified_by = "modified_by";
+
+		private static readonly PropertyChangedEventArgs _modified_byChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_by);
+
+		private void Onmodified_byChanged()
+		{
+			OnPropertyChanged(_modified_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region removed_at : DateTime?
+
+		private DateTime? _removed_at;
+		/// <summary>
+		/// 削除日時
+		/// </summary>
+		[Column(DbType="datetime2(7)",   DataType=DataType.DateTime2, Precision=7),    Nullable]
+		public  DateTime?  removed_at // datetime2(7)
+		{
+			get { return _removed_at; }
+			set
+			{
+				if (_removed_at != value)
+				{
+					Beforeremoved_atChanged(value);
+					_removed_at = value;
+					Afterremoved_atChanged();
+
+					Onremoved_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeremoved_atChanged(DateTime? newValue);
+		partial void Afterremoved_atChanged ();
+
+		public const string NameOfremoved_at = "removed_at";
+
+		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
+
+		private void Onremoved_atChanged()
+		{
+			OnPropertyChanged(_removed_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region row_version : byte[]
+
+		private byte[] _row_version;
+		/// <summary>
+		/// 版
+		/// </summary>
+		[Column(DbType="timestamp",      DataType=DataType.Timestamp, SkipOnInsert=true, SkipOnUpdate=true), NotNull]
+		public  byte[]  row_version // timestamp
+		{
+			get { return _row_version; }
+			set
+			{
+				if (_row_version != value)
+				{
+					Beforerow_versionChanged(value);
+					_row_version = value;
+					Afterrow_versionChanged();
+
+					Onrow_versionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerow_versionChanged(byte[] newValue);
+		partial void Afterrow_versionChanged ();
+
+		public const string NameOfrow_version = "row_version";
+
+		private static readonly PropertyChangedEventArgs _row_versionChangedEventArgs = new PropertyChangedEventArgs(NameOfrow_version);
+
+		private void Onrow_versionChanged()
+		{
+			OnPropertyChanged(_row_versionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region INotifyPropertyChanged support
+
+#if !SILVERLIGHT
+		[field : NonSerialized]
+#endif
+		public virtual event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged(string propertyName)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, new PropertyChangedEventArgs(propertyName));
+						});
+#else
+				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+#endif
+			}
+		}
+
+		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, arg);
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, arg);
+						});
+#else
+				propertyChanged(this, arg);
+#endif
+			}
+		}
 
 		#endregion
 	}
@@ -487,128 +4488,3294 @@ namespace DataModels
 	/// 職員
 	/// </summary>
 	[Table(Schema="HumanResource", Name="Staff")]
-	public partial class Staff
+	public partial class Staff : INotifyPropertyChanged
 	{
+		#region uid : int
+
+		private int _uid;
 		/// <summary>
 		/// ユニークID
 		/// </summary>
-		[Column("uid"),                                                   PrimaryKey,  Identity] public int       Uid           { get; set; } // int
+		[Column(DbType="int",          DataType=DataType.Int32)    , PrimaryKey, Identity]
+		public  int  uid // int
+		{
+			get { return _uid; }
+			set
+			{
+				if (_uid != value)
+				{
+					BeforeuidChanged(value);
+					_uid = value;
+					AfteruidChanged();
+
+					OnuidChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeuidChanged(int newValue);
+		partial void AfteruidChanged ();
+
+		public const string NameOfuid = "uid";
+
+		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
+
+		private void OnuidChanged()
+		{
+			OnPropertyChanged(_uidChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region staff_no : string
+
+		private string _staff_no;
 		/// <summary>
 		/// 職員番号
 		/// </summary>
-		[Column("staff_no"),                                              NotNull              ] public string    StaffNo       { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  staff_no // varchar(16)
+		{
+			get { return _staff_no; }
+			set
+			{
+				if (_staff_no != value)
+				{
+					Beforestaff_noChanged(value);
+					_staff_no = value;
+					Afterstaff_noChanged();
+
+					Onstaff_noChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforestaff_noChanged(string newValue);
+		partial void Afterstaff_noChanged ();
+
+		public const string NameOfstaff_no = "staff_no";
+
+		private static readonly PropertyChangedEventArgs _staff_noChangedEventArgs = new PropertyChangedEventArgs(NameOfstaff_no);
+
+		private void Onstaff_noChanged()
+		{
+			OnPropertyChanged(_staff_noChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region name : string
+
+		private string _name;
 		/// <summary>
 		/// 氏名
 		/// </summary>
-		[Column("name"),                                                  NotNull              ] public string    Name          { get; set; } // nvarchar(20)
+		[Column(DbType="nvarchar(20)", DataType=DataType.NVarChar,  Length=20), NotNull]
+		public  string  name // nvarchar(20)
+		{
+			get { return _name; }
+			set
+			{
+				if (_name != value)
+				{
+					BeforenameChanged(value);
+					_name = value;
+					AfternameChanged();
+
+					OnnameChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforenameChanged(string newValue);
+		partial void AfternameChanged ();
+
+		public const string NameOfname = "name";
+
+		private static readonly PropertyChangedEventArgs _nameChangedEventArgs = new PropertyChangedEventArgs(NameOfname);
+
+		private void OnnameChanged()
+		{
+			OnPropertyChanged(_nameChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region kana : string
+
+		private string _kana;
 		/// <summary>
 		/// かな氏名
 		/// </summary>
-		[Column("kana"),                                                  NotNull              ] public string    Kana          { get; set; } // nvarchar(20)
+		[Column(DbType="nvarchar(20)", DataType=DataType.NVarChar,  Length=20), NotNull]
+		public  string  kana // nvarchar(20)
+		{
+			get { return _kana; }
+			set
+			{
+				if (_kana != value)
+				{
+					BeforekanaChanged(value);
+					_kana = value;
+					AfterkanaChanged();
+
+					OnkanaChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforekanaChanged(string newValue);
+		partial void AfterkanaChanged ();
+
+		public const string NameOfkana = "kana";
+
+		private static readonly PropertyChangedEventArgs _kanaChangedEventArgs = new PropertyChangedEventArgs(NameOfkana);
+
+		private void OnkanaChanged()
+		{
+			OnPropertyChanged(_kanaChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region name_abbrev : string
+
+		private string _name_abbrev;
 		/// <summary>
 		/// 略称
 		/// </summary>
-		[Column("name_abbrev"),                                           NotNull              ] public string    NameAbbrev    { get; set; } // nvarchar(4)
+		[Column(DbType="nvarchar(4)",  DataType=DataType.NVarChar,  Length=4), NotNull]
+		public  string  name_abbrev // nvarchar(4)
+		{
+			get { return _name_abbrev; }
+			set
+			{
+				if (_name_abbrev != value)
+				{
+					Beforename_abbrevChanged(value);
+					_name_abbrev = value;
+					Aftername_abbrevChanged();
+
+					Onname_abbrevChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforename_abbrevChanged(string newValue);
+		partial void Aftername_abbrevChanged ();
+
+		public const string NameOfname_abbrev = "name_abbrev";
+
+		private static readonly PropertyChangedEventArgs _name_abbrevChangedEventArgs = new PropertyChangedEventArgs(NameOfname_abbrev);
+
+		private void Onname_abbrevChanged()
+		{
+			OnPropertyChanged(_name_abbrevChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region name_eng : string
+
+		private string _name_eng;
 		/// <summary>
 		/// 英字氏名
 		/// </summary>
-		[Column("name_eng"),                                              NotNull              ] public string    NameEng       { get; set; } // varchar(4)
+		[Column(DbType="varchar(4)",   DataType=DataType.VarChar,   Length=4), NotNull]
+		public  string  name_eng // varchar(4)
+		{
+			get { return _name_eng; }
+			set
+			{
+				if (_name_eng != value)
+				{
+					Beforename_engChanged(value);
+					_name_eng = value;
+					Aftername_engChanged();
+
+					Onname_engChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforename_engChanged(string newValue);
+		partial void Aftername_engChanged ();
+
+		public const string NameOfname_eng = "name_eng";
+
+		private static readonly PropertyChangedEventArgs _name_engChangedEventArgs = new PropertyChangedEventArgs(NameOfname_eng);
+
+		private void Onname_engChanged()
+		{
+			OnPropertyChanged(_name_engChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region name_eng_abbrev : string
+
+		private string _name_eng_abbrev;
 		/// <summary>
 		/// 英字略称
 		/// </summary>
-		[Column("name_eng_abbrev"),                                       NotNull              ] public string    NameEngAbbrev { get; set; } // varchar(4)
+		[Column(DbType="varchar(4)",   DataType=DataType.VarChar,   Length=4), NotNull]
+		public  string  name_eng_abbrev // varchar(4)
+		{
+			get { return _name_eng_abbrev; }
+			set
+			{
+				if (_name_eng_abbrev != value)
+				{
+					Beforename_eng_abbrevChanged(value);
+					_name_eng_abbrev = value;
+					Aftername_eng_abbrevChanged();
+
+					Onname_eng_abbrevChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforename_eng_abbrevChanged(string newValue);
+		partial void Aftername_eng_abbrevChanged ();
+
+		public const string NameOfname_eng_abbrev = "name_eng_abbrev";
+
+		private static readonly PropertyChangedEventArgs _name_eng_abbrevChangedEventArgs = new PropertyChangedEventArgs(NameOfname_eng_abbrev);
+
+		private void Onname_eng_abbrevChanged()
+		{
+			OnPropertyChanged(_name_eng_abbrevChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region gender : int?
+
+		private int? _gender;
 		/// <summary>
 		/// 性別
 		/// </summary>
-		[Column("gender"),                                                   Nullable          ] public int?      Gender        { get; set; } // int
+		[Column(DbType="int",          DataType=DataType.Int32)    ,    Nullable]
+		public  int?  gender // int
+		{
+			get { return _gender; }
+			set
+			{
+				if (_gender != value)
+				{
+					BeforegenderChanged(value);
+					_gender = value;
+					AftergenderChanged();
+
+					OngenderChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforegenderChanged(int? newValue);
+		partial void AftergenderChanged ();
+
+		public const string NameOfgender = "gender";
+
+		private static readonly PropertyChangedEventArgs _genderChangedEventArgs = new PropertyChangedEventArgs(NameOfgender);
+
+		private void OngenderChanged()
+		{
+			OnPropertyChanged(_genderChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region birth_date : DateTime?
+
+		private DateTime? _birth_date;
 		/// <summary>
 		/// 生年月日
 		/// </summary>
-		[Column("birth_date"),                                               Nullable          ] public DateTime? BirthDate     { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7),    Nullable]
+		public  DateTime?  birth_date // datetime2(7)
+		{
+			get { return _birth_date; }
+			set
+			{
+				if (_birth_date != value)
+				{
+					Beforebirth_dateChanged(value);
+					_birth_date = value;
+					Afterbirth_dateChanged();
+
+					Onbirth_dateChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforebirth_dateChanged(DateTime? newValue);
+		partial void Afterbirth_dateChanged ();
+
+		public const string NameOfbirth_date = "birth_date";
+
+		private static readonly PropertyChangedEventArgs _birth_dateChangedEventArgs = new PropertyChangedEventArgs(NameOfbirth_date);
+
+		private void Onbirth_dateChanged()
+		{
+			OnPropertyChanged(_birth_dateChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_at : DateTime
+
+		private DateTime _created_at;
 		/// <summary>
 		/// 作成日時
 		/// </summary>
-		[Column("created_at"),                                            NotNull              ] public DateTime  CreatedAt     { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  created_at // datetime2(7)
+		{
+			get { return _created_at; }
+			set
+			{
+				if (_created_at != value)
+				{
+					Beforecreated_atChanged(value);
+					_created_at = value;
+					Aftercreated_atChanged();
+
+					Oncreated_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_atChanged(DateTime newValue);
+		partial void Aftercreated_atChanged ();
+
+		public const string NameOfcreated_at = "created_at";
+
+		private static readonly PropertyChangedEventArgs _created_atChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_at);
+
+		private void Oncreated_atChanged()
+		{
+			OnPropertyChanged(_created_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region created_by : string
+
+		private string _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column("created_by"),                                            NotNull              ] public string    CreatedBy     { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  created_by // varchar(16)
+		{
+			get { return _created_by; }
+			set
+			{
+				if (_created_by != value)
+				{
+					Beforecreated_byChanged(value);
+					_created_by = value;
+					Aftercreated_byChanged();
+
+					Oncreated_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_byChanged(string newValue);
+		partial void Aftercreated_byChanged ();
+
+		public const string NameOfcreated_by = "created_by";
+
+		private static readonly PropertyChangedEventArgs _created_byChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_by);
+
+		private void Oncreated_byChanged()
+		{
+			OnPropertyChanged(_created_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_at : DateTime
+
+		private DateTime _modified_at;
 		/// <summary>
 		/// 更新日時
 		/// </summary>
-		[Column("modified_at"),                                           NotNull              ] public DateTime  ModifiedAt    { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  modified_at // datetime2(7)
+		{
+			get { return _modified_at; }
+			set
+			{
+				if (_modified_at != value)
+				{
+					Beforemodified_atChanged(value);
+					_modified_at = value;
+					Aftermodified_atChanged();
+
+					Onmodified_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_atChanged(DateTime newValue);
+		partial void Aftermodified_atChanged ();
+
+		public const string NameOfmodified_at = "modified_at";
+
+		private static readonly PropertyChangedEventArgs _modified_atChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_at);
+
+		private void Onmodified_atChanged()
+		{
+			OnPropertyChanged(_modified_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region modified_by : string
+
+		private string _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column("modified_by"),                                           NotNull              ] public string    ModifiedBy    { get; set; } // varchar(16)
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16), NotNull]
+		public  string  modified_by // varchar(16)
+		{
+			get { return _modified_by; }
+			set
+			{
+				if (_modified_by != value)
+				{
+					Beforemodified_byChanged(value);
+					_modified_by = value;
+					Aftermodified_byChanged();
+
+					Onmodified_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_byChanged(string newValue);
+		partial void Aftermodified_byChanged ();
+
+		public const string NameOfmodified_by = "modified_by";
+
+		private static readonly PropertyChangedEventArgs _modified_byChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_by);
+
+		private void Onmodified_byChanged()
+		{
+			OnPropertyChanged(_modified_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region removed_at : DateTime?
+
+		private DateTime? _removed_at;
 		/// <summary>
 		/// 削除日時
 		/// </summary>
-		[Column("removed_at"),                                               Nullable          ] public DateTime? RemovedAt     { get; set; } // datetime2(7)
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7),    Nullable]
+		public  DateTime?  removed_at // datetime2(7)
+		{
+			get { return _removed_at; }
+			set
+			{
+				if (_removed_at != value)
+				{
+					Beforeremoved_atChanged(value);
+					_removed_at = value;
+					Afterremoved_atChanged();
+
+					Onremoved_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeremoved_atChanged(DateTime? newValue);
+		partial void Afterremoved_atChanged ();
+
+		public const string NameOfremoved_at = "removed_at";
+
+		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
+
+		private void Onremoved_atChanged()
+		{
+			OnPropertyChanged(_removed_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region row_version : byte[]
+
+		private byte[] _row_version;
 		/// <summary>
 		/// 版
 		/// </summary>
-		[Column("row_version",     SkipOnInsert=true, SkipOnUpdate=true), NotNull              ] public byte[]    RowVersion    { get; set; } // timestamp
+		[Column(DbType="timestamp",    DataType=DataType.Timestamp, SkipOnInsert=true, SkipOnUpdate=true), NotNull]
+		public  byte[]  row_version // timestamp
+		{
+			get { return _row_version; }
+			set
+			{
+				if (_row_version != value)
+				{
+					Beforerow_versionChanged(value);
+					_row_version = value;
+					Afterrow_versionChanged();
+
+					Onrow_versionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerow_versionChanged(byte[] newValue);
+		partial void Afterrow_versionChanged ();
+
+		public const string NameOfrow_version = "row_version";
+
+		private static readonly PropertyChangedEventArgs _row_versionChangedEventArgs = new PropertyChangedEventArgs(NameOfrow_version);
+
+		private void Onrow_versionChanged()
+		{
+			OnPropertyChanged(_row_versionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
 
 		#region Associations
 
+		#region Accounts : IEnumerable<Account>
+
+		private IEnumerable<Account> _accounts;
 		/// <summary>
 		/// FK_Account_Staff_BackReference
 		/// </summary>
-		[Association(ThisKey="StaffNo", OtherKey="StaffNo", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<Account> Accounts { get; set; }
+		[Association(ThisKey="staff_no", OtherKey="staff_no", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public  IEnumerable<Account>  Accounts
+		{
+			get { return _accounts; }
+			set
+			{
+				if (_accounts != value)
+				{
+					BeforeAccountsChanged(value);
+					_accounts = value;
+					AfterAccountsChanged();
 
+					OnAccountsChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeAccountsChanged(IEnumerable<Account> newValue);
+		partial void AfterAccountsChanged ();
+
+		public const string NameOfAccounts = "Accounts";
+
+		private static readonly PropertyChangedEventArgs _accountsChangedEventArgs = new PropertyChangedEventArgs(NameOfAccounts);
+
+		private void OnAccountsChanged()
+		{
+			OnPropertyChanged(_accountsChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region Addresses : IEnumerable<Address>
+
+		private IEnumerable<Address> _addresses;
 		/// <summary>
 		/// FK_Address_Staff_BackReference
 		/// </summary>
-		[Association(ThisKey="StaffNo", OtherKey="StaffNo", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<Address> Addresses { get; set; }
+		[Association(ThisKey="staff_no", OtherKey="staff_no", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public  IEnumerable<Address>  Addresses
+		{
+			get { return _addresses; }
+			set
+			{
+				if (_addresses != value)
+				{
+					BeforeAddressesChanged(value);
+					_addresses = value;
+					AfterAddressesChanged();
 
+					OnAddressesChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeAddressesChanged(IEnumerable<Address> newValue);
+		partial void AfterAddressesChanged ();
+
+		public const string NameOfAddresses = "Addresses";
+
+		private static readonly PropertyChangedEventArgs _addressesChangedEventArgs = new PropertyChangedEventArgs(NameOfAddresses);
+
+		private void OnAddressesChanged()
+		{
+			OnPropertyChanged(_addressesChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region Contacts : IEnumerable<Contact>
+
+		private IEnumerable<Contact> _contacts;
 		/// <summary>
 		/// FK_Contact_Staff_BackReference
 		/// </summary>
-		[Association(ThisKey="StaffNo", OtherKey="StaffNo", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<Contact> Contacts { get; set; }
+		[Association(ThisKey="staff_no", OtherKey="staff_no", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public  IEnumerable<Contact>  Contacts
+		{
+			get { return _contacts; }
+			set
+			{
+				if (_contacts != value)
+				{
+					BeforeContactsChanged(value);
+					_contacts = value;
+					AfterContactsChanged();
+
+					OnContactsChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeContactsChanged(IEnumerable<Contact> newValue);
+		partial void AfterContactsChanged ();
+
+		public const string NameOfContacts = "Contacts";
+
+		private static readonly PropertyChangedEventArgs _contactsChangedEventArgs = new PropertyChangedEventArgs(NameOfContacts);
+
+		private void OnContactsChanged()
+		{
+			OnPropertyChanged(_contactsChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#endregion
+
+		#region INotifyPropertyChanged support
+
+#if !SILVERLIGHT
+		[field : NonSerialized]
+#endif
+		public virtual event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged(string propertyName)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, new PropertyChangedEventArgs(propertyName));
+						});
+#else
+				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+#endif
+			}
+		}
+
+		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, arg);
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, arg);
+						});
+#else
+				propertyChanged(this, arg);
+#endif
+			}
+		}
+
+		#endregion
+	}
+
+	/// <summary>
+	/// テスト
+	/// </summary>
+	[Table(Schema="dbo", Name="Test")]
+	public partial class Test : INotifyPropertyChanged
+	{
+		#region uid : int
+
+		private int _uid;
+		/// <summary>
+		/// ユニークID
+		/// </summary>
+		[Column(DbType="int",               DataType=DataType.Int32)         , PrimaryKey, Identity]
+		public  int  uid // int
+		{
+			get { return _uid; }
+			set
+			{
+				if (_uid != value)
+				{
+					BeforeuidChanged(value);
+					_uid = value;
+					AfteruidChanged();
+
+					OnuidChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeuidChanged(int newValue);
+		partial void AfteruidChanged ();
+
+		public const string NameOfuid = "uid";
+
+		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
+
+		private void OnuidChanged()
+		{
+			OnPropertyChanged(_uidChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col01 : char
+
+		private char _col01;
+		/// <summary>
+		/// col01
+		/// </summary>
+		[Column(DbType="char(1)",           DataType=DataType.Char,           Length=1), NotNull]
+		public  char  col01 // char(1)
+		{
+			get { return _col01; }
+			set
+			{
+				if (_col01 != value)
+				{
+					Beforecol01Changed(value);
+					_col01 = value;
+					Aftercol01Changed();
+
+					Oncol01Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol01Changed(char newValue);
+		partial void Aftercol01Changed ();
+
+		public const string NameOfcol01 = "col01";
+
+		private static readonly PropertyChangedEventArgs _col01ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol01);
+
+		private void Oncol01Changed()
+		{
+			OnPropertyChanged(_col01ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col01_ : char?
+
+		private char? _col01_;
+		/// <summary>
+		/// col01_
+		/// </summary>
+		[Column(DbType="char(1)",           DataType=DataType.Char,           Length=1),    Nullable]
+		public  char?  col01_ // char(1)
+		{
+			get { return _col01_; }
+			set
+			{
+				if (_col01_ != value)
+				{
+					Beforecol01_Changed(value);
+					_col01_ = value;
+					Aftercol01_Changed();
+
+					Oncol01_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol01_Changed(char? newValue);
+		partial void Aftercol01_Changed ();
+
+		public const string NameOfcol01_ = "col01_";
+
+		private static readonly PropertyChangedEventArgs _col01_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol01_);
+
+		private void Oncol01_Changed()
+		{
+			OnPropertyChanged(_col01_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col02 : string
+
+		private string _col02;
+		/// <summary>
+		/// col02
+		/// </summary>
+		[Column(DbType="char(10)",          DataType=DataType.Char,           Length=10), NotNull]
+		public  string  col02 // char(10)
+		{
+			get { return _col02; }
+			set
+			{
+				if (_col02 != value)
+				{
+					Beforecol02Changed(value);
+					_col02 = value;
+					Aftercol02Changed();
+
+					Oncol02Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol02Changed(string newValue);
+		partial void Aftercol02Changed ();
+
+		public const string NameOfcol02 = "col02";
+
+		private static readonly PropertyChangedEventArgs _col02ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol02);
+
+		private void Oncol02Changed()
+		{
+			OnPropertyChanged(_col02ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col02_ : string
+
+		private string _col02_;
+		/// <summary>
+		/// col02_
+		/// </summary>
+		[Column(DbType="char(10)",          DataType=DataType.Char,           Length=10),    Nullable]
+		public  string  col02_ // char(10)
+		{
+			get { return _col02_; }
+			set
+			{
+				if (_col02_ != value)
+				{
+					Beforecol02_Changed(value);
+					_col02_ = value;
+					Aftercol02_Changed();
+
+					Oncol02_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol02_Changed(string newValue);
+		partial void Aftercol02_Changed ();
+
+		public const string NameOfcol02_ = "col02_";
+
+		private static readonly PropertyChangedEventArgs _col02_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol02_);
+
+		private void Oncol02_Changed()
+		{
+			OnPropertyChanged(_col02_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col03 : string
+
+		private string _col03;
+		/// <summary>
+		/// col03
+		/// </summary>
+		[Column(DbType="varchar(20)",       DataType=DataType.VarChar,        Length=20), NotNull]
+		public  string  col03 // varchar(20)
+		{
+			get { return _col03; }
+			set
+			{
+				if (_col03 != value)
+				{
+					Beforecol03Changed(value);
+					_col03 = value;
+					Aftercol03Changed();
+
+					Oncol03Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol03Changed(string newValue);
+		partial void Aftercol03Changed ();
+
+		public const string NameOfcol03 = "col03";
+
+		private static readonly PropertyChangedEventArgs _col03ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol03);
+
+		private void Oncol03Changed()
+		{
+			OnPropertyChanged(_col03ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col03_ : string
+
+		private string _col03_;
+		/// <summary>
+		/// col03_
+		/// </summary>
+		[Column(DbType="varchar(20)",       DataType=DataType.VarChar,        Length=20),    Nullable]
+		public  string  col03_ // varchar(20)
+		{
+			get { return _col03_; }
+			set
+			{
+				if (_col03_ != value)
+				{
+					Beforecol03_Changed(value);
+					_col03_ = value;
+					Aftercol03_Changed();
+
+					Oncol03_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol03_Changed(string newValue);
+		partial void Aftercol03_Changed ();
+
+		public const string NameOfcol03_ = "col03_";
+
+		private static readonly PropertyChangedEventArgs _col03_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol03_);
+
+		private void Oncol03_Changed()
+		{
+			OnPropertyChanged(_col03_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col04 : string
+
+		private string _col04;
+		/// <summary>
+		/// col04
+		/// </summary>
+		[Column(DbType="text",              DataType=DataType.Text)          , NotNull]
+		public  string  col04 // text
+		{
+			get { return _col04; }
+			set
+			{
+				if (_col04 != value)
+				{
+					Beforecol04Changed(value);
+					_col04 = value;
+					Aftercol04Changed();
+
+					Oncol04Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol04Changed(string newValue);
+		partial void Aftercol04Changed ();
+
+		public const string NameOfcol04 = "col04";
+
+		private static readonly PropertyChangedEventArgs _col04ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol04);
+
+		private void Oncol04Changed()
+		{
+			OnPropertyChanged(_col04ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col04_ : string
+
+		private string _col04_;
+		/// <summary>
+		/// col04_
+		/// </summary>
+		[Column(DbType="text",              DataType=DataType.Text)          ,    Nullable]
+		public  string  col04_ // text
+		{
+			get { return _col04_; }
+			set
+			{
+				if (_col04_ != value)
+				{
+					Beforecol04_Changed(value);
+					_col04_ = value;
+					Aftercol04_Changed();
+
+					Oncol04_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol04_Changed(string newValue);
+		partial void Aftercol04_Changed ();
+
+		public const string NameOfcol04_ = "col04_";
+
+		private static readonly PropertyChangedEventArgs _col04_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol04_);
+
+		private void Oncol04_Changed()
+		{
+			OnPropertyChanged(_col04_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col05 : char
+
+		private char _col05;
+		/// <summary>
+		/// col05
+		/// </summary>
+		[Column(DbType="nchar(1)",          DataType=DataType.NChar,          Length=1), NotNull]
+		public  char  col05 // nchar(1)
+		{
+			get { return _col05; }
+			set
+			{
+				if (_col05 != value)
+				{
+					Beforecol05Changed(value);
+					_col05 = value;
+					Aftercol05Changed();
+
+					Oncol05Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol05Changed(char newValue);
+		partial void Aftercol05Changed ();
+
+		public const string NameOfcol05 = "col05";
+
+		private static readonly PropertyChangedEventArgs _col05ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol05);
+
+		private void Oncol05Changed()
+		{
+			OnPropertyChanged(_col05ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col05_ : char?
+
+		private char? _col05_;
+		/// <summary>
+		/// col05_
+		/// </summary>
+		[Column(DbType="nchar(1)",          DataType=DataType.NChar,          Length=1),    Nullable]
+		public  char?  col05_ // nchar(1)
+		{
+			get { return _col05_; }
+			set
+			{
+				if (_col05_ != value)
+				{
+					Beforecol05_Changed(value);
+					_col05_ = value;
+					Aftercol05_Changed();
+
+					Oncol05_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol05_Changed(char? newValue);
+		partial void Aftercol05_Changed ();
+
+		public const string NameOfcol05_ = "col05_";
+
+		private static readonly PropertyChangedEventArgs _col05_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol05_);
+
+		private void Oncol05_Changed()
+		{
+			OnPropertyChanged(_col05_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col06 : string
+
+		private string _col06;
+		/// <summary>
+		/// col06
+		/// </summary>
+		[Column(DbType="nchar(10)",         DataType=DataType.NChar,          Length=10), NotNull]
+		public  string  col06 // nchar(10)
+		{
+			get { return _col06; }
+			set
+			{
+				if (_col06 != value)
+				{
+					Beforecol06Changed(value);
+					_col06 = value;
+					Aftercol06Changed();
+
+					Oncol06Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol06Changed(string newValue);
+		partial void Aftercol06Changed ();
+
+		public const string NameOfcol06 = "col06";
+
+		private static readonly PropertyChangedEventArgs _col06ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol06);
+
+		private void Oncol06Changed()
+		{
+			OnPropertyChanged(_col06ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col06_ : string
+
+		private string _col06_;
+		/// <summary>
+		/// col06_
+		/// </summary>
+		[Column(DbType="nchar(10)",         DataType=DataType.NChar,          Length=10),    Nullable]
+		public  string  col06_ // nchar(10)
+		{
+			get { return _col06_; }
+			set
+			{
+				if (_col06_ != value)
+				{
+					Beforecol06_Changed(value);
+					_col06_ = value;
+					Aftercol06_Changed();
+
+					Oncol06_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol06_Changed(string newValue);
+		partial void Aftercol06_Changed ();
+
+		public const string NameOfcol06_ = "col06_";
+
+		private static readonly PropertyChangedEventArgs _col06_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol06_);
+
+		private void Oncol06_Changed()
+		{
+			OnPropertyChanged(_col06_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col07 : string
+
+		private string _col07;
+		/// <summary>
+		/// col07
+		/// </summary>
+		[Column(DbType="nvarchar(20)",      DataType=DataType.NVarChar,       Length=20), NotNull]
+		public  string  col07 // nvarchar(20)
+		{
+			get { return _col07; }
+			set
+			{
+				if (_col07 != value)
+				{
+					Beforecol07Changed(value);
+					_col07 = value;
+					Aftercol07Changed();
+
+					Oncol07Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol07Changed(string newValue);
+		partial void Aftercol07Changed ();
+
+		public const string NameOfcol07 = "col07";
+
+		private static readonly PropertyChangedEventArgs _col07ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol07);
+
+		private void Oncol07Changed()
+		{
+			OnPropertyChanged(_col07ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col07_ : string
+
+		private string _col07_;
+		/// <summary>
+		/// col07_
+		/// </summary>
+		[Column(DbType="nvarchar(20)",      DataType=DataType.NVarChar,       Length=20),    Nullable]
+		public  string  col07_ // nvarchar(20)
+		{
+			get { return _col07_; }
+			set
+			{
+				if (_col07_ != value)
+				{
+					Beforecol07_Changed(value);
+					_col07_ = value;
+					Aftercol07_Changed();
+
+					Oncol07_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol07_Changed(string newValue);
+		partial void Aftercol07_Changed ();
+
+		public const string NameOfcol07_ = "col07_";
+
+		private static readonly PropertyChangedEventArgs _col07_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol07_);
+
+		private void Oncol07_Changed()
+		{
+			OnPropertyChanged(_col07_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col08 : string
+
+		private string _col08;
+		/// <summary>
+		/// col08
+		/// </summary>
+		[Column(DbType="ntext",             DataType=DataType.NText)         , NotNull]
+		public  string  col08 // ntext
+		{
+			get { return _col08; }
+			set
+			{
+				if (_col08 != value)
+				{
+					Beforecol08Changed(value);
+					_col08 = value;
+					Aftercol08Changed();
+
+					Oncol08Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol08Changed(string newValue);
+		partial void Aftercol08Changed ();
+
+		public const string NameOfcol08 = "col08";
+
+		private static readonly PropertyChangedEventArgs _col08ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol08);
+
+		private void Oncol08Changed()
+		{
+			OnPropertyChanged(_col08ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col08_ : string
+
+		private string _col08_;
+		/// <summary>
+		/// col08_
+		/// </summary>
+		[Column(DbType="ntext",             DataType=DataType.NText)         ,    Nullable]
+		public  string  col08_ // ntext
+		{
+			get { return _col08_; }
+			set
+			{
+				if (_col08_ != value)
+				{
+					Beforecol08_Changed(value);
+					_col08_ = value;
+					Aftercol08_Changed();
+
+					Oncol08_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol08_Changed(string newValue);
+		partial void Aftercol08_Changed ();
+
+		public const string NameOfcol08_ = "col08_";
+
+		private static readonly PropertyChangedEventArgs _col08_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol08_);
+
+		private void Oncol08_Changed()
+		{
+			OnPropertyChanged(_col08_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col09 : byte[]
+
+		private byte[] _col09;
+		/// <summary>
+		/// col09
+		/// </summary>
+		[Column(DbType="binary(50)",        DataType=DataType.Binary,         Length=50), NotNull]
+		public  byte[]  col09 // binary(50)
+		{
+			get { return _col09; }
+			set
+			{
+				if (_col09 != value)
+				{
+					Beforecol09Changed(value);
+					_col09 = value;
+					Aftercol09Changed();
+
+					Oncol09Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol09Changed(byte[] newValue);
+		partial void Aftercol09Changed ();
+
+		public const string NameOfcol09 = "col09";
+
+		private static readonly PropertyChangedEventArgs _col09ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol09);
+
+		private void Oncol09Changed()
+		{
+			OnPropertyChanged(_col09ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col09_ : byte[]
+
+		private byte[] _col09_;
+		/// <summary>
+		/// col09_
+		/// </summary>
+		[Column(DbType="binary(50)",        DataType=DataType.Binary,         Length=50),    Nullable]
+		public  byte[]  col09_ // binary(50)
+		{
+			get { return _col09_; }
+			set
+			{
+				if (_col09_ != value)
+				{
+					Beforecol09_Changed(value);
+					_col09_ = value;
+					Aftercol09_Changed();
+
+					Oncol09_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol09_Changed(byte[] newValue);
+		partial void Aftercol09_Changed ();
+
+		public const string NameOfcol09_ = "col09_";
+
+		private static readonly PropertyChangedEventArgs _col09_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol09_);
+
+		private void Oncol09_Changed()
+		{
+			OnPropertyChanged(_col09_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col10 : byte[]
+
+		private byte[] _col10;
+		/// <summary>
+		/// col10
+		/// </summary>
+		[Column(DbType="varbinary(50)",     DataType=DataType.VarBinary,      Length=50), NotNull]
+		public  byte[]  col10 // varbinary(50)
+		{
+			get { return _col10; }
+			set
+			{
+				if (_col10 != value)
+				{
+					Beforecol10Changed(value);
+					_col10 = value;
+					Aftercol10Changed();
+
+					Oncol10Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol10Changed(byte[] newValue);
+		partial void Aftercol10Changed ();
+
+		public const string NameOfcol10 = "col10";
+
+		private static readonly PropertyChangedEventArgs _col10ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol10);
+
+		private void Oncol10Changed()
+		{
+			OnPropertyChanged(_col10ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col10_ : byte[]
+
+		private byte[] _col10_;
+		/// <summary>
+		/// col10_
+		/// </summary>
+		[Column(DbType="varbinary(50)",     DataType=DataType.VarBinary,      Length=50),    Nullable]
+		public  byte[]  col10_ // varbinary(50)
+		{
+			get { return _col10_; }
+			set
+			{
+				if (_col10_ != value)
+				{
+					Beforecol10_Changed(value);
+					_col10_ = value;
+					Aftercol10_Changed();
+
+					Oncol10_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol10_Changed(byte[] newValue);
+		partial void Aftercol10_Changed ();
+
+		public const string NameOfcol10_ = "col10_";
+
+		private static readonly PropertyChangedEventArgs _col10_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol10_);
+
+		private void Oncol10_Changed()
+		{
+			OnPropertyChanged(_col10_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col11 : byte[]
+
+		private byte[] _col11;
+		/// <summary>
+		/// col11
+		/// </summary>
+		[Column(DbType="image",             DataType=DataType.Image)         , NotNull]
+		public  byte[]  col11 // image
+		{
+			get { return _col11; }
+			set
+			{
+				if (_col11 != value)
+				{
+					Beforecol11Changed(value);
+					_col11 = value;
+					Aftercol11Changed();
+
+					Oncol11Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol11Changed(byte[] newValue);
+		partial void Aftercol11Changed ();
+
+		public const string NameOfcol11 = "col11";
+
+		private static readonly PropertyChangedEventArgs _col11ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol11);
+
+		private void Oncol11Changed()
+		{
+			OnPropertyChanged(_col11ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col11_ : byte[]
+
+		private byte[] _col11_;
+		/// <summary>
+		/// col11_
+		/// </summary>
+		[Column(DbType="image",             DataType=DataType.Image)         ,    Nullable]
+		public  byte[]  col11_ // image
+		{
+			get { return _col11_; }
+			set
+			{
+				if (_col11_ != value)
+				{
+					Beforecol11_Changed(value);
+					_col11_ = value;
+					Aftercol11_Changed();
+
+					Oncol11_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol11_Changed(byte[] newValue);
+		partial void Aftercol11_Changed ();
+
+		public const string NameOfcol11_ = "col11_";
+
+		private static readonly PropertyChangedEventArgs _col11_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol11_);
+
+		private void Oncol11_Changed()
+		{
+			OnPropertyChanged(_col11_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col12 : bool
+
+		private bool _col12;
+		/// <summary>
+		/// col12
+		/// </summary>
+		[Column(DbType="bit",               DataType=DataType.Boolean)       , NotNull]
+		public  bool  col12 // bit
+		{
+			get { return _col12; }
+			set
+			{
+				if (_col12 != value)
+				{
+					Beforecol12Changed(value);
+					_col12 = value;
+					Aftercol12Changed();
+
+					Oncol12Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol12Changed(bool newValue);
+		partial void Aftercol12Changed ();
+
+		public const string NameOfcol12 = "col12";
+
+		private static readonly PropertyChangedEventArgs _col12ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol12);
+
+		private void Oncol12Changed()
+		{
+			OnPropertyChanged(_col12ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col12_ : bool?
+
+		private bool? _col12_;
+		/// <summary>
+		/// col12_
+		/// </summary>
+		[Column(DbType="bit",               DataType=DataType.Boolean)       ,    Nullable]
+		public  bool?  col12_ // bit
+		{
+			get { return _col12_; }
+			set
+			{
+				if (_col12_ != value)
+				{
+					Beforecol12_Changed(value);
+					_col12_ = value;
+					Aftercol12_Changed();
+
+					Oncol12_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol12_Changed(bool? newValue);
+		partial void Aftercol12_Changed ();
+
+		public const string NameOfcol12_ = "col12_";
+
+		private static readonly PropertyChangedEventArgs _col12_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol12_);
+
+		private void Oncol12_Changed()
+		{
+			OnPropertyChanged(_col12_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col13 : Guid
+
+		private Guid _col13;
+		/// <summary>
+		/// col13
+		/// </summary>
+		[Column(DbType="uniqueidentifier",  DataType=DataType.Guid)          , NotNull]
+		public  Guid  col13 // uniqueidentifier
+		{
+			get { return _col13; }
+			set
+			{
+				if (_col13 != value)
+				{
+					Beforecol13Changed(value);
+					_col13 = value;
+					Aftercol13Changed();
+
+					Oncol13Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol13Changed(Guid newValue);
+		partial void Aftercol13Changed ();
+
+		public const string NameOfcol13 = "col13";
+
+		private static readonly PropertyChangedEventArgs _col13ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol13);
+
+		private void Oncol13Changed()
+		{
+			OnPropertyChanged(_col13ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col13_ : Guid?
+
+		private Guid? _col13_;
+		/// <summary>
+		/// col13_
+		/// </summary>
+		[Column(DbType="uniqueidentifier",  DataType=DataType.Guid)          ,    Nullable]
+		public  Guid?  col13_ // uniqueidentifier
+		{
+			get { return _col13_; }
+			set
+			{
+				if (_col13_ != value)
+				{
+					Beforecol13_Changed(value);
+					_col13_ = value;
+					Aftercol13_Changed();
+
+					Oncol13_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol13_Changed(Guid? newValue);
+		partial void Aftercol13_Changed ();
+
+		public const string NameOfcol13_ = "col13_";
+
+		private static readonly PropertyChangedEventArgs _col13_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol13_);
+
+		private void Oncol13_Changed()
+		{
+			OnPropertyChanged(_col13_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col14 : short
+
+		private short _col14;
+		/// <summary>
+		/// col14
+		/// </summary>
+		[Column(DbType="smallint",          DataType=DataType.Int16)         , NotNull]
+		public  short  col14 // smallint
+		{
+			get { return _col14; }
+			set
+			{
+				if (_col14 != value)
+				{
+					Beforecol14Changed(value);
+					_col14 = value;
+					Aftercol14Changed();
+
+					Oncol14Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol14Changed(short newValue);
+		partial void Aftercol14Changed ();
+
+		public const string NameOfcol14 = "col14";
+
+		private static readonly PropertyChangedEventArgs _col14ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol14);
+
+		private void Oncol14Changed()
+		{
+			OnPropertyChanged(_col14ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col14_ : short?
+
+		private short? _col14_;
+		/// <summary>
+		/// col14_
+		/// </summary>
+		[Column(DbType="smallint",          DataType=DataType.Int16)         ,    Nullable]
+		public  short?  col14_ // smallint
+		{
+			get { return _col14_; }
+			set
+			{
+				if (_col14_ != value)
+				{
+					Beforecol14_Changed(value);
+					_col14_ = value;
+					Aftercol14_Changed();
+
+					Oncol14_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol14_Changed(short? newValue);
+		partial void Aftercol14_Changed ();
+
+		public const string NameOfcol14_ = "col14_";
+
+		private static readonly PropertyChangedEventArgs _col14_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol14_);
+
+		private void Oncol14_Changed()
+		{
+			OnPropertyChanged(_col14_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col15 : int
+
+		private int _col15;
+		/// <summary>
+		/// col15
+		/// </summary>
+		[Column(DbType="int",               DataType=DataType.Int32)         , NotNull]
+		public  int  col15 // int
+		{
+			get { return _col15; }
+			set
+			{
+				if (_col15 != value)
+				{
+					Beforecol15Changed(value);
+					_col15 = value;
+					Aftercol15Changed();
+
+					Oncol15Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol15Changed(int newValue);
+		partial void Aftercol15Changed ();
+
+		public const string NameOfcol15 = "col15";
+
+		private static readonly PropertyChangedEventArgs _col15ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol15);
+
+		private void Oncol15Changed()
+		{
+			OnPropertyChanged(_col15ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col15_ : int?
+
+		private int? _col15_;
+		/// <summary>
+		/// col15_
+		/// </summary>
+		[Column(DbType="int",               DataType=DataType.Int32)         ,    Nullable]
+		public  int?  col15_ // int
+		{
+			get { return _col15_; }
+			set
+			{
+				if (_col15_ != value)
+				{
+					Beforecol15_Changed(value);
+					_col15_ = value;
+					Aftercol15_Changed();
+
+					Oncol15_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol15_Changed(int? newValue);
+		partial void Aftercol15_Changed ();
+
+		public const string NameOfcol15_ = "col15_";
+
+		private static readonly PropertyChangedEventArgs _col15_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol15_);
+
+		private void Oncol15_Changed()
+		{
+			OnPropertyChanged(_col15_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col16 : long
+
+		private long _col16;
+		/// <summary>
+		/// col16
+		/// </summary>
+		[Column(DbType="bigint",            DataType=DataType.Int64)         , NotNull]
+		public  long  col16 // bigint
+		{
+			get { return _col16; }
+			set
+			{
+				if (_col16 != value)
+				{
+					Beforecol16Changed(value);
+					_col16 = value;
+					Aftercol16Changed();
+
+					Oncol16Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol16Changed(long newValue);
+		partial void Aftercol16Changed ();
+
+		public const string NameOfcol16 = "col16";
+
+		private static readonly PropertyChangedEventArgs _col16ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol16);
+
+		private void Oncol16Changed()
+		{
+			OnPropertyChanged(_col16ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col16_ : long?
+
+		private long? _col16_;
+		/// <summary>
+		/// col16_
+		/// </summary>
+		[Column(DbType="bigint",            DataType=DataType.Int64)         ,    Nullable]
+		public  long?  col16_ // bigint
+		{
+			get { return _col16_; }
+			set
+			{
+				if (_col16_ != value)
+				{
+					Beforecol16_Changed(value);
+					_col16_ = value;
+					Aftercol16_Changed();
+
+					Oncol16_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol16_Changed(long? newValue);
+		partial void Aftercol16_Changed ();
+
+		public const string NameOfcol16_ = "col16_";
+
+		private static readonly PropertyChangedEventArgs _col16_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol16_);
+
+		private void Oncol16_Changed()
+		{
+			OnPropertyChanged(_col16_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col17 : byte
+
+		private byte _col17;
+		/// <summary>
+		/// col17
+		/// </summary>
+		[Column(DbType="tinyint",           DataType=DataType.Byte)          , NotNull]
+		public  byte  col17 // tinyint
+		{
+			get { return _col17; }
+			set
+			{
+				if (_col17 != value)
+				{
+					Beforecol17Changed(value);
+					_col17 = value;
+					Aftercol17Changed();
+
+					Oncol17Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol17Changed(byte newValue);
+		partial void Aftercol17Changed ();
+
+		public const string NameOfcol17 = "col17";
+
+		private static readonly PropertyChangedEventArgs _col17ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol17);
+
+		private void Oncol17Changed()
+		{
+			OnPropertyChanged(_col17ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col17_ : byte?
+
+		private byte? _col17_;
+		/// <summary>
+		/// col17_
+		/// </summary>
+		[Column(DbType="tinyint",           DataType=DataType.Byte)          ,    Nullable]
+		public  byte?  col17_ // tinyint
+		{
+			get { return _col17_; }
+			set
+			{
+				if (_col17_ != value)
+				{
+					Beforecol17_Changed(value);
+					_col17_ = value;
+					Aftercol17_Changed();
+
+					Oncol17_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol17_Changed(byte? newValue);
+		partial void Aftercol17_Changed ();
+
+		public const string NameOfcol17_ = "col17_";
+
+		private static readonly PropertyChangedEventArgs _col17_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol17_);
+
+		private void Oncol17_Changed()
+		{
+			OnPropertyChanged(_col17_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col18 : double
+
+		private double _col18;
+		/// <summary>
+		/// col18
+		/// </summary>
+		[Column(DbType="float",             DataType=DataType.Double)        , NotNull]
+		public  double  col18 // float
+		{
+			get { return _col18; }
+			set
+			{
+				if (_col18 != value)
+				{
+					Beforecol18Changed(value);
+					_col18 = value;
+					Aftercol18Changed();
+
+					Oncol18Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol18Changed(double newValue);
+		partial void Aftercol18Changed ();
+
+		public const string NameOfcol18 = "col18";
+
+		private static readonly PropertyChangedEventArgs _col18ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol18);
+
+		private void Oncol18Changed()
+		{
+			OnPropertyChanged(_col18ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col18_ : double?
+
+		private double? _col18_;
+		/// <summary>
+		/// col18_
+		/// </summary>
+		[Column(DbType="float",             DataType=DataType.Double)        ,    Nullable]
+		public  double?  col18_ // float
+		{
+			get { return _col18_; }
+			set
+			{
+				if (_col18_ != value)
+				{
+					Beforecol18_Changed(value);
+					_col18_ = value;
+					Aftercol18_Changed();
+
+					Oncol18_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol18_Changed(double? newValue);
+		partial void Aftercol18_Changed ();
+
+		public const string NameOfcol18_ = "col18_";
+
+		private static readonly PropertyChangedEventArgs _col18_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol18_);
+
+		private void Oncol18_Changed()
+		{
+			OnPropertyChanged(_col18_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col19 : decimal
+
+		private decimal _col19;
+		/// <summary>
+		/// col19
+		/// </summary>
+		[Column(DbType="decimal(11, 8)",    DataType=DataType.Decimal,        Precision=11, Scale=8), NotNull]
+		public  decimal  col19 // decimal(11, 8)
+		{
+			get { return _col19; }
+			set
+			{
+				if (_col19 != value)
+				{
+					Beforecol19Changed(value);
+					_col19 = value;
+					Aftercol19Changed();
+
+					Oncol19Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol19Changed(decimal newValue);
+		partial void Aftercol19Changed ();
+
+		public const string NameOfcol19 = "col19";
+
+		private static readonly PropertyChangedEventArgs _col19ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol19);
+
+		private void Oncol19Changed()
+		{
+			OnPropertyChanged(_col19ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col19_ : decimal?
+
+		private decimal? _col19_;
+		/// <summary>
+		/// col19_
+		/// </summary>
+		[Column(DbType="decimal(11, 8)",    DataType=DataType.Decimal,        Precision=11, Scale=8),    Nullable]
+		public  decimal?  col19_ // decimal(11, 8)
+		{
+			get { return _col19_; }
+			set
+			{
+				if (_col19_ != value)
+				{
+					Beforecol19_Changed(value);
+					_col19_ = value;
+					Aftercol19_Changed();
+
+					Oncol19_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol19_Changed(decimal? newValue);
+		partial void Aftercol19_Changed ();
+
+		public const string NameOfcol19_ = "col19_";
+
+		private static readonly PropertyChangedEventArgs _col19_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol19_);
+
+		private void Oncol19_Changed()
+		{
+			OnPropertyChanged(_col19_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col20 : decimal
+
+		private decimal _col20;
+		/// <summary>
+		/// col20
+		/// </summary>
+		[Column(DbType="decimal(11, 8)",    DataType=DataType.Decimal,        Precision=11, Scale=8), NotNull]
+		public  decimal  col20 // decimal(11, 8)
+		{
+			get { return _col20; }
+			set
+			{
+				if (_col20 != value)
+				{
+					Beforecol20Changed(value);
+					_col20 = value;
+					Aftercol20Changed();
+
+					Oncol20Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol20Changed(decimal newValue);
+		partial void Aftercol20Changed ();
+
+		public const string NameOfcol20 = "col20";
+
+		private static readonly PropertyChangedEventArgs _col20ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol20);
+
+		private void Oncol20Changed()
+		{
+			OnPropertyChanged(_col20ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col20_ : decimal?
+
+		private decimal? _col20_;
+		/// <summary>
+		/// col20_
+		/// </summary>
+		[Column(DbType="decimal(11, 8)",    DataType=DataType.Decimal,        Precision=11, Scale=8),    Nullable]
+		public  decimal?  col20_ // decimal(11, 8)
+		{
+			get { return _col20_; }
+			set
+			{
+				if (_col20_ != value)
+				{
+					Beforecol20_Changed(value);
+					_col20_ = value;
+					Aftercol20_Changed();
+
+					Oncol20_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol20_Changed(decimal? newValue);
+		partial void Aftercol20_Changed ();
+
+		public const string NameOfcol20_ = "col20_";
+
+		private static readonly PropertyChangedEventArgs _col20_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol20_);
+
+		private void Oncol20_Changed()
+		{
+			OnPropertyChanged(_col20_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col21 : decimal
+
+		private decimal _col21;
+		/// <summary>
+		/// col21
+		/// </summary>
+		[Column(DbType="money",             DataType=DataType.Money)         , NotNull]
+		public  decimal  col21 // money
+		{
+			get { return _col21; }
+			set
+			{
+				if (_col21 != value)
+				{
+					Beforecol21Changed(value);
+					_col21 = value;
+					Aftercol21Changed();
+
+					Oncol21Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol21Changed(decimal newValue);
+		partial void Aftercol21Changed ();
+
+		public const string NameOfcol21 = "col21";
+
+		private static readonly PropertyChangedEventArgs _col21ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol21);
+
+		private void Oncol21Changed()
+		{
+			OnPropertyChanged(_col21ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col21_ : decimal?
+
+		private decimal? _col21_;
+		/// <summary>
+		/// col21_
+		/// </summary>
+		[Column(DbType="money",             DataType=DataType.Money)         ,    Nullable]
+		public  decimal?  col21_ // money
+		{
+			get { return _col21_; }
+			set
+			{
+				if (_col21_ != value)
+				{
+					Beforecol21_Changed(value);
+					_col21_ = value;
+					Aftercol21_Changed();
+
+					Oncol21_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol21_Changed(decimal? newValue);
+		partial void Aftercol21_Changed ();
+
+		public const string NameOfcol21_ = "col21_";
+
+		private static readonly PropertyChangedEventArgs _col21_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol21_);
+
+		private void Oncol21_Changed()
+		{
+			OnPropertyChanged(_col21_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col22 : decimal
+
+		private decimal _col22;
+		/// <summary>
+		/// col22
+		/// </summary>
+		[Column(DbType="smallmoney",        DataType=DataType.SmallMoney)    , NotNull]
+		public  decimal  col22 // smallmoney
+		{
+			get { return _col22; }
+			set
+			{
+				if (_col22 != value)
+				{
+					Beforecol22Changed(value);
+					_col22 = value;
+					Aftercol22Changed();
+
+					Oncol22Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol22Changed(decimal newValue);
+		partial void Aftercol22Changed ();
+
+		public const string NameOfcol22 = "col22";
+
+		private static readonly PropertyChangedEventArgs _col22ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol22);
+
+		private void Oncol22Changed()
+		{
+			OnPropertyChanged(_col22ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col22_ : decimal?
+
+		private decimal? _col22_;
+		/// <summary>
+		/// col22_
+		/// </summary>
+		[Column(DbType="smallmoney",        DataType=DataType.SmallMoney)    ,    Nullable]
+		public  decimal?  col22_ // smallmoney
+		{
+			get { return _col22_; }
+			set
+			{
+				if (_col22_ != value)
+				{
+					Beforecol22_Changed(value);
+					_col22_ = value;
+					Aftercol22_Changed();
+
+					Oncol22_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol22_Changed(decimal? newValue);
+		partial void Aftercol22_Changed ();
+
+		public const string NameOfcol22_ = "col22_";
+
+		private static readonly PropertyChangedEventArgs _col22_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol22_);
+
+		private void Oncol22_Changed()
+		{
+			OnPropertyChanged(_col22_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col23 : DateTime
+
+		private DateTime _col23;
+		/// <summary>
+		/// col23
+		/// </summary>
+		[Column(DbType="date",              DataType=DataType.Date)          , NotNull]
+		public  DateTime  col23 // date
+		{
+			get { return _col23; }
+			set
+			{
+				if (_col23 != value)
+				{
+					Beforecol23Changed(value);
+					_col23 = value;
+					Aftercol23Changed();
+
+					Oncol23Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol23Changed(DateTime newValue);
+		partial void Aftercol23Changed ();
+
+		public const string NameOfcol23 = "col23";
+
+		private static readonly PropertyChangedEventArgs _col23ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol23);
+
+		private void Oncol23Changed()
+		{
+			OnPropertyChanged(_col23ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col23_ : DateTime?
+
+		private DateTime? _col23_;
+		/// <summary>
+		/// col23_
+		/// </summary>
+		[Column(DbType="date",              DataType=DataType.Date)          ,    Nullable]
+		public  DateTime?  col23_ // date
+		{
+			get { return _col23_; }
+			set
+			{
+				if (_col23_ != value)
+				{
+					Beforecol23_Changed(value);
+					_col23_ = value;
+					Aftercol23_Changed();
+
+					Oncol23_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol23_Changed(DateTime? newValue);
+		partial void Aftercol23_Changed ();
+
+		public const string NameOfcol23_ = "col23_";
+
+		private static readonly PropertyChangedEventArgs _col23_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol23_);
+
+		private void Oncol23_Changed()
+		{
+			OnPropertyChanged(_col23_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col24 : TimeSpan
+
+		private TimeSpan _col24;
+		/// <summary>
+		/// col24
+		/// </summary>
+		[Column(DbType="time(7)",           DataType=DataType.Time,           Precision=7), NotNull]
+		public  TimeSpan  col24 // time(7)
+		{
+			get { return _col24; }
+			set
+			{
+				if (_col24 != value)
+				{
+					Beforecol24Changed(value);
+					_col24 = value;
+					Aftercol24Changed();
+
+					Oncol24Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol24Changed(TimeSpan newValue);
+		partial void Aftercol24Changed ();
+
+		public const string NameOfcol24 = "col24";
+
+		private static readonly PropertyChangedEventArgs _col24ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol24);
+
+		private void Oncol24Changed()
+		{
+			OnPropertyChanged(_col24ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col24_ : TimeSpan?
+
+		private TimeSpan? _col24_;
+		/// <summary>
+		/// col24_
+		/// </summary>
+		[Column(DbType="time(7)",           DataType=DataType.Time,           Precision=7),    Nullable]
+		public  TimeSpan?  col24_ // time(7)
+		{
+			get { return _col24_; }
+			set
+			{
+				if (_col24_ != value)
+				{
+					Beforecol24_Changed(value);
+					_col24_ = value;
+					Aftercol24_Changed();
+
+					Oncol24_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol24_Changed(TimeSpan? newValue);
+		partial void Aftercol24_Changed ();
+
+		public const string NameOfcol24_ = "col24_";
+
+		private static readonly PropertyChangedEventArgs _col24_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol24_);
+
+		private void Oncol24_Changed()
+		{
+			OnPropertyChanged(_col24_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col25 : DateTime
+
+		private DateTime _col25;
+		/// <summary>
+		/// col25
+		/// </summary>
+		[Column(DbType="datetime",          DataType=DataType.DateTime)      , NotNull]
+		public  DateTime  col25 // datetime
+		{
+			get { return _col25; }
+			set
+			{
+				if (_col25 != value)
+				{
+					Beforecol25Changed(value);
+					_col25 = value;
+					Aftercol25Changed();
+
+					Oncol25Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol25Changed(DateTime newValue);
+		partial void Aftercol25Changed ();
+
+		public const string NameOfcol25 = "col25";
+
+		private static readonly PropertyChangedEventArgs _col25ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol25);
+
+		private void Oncol25Changed()
+		{
+			OnPropertyChanged(_col25ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col25_ : DateTime?
+
+		private DateTime? _col25_;
+		/// <summary>
+		/// col25_
+		/// </summary>
+		[Column(DbType="datetime",          DataType=DataType.DateTime)      ,    Nullable]
+		public  DateTime?  col25_ // datetime
+		{
+			get { return _col25_; }
+			set
+			{
+				if (_col25_ != value)
+				{
+					Beforecol25_Changed(value);
+					_col25_ = value;
+					Aftercol25_Changed();
+
+					Oncol25_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol25_Changed(DateTime? newValue);
+		partial void Aftercol25_Changed ();
+
+		public const string NameOfcol25_ = "col25_";
+
+		private static readonly PropertyChangedEventArgs _col25_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol25_);
+
+		private void Oncol25_Changed()
+		{
+			OnPropertyChanged(_col25_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col26 : DateTime
+
+		private DateTime _col26;
+		/// <summary>
+		/// col26
+		/// </summary>
+		[Column(DbType="datetime2(7)",      DataType=DataType.DateTime2,      Precision=7), NotNull]
+		public  DateTime  col26 // datetime2(7)
+		{
+			get { return _col26; }
+			set
+			{
+				if (_col26 != value)
+				{
+					Beforecol26Changed(value);
+					_col26 = value;
+					Aftercol26Changed();
+
+					Oncol26Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol26Changed(DateTime newValue);
+		partial void Aftercol26Changed ();
+
+		public const string NameOfcol26 = "col26";
+
+		private static readonly PropertyChangedEventArgs _col26ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol26);
+
+		private void Oncol26Changed()
+		{
+			OnPropertyChanged(_col26ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col26_ : DateTime?
+
+		private DateTime? _col26_;
+		/// <summary>
+		/// col26_
+		/// </summary>
+		[Column(DbType="datetime2(7)",      DataType=DataType.DateTime2,      Precision=7),    Nullable]
+		public  DateTime?  col26_ // datetime2(7)
+		{
+			get { return _col26_; }
+			set
+			{
+				if (_col26_ != value)
+				{
+					Beforecol26_Changed(value);
+					_col26_ = value;
+					Aftercol26_Changed();
+
+					Oncol26_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol26_Changed(DateTime? newValue);
+		partial void Aftercol26_Changed ();
+
+		public const string NameOfcol26_ = "col26_";
+
+		private static readonly PropertyChangedEventArgs _col26_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol26_);
+
+		private void Oncol26_Changed()
+		{
+			OnPropertyChanged(_col26_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col27 : DateTime
+
+		private DateTime _col27;
+		/// <summary>
+		/// col27
+		/// </summary>
+		[Column(DbType="smalldatetime",     DataType=DataType.SmallDateTime) , NotNull]
+		public  DateTime  col27 // smalldatetime
+		{
+			get { return _col27; }
+			set
+			{
+				if (_col27 != value)
+				{
+					Beforecol27Changed(value);
+					_col27 = value;
+					Aftercol27Changed();
+
+					Oncol27Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol27Changed(DateTime newValue);
+		partial void Aftercol27Changed ();
+
+		public const string NameOfcol27 = "col27";
+
+		private static readonly PropertyChangedEventArgs _col27ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol27);
+
+		private void Oncol27Changed()
+		{
+			OnPropertyChanged(_col27ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col27_ : DateTime?
+
+		private DateTime? _col27_;
+		/// <summary>
+		/// col27_
+		/// </summary>
+		[Column(DbType="smalldatetime",     DataType=DataType.SmallDateTime) ,    Nullable]
+		public  DateTime?  col27_ // smalldatetime
+		{
+			get { return _col27_; }
+			set
+			{
+				if (_col27_ != value)
+				{
+					Beforecol27_Changed(value);
+					_col27_ = value;
+					Aftercol27_Changed();
+
+					Oncol27_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol27_Changed(DateTime? newValue);
+		partial void Aftercol27_Changed ();
+
+		public const string NameOfcol27_ = "col27_";
+
+		private static readonly PropertyChangedEventArgs _col27_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol27_);
+
+		private void Oncol27_Changed()
+		{
+			OnPropertyChanged(_col27_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col28 : DateTimeOffset
+
+		private DateTimeOffset _col28;
+		/// <summary>
+		/// col28
+		/// </summary>
+		[Column(DbType="datetimeoffset(7)", DataType=DataType.DateTimeOffset, Precision=7), NotNull]
+		public  DateTimeOffset  col28 // datetimeoffset(7)
+		{
+			get { return _col28; }
+			set
+			{
+				if (_col28 != value)
+				{
+					Beforecol28Changed(value);
+					_col28 = value;
+					Aftercol28Changed();
+
+					Oncol28Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol28Changed(DateTimeOffset newValue);
+		partial void Aftercol28Changed ();
+
+		public const string NameOfcol28 = "col28";
+
+		private static readonly PropertyChangedEventArgs _col28ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol28);
+
+		private void Oncol28Changed()
+		{
+			OnPropertyChanged(_col28ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col28_ : DateTimeOffset?
+
+		private DateTimeOffset? _col28_;
+		/// <summary>
+		/// col28_
+		/// </summary>
+		[Column(DbType="datetimeoffset(7)", DataType=DataType.DateTimeOffset, Precision=7),    Nullable]
+		public  DateTimeOffset?  col28_ // datetimeoffset(7)
+		{
+			get { return _col28_; }
+			set
+			{
+				if (_col28_ != value)
+				{
+					Beforecol28_Changed(value);
+					_col28_ = value;
+					Aftercol28_Changed();
+
+					Oncol28_Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol28_Changed(DateTimeOffset? newValue);
+		partial void Aftercol28_Changed ();
+
+		public const string NameOfcol28_ = "col28_";
+
+		private static readonly PropertyChangedEventArgs _col28_ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol28_);
+
+		private void Oncol28_Changed()
+		{
+			OnPropertyChanged(_col28_ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region col29 : byte[]
+
+		private byte[] _col29;
+		/// <summary>
+		/// col29
+		/// </summary>
+		[Column(DbType="timestamp",         DataType=DataType.Timestamp,      SkipOnInsert=true, SkipOnUpdate=true), NotNull]
+		public  byte[]  col29 // timestamp
+		{
+			get { return _col29; }
+			set
+			{
+				if (_col29 != value)
+				{
+					Beforecol29Changed(value);
+					_col29 = value;
+					Aftercol29Changed();
+
+					Oncol29Changed();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecol29Changed(byte[] newValue);
+		partial void Aftercol29Changed ();
+
+		public const string NameOfcol29 = "col29";
+
+		private static readonly PropertyChangedEventArgs _col29ChangedEventArgs = new PropertyChangedEventArgs(NameOfcol29);
+
+		private void Oncol29Changed()
+		{
+			OnPropertyChanged(_col29ChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region INotifyPropertyChanged support
+
+#if !SILVERLIGHT
+		[field : NonSerialized]
+#endif
+		public virtual event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged(string propertyName)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, new PropertyChangedEventArgs(propertyName));
+						});
+#else
+				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+#endif
+			}
+		}
+
+		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+#if SILVERLIGHT
+				if (System.Windows.Deployment.Current.Dispatcher.CheckAccess())
+					propertyChanged(this, arg);
+				else
+					System.Windows.Deployment.Current.Dispatcher.BeginInvoke(
+						() =>
+						{
+							var pc = PropertyChanged;
+							if (pc != null)
+								pc(this, arg);
+						});
+#else
+				propertyChanged(this, arg);
+#endif
+			}
+		}
 
 		#endregion
 	}
 
 	public static partial class TableExtensions
 	{
-		public static Account Find(this ITable<Account> table, int Uid)
+		public static Account Find(this ITable<Account> table,  int  uid)
 		{
 			return table.FirstOrDefault(t =>
-				t.Uid == Uid);
+				t. uid ==  uid);
 		}
 
-		public static Address Find(this ITable<Address> table, int Uid)
+		public static Address Find(this ITable<Address> table,  int  uid)
 		{
 			return table.FirstOrDefault(t =>
-				t.Uid == Uid);
+				t. uid ==  uid);
 		}
 
-		public static AddressType Find(this ITable<AddressType> table, int Uid)
+		public static AddressType Find(this ITable<AddressType> table,  int  uid)
 		{
 			return table.FirstOrDefault(t =>
-				t.Uid == Uid);
+				t. uid ==  uid);
 		}
 
-		public static Contact Find(this ITable<Contact> table, int Uid)
+		public static Contact Find(this ITable<Contact> table,  int  uid)
 		{
 			return table.FirstOrDefault(t =>
-				t.Uid == Uid);
+				t. uid ==  uid);
 		}
 
-		public static ContactType Find(this ITable<ContactType> table, int Uid)
+		public static ContactType Find(this ITable<ContactType> table,  int  uid)
 		{
 			return table.FirstOrDefault(t =>
-				t.Uid == Uid);
+				t. uid ==  uid);
 		}
 
-		public static Staff Find(this ITable<Staff> table, int Uid)
+		public static ErrorLog Find(this ITable<ErrorLog> table,  int  uid)
 		{
 			return table.FirstOrDefault(t =>
-				t.Uid == Uid);
+				t. uid ==  uid);
+		}
+
+		public static Staff Find(this ITable<Staff> table,  int  uid)
+		{
+			return table.FirstOrDefault(t =>
+				t. uid ==  uid);
+		}
+
+		public static Test Find(this ITable<Test> table,  int  uid)
+		{
+			return table.FirstOrDefault(t =>
+				t. uid ==  uid);
 		}
 	}
 }

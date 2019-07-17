@@ -20,7 +20,7 @@ namespace DataModels
 	/// <summary>
 	/// Database       : peppa
 	/// Data Source    : localhost
-	/// Server Version : 13.00.4224
+	/// Server Version : 13.00.4259
 	/// </summary>
 	public partial class peppaDB : LinqToDB.Data.DataConnection
 	{
@@ -86,7 +86,7 @@ namespace DataModels
 		/// <summary>
 		/// ユニークID
 		/// </summary>
-		[Column(DbType="int",          DataType=DataType.Int32)    , PrimaryKey, Identity]
+		[Column(DbType="int",          DataType=DataType.Int32)    , Identity]
 		public  int  uid // int
 		{
 			get { return _uid; }
@@ -127,7 +127,7 @@ namespace DataModels
 		/// <summary>
 		/// アカウントID
 		/// </summary>
-		[Column(DbType="int",          DataType=DataType.Int32)    , NotNull]
+		[Column(DbType="int",          DataType=DataType.Int32)    , PrimaryKey, NotNull]
 		public  int  account_id // int
 		{
 			get { return _account_id; }
@@ -367,55 +367,55 @@ namespace DataModels
 
 		#endregion
 
-		#region user_id : string
+		#region user_no : string
 
-		private string _user_id;
+		private string _user_no;
 		/// <summary>
-		/// 利用者番号
+		/// ユーザ番号
 		/// </summary>
 		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  user_id // varchar(16)
+		public  string  user_no // varchar(16)
 		{
-			get { return _user_id; }
+			get { return _user_no; }
 			set
 			{
-				if (_user_id != value)
+				if (_user_no != value)
 				{
-					Beforeuser_idChanged(value);
-					_user_id = value;
-					Afteruser_idChanged();
+					Beforeuser_noChanged(value);
+					_user_no = value;
+					Afteruser_noChanged();
 
-					Onuser_idChanged();
+					Onuser_noChanged();
 				}
 			}
 		}
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforeuser_idChanged(string newValue);
-		partial void Afteruser_idChanged ();
+		partial void Beforeuser_noChanged(string newValue);
+		partial void Afteruser_noChanged ();
 
-		public const string NameOfuser_id = "user_id";
+		public const string NameOfuser_no = "user_no";
 
-		private static readonly PropertyChangedEventArgs _user_idChangedEventArgs = new PropertyChangedEventArgs(NameOfuser_id);
+		private static readonly PropertyChangedEventArgs _user_noChangedEventArgs = new PropertyChangedEventArgs(NameOfuser_no);
 
-		private void Onuser_idChanged()
+		private void Onuser_noChanged()
 		{
-			OnPropertyChanged(_user_idChangedEventArgs);
+			OnPropertyChanged(_user_noChangedEventArgs);
 		}
 
 		#endregion
 
 		#endregion
 
-		#region auth_method_type : int
+		#region auth_method_type : string
 
-		private int _auth_method_type;
+		private string _auth_method_type;
 		/// <summary>
 		/// 認証方式
 		/// </summary>
-		[Column(DbType="int",          DataType=DataType.Int32)    , NotNull]
-		public  int  auth_method_type // int
+		[Column(DbType="varchar(10)",  DataType=DataType.VarChar,   Length=10), NotNull]
+		public  string  auth_method_type // varchar(10)
 		{
 			get { return _auth_method_type; }
 			set
@@ -433,7 +433,7 @@ namespace DataModels
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforeauth_method_typeChanged(int newValue);
+		partial void Beforeauth_method_typeChanged(string newValue);
 		partial void Afterauth_method_typeChanged ();
 
 		public const string NameOfauth_method_type = "auth_method_type";
@@ -849,7 +849,7 @@ namespace DataModels
 		/// <summary>
 		/// ユニークID
 		/// </summary>
-		[Column(DbType="int",            DataType=DataType.Int32)    , PrimaryKey, Identity]
+		[Column(DbType="int",            DataType=DataType.Int32)    , Identity]
 		public  int  uid // int
 		{
 			get { return _uid; }
@@ -884,246 +884,82 @@ namespace DataModels
 
 		#endregion
 
-		#region staff_no : string
+		#region user_type : int
 
-		private string _staff_no;
+		private int _user_type;
 		/// <summary>
-		/// 職員番号
+		/// 利用者種別
 		/// </summary>
-		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  staff_no // varchar(16)
+		[Column(DbType="int",            DataType=DataType.Int32)    , PrimaryKey(1), NotNull]
+		public  int  user_type // int
 		{
-			get { return _staff_no; }
+			get { return _user_type; }
 			set
 			{
-				if (_staff_no != value)
+				if (_user_type != value)
 				{
-					Beforestaff_noChanged(value);
-					_staff_no = value;
-					Afterstaff_noChanged();
+					Beforeuser_typeChanged(value);
+					_user_type = value;
+					Afteruser_typeChanged();
 
-					Onstaff_noChanged();
+					Onuser_typeChanged();
 				}
 			}
 		}
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforestaff_noChanged(string newValue);
-		partial void Afterstaff_noChanged ();
+		partial void Beforeuser_typeChanged(int newValue);
+		partial void Afteruser_typeChanged ();
 
-		public const string NameOfstaff_no = "staff_no";
+		public const string NameOfuser_type = "user_type";
 
-		private static readonly PropertyChangedEventArgs _staff_noChangedEventArgs = new PropertyChangedEventArgs(NameOfstaff_no);
+		private static readonly PropertyChangedEventArgs _user_typeChangedEventArgs = new PropertyChangedEventArgs(NameOfuser_type);
 
-		private void Onstaff_noChanged()
+		private void Onuser_typeChanged()
 		{
-			OnPropertyChanged(_staff_noChangedEventArgs);
+			OnPropertyChanged(_user_typeChangedEventArgs);
 		}
 
 		#endregion
 
 		#endregion
 
-		#region teacher_no : string
+		#region generic_user_no : string
 
-		private string _teacher_no;
-		/// <summary>
-		/// 教員番号
-		/// </summary>
-		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  teacher_no // varchar(16)
-		{
-			get { return _teacher_no; }
-			set
-			{
-				if (_teacher_no != value)
-				{
-					Beforeteacher_noChanged(value);
-					_teacher_no = value;
-					Afterteacher_noChanged();
-
-					Onteacher_noChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforeteacher_noChanged(string newValue);
-		partial void Afterteacher_noChanged ();
-
-		public const string NameOfteacher_no = "teacher_no";
-
-		private static readonly PropertyChangedEventArgs _teacher_noChangedEventArgs = new PropertyChangedEventArgs(NameOfteacher_no);
-
-		private void Onteacher_noChanged()
-		{
-			OnPropertyChanged(_teacher_noChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-
-		#region student_no : string
-
-		private string _student_no;
-		/// <summary>
-		/// 学生番号
-		/// </summary>
-		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  student_no // varchar(16)
-		{
-			get { return _student_no; }
-			set
-			{
-				if (_student_no != value)
-				{
-					Beforestudent_noChanged(value);
-					_student_no = value;
-					Afterstudent_noChanged();
-
-					Onstudent_noChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforestudent_noChanged(string newValue);
-		partial void Afterstudent_noChanged ();
-
-		public const string NameOfstudent_no = "student_no";
-
-		private static readonly PropertyChangedEventArgs _student_noChangedEventArgs = new PropertyChangedEventArgs(NameOfstudent_no);
-
-		private void Onstudent_noChanged()
-		{
-			OnPropertyChanged(_student_noChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-
-		#region out_student_no : string
-
-		private string _out_student_no;
-		/// <summary>
-		/// 除籍生番号
-		/// </summary>
-		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  out_student_no // varchar(16)
-		{
-			get { return _out_student_no; }
-			set
-			{
-				if (_out_student_no != value)
-				{
-					Beforeout_student_noChanged(value);
-					_out_student_no = value;
-					Afterout_student_noChanged();
-
-					Onout_student_noChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforeout_student_noChanged(string newValue);
-		partial void Afterout_student_noChanged ();
-
-		public const string NameOfout_student_no = "out_student_no";
-
-		private static readonly PropertyChangedEventArgs _out_student_noChangedEventArgs = new PropertyChangedEventArgs(NameOfout_student_no);
-
-		private void Onout_student_noChanged()
-		{
-			OnPropertyChanged(_out_student_noChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-
-		#region parent_no : string
-
-		private string _parent_no;
-		/// <summary>
-		/// 保護者番号
-		/// </summary>
-		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  parent_no // varchar(16)
-		{
-			get { return _parent_no; }
-			set
-			{
-				if (_parent_no != value)
-				{
-					Beforeparent_noChanged(value);
-					_parent_no = value;
-					Afterparent_noChanged();
-
-					Onparent_noChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforeparent_noChanged(string newValue);
-		partial void Afterparent_noChanged ();
-
-		public const string NameOfparent_no = "parent_no";
-
-		private static readonly PropertyChangedEventArgs _parent_noChangedEventArgs = new PropertyChangedEventArgs(NameOfparent_no);
-
-		private void Onparent_noChanged()
-		{
-			OnPropertyChanged(_parent_noChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-
-		#region user_id : string
-
-		private string _user_id;
+		private string _generic_user_no;
 		/// <summary>
 		/// 利用者番号
 		/// </summary>
-		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  user_id // varchar(16)
+		[Column(DbType="varchar(16)",    DataType=DataType.VarChar,   Length=16), PrimaryKey(2), NotNull]
+		public  string  generic_user_no // varchar(16)
 		{
-			get { return _user_id; }
+			get { return _generic_user_no; }
 			set
 			{
-				if (_user_id != value)
+				if (_generic_user_no != value)
 				{
-					Beforeuser_idChanged(value);
-					_user_id = value;
-					Afteruser_idChanged();
+					Beforegeneric_user_noChanged(value);
+					_generic_user_no = value;
+					Aftergeneric_user_noChanged();
 
-					Onuser_idChanged();
+					Ongeneric_user_noChanged();
 				}
 			}
 		}
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforeuser_idChanged(string newValue);
-		partial void Afteruser_idChanged ();
+		partial void Beforegeneric_user_noChanged(string newValue);
+		partial void Aftergeneric_user_noChanged ();
 
-		public const string NameOfuser_id = "user_id";
+		public const string NameOfgeneric_user_no = "generic_user_no";
 
-		private static readonly PropertyChangedEventArgs _user_idChangedEventArgs = new PropertyChangedEventArgs(NameOfuser_id);
+		private static readonly PropertyChangedEventArgs _generic_user_noChangedEventArgs = new PropertyChangedEventArgs(NameOfgeneric_user_no);
 
-		private void Onuser_idChanged()
+		private void Ongeneric_user_noChanged()
 		{
-			OnPropertyChanged(_user_idChangedEventArgs);
+			OnPropertyChanged(_generic_user_noChangedEventArgs);
 		}
 
 		#endregion
@@ -1136,7 +972,7 @@ namespace DataModels
 		/// <summary>
 		/// 連番
 		/// </summary>
-		[Column(DbType="int",            DataType=DataType.Int32)    , NotNull]
+		[Column(DbType="int",            DataType=DataType.Int32)    , PrimaryKey(3), NotNull]
 		public  int  seq // int
 		{
 			get { return _seq; }
@@ -1745,47 +1581,6 @@ namespace DataModels
 
 		#endregion
 
-		#region removed_at : DateTime?
-
-		private DateTime? _removed_at;
-		/// <summary>
-		/// 削除日時
-		/// </summary>
-		[Column(DbType="datetime2(7)",   DataType=DataType.DateTime2, Precision=7),    Nullable]
-		public  DateTime?  removed_at // datetime2(7)
-		{
-			get { return _removed_at; }
-			set
-			{
-				if (_removed_at != value)
-				{
-					Beforeremoved_atChanged(value);
-					_removed_at = value;
-					Afterremoved_atChanged();
-
-					Onremoved_atChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforeremoved_atChanged(DateTime? newValue);
-		partial void Afterremoved_atChanged ();
-
-		public const string NameOfremoved_at = "removed_at";
-
-		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
-
-		private void Onremoved_atChanged()
-		{
-			OnPropertyChanged(_removed_atChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-
 		#region row_version : byte[]
 
 		private byte[] _row_version;
@@ -1876,7 +1671,7 @@ namespace DataModels
 		/// <summary>
 		/// FK_Address_Staff
 		/// </summary>
-		[Association(ThisKey="staff_no", OtherKey="staff_no", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_Address_Staff", BackReferenceName="Addresses")]
+		[Association(ThisKey="user_type, generic_user_no", OtherKey="user_type, staff_no", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_Address_Staff", BackReferenceName="Addresses")]
 		public  Staff  Staff
 		{
 			get { return _staff; }
@@ -1981,7 +1776,7 @@ namespace DataModels
 		/// <summary>
 		/// ユニークID
 		/// </summary>
-		[Column(DbType="int",          DataType=DataType.Int32)    , PrimaryKey, Identity]
+		[Column(DbType="int",          DataType=DataType.Int32)    , Identity]
 		public  int  uid // int
 		{
 			get { return _uid; }
@@ -2022,7 +1817,7 @@ namespace DataModels
 		/// <summary>
 		/// 住所種別ID
 		/// </summary>
-		[Column(DbType="int",          DataType=DataType.Int32)    , NotNull]
+		[Column(DbType="int",          DataType=DataType.Int32)    , PrimaryKey, NotNull]
 		public  int  address_type_id // int
 		{
 			get { return _address_type_id; }
@@ -2539,7 +2334,7 @@ namespace DataModels
 		/// <summary>
 		/// ユニークID
 		/// </summary>
-		[Column(DbType="int",           DataType=DataType.Int32)    , PrimaryKey, Identity]
+		[Column(DbType="int",           DataType=DataType.Int32)    , Identity]
 		public  int  uid // int
 		{
 			get { return _uid; }
@@ -2574,246 +2369,82 @@ namespace DataModels
 
 		#endregion
 
-		#region staff_no : string
+		#region user_type : int
 
-		private string _staff_no;
+		private int _user_type;
 		/// <summary>
-		/// 職員番号
+		/// 利用者種別
 		/// </summary>
-		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  staff_no // varchar(16)
+		[Column(DbType="int",           DataType=DataType.Int32)    , PrimaryKey(1), NotNull]
+		public  int  user_type // int
 		{
-			get { return _staff_no; }
+			get { return _user_type; }
 			set
 			{
-				if (_staff_no != value)
+				if (_user_type != value)
 				{
-					Beforestaff_noChanged(value);
-					_staff_no = value;
-					Afterstaff_noChanged();
+					Beforeuser_typeChanged(value);
+					_user_type = value;
+					Afteruser_typeChanged();
 
-					Onstaff_noChanged();
+					Onuser_typeChanged();
 				}
 			}
 		}
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforestaff_noChanged(string newValue);
-		partial void Afterstaff_noChanged ();
+		partial void Beforeuser_typeChanged(int newValue);
+		partial void Afteruser_typeChanged ();
 
-		public const string NameOfstaff_no = "staff_no";
+		public const string NameOfuser_type = "user_type";
 
-		private static readonly PropertyChangedEventArgs _staff_noChangedEventArgs = new PropertyChangedEventArgs(NameOfstaff_no);
+		private static readonly PropertyChangedEventArgs _user_typeChangedEventArgs = new PropertyChangedEventArgs(NameOfuser_type);
 
-		private void Onstaff_noChanged()
+		private void Onuser_typeChanged()
 		{
-			OnPropertyChanged(_staff_noChangedEventArgs);
+			OnPropertyChanged(_user_typeChangedEventArgs);
 		}
 
 		#endregion
 
 		#endregion
 
-		#region teacher_no : string
+		#region generic_user_no : string
 
-		private string _teacher_no;
-		/// <summary>
-		/// 教員番号
-		/// </summary>
-		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  teacher_no // varchar(16)
-		{
-			get { return _teacher_no; }
-			set
-			{
-				if (_teacher_no != value)
-				{
-					Beforeteacher_noChanged(value);
-					_teacher_no = value;
-					Afterteacher_noChanged();
-
-					Onteacher_noChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforeteacher_noChanged(string newValue);
-		partial void Afterteacher_noChanged ();
-
-		public const string NameOfteacher_no = "teacher_no";
-
-		private static readonly PropertyChangedEventArgs _teacher_noChangedEventArgs = new PropertyChangedEventArgs(NameOfteacher_no);
-
-		private void Onteacher_noChanged()
-		{
-			OnPropertyChanged(_teacher_noChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-
-		#region student_no : string
-
-		private string _student_no;
-		/// <summary>
-		/// 学生番号
-		/// </summary>
-		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  student_no // varchar(16)
-		{
-			get { return _student_no; }
-			set
-			{
-				if (_student_no != value)
-				{
-					Beforestudent_noChanged(value);
-					_student_no = value;
-					Afterstudent_noChanged();
-
-					Onstudent_noChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforestudent_noChanged(string newValue);
-		partial void Afterstudent_noChanged ();
-
-		public const string NameOfstudent_no = "student_no";
-
-		private static readonly PropertyChangedEventArgs _student_noChangedEventArgs = new PropertyChangedEventArgs(NameOfstudent_no);
-
-		private void Onstudent_noChanged()
-		{
-			OnPropertyChanged(_student_noChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-
-		#region out_student_no : string
-
-		private string _out_student_no;
-		/// <summary>
-		/// 除籍生番号
-		/// </summary>
-		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  out_student_no // varchar(16)
-		{
-			get { return _out_student_no; }
-			set
-			{
-				if (_out_student_no != value)
-				{
-					Beforeout_student_noChanged(value);
-					_out_student_no = value;
-					Afterout_student_noChanged();
-
-					Onout_student_noChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforeout_student_noChanged(string newValue);
-		partial void Afterout_student_noChanged ();
-
-		public const string NameOfout_student_no = "out_student_no";
-
-		private static readonly PropertyChangedEventArgs _out_student_noChangedEventArgs = new PropertyChangedEventArgs(NameOfout_student_no);
-
-		private void Onout_student_noChanged()
-		{
-			OnPropertyChanged(_out_student_noChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-
-		#region parent_no : string
-
-		private string _parent_no;
-		/// <summary>
-		/// 保護者番号
-		/// </summary>
-		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  parent_no // varchar(16)
-		{
-			get { return _parent_no; }
-			set
-			{
-				if (_parent_no != value)
-				{
-					Beforeparent_noChanged(value);
-					_parent_no = value;
-					Afterparent_noChanged();
-
-					Onparent_noChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforeparent_noChanged(string newValue);
-		partial void Afterparent_noChanged ();
-
-		public const string NameOfparent_no = "parent_no";
-
-		private static readonly PropertyChangedEventArgs _parent_noChangedEventArgs = new PropertyChangedEventArgs(NameOfparent_no);
-
-		private void Onparent_noChanged()
-		{
-			OnPropertyChanged(_parent_noChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-
-		#region user_id : string
-
-		private string _user_id;
+		private string _generic_user_no;
 		/// <summary>
 		/// 利用者番号
 		/// </summary>
-		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16),    Nullable]
-		public  string  user_id // varchar(16)
+		[Column(DbType="varchar(16)",   DataType=DataType.VarChar,   Length=16), PrimaryKey(2), NotNull]
+		public  string  generic_user_no // varchar(16)
 		{
-			get { return _user_id; }
+			get { return _generic_user_no; }
 			set
 			{
-				if (_user_id != value)
+				if (_generic_user_no != value)
 				{
-					Beforeuser_idChanged(value);
-					_user_id = value;
-					Afteruser_idChanged();
+					Beforegeneric_user_noChanged(value);
+					_generic_user_no = value;
+					Aftergeneric_user_noChanged();
 
-					Onuser_idChanged();
+					Ongeneric_user_noChanged();
 				}
 			}
 		}
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforeuser_idChanged(string newValue);
-		partial void Afteruser_idChanged ();
+		partial void Beforegeneric_user_noChanged(string newValue);
+		partial void Aftergeneric_user_noChanged ();
 
-		public const string NameOfuser_id = "user_id";
+		public const string NameOfgeneric_user_no = "generic_user_no";
 
-		private static readonly PropertyChangedEventArgs _user_idChangedEventArgs = new PropertyChangedEventArgs(NameOfuser_id);
+		private static readonly PropertyChangedEventArgs _generic_user_noChangedEventArgs = new PropertyChangedEventArgs(NameOfgeneric_user_no);
 
-		private void Onuser_idChanged()
+		private void Ongeneric_user_noChanged()
 		{
-			OnPropertyChanged(_user_idChangedEventArgs);
+			OnPropertyChanged(_generic_user_noChangedEventArgs);
 		}
 
 		#endregion
@@ -2826,7 +2457,7 @@ namespace DataModels
 		/// <summary>
 		/// 連番
 		/// </summary>
-		[Column(DbType="int",           DataType=DataType.Int32)    , NotNull]
+		[Column(DbType="int",           DataType=DataType.Int32)    , PrimaryKey(3), NotNull]
 		public  int  seq // int
 		{
 			get { return _seq; }
@@ -3148,47 +2779,6 @@ namespace DataModels
 
 		#endregion
 
-		#region removed_at : DateTime?
-
-		private DateTime? _removed_at;
-		/// <summary>
-		/// 削除日時
-		/// </summary>
-		[Column(DbType="datetime2(7)",  DataType=DataType.DateTime2, Precision=7),    Nullable]
-		public  DateTime?  removed_at // datetime2(7)
-		{
-			get { return _removed_at; }
-			set
-			{
-				if (_removed_at != value)
-				{
-					Beforeremoved_atChanged(value);
-					_removed_at = value;
-					Afterremoved_atChanged();
-
-					Onremoved_atChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforeremoved_atChanged(DateTime? newValue);
-		partial void Afterremoved_atChanged ();
-
-		public const string NameOfremoved_at = "removed_at";
-
-		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
-
-		private void Onremoved_atChanged()
-		{
-			OnPropertyChanged(_removed_atChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-
 		#region row_version : byte[]
 
 		private byte[] _row_version;
@@ -3279,7 +2869,7 @@ namespace DataModels
 		/// <summary>
 		/// FK_Contact_Staff
 		/// </summary>
-		[Association(ThisKey="staff_no", OtherKey="staff_no", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_Contact_Staff", BackReferenceName="Contacts")]
+		[Association(ThisKey="user_type, generic_user_no", OtherKey="user_type, staff_no", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_Contact_Staff", BackReferenceName="Contacts")]
 		public  Staff  Staff
 		{
 			get { return _staff; }
@@ -3384,7 +2974,7 @@ namespace DataModels
 		/// <summary>
 		/// ユニークID
 		/// </summary>
-		[Column(DbType="int",          DataType=DataType.Int32)    , PrimaryKey, Identity]
+		[Column(DbType="int",          DataType=DataType.Int32)    , Identity]
 		public  int  uid // int
 		{
 			get { return _uid; }
@@ -3425,7 +3015,7 @@ namespace DataModels
 		/// <summary>
 		/// 連絡先種別ID
 		/// </summary>
-		[Column(DbType="int",          DataType=DataType.Int32)    , NotNull]
+		[Column(DbType="int",          DataType=DataType.Int32)    , PrimaryKey, NotNull]
 		public  int  contact_type_id // int
 		{
 			get { return _contact_type_id; }
@@ -4496,7 +4086,7 @@ namespace DataModels
 		/// <summary>
 		/// ユニークID
 		/// </summary>
-		[Column(DbType="int",          DataType=DataType.Int32)    , PrimaryKey, Identity]
+		[Column(DbType="int",          DataType=DataType.Int32)    , Identity]
 		public  int  uid // int
 		{
 			get { return _uid; }
@@ -4531,13 +4121,54 @@ namespace DataModels
 
 		#endregion
 
+		#region user_type : int
+
+		private int _user_type;
+		/// <summary>
+		/// 利用者種別
+		/// </summary>
+		[Column(DbType="int",          DataType=DataType.Int32)    , NotNull]
+		public  int  user_type // int
+		{
+			get { return _user_type; }
+			set
+			{
+				if (_user_type != value)
+				{
+					Beforeuser_typeChanged(value);
+					_user_type = value;
+					Afteruser_typeChanged();
+
+					Onuser_typeChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeuser_typeChanged(int newValue);
+		partial void Afteruser_typeChanged ();
+
+		public const string NameOfuser_type = "user_type";
+
+		private static readonly PropertyChangedEventArgs _user_typeChangedEventArgs = new PropertyChangedEventArgs(NameOfuser_type);
+
+		private void Onuser_typeChanged()
+		{
+			OnPropertyChanged(_user_typeChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
 		#region staff_no : string
 
 		private string _staff_no;
 		/// <summary>
 		/// 職員番号
 		/// </summary>
-		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16), NotNull]
+		[Column(DbType="varchar(16)",  DataType=DataType.VarChar,   Length=16), PrimaryKey, NotNull]
 		public  string  staff_no // varchar(16)
 		{
 			get { return _staff_no; }
@@ -5154,7 +4785,7 @@ namespace DataModels
 		/// <summary>
 		/// FK_Address_Staff_BackReference
 		/// </summary>
-		[Association(ThisKey="staff_no", OtherKey="staff_no", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		[Association(ThisKey="user_type, staff_no", OtherKey="user_type, generic_user_no", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
 		public  IEnumerable<Address>  Addresses
 		{
 			get { return _addresses; }
@@ -5195,7 +4826,7 @@ namespace DataModels
 		/// <summary>
 		/// FK_Contact_Staff_BackReference
 		/// </summary>
-		[Association(ThisKey="staff_no", OtherKey="staff_no", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		[Association(ThisKey="user_type, staff_no", OtherKey="user_type, generic_user_no", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
 		public  IEnumerable<Contact>  Contacts
 		{
 			get { return _contacts; }
@@ -7730,34 +7361,38 @@ namespace DataModels
 
 	public static partial class TableExtensions
 	{
-		public static Account Find(this ITable<Account> table,  int  uid)
+		public static Account Find(this ITable<Account> table,  int  account_id)
 		{
 			return table.FirstOrDefault(t =>
-				t. uid ==  uid);
+				t. account_id ==  account_id);
 		}
 
-		public static Address Find(this ITable<Address> table,  int  uid)
+		public static Address Find(this ITable<Address> table,  int  user_type,  string  generic_user_no,  int  seq)
 		{
 			return table.FirstOrDefault(t =>
-				t. uid ==  uid);
+				t. user_type      ==  user_type      &&
+				t. generic_user_no ==  generic_user_no &&
+				t. seq            ==  seq);
 		}
 
-		public static AddressType Find(this ITable<AddressType> table,  int  uid)
+		public static AddressType Find(this ITable<AddressType> table,  int  address_type_id)
 		{
 			return table.FirstOrDefault(t =>
-				t. uid ==  uid);
+				t. address_type_id ==  address_type_id);
 		}
 
-		public static Contact Find(this ITable<Contact> table,  int  uid)
+		public static Contact Find(this ITable<Contact> table,  int  user_type,  string  generic_user_no,  int  seq)
 		{
 			return table.FirstOrDefault(t =>
-				t. uid ==  uid);
+				t. user_type      ==  user_type      &&
+				t. generic_user_no ==  generic_user_no &&
+				t. seq            ==  seq);
 		}
 
-		public static ContactType Find(this ITable<ContactType> table,  int  uid)
+		public static ContactType Find(this ITable<ContactType> table,  int  contact_type_id)
 		{
 			return table.FirstOrDefault(t =>
-				t. uid ==  uid);
+				t. contact_type_id ==  contact_type_id);
 		}
 
 		public static ErrorLog Find(this ITable<ErrorLog> table,  int  uid)
@@ -7766,10 +7401,10 @@ namespace DataModels
 				t. uid ==  uid);
 		}
 
-		public static Staff Find(this ITable<Staff> table,  int  uid)
+		public static Staff Find(this ITable<Staff> table,  string  staff_no)
 		{
 			return table.FirstOrDefault(t =>
-				t. uid ==  uid);
+				t. staff_no ==  staff_no);
 		}
 
 		public static Test Find(this ITable<Test> table,  int  uid)

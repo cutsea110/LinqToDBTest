@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using DataModels;
+using peppa.Domain;
 using LinqToDB.Data;
 
 namespace LinqToDBTest
@@ -18,10 +18,10 @@ namespace LinqToDBTest
             DataConnection.TurnTraceSwitchOn();
             DataConnection.WriteTraceLine = (msg, context) => Debug.WriteLine(msg, context);
 #endif
-            using (var db = new peppaDB())
+            using (var db = new peppaDB("peppaConnectionString"))
             {
                 var q =
-                    from c in db.Accounts
+                    from c in db.Account
                     select new
                     {
                         c.account_id,

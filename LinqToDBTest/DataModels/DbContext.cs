@@ -98,7 +98,7 @@ namespace peppa.Domain
 			InitMappingSchema();
 		}
 
-		partial void InitDataContext  ();
+		partial void InitDataContext();
 		partial void InitMappingSchema();
 	}
 
@@ -227,6 +227,25 @@ namespace peppa.Domain
 		{
 			foreach (ValidityFlag v in Enum.GetValues(typeof(ValidityFlag)))
 				yield return v;
+		}
+
+		/// <summary>
+		/// 整数値からValidityFlagへの変換
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="missing"></param>
+		/// <returns></returns>
+		public static ValidityFlag? ToValidityFlag(this int self, ValidityFlag? missing = null)
+		{
+			switch (self)
+			{
+				case 0:
+					return ValidityFlag.無効;
+				case 1:
+					return ValidityFlag.有効;
+				default:
+					return (ValidityFlag?)missing;
+			}
 		}
 
 		/// <summary>
@@ -370,6 +389,29 @@ namespace peppa.Domain
 		{
 			foreach (AuthMethod v in Enum.GetValues(typeof(AuthMethod)))
 				yield return v;
+		}
+
+		/// <summary>
+		/// 文字列値からAuthMethodへの変換
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="missing"></param>
+		/// <returns></returns>
+		public static AuthMethod? ToAuthMethod(this string self, AuthMethod? missing = null)
+		{
+			switch (self)
+			{
+				case "None":
+					return AuthMethod.無認証;
+				case "Password":
+					return AuthMethod.パスワード;
+				case "LDAP":
+					return AuthMethod.LDAP;
+				case "OAuth2":
+					return AuthMethod.OAuth2;
+				default:
+					return (AuthMethod?)missing;
+			}
 		}
 
 		/// <summary>
@@ -544,6 +586,25 @@ namespace peppa.Domain
 		}
 
 		/// <summary>
+		/// 整数値からGenderへの変換
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="missing"></param>
+		/// <returns></returns>
+		public static Gender? ToGender(this int self, Gender? missing = null)
+		{
+			switch (self)
+			{
+				case 1:
+					return Gender.男性;
+				case 2:
+					return Gender.女性;
+				default:
+					return (Gender?)missing;
+			}
+		}
+
+		/// <summary>
 		/// Genderの値取得
 		/// </summary>
 		/// <param name="self"></param>
@@ -684,6 +745,33 @@ namespace peppa.Domain
 		{
 			foreach (UserType v in Enum.GetValues(typeof(UserType)))
 				yield return v;
+		}
+
+		/// <summary>
+		/// 整数値からUserTypeへの変換
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="missing"></param>
+		/// <returns></returns>
+		public static UserType? ToUserType(this int self, UserType? missing = null)
+		{
+			switch (self)
+			{
+				case 1:
+					return UserType.職員;
+				case 2:
+					return UserType.教員;
+				case 3:
+					return UserType.在学生;
+				case 4:
+					return UserType.除籍生;
+				case 5:
+					return UserType.保護者;
+				case 99:
+					return UserType.他ユーザ;
+				default:
+					return (UserType?)missing;
+			}
 		}
 
 		/// <summary>
@@ -911,7 +999,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforeuidChanged(int newValue);
-		partial void AfteruidChanged ();
+		partial void AfteruidChanged();
 
 		public const string NameOfuid = "uid";
 
@@ -951,7 +1039,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol01Changed(char newValue);
-		partial void Aftercol01Changed ();
+		partial void Aftercol01Changed();
 
 		public const string NameOfcol01 = "col01";
 
@@ -991,7 +1079,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol01_Changed(char? newValue);
-		partial void Aftercol01_Changed ();
+		partial void Aftercol01_Changed();
 
 		public const string NameOfcol01_ = "col01_";
 
@@ -1031,7 +1119,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol02Changed(string newValue);
-		partial void Aftercol02Changed ();
+		partial void Aftercol02Changed();
 
 		public const string NameOfcol02 = "col02";
 
@@ -1071,7 +1159,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol02_Changed(string newValue);
-		partial void Aftercol02_Changed ();
+		partial void Aftercol02_Changed();
 
 		public const string NameOfcol02_ = "col02_";
 
@@ -1111,7 +1199,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol03Changed(string newValue);
-		partial void Aftercol03Changed ();
+		partial void Aftercol03Changed();
 
 		public const string NameOfcol03 = "col03";
 
@@ -1151,7 +1239,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol03_Changed(string newValue);
-		partial void Aftercol03_Changed ();
+		partial void Aftercol03_Changed();
 
 		public const string NameOfcol03_ = "col03_";
 
@@ -1191,7 +1279,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol04Changed(string newValue);
-		partial void Aftercol04Changed ();
+		partial void Aftercol04Changed();
 
 		public const string NameOfcol04 = "col04";
 
@@ -1231,7 +1319,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol04_Changed(string newValue);
-		partial void Aftercol04_Changed ();
+		partial void Aftercol04_Changed();
 
 		public const string NameOfcol04_ = "col04_";
 
@@ -1271,7 +1359,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol05Changed(char newValue);
-		partial void Aftercol05Changed ();
+		partial void Aftercol05Changed();
 
 		public const string NameOfcol05 = "col05";
 
@@ -1311,7 +1399,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol05_Changed(char? newValue);
-		partial void Aftercol05_Changed ();
+		partial void Aftercol05_Changed();
 
 		public const string NameOfcol05_ = "col05_";
 
@@ -1351,7 +1439,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol06Changed(string newValue);
-		partial void Aftercol06Changed ();
+		partial void Aftercol06Changed();
 
 		public const string NameOfcol06 = "col06";
 
@@ -1391,7 +1479,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol06_Changed(string newValue);
-		partial void Aftercol06_Changed ();
+		partial void Aftercol06_Changed();
 
 		public const string NameOfcol06_ = "col06_";
 
@@ -1431,7 +1519,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol07Changed(string newValue);
-		partial void Aftercol07Changed ();
+		partial void Aftercol07Changed();
 
 		public const string NameOfcol07 = "col07";
 
@@ -1471,7 +1559,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol07_Changed(string newValue);
-		partial void Aftercol07_Changed ();
+		partial void Aftercol07_Changed();
 
 		public const string NameOfcol07_ = "col07_";
 
@@ -1511,7 +1599,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol08Changed(string newValue);
-		partial void Aftercol08Changed ();
+		partial void Aftercol08Changed();
 
 		public const string NameOfcol08 = "col08";
 
@@ -1551,7 +1639,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol08_Changed(string newValue);
-		partial void Aftercol08_Changed ();
+		partial void Aftercol08_Changed();
 
 		public const string NameOfcol08_ = "col08_";
 
@@ -1591,7 +1679,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol09Changed(byte[] newValue);
-		partial void Aftercol09Changed ();
+		partial void Aftercol09Changed();
 
 		public const string NameOfcol09 = "col09";
 
@@ -1631,7 +1719,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol09_Changed(byte[] newValue);
-		partial void Aftercol09_Changed ();
+		partial void Aftercol09_Changed();
 
 		public const string NameOfcol09_ = "col09_";
 
@@ -1671,7 +1759,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol10Changed(byte[] newValue);
-		partial void Aftercol10Changed ();
+		partial void Aftercol10Changed();
 
 		public const string NameOfcol10 = "col10";
 
@@ -1711,7 +1799,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol10_Changed(byte[] newValue);
-		partial void Aftercol10_Changed ();
+		partial void Aftercol10_Changed();
 
 		public const string NameOfcol10_ = "col10_";
 
@@ -1751,7 +1839,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol11Changed(byte[] newValue);
-		partial void Aftercol11Changed ();
+		partial void Aftercol11Changed();
 
 		public const string NameOfcol11 = "col11";
 
@@ -1791,7 +1879,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol11_Changed(byte[] newValue);
-		partial void Aftercol11_Changed ();
+		partial void Aftercol11_Changed();
 
 		public const string NameOfcol11_ = "col11_";
 
@@ -1831,7 +1919,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol12Changed(bool newValue);
-		partial void Aftercol12Changed ();
+		partial void Aftercol12Changed();
 
 		public const string NameOfcol12 = "col12";
 
@@ -1871,7 +1959,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol12_Changed(bool? newValue);
-		partial void Aftercol12_Changed ();
+		partial void Aftercol12_Changed();
 
 		public const string NameOfcol12_ = "col12_";
 
@@ -1911,7 +1999,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol13Changed(Guid newValue);
-		partial void Aftercol13Changed ();
+		partial void Aftercol13Changed();
 
 		public const string NameOfcol13 = "col13";
 
@@ -1951,7 +2039,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol13_Changed(Guid? newValue);
-		partial void Aftercol13_Changed ();
+		partial void Aftercol13_Changed();
 
 		public const string NameOfcol13_ = "col13_";
 
@@ -1991,7 +2079,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol14Changed(Int16 newValue);
-		partial void Aftercol14Changed ();
+		partial void Aftercol14Changed();
 
 		public const string NameOfcol14 = "col14";
 
@@ -2031,7 +2119,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol14_Changed(Int16? newValue);
-		partial void Aftercol14_Changed ();
+		partial void Aftercol14_Changed();
 
 		public const string NameOfcol14_ = "col14_";
 
@@ -2071,7 +2159,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol15Changed(int newValue);
-		partial void Aftercol15Changed ();
+		partial void Aftercol15Changed();
 
 		public const string NameOfcol15 = "col15";
 
@@ -2111,7 +2199,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol15_Changed(int? newValue);
-		partial void Aftercol15_Changed ();
+		partial void Aftercol15_Changed();
 
 		public const string NameOfcol15_ = "col15_";
 
@@ -2151,7 +2239,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol16Changed(Int64 newValue);
-		partial void Aftercol16Changed ();
+		partial void Aftercol16Changed();
 
 		public const string NameOfcol16 = "col16";
 
@@ -2191,7 +2279,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol16_Changed(Int64? newValue);
-		partial void Aftercol16_Changed ();
+		partial void Aftercol16_Changed();
 
 		public const string NameOfcol16_ = "col16_";
 
@@ -2231,7 +2319,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol17Changed(byte newValue);
-		partial void Aftercol17Changed ();
+		partial void Aftercol17Changed();
 
 		public const string NameOfcol17 = "col17";
 
@@ -2271,7 +2359,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol17_Changed(byte? newValue);
-		partial void Aftercol17_Changed ();
+		partial void Aftercol17_Changed();
 
 		public const string NameOfcol17_ = "col17_";
 
@@ -2311,7 +2399,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol18Changed(float newValue);
-		partial void Aftercol18Changed ();
+		partial void Aftercol18Changed();
 
 		public const string NameOfcol18 = "col18";
 
@@ -2351,7 +2439,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol18_Changed(float? newValue);
-		partial void Aftercol18_Changed ();
+		partial void Aftercol18_Changed();
 
 		public const string NameOfcol18_ = "col18_";
 
@@ -2391,7 +2479,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol19Changed(decimal newValue);
-		partial void Aftercol19Changed ();
+		partial void Aftercol19Changed();
 
 		public const string NameOfcol19 = "col19";
 
@@ -2431,7 +2519,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol19_Changed(decimal? newValue);
-		partial void Aftercol19_Changed ();
+		partial void Aftercol19_Changed();
 
 		public const string NameOfcol19_ = "col19_";
 
@@ -2471,7 +2559,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol20Changed(decimal newValue);
-		partial void Aftercol20Changed ();
+		partial void Aftercol20Changed();
 
 		public const string NameOfcol20 = "col20";
 
@@ -2511,7 +2599,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol20_Changed(decimal? newValue);
-		partial void Aftercol20_Changed ();
+		partial void Aftercol20_Changed();
 
 		public const string NameOfcol20_ = "col20_";
 
@@ -2551,7 +2639,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol21Changed(decimal newValue);
-		partial void Aftercol21Changed ();
+		partial void Aftercol21Changed();
 
 		public const string NameOfcol21 = "col21";
 
@@ -2591,7 +2679,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol21_Changed(decimal? newValue);
-		partial void Aftercol21_Changed ();
+		partial void Aftercol21_Changed();
 
 		public const string NameOfcol21_ = "col21_";
 
@@ -2631,7 +2719,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol22Changed(decimal newValue);
-		partial void Aftercol22Changed ();
+		partial void Aftercol22Changed();
 
 		public const string NameOfcol22 = "col22";
 
@@ -2671,7 +2759,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol22_Changed(decimal? newValue);
-		partial void Aftercol22_Changed ();
+		partial void Aftercol22_Changed();
 
 		public const string NameOfcol22_ = "col22_";
 
@@ -2711,7 +2799,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol23Changed(DateTime newValue);
-		partial void Aftercol23Changed ();
+		partial void Aftercol23Changed();
 
 		public const string NameOfcol23 = "col23";
 
@@ -2751,7 +2839,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol23_Changed(DateTime? newValue);
-		partial void Aftercol23_Changed ();
+		partial void Aftercol23_Changed();
 
 		public const string NameOfcol23_ = "col23_";
 
@@ -2791,7 +2879,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol24Changed(TimeSpan newValue);
-		partial void Aftercol24Changed ();
+		partial void Aftercol24Changed();
 
 		public const string NameOfcol24 = "col24";
 
@@ -2831,7 +2919,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol24_Changed(TimeSpan? newValue);
-		partial void Aftercol24_Changed ();
+		partial void Aftercol24_Changed();
 
 		public const string NameOfcol24_ = "col24_";
 
@@ -2871,7 +2959,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol25Changed(DateTime newValue);
-		partial void Aftercol25Changed ();
+		partial void Aftercol25Changed();
 
 		public const string NameOfcol25 = "col25";
 
@@ -2911,7 +2999,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol25_Changed(DateTime? newValue);
-		partial void Aftercol25_Changed ();
+		partial void Aftercol25_Changed();
 
 		public const string NameOfcol25_ = "col25_";
 
@@ -2951,7 +3039,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol26Changed(DateTime newValue);
-		partial void Aftercol26Changed ();
+		partial void Aftercol26Changed();
 
 		public const string NameOfcol26 = "col26";
 
@@ -2991,7 +3079,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol26_Changed(DateTime? newValue);
-		partial void Aftercol26_Changed ();
+		partial void Aftercol26_Changed();
 
 		public const string NameOfcol26_ = "col26_";
 
@@ -3031,7 +3119,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol27Changed(DateTime newValue);
-		partial void Aftercol27Changed ();
+		partial void Aftercol27Changed();
 
 		public const string NameOfcol27 = "col27";
 
@@ -3071,7 +3159,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol27_Changed(DateTime? newValue);
-		partial void Aftercol27_Changed ();
+		partial void Aftercol27_Changed();
 
 		public const string NameOfcol27_ = "col27_";
 
@@ -3111,7 +3199,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol28Changed(DateTimeOffset newValue);
-		partial void Aftercol28Changed ();
+		partial void Aftercol28Changed();
 
 		public const string NameOfcol28 = "col28";
 
@@ -3151,7 +3239,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol28_Changed(DateTimeOffset? newValue);
-		partial void Aftercol28_Changed ();
+		partial void Aftercol28_Changed();
 
 		public const string NameOfcol28_ = "col28_";
 
@@ -3191,7 +3279,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecol29Changed(byte[] newValue);
-		partial void Aftercol29Changed ();
+		partial void Aftercol29Changed();
 
 		public const string NameOfcol29 = "col29";
 
@@ -3248,7 +3336,714 @@ namespace peppa.Domain
 	/// </summary>
 	public partial class TestCondition : ConditionBase<Test>
 	{
+		#region properties
+		#region uid
+		public int? uid_eq { get; set; }
+		public int? uid_ne { get; set; }
+		public int? uid_lt { get; set; }
+		public int? uid_gt { get; set; }
+		public int? uid_le { get; set; }
+		public int? uid_ge { get; set; }
+		public IEnumerable<int> uid_in { get; set; }
+		public IEnumerable<int> uid_ni { get; set; }
+		#endregion
+		#region col01
+		public char? col01_eq { get; set; }
+		public char? col01_ne { get; set; }
+		public char? col01_lt { get; set; }
+		public char? col01_gt { get; set; }
+		public char? col01_le { get; set; }
+		public char? col01_ge { get; set; }
+		public IEnumerable<char> col01_in { get; set; }
+		public IEnumerable<char> col01_ni { get; set; }
+		#endregion
+		#region col01_
+		public char? col01__eq { get; set; }
+		public char? col01__ne { get; set; }
+		public char? col01__lt { get; set; }
+		public char? col01__gt { get; set; }
+		public char? col01__le { get; set; }
+		public char? col01__ge { get; set; }
+		public IEnumerable<char> col01__in { get; set; }
+		public IEnumerable<char> col01__ni { get; set; }
+		#endregion
+		#region col02
+		public string col02_eq { get; set; }
+		public string col02_ne { get; set; }
+		public string col02_lt { get; set; }
+		public string col02_gt { get; set; }
+		public string col02_le { get; set; }
+		public string col02_ge { get; set; }
+		public IEnumerable<string> col02_in { get; set; }
+		public IEnumerable<string> col02_ni { get; set; }
+		#endregion
+		#region col02_
+		public string col02__eq { get; set; }
+		public string col02__ne { get; set; }
+		public string col02__lt { get; set; }
+		public string col02__gt { get; set; }
+		public string col02__le { get; set; }
+		public string col02__ge { get; set; }
+		public IEnumerable<string> col02__in { get; set; }
+		public IEnumerable<string> col02__ni { get; set; }
+		#endregion
+		#region col03
+		public string col03_eq { get; set; }
+		public string col03_ne { get; set; }
+		public string col03_lt { get; set; }
+		public string col03_gt { get; set; }
+		public string col03_le { get; set; }
+		public string col03_ge { get; set; }
+		public IEnumerable<string> col03_in { get; set; }
+		public IEnumerable<string> col03_ni { get; set; }
+		#endregion
+		#region col03_
+		public string col03__eq { get; set; }
+		public string col03__ne { get; set; }
+		public string col03__lt { get; set; }
+		public string col03__gt { get; set; }
+		public string col03__le { get; set; }
+		public string col03__ge { get; set; }
+		public IEnumerable<string> col03__in { get; set; }
+		public IEnumerable<string> col03__ni { get; set; }
+		#endregion
+		#region col04
+		public string col04_eq { get; set; }
+		public string col04_ne { get; set; }
+		public string col04_lt { get; set; }
+		public string col04_gt { get; set; }
+		public string col04_le { get; set; }
+		public string col04_ge { get; set; }
+		public IEnumerable<string> col04_in { get; set; }
+		public IEnumerable<string> col04_ni { get; set; }
+		#endregion
+		#region col04_
+		public string col04__eq { get; set; }
+		public string col04__ne { get; set; }
+		public string col04__lt { get; set; }
+		public string col04__gt { get; set; }
+		public string col04__le { get; set; }
+		public string col04__ge { get; set; }
+		public IEnumerable<string> col04__in { get; set; }
+		public IEnumerable<string> col04__ni { get; set; }
+		#endregion
+		#region col05
+		public char? col05_eq { get; set; }
+		public char? col05_ne { get; set; }
+		public char? col05_lt { get; set; }
+		public char? col05_gt { get; set; }
+		public char? col05_le { get; set; }
+		public char? col05_ge { get; set; }
+		public IEnumerable<char> col05_in { get; set; }
+		public IEnumerable<char> col05_ni { get; set; }
+		#endregion
+		#region col05_
+		public char? col05__eq { get; set; }
+		public char? col05__ne { get; set; }
+		public char? col05__lt { get; set; }
+		public char? col05__gt { get; set; }
+		public char? col05__le { get; set; }
+		public char? col05__ge { get; set; }
+		public IEnumerable<char> col05__in { get; set; }
+		public IEnumerable<char> col05__ni { get; set; }
+		#endregion
+		#region col06
+		public string col06_eq { get; set; }
+		public string col06_ne { get; set; }
+		public string col06_lt { get; set; }
+		public string col06_gt { get; set; }
+		public string col06_le { get; set; }
+		public string col06_ge { get; set; }
+		public IEnumerable<string> col06_in { get; set; }
+		public IEnumerable<string> col06_ni { get; set; }
+		#endregion
+		#region col06_
+		public string col06__eq { get; set; }
+		public string col06__ne { get; set; }
+		public string col06__lt { get; set; }
+		public string col06__gt { get; set; }
+		public string col06__le { get; set; }
+		public string col06__ge { get; set; }
+		public IEnumerable<string> col06__in { get; set; }
+		public IEnumerable<string> col06__ni { get; set; }
+		#endregion
+		#region col07
+		public string col07_eq { get; set; }
+		public string col07_ne { get; set; }
+		public string col07_lt { get; set; }
+		public string col07_gt { get; set; }
+		public string col07_le { get; set; }
+		public string col07_ge { get; set; }
+		public IEnumerable<string> col07_in { get; set; }
+		public IEnumerable<string> col07_ni { get; set; }
+		#endregion
+		#region col07_
+		public string col07__eq { get; set; }
+		public string col07__ne { get; set; }
+		public string col07__lt { get; set; }
+		public string col07__gt { get; set; }
+		public string col07__le { get; set; }
+		public string col07__ge { get; set; }
+		public IEnumerable<string> col07__in { get; set; }
+		public IEnumerable<string> col07__ni { get; set; }
+		#endregion
+		#region col08
+		public string col08_eq { get; set; }
+		public string col08_ne { get; set; }
+		public string col08_lt { get; set; }
+		public string col08_gt { get; set; }
+		public string col08_le { get; set; }
+		public string col08_ge { get; set; }
+		public IEnumerable<string> col08_in { get; set; }
+		public IEnumerable<string> col08_ni { get; set; }
+		#endregion
+		#region col08_
+		public string col08__eq { get; set; }
+		public string col08__ne { get; set; }
+		public string col08__lt { get; set; }
+		public string col08__gt { get; set; }
+		public string col08__le { get; set; }
+		public string col08__ge { get; set; }
+		public IEnumerable<string> col08__in { get; set; }
+		public IEnumerable<string> col08__ni { get; set; }
+		#endregion
+		#region col09
+		public byte[] col09_eq { get; set; }
+		public byte[] col09_ne { get; set; }
+		public byte[] col09_lt { get; set; }
+		public byte[] col09_gt { get; set; }
+		public byte[] col09_le { get; set; }
+		public byte[] col09_ge { get; set; }
+		public IEnumerable<byte[]> col09_in { get; set; }
+		public IEnumerable<byte[]> col09_ni { get; set; }
+		#endregion
+		#region col09_
+		public byte[] col09__eq { get; set; }
+		public byte[] col09__ne { get; set; }
+		public byte[] col09__lt { get; set; }
+		public byte[] col09__gt { get; set; }
+		public byte[] col09__le { get; set; }
+		public byte[] col09__ge { get; set; }
+		public IEnumerable<byte[]> col09__in { get; set; }
+		public IEnumerable<byte[]> col09__ni { get; set; }
+		#endregion
+		#region col10
+		public byte[] col10_eq { get; set; }
+		public byte[] col10_ne { get; set; }
+		public byte[] col10_lt { get; set; }
+		public byte[] col10_gt { get; set; }
+		public byte[] col10_le { get; set; }
+		public byte[] col10_ge { get; set; }
+		public IEnumerable<byte[]> col10_in { get; set; }
+		public IEnumerable<byte[]> col10_ni { get; set; }
+		#endregion
+		#region col10_
+		public byte[] col10__eq { get; set; }
+		public byte[] col10__ne { get; set; }
+		public byte[] col10__lt { get; set; }
+		public byte[] col10__gt { get; set; }
+		public byte[] col10__le { get; set; }
+		public byte[] col10__ge { get; set; }
+		public IEnumerable<byte[]> col10__in { get; set; }
+		public IEnumerable<byte[]> col10__ni { get; set; }
+		#endregion
+		#region col11
+		public byte[] col11_eq { get; set; }
+		public byte[] col11_ne { get; set; }
+		public byte[] col11_lt { get; set; }
+		public byte[] col11_gt { get; set; }
+		public byte[] col11_le { get; set; }
+		public byte[] col11_ge { get; set; }
+		public IEnumerable<byte[]> col11_in { get; set; }
+		public IEnumerable<byte[]> col11_ni { get; set; }
+		#endregion
+		#region col11_
+		public byte[] col11__eq { get; set; }
+		public byte[] col11__ne { get; set; }
+		public byte[] col11__lt { get; set; }
+		public byte[] col11__gt { get; set; }
+		public byte[] col11__le { get; set; }
+		public byte[] col11__ge { get; set; }
+		public IEnumerable<byte[]> col11__in { get; set; }
+		public IEnumerable<byte[]> col11__ni { get; set; }
+		#endregion
+		#region col12
+		public bool? col12_eq { get; set; }
+		public bool? col12_ne { get; set; }
+		public bool? col12_lt { get; set; }
+		public bool? col12_gt { get; set; }
+		public bool? col12_le { get; set; }
+		public bool? col12_ge { get; set; }
+		public IEnumerable<bool> col12_in { get; set; }
+		public IEnumerable<bool> col12_ni { get; set; }
+		#endregion
+		#region col12_
+		public bool? col12__eq { get; set; }
+		public bool? col12__ne { get; set; }
+		public bool? col12__lt { get; set; }
+		public bool? col12__gt { get; set; }
+		public bool? col12__le { get; set; }
+		public bool? col12__ge { get; set; }
+		public IEnumerable<bool> col12__in { get; set; }
+		public IEnumerable<bool> col12__ni { get; set; }
+		#endregion
+		#region col13
+		public Guid? col13_eq { get; set; }
+		public Guid? col13_ne { get; set; }
+		public Guid? col13_lt { get; set; }
+		public Guid? col13_gt { get; set; }
+		public Guid? col13_le { get; set; }
+		public Guid? col13_ge { get; set; }
+		public IEnumerable<Guid> col13_in { get; set; }
+		public IEnumerable<Guid> col13_ni { get; set; }
+		#endregion
+		#region col13_
+		public Guid? col13__eq { get; set; }
+		public Guid? col13__ne { get; set; }
+		public Guid? col13__lt { get; set; }
+		public Guid? col13__gt { get; set; }
+		public Guid? col13__le { get; set; }
+		public Guid? col13__ge { get; set; }
+		public IEnumerable<Guid> col13__in { get; set; }
+		public IEnumerable<Guid> col13__ni { get; set; }
+		#endregion
+		#region col14
+		public Int16? col14_eq { get; set; }
+		public Int16? col14_ne { get; set; }
+		public Int16? col14_lt { get; set; }
+		public Int16? col14_gt { get; set; }
+		public Int16? col14_le { get; set; }
+		public Int16? col14_ge { get; set; }
+		public IEnumerable<Int16> col14_in { get; set; }
+		public IEnumerable<Int16> col14_ni { get; set; }
+		#endregion
+		#region col14_
+		public Int16? col14__eq { get; set; }
+		public Int16? col14__ne { get; set; }
+		public Int16? col14__lt { get; set; }
+		public Int16? col14__gt { get; set; }
+		public Int16? col14__le { get; set; }
+		public Int16? col14__ge { get; set; }
+		public IEnumerable<Int16> col14__in { get; set; }
+		public IEnumerable<Int16> col14__ni { get; set; }
+		#endregion
+		#region col15
+		public int? col15_eq { get; set; }
+		public int? col15_ne { get; set; }
+		public int? col15_lt { get; set; }
+		public int? col15_gt { get; set; }
+		public int? col15_le { get; set; }
+		public int? col15_ge { get; set; }
+		public IEnumerable<int> col15_in { get; set; }
+		public IEnumerable<int> col15_ni { get; set; }
+		#endregion
+		#region col15_
+		public int? col15__eq { get; set; }
+		public int? col15__ne { get; set; }
+		public int? col15__lt { get; set; }
+		public int? col15__gt { get; set; }
+		public int? col15__le { get; set; }
+		public int? col15__ge { get; set; }
+		public IEnumerable<int> col15__in { get; set; }
+		public IEnumerable<int> col15__ni { get; set; }
+		#endregion
+		#region col16
+		public Int64? col16_eq { get; set; }
+		public Int64? col16_ne { get; set; }
+		public Int64? col16_lt { get; set; }
+		public Int64? col16_gt { get; set; }
+		public Int64? col16_le { get; set; }
+		public Int64? col16_ge { get; set; }
+		public IEnumerable<Int64> col16_in { get; set; }
+		public IEnumerable<Int64> col16_ni { get; set; }
+		#endregion
+		#region col16_
+		public Int64? col16__eq { get; set; }
+		public Int64? col16__ne { get; set; }
+		public Int64? col16__lt { get; set; }
+		public Int64? col16__gt { get; set; }
+		public Int64? col16__le { get; set; }
+		public Int64? col16__ge { get; set; }
+		public IEnumerable<Int64> col16__in { get; set; }
+		public IEnumerable<Int64> col16__ni { get; set; }
+		#endregion
+		#region col17
+		public byte? col17_eq { get; set; }
+		public byte? col17_ne { get; set; }
+		public byte? col17_lt { get; set; }
+		public byte? col17_gt { get; set; }
+		public byte? col17_le { get; set; }
+		public byte? col17_ge { get; set; }
+		public IEnumerable<byte> col17_in { get; set; }
+		public IEnumerable<byte> col17_ni { get; set; }
+		#endregion
+		#region col17_
+		public byte? col17__eq { get; set; }
+		public byte? col17__ne { get; set; }
+		public byte? col17__lt { get; set; }
+		public byte? col17__gt { get; set; }
+		public byte? col17__le { get; set; }
+		public byte? col17__ge { get; set; }
+		public IEnumerable<byte> col17__in { get; set; }
+		public IEnumerable<byte> col17__ni { get; set; }
+		#endregion
+		#region col18
+		public float? col18_eq { get; set; }
+		public float? col18_ne { get; set; }
+		public float? col18_lt { get; set; }
+		public float? col18_gt { get; set; }
+		public float? col18_le { get; set; }
+		public float? col18_ge { get; set; }
+		public IEnumerable<float> col18_in { get; set; }
+		public IEnumerable<float> col18_ni { get; set; }
+		#endregion
+		#region col18_
+		public float? col18__eq { get; set; }
+		public float? col18__ne { get; set; }
+		public float? col18__lt { get; set; }
+		public float? col18__gt { get; set; }
+		public float? col18__le { get; set; }
+		public float? col18__ge { get; set; }
+		public IEnumerable<float> col18__in { get; set; }
+		public IEnumerable<float> col18__ni { get; set; }
+		#endregion
+		#region col19
+		public decimal? col19_eq { get; set; }
+		public decimal? col19_ne { get; set; }
+		public decimal? col19_lt { get; set; }
+		public decimal? col19_gt { get; set; }
+		public decimal? col19_le { get; set; }
+		public decimal? col19_ge { get; set; }
+		public IEnumerable<decimal> col19_in { get; set; }
+		public IEnumerable<decimal> col19_ni { get; set; }
+		#endregion
+		#region col19_
+		public decimal? col19__eq { get; set; }
+		public decimal? col19__ne { get; set; }
+		public decimal? col19__lt { get; set; }
+		public decimal? col19__gt { get; set; }
+		public decimal? col19__le { get; set; }
+		public decimal? col19__ge { get; set; }
+		public IEnumerable<decimal> col19__in { get; set; }
+		public IEnumerable<decimal> col19__ni { get; set; }
+		#endregion
+		#region col20
+		public decimal? col20_eq { get; set; }
+		public decimal? col20_ne { get; set; }
+		public decimal? col20_lt { get; set; }
+		public decimal? col20_gt { get; set; }
+		public decimal? col20_le { get; set; }
+		public decimal? col20_ge { get; set; }
+		public IEnumerable<decimal> col20_in { get; set; }
+		public IEnumerable<decimal> col20_ni { get; set; }
+		#endregion
+		#region col20_
+		public decimal? col20__eq { get; set; }
+		public decimal? col20__ne { get; set; }
+		public decimal? col20__lt { get; set; }
+		public decimal? col20__gt { get; set; }
+		public decimal? col20__le { get; set; }
+		public decimal? col20__ge { get; set; }
+		public IEnumerable<decimal> col20__in { get; set; }
+		public IEnumerable<decimal> col20__ni { get; set; }
+		#endregion
+		#region col21
+		public decimal? col21_eq { get; set; }
+		public decimal? col21_ne { get; set; }
+		public decimal? col21_lt { get; set; }
+		public decimal? col21_gt { get; set; }
+		public decimal? col21_le { get; set; }
+		public decimal? col21_ge { get; set; }
+		public IEnumerable<decimal> col21_in { get; set; }
+		public IEnumerable<decimal> col21_ni { get; set; }
+		#endregion
+		#region col21_
+		public decimal? col21__eq { get; set; }
+		public decimal? col21__ne { get; set; }
+		public decimal? col21__lt { get; set; }
+		public decimal? col21__gt { get; set; }
+		public decimal? col21__le { get; set; }
+		public decimal? col21__ge { get; set; }
+		public IEnumerable<decimal> col21__in { get; set; }
+		public IEnumerable<decimal> col21__ni { get; set; }
+		#endregion
+		#region col22
+		public decimal? col22_eq { get; set; }
+		public decimal? col22_ne { get; set; }
+		public decimal? col22_lt { get; set; }
+		public decimal? col22_gt { get; set; }
+		public decimal? col22_le { get; set; }
+		public decimal? col22_ge { get; set; }
+		public IEnumerable<decimal> col22_in { get; set; }
+		public IEnumerable<decimal> col22_ni { get; set; }
+		#endregion
+		#region col22_
+		public decimal? col22__eq { get; set; }
+		public decimal? col22__ne { get; set; }
+		public decimal? col22__lt { get; set; }
+		public decimal? col22__gt { get; set; }
+		public decimal? col22__le { get; set; }
+		public decimal? col22__ge { get; set; }
+		public IEnumerable<decimal> col22__in { get; set; }
+		public IEnumerable<decimal> col22__ni { get; set; }
+		#endregion
+		#region col23
+		public DateTime? col23_eq { get; set; }
+		public DateTime? col23_ne { get; set; }
+		public DateTime? col23_lt { get; set; }
+		public DateTime? col23_gt { get; set; }
+		public DateTime? col23_le { get; set; }
+		public DateTime? col23_ge { get; set; }
+		public IEnumerable<DateTime> col23_in { get; set; }
+		public IEnumerable<DateTime> col23_ni { get; set; }
+		#endregion
+		#region col23_
+		public DateTime? col23__eq { get; set; }
+		public DateTime? col23__ne { get; set; }
+		public DateTime? col23__lt { get; set; }
+		public DateTime? col23__gt { get; set; }
+		public DateTime? col23__le { get; set; }
+		public DateTime? col23__ge { get; set; }
+		public IEnumerable<DateTime> col23__in { get; set; }
+		public IEnumerable<DateTime> col23__ni { get; set; }
+		#endregion
+		#region col24
+		public TimeSpan? col24_eq { get; set; }
+		public TimeSpan? col24_ne { get; set; }
+		public TimeSpan? col24_lt { get; set; }
+		public TimeSpan? col24_gt { get; set; }
+		public TimeSpan? col24_le { get; set; }
+		public TimeSpan? col24_ge { get; set; }
+		public IEnumerable<TimeSpan> col24_in { get; set; }
+		public IEnumerable<TimeSpan> col24_ni { get; set; }
+		#endregion
+		#region col24_
+		public TimeSpan? col24__eq { get; set; }
+		public TimeSpan? col24__ne { get; set; }
+		public TimeSpan? col24__lt { get; set; }
+		public TimeSpan? col24__gt { get; set; }
+		public TimeSpan? col24__le { get; set; }
+		public TimeSpan? col24__ge { get; set; }
+		public IEnumerable<TimeSpan> col24__in { get; set; }
+		public IEnumerable<TimeSpan> col24__ni { get; set; }
+		#endregion
+		#region col25
+		public DateTime? col25_eq { get; set; }
+		public DateTime? col25_ne { get; set; }
+		public DateTime? col25_lt { get; set; }
+		public DateTime? col25_gt { get; set; }
+		public DateTime? col25_le { get; set; }
+		public DateTime? col25_ge { get; set; }
+		public IEnumerable<DateTime> col25_in { get; set; }
+		public IEnumerable<DateTime> col25_ni { get; set; }
+		#endregion
+		#region col25_
+		public DateTime? col25__eq { get; set; }
+		public DateTime? col25__ne { get; set; }
+		public DateTime? col25__lt { get; set; }
+		public DateTime? col25__gt { get; set; }
+		public DateTime? col25__le { get; set; }
+		public DateTime? col25__ge { get; set; }
+		public IEnumerable<DateTime> col25__in { get; set; }
+		public IEnumerable<DateTime> col25__ni { get; set; }
+		#endregion
+		#region col26
+		public DateTime? col26_eq { get; set; }
+		public DateTime? col26_ne { get; set; }
+		public DateTime? col26_lt { get; set; }
+		public DateTime? col26_gt { get; set; }
+		public DateTime? col26_le { get; set; }
+		public DateTime? col26_ge { get; set; }
+		public IEnumerable<DateTime> col26_in { get; set; }
+		public IEnumerable<DateTime> col26_ni { get; set; }
+		#endregion
+		#region col26_
+		public DateTime? col26__eq { get; set; }
+		public DateTime? col26__ne { get; set; }
+		public DateTime? col26__lt { get; set; }
+		public DateTime? col26__gt { get; set; }
+		public DateTime? col26__le { get; set; }
+		public DateTime? col26__ge { get; set; }
+		public IEnumerable<DateTime> col26__in { get; set; }
+		public IEnumerable<DateTime> col26__ni { get; set; }
+		#endregion
+		#region col27
+		public DateTime? col27_eq { get; set; }
+		public DateTime? col27_ne { get; set; }
+		public DateTime? col27_lt { get; set; }
+		public DateTime? col27_gt { get; set; }
+		public DateTime? col27_le { get; set; }
+		public DateTime? col27_ge { get; set; }
+		public IEnumerable<DateTime> col27_in { get; set; }
+		public IEnumerable<DateTime> col27_ni { get; set; }
+		#endregion
+		#region col27_
+		public DateTime? col27__eq { get; set; }
+		public DateTime? col27__ne { get; set; }
+		public DateTime? col27__lt { get; set; }
+		public DateTime? col27__gt { get; set; }
+		public DateTime? col27__le { get; set; }
+		public DateTime? col27__ge { get; set; }
+		public IEnumerable<DateTime> col27__in { get; set; }
+		public IEnumerable<DateTime> col27__ni { get; set; }
+		#endregion
+		#region col28
+		public DateTimeOffset? col28_eq { get; set; }
+		public DateTimeOffset? col28_ne { get; set; }
+		public DateTimeOffset? col28_lt { get; set; }
+		public DateTimeOffset? col28_gt { get; set; }
+		public DateTimeOffset? col28_le { get; set; }
+		public DateTimeOffset? col28_ge { get; set; }
+		public IEnumerable<DateTimeOffset> col28_in { get; set; }
+		public IEnumerable<DateTimeOffset> col28_ni { get; set; }
+		#endregion
+		#region col28_
+		public DateTimeOffset? col28__eq { get; set; }
+		public DateTimeOffset? col28__ne { get; set; }
+		public DateTimeOffset? col28__lt { get; set; }
+		public DateTimeOffset? col28__gt { get; set; }
+		public DateTimeOffset? col28__le { get; set; }
+		public DateTimeOffset? col28__ge { get; set; }
+		public IEnumerable<DateTimeOffset> col28__in { get; set; }
+		public IEnumerable<DateTimeOffset> col28__ni { get; set; }
+		#endregion
+		#region col29
+		public byte[] col29_eq { get; set; }
+		public byte[] col29_ne { get; set; }
+		public byte[] col29_lt { get; set; }
+		public byte[] col29_gt { get; set; }
+		public byte[] col29_le { get; set; }
+		public byte[] col29_ge { get; set; }
+		public IEnumerable<byte[]> col29_in { get; set; }
+		public IEnumerable<byte[]> col29_ni { get; set; }
+		#endregion
+		#endregion
 
+		#region override
+		override public Expression<Func<Test, bool>> CreatePredicate()
+		{
+			var predicate = PredicateBuilder.True<Test>();
+
+			#region uid
+			#endregion
+			#region col01
+			#endregion
+			#region col01_
+			#endregion
+			#region col02
+			#endregion
+			#region col02_
+			#endregion
+			#region col03
+			#endregion
+			#region col03_
+			#endregion
+			#region col04
+			#endregion
+			#region col04_
+			#endregion
+			#region col05
+			#endregion
+			#region col05_
+			#endregion
+			#region col06
+			#endregion
+			#region col06_
+			#endregion
+			#region col07
+			#endregion
+			#region col07_
+			#endregion
+			#region col08
+			#endregion
+			#region col08_
+			#endregion
+			#region col09
+			#endregion
+			#region col09_
+			#endregion
+			#region col10
+			#endregion
+			#region col10_
+			#endregion
+			#region col11
+			#endregion
+			#region col11_
+			#endregion
+			#region col12
+			#endregion
+			#region col12_
+			#endregion
+			#region col13
+			#endregion
+			#region col13_
+			#endregion
+			#region col14
+			#endregion
+			#region col14_
+			#endregion
+			#region col15
+			#endregion
+			#region col15_
+			#endregion
+			#region col16
+			#endregion
+			#region col16_
+			#endregion
+			#region col17
+			#endregion
+			#region col17_
+			#endregion
+			#region col18
+			#endregion
+			#region col18_
+			#endregion
+			#region col19
+			#endregion
+			#region col19_
+			#endregion
+			#region col20
+			#endregion
+			#region col20_
+			#endregion
+			#region col21
+			#endregion
+			#region col21_
+			#endregion
+			#region col22
+			#endregion
+			#region col22_
+			#endregion
+			#region col23
+			#endregion
+			#region col23_
+			#endregion
+			#region col24
+			#endregion
+			#region col24_
+			#endregion
+			#region col25
+			#endregion
+			#region col25_
+			#endregion
+			#region col26
+			#endregion
+			#region col26_
+			#endregion
+			#region col27
+			#endregion
+			#region col27_
+			#endregion
+			#region col28
+			#endregion
+			#region col28_
+			#endregion
+			#region col29
+			#endregion
+
+			return predicate;
+		}
+		#endregion
 	}
 	#endregion
 	#endregion
@@ -3286,7 +4081,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforeuidChanged(int newValue);
-		partial void AfteruidChanged ();
+		partial void AfteruidChanged();
 
 		public const string NameOfuid = "uid";
 
@@ -3326,7 +4121,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforecategoryChanged(string newValue);
-		partial void AftercategoryChanged ();
+		partial void AftercategoryChanged();
 
 		public const string NameOfcategory = "category";
 
@@ -3366,7 +4161,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforetypeChanged(string newValue);
-		partial void AftertypeChanged ();
+		partial void AftertypeChanged();
 
 		public const string NameOftype = "type";
 
@@ -3406,7 +4201,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforelevelChanged(int newValue);
-		partial void AfterlevelChanged ();
+		partial void AfterlevelChanged();
 
 		public const string NameOflevel = "level";
 
@@ -3446,7 +4241,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforeurlChanged(string newValue);
-		partial void AfterurlChanged ();
+		partial void AfterurlChanged();
 
 		public const string NameOfurl = "url";
 
@@ -3486,7 +4281,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforemethodsChanged(string newValue);
-		partial void AftermethodsChanged ();
+		partial void AftermethodsChanged();
 
 		public const string NameOfmethods = "methods";
 
@@ -3526,7 +4321,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_atChanged(DateTime newValue);
-		partial void Aftercreated_atChanged ();
+		partial void Aftercreated_atChanged();
 
 		public const string NameOfcreated_at = "created_at";
 
@@ -3566,7 +4361,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_byChanged(string newValue);
-		partial void Aftercreated_byChanged ();
+		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
 
@@ -3606,7 +4401,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_atChanged(DateTime newValue);
-		partial void Aftermodified_atChanged ();
+		partial void Aftermodified_atChanged();
 
 		public const string NameOfmodified_at = "modified_at";
 
@@ -3646,7 +4441,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_byChanged(string newValue);
-		partial void Aftermodified_byChanged ();
+		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
 
@@ -3686,7 +4481,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeremoved_atChanged(DateTime? newValue);
-		partial void Afterremoved_atChanged ();
+		partial void Afterremoved_atChanged();
 
 		public const string NameOfremoved_at = "removed_at";
 
@@ -3726,7 +4521,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforerow_versionChanged(byte[] newValue);
-		partial void Afterrow_versionChanged ();
+		partial void Afterrow_versionChanged();
 
 		public const string NameOfrow_version = "row_version";
 
@@ -3783,7 +4578,162 @@ namespace peppa.Domain
 	/// </summary>
 	public partial class ErrorLogCondition : ConditionBase<ErrorLog>
 	{
+		#region properties
+		#region uid
+		public int? uid_eq { get; set; }
+		public int? uid_ne { get; set; }
+		public int? uid_lt { get; set; }
+		public int? uid_gt { get; set; }
+		public int? uid_le { get; set; }
+		public int? uid_ge { get; set; }
+		public IEnumerable<int> uid_in { get; set; }
+		public IEnumerable<int> uid_ni { get; set; }
+		#endregion
+		#region category
+		public string category_eq { get; set; }
+		public string category_ne { get; set; }
+		public string category_lt { get; set; }
+		public string category_gt { get; set; }
+		public string category_le { get; set; }
+		public string category_ge { get; set; }
+		public IEnumerable<string> category_in { get; set; }
+		public IEnumerable<string> category_ni { get; set; }
+		#endregion
+		#region type
+		public string type_eq { get; set; }
+		public string type_ne { get; set; }
+		public string type_lt { get; set; }
+		public string type_gt { get; set; }
+		public string type_le { get; set; }
+		public string type_ge { get; set; }
+		public IEnumerable<string> type_in { get; set; }
+		public IEnumerable<string> type_ni { get; set; }
+		#endregion
+		#region level
+		public int? level_eq { get; set; }
+		public int? level_ne { get; set; }
+		public int? level_lt { get; set; }
+		public int? level_gt { get; set; }
+		public int? level_le { get; set; }
+		public int? level_ge { get; set; }
+		public IEnumerable<int> level_in { get; set; }
+		public IEnumerable<int> level_ni { get; set; }
+		#endregion
+		#region url
+		public string url_eq { get; set; }
+		public string url_ne { get; set; }
+		public string url_lt { get; set; }
+		public string url_gt { get; set; }
+		public string url_le { get; set; }
+		public string url_ge { get; set; }
+		public IEnumerable<string> url_in { get; set; }
+		public IEnumerable<string> url_ni { get; set; }
+		#endregion
+		#region methods
+		public string methods_eq { get; set; }
+		public string methods_ne { get; set; }
+		public string methods_lt { get; set; }
+		public string methods_gt { get; set; }
+		public string methods_le { get; set; }
+		public string methods_ge { get; set; }
+		public IEnumerable<string> methods_in { get; set; }
+		public IEnumerable<string> methods_ni { get; set; }
+		#endregion
+		#region created_at
+		public DateTime? created_at_eq { get; set; }
+		public DateTime? created_at_ne { get; set; }
+		public DateTime? created_at_lt { get; set; }
+		public DateTime? created_at_gt { get; set; }
+		public DateTime? created_at_le { get; set; }
+		public DateTime? created_at_ge { get; set; }
+		public IEnumerable<DateTime> created_at_in { get; set; }
+		public IEnumerable<DateTime> created_at_ni { get; set; }
+		#endregion
+		#region created_by
+		public string created_by_eq { get; set; }
+		public string created_by_ne { get; set; }
+		public string created_by_lt { get; set; }
+		public string created_by_gt { get; set; }
+		public string created_by_le { get; set; }
+		public string created_by_ge { get; set; }
+		public IEnumerable<string> created_by_in { get; set; }
+		public IEnumerable<string> created_by_ni { get; set; }
+		#endregion
+		#region modified_at
+		public DateTime? modified_at_eq { get; set; }
+		public DateTime? modified_at_ne { get; set; }
+		public DateTime? modified_at_lt { get; set; }
+		public DateTime? modified_at_gt { get; set; }
+		public DateTime? modified_at_le { get; set; }
+		public DateTime? modified_at_ge { get; set; }
+		public IEnumerable<DateTime> modified_at_in { get; set; }
+		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		#endregion
+		#region modified_by
+		public string modified_by_eq { get; set; }
+		public string modified_by_ne { get; set; }
+		public string modified_by_lt { get; set; }
+		public string modified_by_gt { get; set; }
+		public string modified_by_le { get; set; }
+		public string modified_by_ge { get; set; }
+		public IEnumerable<string> modified_by_in { get; set; }
+		public IEnumerable<string> modified_by_ni { get; set; }
+		#endregion
+		#region removed_at
+		public DateTime? removed_at_eq { get; set; }
+		public DateTime? removed_at_ne { get; set; }
+		public DateTime? removed_at_lt { get; set; }
+		public DateTime? removed_at_gt { get; set; }
+		public DateTime? removed_at_le { get; set; }
+		public DateTime? removed_at_ge { get; set; }
+		public IEnumerable<DateTime> removed_at_in { get; set; }
+		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		#endregion
+		#region row_version
+		public byte[] row_version_eq { get; set; }
+		public byte[] row_version_ne { get; set; }
+		public byte[] row_version_lt { get; set; }
+		public byte[] row_version_gt { get; set; }
+		public byte[] row_version_le { get; set; }
+		public byte[] row_version_ge { get; set; }
+		public IEnumerable<byte[]> row_version_in { get; set; }
+		public IEnumerable<byte[]> row_version_ni { get; set; }
+		#endregion
+		#endregion
 
+		#region override
+		override public Expression<Func<ErrorLog, bool>> CreatePredicate()
+		{
+			var predicate = PredicateBuilder.True<ErrorLog>();
+
+			#region uid
+			#endregion
+			#region category
+			#endregion
+			#region type
+			#endregion
+			#region level
+			#endregion
+			#region url
+			#endregion
+			#region methods
+			#endregion
+			#region created_at
+			#endregion
+			#region created_by
+			#endregion
+			#region modified_at
+			#endregion
+			#region modified_by
+			#endregion
+			#region removed_at
+			#endregion
+			#region row_version
+			#endregion
+
+			return predicate;
+		}
+		#endregion
 	}
 	#endregion
 	#endregion
@@ -3821,7 +4771,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforeuidChanged(int newValue);
-		partial void AfteruidChanged ();
+		partial void AfteruidChanged();
 
 		public const string NameOfuid = "uid";
 
@@ -3861,7 +4811,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeaccount_idChanged(int newValue);
-		partial void Afteraccount_idChanged ();
+		partial void Afteraccount_idChanged();
 
 		public const string NameOfaccount_id = "account_id";
 
@@ -3901,7 +4851,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforestaff_noChanged(string newValue);
-		partial void Afterstaff_noChanged ();
+		partial void Afterstaff_noChanged();
 
 		public const string NameOfstaff_no = "staff_no";
 
@@ -3941,7 +4891,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeteacher_noChanged(string newValue);
-		partial void Afterteacher_noChanged ();
+		partial void Afterteacher_noChanged();
 
 		public const string NameOfteacher_no = "teacher_no";
 
@@ -3981,7 +4931,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforestudent_noChanged(string newValue);
-		partial void Afterstudent_noChanged ();
+		partial void Afterstudent_noChanged();
 
 		public const string NameOfstudent_no = "student_no";
 
@@ -4021,7 +4971,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeout_student_noChanged(string newValue);
-		partial void Afterout_student_noChanged ();
+		partial void Afterout_student_noChanged();
 
 		public const string NameOfout_student_no = "out_student_no";
 
@@ -4061,7 +5011,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeparent_noChanged(string newValue);
-		partial void Afterparent_noChanged ();
+		partial void Afterparent_noChanged();
 
 		public const string NameOfparent_no = "parent_no";
 
@@ -4101,7 +5051,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeuser_noChanged(string newValue);
-		partial void Afteruser_noChanged ();
+		partial void Afteruser_noChanged();
 
 		public const string NameOfuser_no = "user_no";
 
@@ -4141,7 +5091,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeauth_method_typeChanged(string newValue);
-		partial void Afterauth_method_typeChanged ();
+		partial void Afterauth_method_typeChanged();
 
 		public const string NameOfauth_method_type = "auth_method_type";
 
@@ -4181,7 +5131,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeis_validChanged(int newValue);
-		partial void Afteris_validChanged ();
+		partial void Afteris_validChanged();
 
 		public const string NameOfis_valid = "is_valid";
 
@@ -4221,7 +5171,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_atChanged(DateTime newValue);
-		partial void Aftercreated_atChanged ();
+		partial void Aftercreated_atChanged();
 
 		public const string NameOfcreated_at = "created_at";
 
@@ -4261,7 +5211,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_byChanged(string newValue);
-		partial void Aftercreated_byChanged ();
+		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
 
@@ -4301,7 +5251,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_atChanged(DateTime newValue);
-		partial void Aftermodified_atChanged ();
+		partial void Aftermodified_atChanged();
 
 		public const string NameOfmodified_at = "modified_at";
 
@@ -4341,7 +5291,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_byChanged(string newValue);
-		partial void Aftermodified_byChanged ();
+		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
 
@@ -4381,7 +5331,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeremoved_atChanged(DateTime? newValue);
-		partial void Afterremoved_atChanged ();
+		partial void Afterremoved_atChanged();
 
 		public const string NameOfremoved_at = "removed_at";
 
@@ -4421,7 +5371,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforerow_versionChanged(byte[] newValue);
-		partial void Afterrow_versionChanged ();
+		partial void Afterrow_versionChanged();
 
 		public const string NameOfrow_version = "row_version";
 
@@ -4568,7 +5518,290 @@ namespace peppa.Domain
 	/// </summary>
 	public partial class AccountCondition : ConditionBase<Account>
 	{
+		#region properties
+		#region uid
+		public int? uid_eq { get; set; }
+		public int? uid_ne { get; set; }
+		public int? uid_lt { get; set; }
+		public int? uid_gt { get; set; }
+		public int? uid_le { get; set; }
+		public int? uid_ge { get; set; }
+		public IEnumerable<int> uid_in { get; set; }
+		public IEnumerable<int> uid_ni { get; set; }
+		#endregion
+		#region account_id
+		public int? account_id_eq { get; set; }
+		public int? account_id_ne { get; set; }
+		public int? account_id_lt { get; set; }
+		public int? account_id_gt { get; set; }
+		public int? account_id_le { get; set; }
+		public int? account_id_ge { get; set; }
+		public IEnumerable<int> account_id_in { get; set; }
+		public IEnumerable<int> account_id_ni { get; set; }
+		#endregion
+		#region staff_no
+		public string staff_no_eq { get; set; }
+		public string staff_no_ne { get; set; }
+		public string staff_no_lt { get; set; }
+		public string staff_no_gt { get; set; }
+		public string staff_no_le { get; set; }
+		public string staff_no_ge { get; set; }
+		public IEnumerable<string> staff_no_in { get; set; }
+		public IEnumerable<string> staff_no_ni { get; set; }
+		#endregion
+		#region teacher_no
+		public string teacher_no_eq { get; set; }
+		public string teacher_no_ne { get; set; }
+		public string teacher_no_lt { get; set; }
+		public string teacher_no_gt { get; set; }
+		public string teacher_no_le { get; set; }
+		public string teacher_no_ge { get; set; }
+		public IEnumerable<string> teacher_no_in { get; set; }
+		public IEnumerable<string> teacher_no_ni { get; set; }
+		#endregion
+		#region student_no
+		public string student_no_eq { get; set; }
+		public string student_no_ne { get; set; }
+		public string student_no_lt { get; set; }
+		public string student_no_gt { get; set; }
+		public string student_no_le { get; set; }
+		public string student_no_ge { get; set; }
+		public IEnumerable<string> student_no_in { get; set; }
+		public IEnumerable<string> student_no_ni { get; set; }
+		#endregion
+		#region out_student_no
+		public string out_student_no_eq { get; set; }
+		public string out_student_no_ne { get; set; }
+		public string out_student_no_lt { get; set; }
+		public string out_student_no_gt { get; set; }
+		public string out_student_no_le { get; set; }
+		public string out_student_no_ge { get; set; }
+		public IEnumerable<string> out_student_no_in { get; set; }
+		public IEnumerable<string> out_student_no_ni { get; set; }
+		#endregion
+		#region parent_no
+		public string parent_no_eq { get; set; }
+		public string parent_no_ne { get; set; }
+		public string parent_no_lt { get; set; }
+		public string parent_no_gt { get; set; }
+		public string parent_no_le { get; set; }
+		public string parent_no_ge { get; set; }
+		public IEnumerable<string> parent_no_in { get; set; }
+		public IEnumerable<string> parent_no_ni { get; set; }
+		#endregion
+		#region user_no
+		public string user_no_eq { get; set; }
+		public string user_no_ne { get; set; }
+		public string user_no_lt { get; set; }
+		public string user_no_gt { get; set; }
+		public string user_no_le { get; set; }
+		public string user_no_ge { get; set; }
+		public IEnumerable<string> user_no_in { get; set; }
+		public IEnumerable<string> user_no_ni { get; set; }
+		#endregion
+		#region auth_method_type (AuthMethodType)
+		private string _auth_method_type_eq;
+		public AuthMethod? AuthMethodType_eq
+		{
+			get => _auth_method_type_eq?.ToAuthMethod();
+			set => _auth_method_type_eq = value.HasValue ? value.Value.Val() : (string)null;
+		}
+		private string _auth_method_type_ne;
+		public AuthMethod? AuthMethodType_ne
+		{
+			get => _auth_method_type_ne?.ToAuthMethod();
+			set => _auth_method_type_ne = value.HasValue ? value.Value.Val() : (string)null;
+		}
+		private string _auth_method_type_lt;
+		public AuthMethod? AuthMethodType_lt
+		{
+			get => _auth_method_type_lt?.ToAuthMethod();
+			set => _auth_method_type_lt = value.HasValue ? value.Value.Val() : (string)null;
+		}
+		private string _auth_method_type_gt;
+		public AuthMethod? AuthMethodType_gt
+		{
+			get => _auth_method_type_gt?.ToAuthMethod();
+			set => _auth_method_type_gt = value.HasValue ? value.Value.Val() : (string)null;
+		}
+		private string _auth_method_type_le;
+		public AuthMethod? AuthMethodType_le
+		{
+			get => _auth_method_type_le?.ToAuthMethod();
+			set => _auth_method_type_le = value.HasValue ? value.Value.Val() : (string)null;
+		}
+		private string _auth_method_type_ge;
+		public AuthMethod? AuthMethodType_ge
+		{
+			get => _auth_method_type_ge?.ToAuthMethod();
+			set => _auth_method_type_ge = value.HasValue ? value.Value.Val() : (string)null;
+		}
+		private IEnumerable<string> _auth_method_type_in;
+		public IEnumerable<AuthMethod> AuthMethodType_in
+		{
+			get => _auth_method_type_in.Select(_ => _.ToAuthMethod().Value);
+			set => _auth_method_type_in = value.Select(_ => _.Val());
+		}
+		private IEnumerable<string> _auth_method_type_ni;
+		public IEnumerable<AuthMethod> AuthMethodType_ni
+		{
+			get => _auth_method_type_ni.Select(_ => _.ToAuthMethod().Value);
+			set => _auth_method_type_ni = value.Select(_ => _.Val());
+		}
+		#endregion
+		#region is_valid (IsValid)
+		private int? _is_valid_eq;
+		public ValidityFlag? IsValid_eq
+		{
+			get => _is_valid_eq?.ToValidityFlag();
+			set => _is_valid_eq = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _is_valid_ne;
+		public ValidityFlag? IsValid_ne
+		{
+			get => _is_valid_ne?.ToValidityFlag();
+			set => _is_valid_ne = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _is_valid_lt;
+		public ValidityFlag? IsValid_lt
+		{
+			get => _is_valid_lt?.ToValidityFlag();
+			set => _is_valid_lt = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _is_valid_gt;
+		public ValidityFlag? IsValid_gt
+		{
+			get => _is_valid_gt?.ToValidityFlag();
+			set => _is_valid_gt = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _is_valid_le;
+		public ValidityFlag? IsValid_le
+		{
+			get => _is_valid_le?.ToValidityFlag();
+			set => _is_valid_le = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _is_valid_ge;
+		public ValidityFlag? IsValid_ge
+		{
+			get => _is_valid_ge?.ToValidityFlag();
+			set => _is_valid_ge = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private IEnumerable<int> _is_valid_in;
+		public IEnumerable<ValidityFlag> IsValid_in
+		{
+			get => _is_valid_in.Select(_ => _.ToValidityFlag().Value);
+			set => _is_valid_in = value.Select(_ => _.Val());
+		}
+		private IEnumerable<int> _is_valid_ni;
+		public IEnumerable<ValidityFlag> IsValid_ni
+		{
+			get => _is_valid_ni.Select(_ => _.ToValidityFlag().Value);
+			set => _is_valid_ni = value.Select(_ => _.Val());
+		}
+		#endregion
+		#region created_at
+		public DateTime? created_at_eq { get; set; }
+		public DateTime? created_at_ne { get; set; }
+		public DateTime? created_at_lt { get; set; }
+		public DateTime? created_at_gt { get; set; }
+		public DateTime? created_at_le { get; set; }
+		public DateTime? created_at_ge { get; set; }
+		public IEnumerable<DateTime> created_at_in { get; set; }
+		public IEnumerable<DateTime> created_at_ni { get; set; }
+		#endregion
+		#region created_by
+		public string created_by_eq { get; set; }
+		public string created_by_ne { get; set; }
+		public string created_by_lt { get; set; }
+		public string created_by_gt { get; set; }
+		public string created_by_le { get; set; }
+		public string created_by_ge { get; set; }
+		public IEnumerable<string> created_by_in { get; set; }
+		public IEnumerable<string> created_by_ni { get; set; }
+		#endregion
+		#region modified_at
+		public DateTime? modified_at_eq { get; set; }
+		public DateTime? modified_at_ne { get; set; }
+		public DateTime? modified_at_lt { get; set; }
+		public DateTime? modified_at_gt { get; set; }
+		public DateTime? modified_at_le { get; set; }
+		public DateTime? modified_at_ge { get; set; }
+		public IEnumerable<DateTime> modified_at_in { get; set; }
+		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		#endregion
+		#region modified_by
+		public string modified_by_eq { get; set; }
+		public string modified_by_ne { get; set; }
+		public string modified_by_lt { get; set; }
+		public string modified_by_gt { get; set; }
+		public string modified_by_le { get; set; }
+		public string modified_by_ge { get; set; }
+		public IEnumerable<string> modified_by_in { get; set; }
+		public IEnumerable<string> modified_by_ni { get; set; }
+		#endregion
+		#region removed_at
+		public DateTime? removed_at_eq { get; set; }
+		public DateTime? removed_at_ne { get; set; }
+		public DateTime? removed_at_lt { get; set; }
+		public DateTime? removed_at_gt { get; set; }
+		public DateTime? removed_at_le { get; set; }
+		public DateTime? removed_at_ge { get; set; }
+		public IEnumerable<DateTime> removed_at_in { get; set; }
+		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		#endregion
+		#region row_version
+		public byte[] row_version_eq { get; set; }
+		public byte[] row_version_ne { get; set; }
+		public byte[] row_version_lt { get; set; }
+		public byte[] row_version_gt { get; set; }
+		public byte[] row_version_le { get; set; }
+		public byte[] row_version_ge { get; set; }
+		public IEnumerable<byte[]> row_version_in { get; set; }
+		public IEnumerable<byte[]> row_version_ni { get; set; }
+		#endregion
+		#endregion
 
+		#region override
+		override public Expression<Func<Account, bool>> CreatePredicate()
+		{
+			var predicate = PredicateBuilder.True<Account>();
+
+			#region uid
+			#endregion
+			#region account_id
+			#endregion
+			#region staff_no
+			#endregion
+			#region teacher_no
+			#endregion
+			#region student_no
+			#endregion
+			#region out_student_no
+			#endregion
+			#region parent_no
+			#endregion
+			#region user_no
+			#endregion
+			#region auth_method_type
+			#endregion
+			#region is_valid
+			#endregion
+			#region created_at
+			#endregion
+			#region created_by
+			#endregion
+			#region modified_at
+			#endregion
+			#region modified_by
+			#endregion
+			#region removed_at
+			#endregion
+			#region row_version
+			#endregion
+
+			return predicate;
+		}
+		#endregion
 	}
 	#endregion
 	#endregion
@@ -4606,7 +5839,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforeuidChanged(int newValue);
-		partial void AfteruidChanged ();
+		partial void AfteruidChanged();
 
 		public const string NameOfuid = "uid";
 
@@ -4646,7 +5879,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeuser_typeChanged(int newValue);
-		partial void Afteruser_typeChanged ();
+		partial void Afteruser_typeChanged();
 
 		public const string NameOfuser_type = "user_type";
 
@@ -4686,7 +5919,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforestaff_noChanged(string newValue);
-		partial void Afterstaff_noChanged ();
+		partial void Afterstaff_noChanged();
 
 		public const string NameOfstaff_no = "staff_no";
 
@@ -4726,7 +5959,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforenameChanged(string newValue);
-		partial void AfternameChanged ();
+		partial void AfternameChanged();
 
 		public const string NameOfname = "name";
 
@@ -4766,7 +5999,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforekanaChanged(string newValue);
-		partial void AfterkanaChanged ();
+		partial void AfterkanaChanged();
 
 		public const string NameOfkana = "kana";
 
@@ -4806,7 +6039,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforename_abbrevChanged(string newValue);
-		partial void Aftername_abbrevChanged ();
+		partial void Aftername_abbrevChanged();
 
 		public const string NameOfname_abbrev = "name_abbrev";
 
@@ -4846,7 +6079,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforename_engChanged(string newValue);
-		partial void Aftername_engChanged ();
+		partial void Aftername_engChanged();
 
 		public const string NameOfname_eng = "name_eng";
 
@@ -4886,7 +6119,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforename_eng_abbrevChanged(string newValue);
-		partial void Aftername_eng_abbrevChanged ();
+		partial void Aftername_eng_abbrevChanged();
 
 		public const string NameOfname_eng_abbrev = "name_eng_abbrev";
 
@@ -4926,7 +6159,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforegenderChanged(int? newValue);
-		partial void AftergenderChanged ();
+		partial void AftergenderChanged();
 
 		public const string NameOfgender = "gender";
 
@@ -4966,7 +6199,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforebirth_dateChanged(DateTime? newValue);
-		partial void Afterbirth_dateChanged ();
+		partial void Afterbirth_dateChanged();
 
 		public const string NameOfbirth_date = "birth_date";
 
@@ -5006,7 +6239,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_atChanged(DateTime newValue);
-		partial void Aftercreated_atChanged ();
+		partial void Aftercreated_atChanged();
 
 		public const string NameOfcreated_at = "created_at";
 
@@ -5046,7 +6279,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_byChanged(string newValue);
-		partial void Aftercreated_byChanged ();
+		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
 
@@ -5086,7 +6319,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_atChanged(DateTime newValue);
-		partial void Aftermodified_atChanged ();
+		partial void Aftermodified_atChanged();
 
 		public const string NameOfmodified_at = "modified_at";
 
@@ -5126,7 +6359,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_byChanged(string newValue);
-		partial void Aftermodified_byChanged ();
+		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
 
@@ -5166,7 +6399,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeremoved_atChanged(DateTime? newValue);
-		partial void Afterremoved_atChanged ();
+		partial void Afterremoved_atChanged();
 
 		public const string NameOfremoved_at = "removed_at";
 
@@ -5206,7 +6439,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforerow_versionChanged(byte[] newValue);
-		partial void Afterrow_versionChanged ();
+		partial void Afterrow_versionChanged();
 
 		public const string NameOfrow_version = "row_version";
 
@@ -5399,7 +6632,290 @@ namespace peppa.Domain
 	/// </summary>
 	public partial class StaffCondition : ConditionBase<Staff>
 	{
+		#region properties
+		#region uid
+		public int? uid_eq { get; set; }
+		public int? uid_ne { get; set; }
+		public int? uid_lt { get; set; }
+		public int? uid_gt { get; set; }
+		public int? uid_le { get; set; }
+		public int? uid_ge { get; set; }
+		public IEnumerable<int> uid_in { get; set; }
+		public IEnumerable<int> uid_ni { get; set; }
+		#endregion
+		#region user_type (UserType)
+		private int? _user_type_eq;
+		public UserType? UserType_eq
+		{
+			get => _user_type_eq?.ToUserType();
+			set => _user_type_eq = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_ne;
+		public UserType? UserType_ne
+		{
+			get => _user_type_ne?.ToUserType();
+			set => _user_type_ne = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_lt;
+		public UserType? UserType_lt
+		{
+			get => _user_type_lt?.ToUserType();
+			set => _user_type_lt = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_gt;
+		public UserType? UserType_gt
+		{
+			get => _user_type_gt?.ToUserType();
+			set => _user_type_gt = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_le;
+		public UserType? UserType_le
+		{
+			get => _user_type_le?.ToUserType();
+			set => _user_type_le = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_ge;
+		public UserType? UserType_ge
+		{
+			get => _user_type_ge?.ToUserType();
+			set => _user_type_ge = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private IEnumerable<int> _user_type_in;
+		public IEnumerable<UserType> UserType_in
+		{
+			get => _user_type_in.Select(_ => _.ToUserType().Value);
+			set => _user_type_in = value.Select(_ => _.Val());
+		}
+		private IEnumerable<int> _user_type_ni;
+		public IEnumerable<UserType> UserType_ni
+		{
+			get => _user_type_ni.Select(_ => _.ToUserType().Value);
+			set => _user_type_ni = value.Select(_ => _.Val());
+		}
+		#endregion
+		#region staff_no
+		public string staff_no_eq { get; set; }
+		public string staff_no_ne { get; set; }
+		public string staff_no_lt { get; set; }
+		public string staff_no_gt { get; set; }
+		public string staff_no_le { get; set; }
+		public string staff_no_ge { get; set; }
+		public IEnumerable<string> staff_no_in { get; set; }
+		public IEnumerable<string> staff_no_ni { get; set; }
+		#endregion
+		#region name
+		public string name_eq { get; set; }
+		public string name_ne { get; set; }
+		public string name_lt { get; set; }
+		public string name_gt { get; set; }
+		public string name_le { get; set; }
+		public string name_ge { get; set; }
+		public IEnumerable<string> name_in { get; set; }
+		public IEnumerable<string> name_ni { get; set; }
+		#endregion
+		#region kana
+		public string kana_eq { get; set; }
+		public string kana_ne { get; set; }
+		public string kana_lt { get; set; }
+		public string kana_gt { get; set; }
+		public string kana_le { get; set; }
+		public string kana_ge { get; set; }
+		public IEnumerable<string> kana_in { get; set; }
+		public IEnumerable<string> kana_ni { get; set; }
+		#endregion
+		#region name_abbrev
+		public string name_abbrev_eq { get; set; }
+		public string name_abbrev_ne { get; set; }
+		public string name_abbrev_lt { get; set; }
+		public string name_abbrev_gt { get; set; }
+		public string name_abbrev_le { get; set; }
+		public string name_abbrev_ge { get; set; }
+		public IEnumerable<string> name_abbrev_in { get; set; }
+		public IEnumerable<string> name_abbrev_ni { get; set; }
+		#endregion
+		#region name_eng
+		public string name_eng_eq { get; set; }
+		public string name_eng_ne { get; set; }
+		public string name_eng_lt { get; set; }
+		public string name_eng_gt { get; set; }
+		public string name_eng_le { get; set; }
+		public string name_eng_ge { get; set; }
+		public IEnumerable<string> name_eng_in { get; set; }
+		public IEnumerable<string> name_eng_ni { get; set; }
+		#endregion
+		#region name_eng_abbrev
+		public string name_eng_abbrev_eq { get; set; }
+		public string name_eng_abbrev_ne { get; set; }
+		public string name_eng_abbrev_lt { get; set; }
+		public string name_eng_abbrev_gt { get; set; }
+		public string name_eng_abbrev_le { get; set; }
+		public string name_eng_abbrev_ge { get; set; }
+		public IEnumerable<string> name_eng_abbrev_in { get; set; }
+		public IEnumerable<string> name_eng_abbrev_ni { get; set; }
+		#endregion
+		#region gender (Gender)
+		private int? _gender_eq;
+		public Gender? Gender_eq
+		{
+			get => _gender_eq?.ToGender();
+			set => _gender_eq = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _gender_ne;
+		public Gender? Gender_ne
+		{
+			get => _gender_ne?.ToGender();
+			set => _gender_ne = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _gender_lt;
+		public Gender? Gender_lt
+		{
+			get => _gender_lt?.ToGender();
+			set => _gender_lt = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _gender_gt;
+		public Gender? Gender_gt
+		{
+			get => _gender_gt?.ToGender();
+			set => _gender_gt = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _gender_le;
+		public Gender? Gender_le
+		{
+			get => _gender_le?.ToGender();
+			set => _gender_le = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _gender_ge;
+		public Gender? Gender_ge
+		{
+			get => _gender_ge?.ToGender();
+			set => _gender_ge = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private IEnumerable<int> _gender_in;
+		public IEnumerable<Gender> Gender_in
+		{
+			get => _gender_in.Select(_ => _.ToGender().Value);
+			set => _gender_in = value.Select(_ => _.Val());
+		}
+		private IEnumerable<int> _gender_ni;
+		public IEnumerable<Gender> Gender_ni
+		{
+			get => _gender_ni.Select(_ => _.ToGender().Value);
+			set => _gender_ni = value.Select(_ => _.Val());
+		}
+		#endregion
+		#region birth_date
+		public DateTime? birth_date_eq { get; set; }
+		public DateTime? birth_date_ne { get; set; }
+		public DateTime? birth_date_lt { get; set; }
+		public DateTime? birth_date_gt { get; set; }
+		public DateTime? birth_date_le { get; set; }
+		public DateTime? birth_date_ge { get; set; }
+		public IEnumerable<DateTime> birth_date_in { get; set; }
+		public IEnumerable<DateTime> birth_date_ni { get; set; }
+		#endregion
+		#region created_at
+		public DateTime? created_at_eq { get; set; }
+		public DateTime? created_at_ne { get; set; }
+		public DateTime? created_at_lt { get; set; }
+		public DateTime? created_at_gt { get; set; }
+		public DateTime? created_at_le { get; set; }
+		public DateTime? created_at_ge { get; set; }
+		public IEnumerable<DateTime> created_at_in { get; set; }
+		public IEnumerable<DateTime> created_at_ni { get; set; }
+		#endregion
+		#region created_by
+		public string created_by_eq { get; set; }
+		public string created_by_ne { get; set; }
+		public string created_by_lt { get; set; }
+		public string created_by_gt { get; set; }
+		public string created_by_le { get; set; }
+		public string created_by_ge { get; set; }
+		public IEnumerable<string> created_by_in { get; set; }
+		public IEnumerable<string> created_by_ni { get; set; }
+		#endregion
+		#region modified_at
+		public DateTime? modified_at_eq { get; set; }
+		public DateTime? modified_at_ne { get; set; }
+		public DateTime? modified_at_lt { get; set; }
+		public DateTime? modified_at_gt { get; set; }
+		public DateTime? modified_at_le { get; set; }
+		public DateTime? modified_at_ge { get; set; }
+		public IEnumerable<DateTime> modified_at_in { get; set; }
+		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		#endregion
+		#region modified_by
+		public string modified_by_eq { get; set; }
+		public string modified_by_ne { get; set; }
+		public string modified_by_lt { get; set; }
+		public string modified_by_gt { get; set; }
+		public string modified_by_le { get; set; }
+		public string modified_by_ge { get; set; }
+		public IEnumerable<string> modified_by_in { get; set; }
+		public IEnumerable<string> modified_by_ni { get; set; }
+		#endregion
+		#region removed_at
+		public DateTime? removed_at_eq { get; set; }
+		public DateTime? removed_at_ne { get; set; }
+		public DateTime? removed_at_lt { get; set; }
+		public DateTime? removed_at_gt { get; set; }
+		public DateTime? removed_at_le { get; set; }
+		public DateTime? removed_at_ge { get; set; }
+		public IEnumerable<DateTime> removed_at_in { get; set; }
+		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		#endregion
+		#region row_version
+		public byte[] row_version_eq { get; set; }
+		public byte[] row_version_ne { get; set; }
+		public byte[] row_version_lt { get; set; }
+		public byte[] row_version_gt { get; set; }
+		public byte[] row_version_le { get; set; }
+		public byte[] row_version_ge { get; set; }
+		public IEnumerable<byte[]> row_version_in { get; set; }
+		public IEnumerable<byte[]> row_version_ni { get; set; }
+		#endregion
+		#endregion
 
+		#region override
+		override public Expression<Func<Staff, bool>> CreatePredicate()
+		{
+			var predicate = PredicateBuilder.True<Staff>();
+
+			#region uid
+			#endregion
+			#region user_type
+			#endregion
+			#region staff_no
+			#endregion
+			#region name
+			#endregion
+			#region kana
+			#endregion
+			#region name_abbrev
+			#endregion
+			#region name_eng
+			#endregion
+			#region name_eng_abbrev
+			#endregion
+			#region gender
+			#endregion
+			#region birth_date
+			#endregion
+			#region created_at
+			#endregion
+			#region created_by
+			#endregion
+			#region modified_at
+			#endregion
+			#region modified_by
+			#endregion
+			#region removed_at
+			#endregion
+			#region row_version
+			#endregion
+
+			return predicate;
+		}
+		#endregion
 	}
 	#endregion
 	#endregion
@@ -5437,7 +6953,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforeuidChanged(int newValue);
-		partial void AfteruidChanged ();
+		partial void AfteruidChanged();
 
 		public const string NameOfuid = "uid";
 
@@ -5477,7 +6993,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeuser_typeChanged(int newValue);
-		partial void Afteruser_typeChanged ();
+		partial void Afteruser_typeChanged();
 
 		public const string NameOfuser_type = "user_type";
 
@@ -5517,7 +7033,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforegeneric_user_noChanged(string newValue);
-		partial void Aftergeneric_user_noChanged ();
+		partial void Aftergeneric_user_noChanged();
 
 		public const string NameOfgeneric_user_no = "generic_user_no";
 
@@ -5557,7 +7073,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforeseqChanged(int newValue);
-		partial void AfterseqChanged ();
+		partial void AfterseqChanged();
 
 		public const string NameOfseq = "seq";
 
@@ -5597,7 +7113,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeaddress_type_idChanged(int newValue);
-		partial void Afteraddress_type_idChanged ();
+		partial void Afteraddress_type_idChanged();
 
 		public const string NameOfaddress_type_id = "address_type_id";
 
@@ -5637,7 +7153,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforepostal_codeChanged(string newValue);
-		partial void Afterpostal_codeChanged ();
+		partial void Afterpostal_codeChanged();
 
 		public const string NameOfpostal_code = "postal_code";
 
@@ -5677,7 +7193,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeprefecture_codeChanged(int newValue);
-		partial void Afterprefecture_codeChanged ();
+		partial void Afterprefecture_codeChanged();
 
 		public const string NameOfprefecture_code = "prefecture_code";
 
@@ -5717,7 +7233,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeaddress1Changed(string newValue);
-		partial void Afteraddress1Changed ();
+		partial void Afteraddress1Changed();
 
 		public const string NameOfaddress1 = "address1";
 
@@ -5757,7 +7273,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeaddress2Changed(string newValue);
-		partial void Afteraddress2Changed ();
+		partial void Afteraddress2Changed();
 
 		public const string NameOfaddress2 = "address2";
 
@@ -5797,7 +7313,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeaddress3Changed(string newValue);
-		partial void Afteraddress3Changed ();
+		partial void Afteraddress3Changed();
 
 		public const string NameOfaddress3 = "address3";
 
@@ -5837,7 +7353,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforelatitudeChanged(decimal? newValue);
-		partial void AfterlatitudeChanged ();
+		partial void AfterlatitudeChanged();
 
 		public const string NameOflatitude = "latitude";
 
@@ -5877,7 +7393,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforelongitudeChanged(decimal? newValue);
-		partial void AfterlongitudeChanged ();
+		partial void AfterlongitudeChanged();
 
 		public const string NameOflongitude = "longitude";
 
@@ -5917,7 +7433,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeenter_dateChanged(DateTime? newValue);
-		partial void Afterenter_dateChanged ();
+		partial void Afterenter_dateChanged();
 
 		public const string NameOfenter_date = "enter_date";
 
@@ -5957,7 +7473,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeleave_dateChanged(DateTime? newValue);
-		partial void Afterleave_dateChanged ();
+		partial void Afterleave_dateChanged();
 
 		public const string NameOfleave_date = "leave_date";
 
@@ -5997,7 +7513,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_atChanged(DateTime newValue);
-		partial void Aftercreated_atChanged ();
+		partial void Aftercreated_atChanged();
 
 		public const string NameOfcreated_at = "created_at";
 
@@ -6037,7 +7553,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_byChanged(string newValue);
-		partial void Aftercreated_byChanged ();
+		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
 
@@ -6077,7 +7593,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_atChanged(DateTime newValue);
-		partial void Aftermodified_atChanged ();
+		partial void Aftermodified_atChanged();
 
 		public const string NameOfmodified_at = "modified_at";
 
@@ -6117,7 +7633,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_byChanged(string newValue);
-		partial void Aftermodified_byChanged ();
+		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
 
@@ -6157,7 +7673,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforerow_versionChanged(byte[] newValue);
-		partial void Afterrow_versionChanged ();
+		partial void Afterrow_versionChanged();
 
 		public const string NameOfrow_version = "row_version";
 
@@ -6302,7 +7818,286 @@ namespace peppa.Domain
 	/// </summary>
 	public partial class AddressCondition : ConditionBase<Address>
 	{
+		#region properties
+		#region uid
+		public int? uid_eq { get; set; }
+		public int? uid_ne { get; set; }
+		public int? uid_lt { get; set; }
+		public int? uid_gt { get; set; }
+		public int? uid_le { get; set; }
+		public int? uid_ge { get; set; }
+		public IEnumerable<int> uid_in { get; set; }
+		public IEnumerable<int> uid_ni { get; set; }
+		#endregion
+		#region user_type (UserType)
+		private int? _user_type_eq;
+		public UserType? UserType_eq
+		{
+			get => _user_type_eq?.ToUserType();
+			set => _user_type_eq = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_ne;
+		public UserType? UserType_ne
+		{
+			get => _user_type_ne?.ToUserType();
+			set => _user_type_ne = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_lt;
+		public UserType? UserType_lt
+		{
+			get => _user_type_lt?.ToUserType();
+			set => _user_type_lt = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_gt;
+		public UserType? UserType_gt
+		{
+			get => _user_type_gt?.ToUserType();
+			set => _user_type_gt = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_le;
+		public UserType? UserType_le
+		{
+			get => _user_type_le?.ToUserType();
+			set => _user_type_le = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_ge;
+		public UserType? UserType_ge
+		{
+			get => _user_type_ge?.ToUserType();
+			set => _user_type_ge = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private IEnumerable<int> _user_type_in;
+		public IEnumerable<UserType> UserType_in
+		{
+			get => _user_type_in.Select(_ => _.ToUserType().Value);
+			set => _user_type_in = value.Select(_ => _.Val());
+		}
+		private IEnumerable<int> _user_type_ni;
+		public IEnumerable<UserType> UserType_ni
+		{
+			get => _user_type_ni.Select(_ => _.ToUserType().Value);
+			set => _user_type_ni = value.Select(_ => _.Val());
+		}
+		#endregion
+		#region generic_user_no
+		public string generic_user_no_eq { get; set; }
+		public string generic_user_no_ne { get; set; }
+		public string generic_user_no_lt { get; set; }
+		public string generic_user_no_gt { get; set; }
+		public string generic_user_no_le { get; set; }
+		public string generic_user_no_ge { get; set; }
+		public IEnumerable<string> generic_user_no_in { get; set; }
+		public IEnumerable<string> generic_user_no_ni { get; set; }
+		#endregion
+		#region seq
+		public int? seq_eq { get; set; }
+		public int? seq_ne { get; set; }
+		public int? seq_lt { get; set; }
+		public int? seq_gt { get; set; }
+		public int? seq_le { get; set; }
+		public int? seq_ge { get; set; }
+		public IEnumerable<int> seq_in { get; set; }
+		public IEnumerable<int> seq_ni { get; set; }
+		#endregion
+		#region address_type_id
+		public int? address_type_id_eq { get; set; }
+		public int? address_type_id_ne { get; set; }
+		public int? address_type_id_lt { get; set; }
+		public int? address_type_id_gt { get; set; }
+		public int? address_type_id_le { get; set; }
+		public int? address_type_id_ge { get; set; }
+		public IEnumerable<int> address_type_id_in { get; set; }
+		public IEnumerable<int> address_type_id_ni { get; set; }
+		#endregion
+		#region postal_code
+		public string postal_code_eq { get; set; }
+		public string postal_code_ne { get; set; }
+		public string postal_code_lt { get; set; }
+		public string postal_code_gt { get; set; }
+		public string postal_code_le { get; set; }
+		public string postal_code_ge { get; set; }
+		public IEnumerable<string> postal_code_in { get; set; }
+		public IEnumerable<string> postal_code_ni { get; set; }
+		#endregion
+		#region prefecture_code
+		public int? prefecture_code_eq { get; set; }
+		public int? prefecture_code_ne { get; set; }
+		public int? prefecture_code_lt { get; set; }
+		public int? prefecture_code_gt { get; set; }
+		public int? prefecture_code_le { get; set; }
+		public int? prefecture_code_ge { get; set; }
+		public IEnumerable<int> prefecture_code_in { get; set; }
+		public IEnumerable<int> prefecture_code_ni { get; set; }
+		#endregion
+		#region address1
+		public string address1_eq { get; set; }
+		public string address1_ne { get; set; }
+		public string address1_lt { get; set; }
+		public string address1_gt { get; set; }
+		public string address1_le { get; set; }
+		public string address1_ge { get; set; }
+		public IEnumerable<string> address1_in { get; set; }
+		public IEnumerable<string> address1_ni { get; set; }
+		#endregion
+		#region address2
+		public string address2_eq { get; set; }
+		public string address2_ne { get; set; }
+		public string address2_lt { get; set; }
+		public string address2_gt { get; set; }
+		public string address2_le { get; set; }
+		public string address2_ge { get; set; }
+		public IEnumerable<string> address2_in { get; set; }
+		public IEnumerable<string> address2_ni { get; set; }
+		#endregion
+		#region address3
+		public string address3_eq { get; set; }
+		public string address3_ne { get; set; }
+		public string address3_lt { get; set; }
+		public string address3_gt { get; set; }
+		public string address3_le { get; set; }
+		public string address3_ge { get; set; }
+		public IEnumerable<string> address3_in { get; set; }
+		public IEnumerable<string> address3_ni { get; set; }
+		#endregion
+		#region latitude
+		public decimal? latitude_eq { get; set; }
+		public decimal? latitude_ne { get; set; }
+		public decimal? latitude_lt { get; set; }
+		public decimal? latitude_gt { get; set; }
+		public decimal? latitude_le { get; set; }
+		public decimal? latitude_ge { get; set; }
+		public IEnumerable<decimal> latitude_in { get; set; }
+		public IEnumerable<decimal> latitude_ni { get; set; }
+		#endregion
+		#region longitude
+		public decimal? longitude_eq { get; set; }
+		public decimal? longitude_ne { get; set; }
+		public decimal? longitude_lt { get; set; }
+		public decimal? longitude_gt { get; set; }
+		public decimal? longitude_le { get; set; }
+		public decimal? longitude_ge { get; set; }
+		public IEnumerable<decimal> longitude_in { get; set; }
+		public IEnumerable<decimal> longitude_ni { get; set; }
+		#endregion
+		#region enter_date
+		public DateTime? enter_date_eq { get; set; }
+		public DateTime? enter_date_ne { get; set; }
+		public DateTime? enter_date_lt { get; set; }
+		public DateTime? enter_date_gt { get; set; }
+		public DateTime? enter_date_le { get; set; }
+		public DateTime? enter_date_ge { get; set; }
+		public IEnumerable<DateTime> enter_date_in { get; set; }
+		public IEnumerable<DateTime> enter_date_ni { get; set; }
+		#endregion
+		#region leave_date
+		public DateTime? leave_date_eq { get; set; }
+		public DateTime? leave_date_ne { get; set; }
+		public DateTime? leave_date_lt { get; set; }
+		public DateTime? leave_date_gt { get; set; }
+		public DateTime? leave_date_le { get; set; }
+		public DateTime? leave_date_ge { get; set; }
+		public IEnumerable<DateTime> leave_date_in { get; set; }
+		public IEnumerable<DateTime> leave_date_ni { get; set; }
+		#endregion
+		#region created_at
+		public DateTime? created_at_eq { get; set; }
+		public DateTime? created_at_ne { get; set; }
+		public DateTime? created_at_lt { get; set; }
+		public DateTime? created_at_gt { get; set; }
+		public DateTime? created_at_le { get; set; }
+		public DateTime? created_at_ge { get; set; }
+		public IEnumerable<DateTime> created_at_in { get; set; }
+		public IEnumerable<DateTime> created_at_ni { get; set; }
+		#endregion
+		#region created_by
+		public string created_by_eq { get; set; }
+		public string created_by_ne { get; set; }
+		public string created_by_lt { get; set; }
+		public string created_by_gt { get; set; }
+		public string created_by_le { get; set; }
+		public string created_by_ge { get; set; }
+		public IEnumerable<string> created_by_in { get; set; }
+		public IEnumerable<string> created_by_ni { get; set; }
+		#endregion
+		#region modified_at
+		public DateTime? modified_at_eq { get; set; }
+		public DateTime? modified_at_ne { get; set; }
+		public DateTime? modified_at_lt { get; set; }
+		public DateTime? modified_at_gt { get; set; }
+		public DateTime? modified_at_le { get; set; }
+		public DateTime? modified_at_ge { get; set; }
+		public IEnumerable<DateTime> modified_at_in { get; set; }
+		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		#endregion
+		#region modified_by
+		public string modified_by_eq { get; set; }
+		public string modified_by_ne { get; set; }
+		public string modified_by_lt { get; set; }
+		public string modified_by_gt { get; set; }
+		public string modified_by_le { get; set; }
+		public string modified_by_ge { get; set; }
+		public IEnumerable<string> modified_by_in { get; set; }
+		public IEnumerable<string> modified_by_ni { get; set; }
+		#endregion
+		#region row_version
+		public byte[] row_version_eq { get; set; }
+		public byte[] row_version_ne { get; set; }
+		public byte[] row_version_lt { get; set; }
+		public byte[] row_version_gt { get; set; }
+		public byte[] row_version_le { get; set; }
+		public byte[] row_version_ge { get; set; }
+		public IEnumerable<byte[]> row_version_in { get; set; }
+		public IEnumerable<byte[]> row_version_ni { get; set; }
+		#endregion
+		#endregion
 
+		#region override
+		override public Expression<Func<Address, bool>> CreatePredicate()
+		{
+			var predicate = PredicateBuilder.True<Address>();
+
+			#region uid
+			#endregion
+			#region user_type
+			#endregion
+			#region generic_user_no
+			#endregion
+			#region seq
+			#endregion
+			#region address_type_id
+			#endregion
+			#region postal_code
+			#endregion
+			#region prefecture_code
+			#endregion
+			#region address1
+			#endregion
+			#region address2
+			#endregion
+			#region address3
+			#endregion
+			#region latitude
+			#endregion
+			#region longitude
+			#endregion
+			#region enter_date
+			#endregion
+			#region leave_date
+			#endregion
+			#region created_at
+			#endregion
+			#region created_by
+			#endregion
+			#region modified_at
+			#endregion
+			#region modified_by
+			#endregion
+			#region row_version
+			#endregion
+
+			return predicate;
+		}
+		#endregion
 	}
 	#endregion
 	#endregion
@@ -6340,7 +8135,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforeuidChanged(int newValue);
-		partial void AfteruidChanged ();
+		partial void AfteruidChanged();
 
 		public const string NameOfuid = "uid";
 
@@ -6380,7 +8175,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeaddress_type_idChanged(int newValue);
-		partial void Afteraddress_type_idChanged ();
+		partial void Afteraddress_type_idChanged();
 
 		public const string NameOfaddress_type_id = "address_type_id";
 
@@ -6420,7 +8215,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforenameChanged(string newValue);
-		partial void AfternameChanged ();
+		partial void AfternameChanged();
 
 		public const string NameOfname = "name";
 
@@ -6460,7 +8255,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforedescriptionChanged(string newValue);
-		partial void AfterdescriptionChanged ();
+		partial void AfterdescriptionChanged();
 
 		public const string NameOfdescription = "description";
 
@@ -6500,7 +8295,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforedisplay_orderChanged(int newValue);
-		partial void Afterdisplay_orderChanged ();
+		partial void Afterdisplay_orderChanged();
 
 		public const string NameOfdisplay_order = "display_order";
 
@@ -6540,7 +8335,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_atChanged(DateTime newValue);
-		partial void Aftercreated_atChanged ();
+		partial void Aftercreated_atChanged();
 
 		public const string NameOfcreated_at = "created_at";
 
@@ -6580,7 +8375,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_byChanged(string newValue);
-		partial void Aftercreated_byChanged ();
+		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
 
@@ -6620,7 +8415,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_atChanged(DateTime newValue);
-		partial void Aftermodified_atChanged ();
+		partial void Aftermodified_atChanged();
 
 		public const string NameOfmodified_at = "modified_at";
 
@@ -6660,7 +8455,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_byChanged(string newValue);
-		partial void Aftermodified_byChanged ();
+		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
 
@@ -6700,7 +8495,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeremoved_atChanged(DateTime? newValue);
-		partial void Afterremoved_atChanged ();
+		partial void Afterremoved_atChanged();
 
 		public const string NameOfremoved_at = "removed_at";
 
@@ -6740,7 +8535,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforerow_versionChanged(byte[] newValue);
-		partial void Afterrow_versionChanged ();
+		partial void Afterrow_versionChanged();
 
 		public const string NameOfrow_version = "row_version";
 
@@ -6797,7 +8592,150 @@ namespace peppa.Domain
 	/// </summary>
 	public partial class AddressTypeCondition : ConditionBase<AddressType>
 	{
+		#region properties
+		#region uid
+		public int? uid_eq { get; set; }
+		public int? uid_ne { get; set; }
+		public int? uid_lt { get; set; }
+		public int? uid_gt { get; set; }
+		public int? uid_le { get; set; }
+		public int? uid_ge { get; set; }
+		public IEnumerable<int> uid_in { get; set; }
+		public IEnumerable<int> uid_ni { get; set; }
+		#endregion
+		#region address_type_id
+		public int? address_type_id_eq { get; set; }
+		public int? address_type_id_ne { get; set; }
+		public int? address_type_id_lt { get; set; }
+		public int? address_type_id_gt { get; set; }
+		public int? address_type_id_le { get; set; }
+		public int? address_type_id_ge { get; set; }
+		public IEnumerable<int> address_type_id_in { get; set; }
+		public IEnumerable<int> address_type_id_ni { get; set; }
+		#endregion
+		#region name
+		public string name_eq { get; set; }
+		public string name_ne { get; set; }
+		public string name_lt { get; set; }
+		public string name_gt { get; set; }
+		public string name_le { get; set; }
+		public string name_ge { get; set; }
+		public IEnumerable<string> name_in { get; set; }
+		public IEnumerable<string> name_ni { get; set; }
+		#endregion
+		#region description
+		public string description_eq { get; set; }
+		public string description_ne { get; set; }
+		public string description_lt { get; set; }
+		public string description_gt { get; set; }
+		public string description_le { get; set; }
+		public string description_ge { get; set; }
+		public IEnumerable<string> description_in { get; set; }
+		public IEnumerable<string> description_ni { get; set; }
+		#endregion
+		#region display_order
+		public int? display_order_eq { get; set; }
+		public int? display_order_ne { get; set; }
+		public int? display_order_lt { get; set; }
+		public int? display_order_gt { get; set; }
+		public int? display_order_le { get; set; }
+		public int? display_order_ge { get; set; }
+		public IEnumerable<int> display_order_in { get; set; }
+		public IEnumerable<int> display_order_ni { get; set; }
+		#endregion
+		#region created_at
+		public DateTime? created_at_eq { get; set; }
+		public DateTime? created_at_ne { get; set; }
+		public DateTime? created_at_lt { get; set; }
+		public DateTime? created_at_gt { get; set; }
+		public DateTime? created_at_le { get; set; }
+		public DateTime? created_at_ge { get; set; }
+		public IEnumerable<DateTime> created_at_in { get; set; }
+		public IEnumerable<DateTime> created_at_ni { get; set; }
+		#endregion
+		#region created_by
+		public string created_by_eq { get; set; }
+		public string created_by_ne { get; set; }
+		public string created_by_lt { get; set; }
+		public string created_by_gt { get; set; }
+		public string created_by_le { get; set; }
+		public string created_by_ge { get; set; }
+		public IEnumerable<string> created_by_in { get; set; }
+		public IEnumerable<string> created_by_ni { get; set; }
+		#endregion
+		#region modified_at
+		public DateTime? modified_at_eq { get; set; }
+		public DateTime? modified_at_ne { get; set; }
+		public DateTime? modified_at_lt { get; set; }
+		public DateTime? modified_at_gt { get; set; }
+		public DateTime? modified_at_le { get; set; }
+		public DateTime? modified_at_ge { get; set; }
+		public IEnumerable<DateTime> modified_at_in { get; set; }
+		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		#endregion
+		#region modified_by
+		public string modified_by_eq { get; set; }
+		public string modified_by_ne { get; set; }
+		public string modified_by_lt { get; set; }
+		public string modified_by_gt { get; set; }
+		public string modified_by_le { get; set; }
+		public string modified_by_ge { get; set; }
+		public IEnumerable<string> modified_by_in { get; set; }
+		public IEnumerable<string> modified_by_ni { get; set; }
+		#endregion
+		#region removed_at
+		public DateTime? removed_at_eq { get; set; }
+		public DateTime? removed_at_ne { get; set; }
+		public DateTime? removed_at_lt { get; set; }
+		public DateTime? removed_at_gt { get; set; }
+		public DateTime? removed_at_le { get; set; }
+		public DateTime? removed_at_ge { get; set; }
+		public IEnumerable<DateTime> removed_at_in { get; set; }
+		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		#endregion
+		#region row_version
+		public byte[] row_version_eq { get; set; }
+		public byte[] row_version_ne { get; set; }
+		public byte[] row_version_lt { get; set; }
+		public byte[] row_version_gt { get; set; }
+		public byte[] row_version_le { get; set; }
+		public byte[] row_version_ge { get; set; }
+		public IEnumerable<byte[]> row_version_in { get; set; }
+		public IEnumerable<byte[]> row_version_ni { get; set; }
+		#endregion
+		#endregion
 
+		#region override
+		override public Expression<Func<AddressType, bool>> CreatePredicate()
+		{
+			var predicate = PredicateBuilder.True<AddressType>();
+
+			#region uid
+			#endregion
+			#region address_type_id
+			#endregion
+			#region name
+			#endregion
+			#region description
+			#endregion
+			#region display_order
+			#endregion
+			#region created_at
+			#endregion
+			#region created_by
+			#endregion
+			#region modified_at
+			#endregion
+			#region modified_by
+			#endregion
+			#region removed_at
+			#endregion
+			#region row_version
+			#endregion
+
+			return predicate;
+		}
+		#endregion
 	}
 	#endregion
 	#endregion
@@ -6835,7 +8773,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforeuidChanged(int newValue);
-		partial void AfteruidChanged ();
+		partial void AfteruidChanged();
 
 		public const string NameOfuid = "uid";
 
@@ -6875,7 +8813,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeuser_typeChanged(int newValue);
-		partial void Afteruser_typeChanged ();
+		partial void Afteruser_typeChanged();
 
 		public const string NameOfuser_type = "user_type";
 
@@ -6915,7 +8853,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforegeneric_user_noChanged(string newValue);
-		partial void Aftergeneric_user_noChanged ();
+		partial void Aftergeneric_user_noChanged();
 
 		public const string NameOfgeneric_user_no = "generic_user_no";
 
@@ -6955,7 +8893,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforeseqChanged(int newValue);
-		partial void AfterseqChanged ();
+		partial void AfterseqChanged();
 
 		public const string NameOfseq = "seq";
 
@@ -6995,7 +8933,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecontact_type_idChanged(int newValue);
-		partial void Aftercontact_type_idChanged ();
+		partial void Aftercontact_type_idChanged();
 
 		public const string NameOfcontact_type_id = "contact_type_id";
 
@@ -7035,7 +8973,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforecontactChanged(string newValue);
-		partial void AftercontactChanged ();
+		partial void AftercontactChanged();
 
 		public const string NameOfcontact = "contact";
 
@@ -7075,7 +9013,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforenoteChanged(string newValue);
-		partial void AfternoteChanged ();
+		partial void AfternoteChanged();
 
 		public const string NameOfnote = "note";
 
@@ -7115,7 +9053,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_atChanged(DateTime newValue);
-		partial void Aftercreated_atChanged ();
+		partial void Aftercreated_atChanged();
 
 		public const string NameOfcreated_at = "created_at";
 
@@ -7155,7 +9093,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_byChanged(string newValue);
-		partial void Aftercreated_byChanged ();
+		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
 
@@ -7195,7 +9133,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_atChanged(DateTime newValue);
-		partial void Aftermodified_atChanged ();
+		partial void Aftermodified_atChanged();
 
 		public const string NameOfmodified_at = "modified_at";
 
@@ -7235,7 +9173,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_byChanged(string newValue);
-		partial void Aftermodified_byChanged ();
+		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
 
@@ -7275,7 +9213,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforerow_versionChanged(byte[] newValue);
-		partial void Afterrow_versionChanged ();
+		partial void Afterrow_versionChanged();
 
 		public const string NameOfrow_version = "row_version";
 
@@ -7420,7 +9358,202 @@ namespace peppa.Domain
 	/// </summary>
 	public partial class ContactCondition : ConditionBase<Contact>
 	{
+		#region properties
+		#region uid
+		public int? uid_eq { get; set; }
+		public int? uid_ne { get; set; }
+		public int? uid_lt { get; set; }
+		public int? uid_gt { get; set; }
+		public int? uid_le { get; set; }
+		public int? uid_ge { get; set; }
+		public IEnumerable<int> uid_in { get; set; }
+		public IEnumerable<int> uid_ni { get; set; }
+		#endregion
+		#region user_type (UserType)
+		private int? _user_type_eq;
+		public UserType? UserType_eq
+		{
+			get => _user_type_eq?.ToUserType();
+			set => _user_type_eq = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_ne;
+		public UserType? UserType_ne
+		{
+			get => _user_type_ne?.ToUserType();
+			set => _user_type_ne = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_lt;
+		public UserType? UserType_lt
+		{
+			get => _user_type_lt?.ToUserType();
+			set => _user_type_lt = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_gt;
+		public UserType? UserType_gt
+		{
+			get => _user_type_gt?.ToUserType();
+			set => _user_type_gt = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_le;
+		public UserType? UserType_le
+		{
+			get => _user_type_le?.ToUserType();
+			set => _user_type_le = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private int? _user_type_ge;
+		public UserType? UserType_ge
+		{
+			get => _user_type_ge?.ToUserType();
+			set => _user_type_ge = value.HasValue ? value.Value.Val() : (int?)null;
+		}
+		private IEnumerable<int> _user_type_in;
+		public IEnumerable<UserType> UserType_in
+		{
+			get => _user_type_in.Select(_ => _.ToUserType().Value);
+			set => _user_type_in = value.Select(_ => _.Val());
+		}
+		private IEnumerable<int> _user_type_ni;
+		public IEnumerable<UserType> UserType_ni
+		{
+			get => _user_type_ni.Select(_ => _.ToUserType().Value);
+			set => _user_type_ni = value.Select(_ => _.Val());
+		}
+		#endregion
+		#region generic_user_no
+		public string generic_user_no_eq { get; set; }
+		public string generic_user_no_ne { get; set; }
+		public string generic_user_no_lt { get; set; }
+		public string generic_user_no_gt { get; set; }
+		public string generic_user_no_le { get; set; }
+		public string generic_user_no_ge { get; set; }
+		public IEnumerable<string> generic_user_no_in { get; set; }
+		public IEnumerable<string> generic_user_no_ni { get; set; }
+		#endregion
+		#region seq
+		public int? seq_eq { get; set; }
+		public int? seq_ne { get; set; }
+		public int? seq_lt { get; set; }
+		public int? seq_gt { get; set; }
+		public int? seq_le { get; set; }
+		public int? seq_ge { get; set; }
+		public IEnumerable<int> seq_in { get; set; }
+		public IEnumerable<int> seq_ni { get; set; }
+		#endregion
+		#region contact_type_id
+		public int? contact_type_id_eq { get; set; }
+		public int? contact_type_id_ne { get; set; }
+		public int? contact_type_id_lt { get; set; }
+		public int? contact_type_id_gt { get; set; }
+		public int? contact_type_id_le { get; set; }
+		public int? contact_type_id_ge { get; set; }
+		public IEnumerable<int> contact_type_id_in { get; set; }
+		public IEnumerable<int> contact_type_id_ni { get; set; }
+		#endregion
+		#region contact
+		public string contact_eq { get; set; }
+		public string contact_ne { get; set; }
+		public string contact_lt { get; set; }
+		public string contact_gt { get; set; }
+		public string contact_le { get; set; }
+		public string contact_ge { get; set; }
+		public IEnumerable<string> contact_in { get; set; }
+		public IEnumerable<string> contact_ni { get; set; }
+		#endregion
+		#region note
+		public string note_eq { get; set; }
+		public string note_ne { get; set; }
+		public string note_lt { get; set; }
+		public string note_gt { get; set; }
+		public string note_le { get; set; }
+		public string note_ge { get; set; }
+		public IEnumerable<string> note_in { get; set; }
+		public IEnumerable<string> note_ni { get; set; }
+		#endregion
+		#region created_at
+		public DateTime? created_at_eq { get; set; }
+		public DateTime? created_at_ne { get; set; }
+		public DateTime? created_at_lt { get; set; }
+		public DateTime? created_at_gt { get; set; }
+		public DateTime? created_at_le { get; set; }
+		public DateTime? created_at_ge { get; set; }
+		public IEnumerable<DateTime> created_at_in { get; set; }
+		public IEnumerable<DateTime> created_at_ni { get; set; }
+		#endregion
+		#region created_by
+		public string created_by_eq { get; set; }
+		public string created_by_ne { get; set; }
+		public string created_by_lt { get; set; }
+		public string created_by_gt { get; set; }
+		public string created_by_le { get; set; }
+		public string created_by_ge { get; set; }
+		public IEnumerable<string> created_by_in { get; set; }
+		public IEnumerable<string> created_by_ni { get; set; }
+		#endregion
+		#region modified_at
+		public DateTime? modified_at_eq { get; set; }
+		public DateTime? modified_at_ne { get; set; }
+		public DateTime? modified_at_lt { get; set; }
+		public DateTime? modified_at_gt { get; set; }
+		public DateTime? modified_at_le { get; set; }
+		public DateTime? modified_at_ge { get; set; }
+		public IEnumerable<DateTime> modified_at_in { get; set; }
+		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		#endregion
+		#region modified_by
+		public string modified_by_eq { get; set; }
+		public string modified_by_ne { get; set; }
+		public string modified_by_lt { get; set; }
+		public string modified_by_gt { get; set; }
+		public string modified_by_le { get; set; }
+		public string modified_by_ge { get; set; }
+		public IEnumerable<string> modified_by_in { get; set; }
+		public IEnumerable<string> modified_by_ni { get; set; }
+		#endregion
+		#region row_version
+		public byte[] row_version_eq { get; set; }
+		public byte[] row_version_ne { get; set; }
+		public byte[] row_version_lt { get; set; }
+		public byte[] row_version_gt { get; set; }
+		public byte[] row_version_le { get; set; }
+		public byte[] row_version_ge { get; set; }
+		public IEnumerable<byte[]> row_version_in { get; set; }
+		public IEnumerable<byte[]> row_version_ni { get; set; }
+		#endregion
+		#endregion
 
+		#region override
+		override public Expression<Func<Contact, bool>> CreatePredicate()
+		{
+			var predicate = PredicateBuilder.True<Contact>();
+
+			#region uid
+			#endregion
+			#region user_type
+			#endregion
+			#region generic_user_no
+			#endregion
+			#region seq
+			#endregion
+			#region contact_type_id
+			#endregion
+			#region contact
+			#endregion
+			#region note
+			#endregion
+			#region created_at
+			#endregion
+			#region created_by
+			#endregion
+			#region modified_at
+			#endregion
+			#region modified_by
+			#endregion
+			#region row_version
+			#endregion
+
+			return predicate;
+		}
+		#endregion
 	}
 	#endregion
 	#endregion
@@ -7458,7 +9591,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforeuidChanged(int newValue);
-		partial void AfteruidChanged ();
+		partial void AfteruidChanged();
 
 		public const string NameOfuid = "uid";
 
@@ -7498,7 +9631,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecontact_type_idChanged(int newValue);
-		partial void Aftercontact_type_idChanged ();
+		partial void Aftercontact_type_idChanged();
 
 		public const string NameOfcontact_type_id = "contact_type_id";
 
@@ -7538,7 +9671,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforenameChanged(string newValue);
-		partial void AfternameChanged ();
+		partial void AfternameChanged();
 
 		public const string NameOfname = "name";
 
@@ -7578,7 +9711,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void BeforedescriptionChanged(string newValue);
-		partial void AfterdescriptionChanged ();
+		partial void AfterdescriptionChanged();
 
 		public const string NameOfdescription = "description";
 
@@ -7618,7 +9751,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforedisplay_orderChanged(int newValue);
-		partial void Afterdisplay_orderChanged ();
+		partial void Afterdisplay_orderChanged();
 
 		public const string NameOfdisplay_order = "display_order";
 
@@ -7658,7 +9791,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_atChanged(DateTime newValue);
-		partial void Aftercreated_atChanged ();
+		partial void Aftercreated_atChanged();
 
 		public const string NameOfcreated_at = "created_at";
 
@@ -7698,7 +9831,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforecreated_byChanged(string newValue);
-		partial void Aftercreated_byChanged ();
+		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
 
@@ -7738,7 +9871,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_atChanged(DateTime newValue);
-		partial void Aftermodified_atChanged ();
+		partial void Aftermodified_atChanged();
 
 		public const string NameOfmodified_at = "modified_at";
 
@@ -7778,7 +9911,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforemodified_byChanged(string newValue);
-		partial void Aftermodified_byChanged ();
+		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
 
@@ -7818,7 +9951,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforeremoved_atChanged(DateTime? newValue);
-		partial void Afterremoved_atChanged ();
+		partial void Afterremoved_atChanged();
 
 		public const string NameOfremoved_at = "removed_at";
 
@@ -7858,7 +9991,7 @@ namespace peppa.Domain
 		#region INotifyPropertyChanged support
 
 		partial void Beforerow_versionChanged(byte[] newValue);
-		partial void Afterrow_versionChanged ();
+		partial void Afterrow_versionChanged();
 
 		public const string NameOfrow_version = "row_version";
 
@@ -7915,7 +10048,150 @@ namespace peppa.Domain
 	/// </summary>
 	public partial class ContactTypeCondition : ConditionBase<ContactType>
 	{
+		#region properties
+		#region uid
+		public int? uid_eq { get; set; }
+		public int? uid_ne { get; set; }
+		public int? uid_lt { get; set; }
+		public int? uid_gt { get; set; }
+		public int? uid_le { get; set; }
+		public int? uid_ge { get; set; }
+		public IEnumerable<int> uid_in { get; set; }
+		public IEnumerable<int> uid_ni { get; set; }
+		#endregion
+		#region contact_type_id
+		public int? contact_type_id_eq { get; set; }
+		public int? contact_type_id_ne { get; set; }
+		public int? contact_type_id_lt { get; set; }
+		public int? contact_type_id_gt { get; set; }
+		public int? contact_type_id_le { get; set; }
+		public int? contact_type_id_ge { get; set; }
+		public IEnumerable<int> contact_type_id_in { get; set; }
+		public IEnumerable<int> contact_type_id_ni { get; set; }
+		#endregion
+		#region name
+		public string name_eq { get; set; }
+		public string name_ne { get; set; }
+		public string name_lt { get; set; }
+		public string name_gt { get; set; }
+		public string name_le { get; set; }
+		public string name_ge { get; set; }
+		public IEnumerable<string> name_in { get; set; }
+		public IEnumerable<string> name_ni { get; set; }
+		#endregion
+		#region description
+		public string description_eq { get; set; }
+		public string description_ne { get; set; }
+		public string description_lt { get; set; }
+		public string description_gt { get; set; }
+		public string description_le { get; set; }
+		public string description_ge { get; set; }
+		public IEnumerable<string> description_in { get; set; }
+		public IEnumerable<string> description_ni { get; set; }
+		#endregion
+		#region display_order
+		public int? display_order_eq { get; set; }
+		public int? display_order_ne { get; set; }
+		public int? display_order_lt { get; set; }
+		public int? display_order_gt { get; set; }
+		public int? display_order_le { get; set; }
+		public int? display_order_ge { get; set; }
+		public IEnumerable<int> display_order_in { get; set; }
+		public IEnumerable<int> display_order_ni { get; set; }
+		#endregion
+		#region created_at
+		public DateTime? created_at_eq { get; set; }
+		public DateTime? created_at_ne { get; set; }
+		public DateTime? created_at_lt { get; set; }
+		public DateTime? created_at_gt { get; set; }
+		public DateTime? created_at_le { get; set; }
+		public DateTime? created_at_ge { get; set; }
+		public IEnumerable<DateTime> created_at_in { get; set; }
+		public IEnumerable<DateTime> created_at_ni { get; set; }
+		#endregion
+		#region created_by
+		public string created_by_eq { get; set; }
+		public string created_by_ne { get; set; }
+		public string created_by_lt { get; set; }
+		public string created_by_gt { get; set; }
+		public string created_by_le { get; set; }
+		public string created_by_ge { get; set; }
+		public IEnumerable<string> created_by_in { get; set; }
+		public IEnumerable<string> created_by_ni { get; set; }
+		#endregion
+		#region modified_at
+		public DateTime? modified_at_eq { get; set; }
+		public DateTime? modified_at_ne { get; set; }
+		public DateTime? modified_at_lt { get; set; }
+		public DateTime? modified_at_gt { get; set; }
+		public DateTime? modified_at_le { get; set; }
+		public DateTime? modified_at_ge { get; set; }
+		public IEnumerable<DateTime> modified_at_in { get; set; }
+		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		#endregion
+		#region modified_by
+		public string modified_by_eq { get; set; }
+		public string modified_by_ne { get; set; }
+		public string modified_by_lt { get; set; }
+		public string modified_by_gt { get; set; }
+		public string modified_by_le { get; set; }
+		public string modified_by_ge { get; set; }
+		public IEnumerable<string> modified_by_in { get; set; }
+		public IEnumerable<string> modified_by_ni { get; set; }
+		#endregion
+		#region removed_at
+		public DateTime? removed_at_eq { get; set; }
+		public DateTime? removed_at_ne { get; set; }
+		public DateTime? removed_at_lt { get; set; }
+		public DateTime? removed_at_gt { get; set; }
+		public DateTime? removed_at_le { get; set; }
+		public DateTime? removed_at_ge { get; set; }
+		public IEnumerable<DateTime> removed_at_in { get; set; }
+		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		#endregion
+		#region row_version
+		public byte[] row_version_eq { get; set; }
+		public byte[] row_version_ne { get; set; }
+		public byte[] row_version_lt { get; set; }
+		public byte[] row_version_gt { get; set; }
+		public byte[] row_version_le { get; set; }
+		public byte[] row_version_ge { get; set; }
+		public IEnumerable<byte[]> row_version_in { get; set; }
+		public IEnumerable<byte[]> row_version_ni { get; set; }
+		#endregion
+		#endregion
 
+		#region override
+		override public Expression<Func<ContactType, bool>> CreatePredicate()
+		{
+			var predicate = PredicateBuilder.True<ContactType>();
+
+			#region uid
+			#endregion
+			#region contact_type_id
+			#endregion
+			#region name
+			#endregion
+			#region description
+			#endregion
+			#region display_order
+			#endregion
+			#region created_at
+			#endregion
+			#region created_by
+			#endregion
+			#region modified_at
+			#endregion
+			#region modified_by
+			#endregion
+			#region removed_at
+			#endregion
+			#region row_version
+			#endregion
+
+			return predicate;
+		}
+		#endregion
 	}
 	#endregion
 	#endregion

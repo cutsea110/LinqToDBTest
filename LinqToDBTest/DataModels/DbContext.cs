@@ -57,10 +57,6 @@ namespace peppa.Domain
 		/// </summary>
 		public ITable<Test> Test => this.GetTable<Test>();
 		/// <summary>
-		/// エラーログ
-		/// </summary>
-		public ITable<ErrorLog> ErrorLog => this.GetTable<ErrorLog>();
-		/// <summary>
 		/// ロールマスタ
 		/// </summary>
 		public ITable<Role> Role => this.GetTable<Role>();
@@ -96,6 +92,10 @@ namespace peppa.Domain
 		/// 連絡先種別
 		/// </summary>
 		public ITable<ContactType> ContactType => this.GetTable<ContactType>();
+		/// <summary>
+		/// エラーログ
+		/// </summary>
+		public ITable<ErrorLog> ErrorLog => this.GetTable<ErrorLog>();
 		#endregion
 
 		public peppaDB()
@@ -223,6 +223,252 @@ namespace peppa.Domain
 		/// </summary>
 		[MapValue(Value = 99)]
 		他ユーザ = 99,
+	}
+	/// <summary>
+	/// 権限
+	/// <summary>
+	public enum PermissionType
+	{
+		/// <summary>
+		/// 名称 : ロール作成
+		/// 説明 : ロールマスタの新規作成
+		/// </summary>
+		[MapValue(Value = "Create_Role")]
+		ロール作成,
+		/// <summary>
+		/// 名称 : ロール表示
+		/// 説明 : ロールマスタの閲覧
+		/// </summary>
+		[MapValue(Value = "Read_Role")]
+		ロール表示,
+		/// <summary>
+		/// 名称 : ロール更新
+		/// 説明 : ロールマスタの変更
+		/// </summary>
+		[MapValue(Value = "Update_Role")]
+		ロール更新,
+		/// <summary>
+		/// 名称 : ロール削除
+		/// 説明 : ロールマスタの削除
+		/// </summary>
+		[MapValue(Value = "Delete_Role")]
+		ロール削除,
+		/// <summary>
+		/// 名称 : ロール権限作成
+		/// 説明 : ロール権限の新規作成
+		/// </summary>
+		[MapValue(Value = "Create_RolePermission")]
+		ロール権限作成,
+		/// <summary>
+		/// 名称 : ロール権限表示
+		/// 説明 : ロール権限の閲覧
+		/// </summary>
+		[MapValue(Value = "Read_RolePermission")]
+		ロール権限表示,
+		/// <summary>
+		/// 名称 : ロール権限更新
+		/// 説明 : ロール権限の変更
+		/// </summary>
+		[MapValue(Value = "Update_RolePermission")]
+		ロール権限更新,
+		/// <summary>
+		/// 名称 : ロール権限削除
+		/// 説明 : ロール権限の削除
+		/// </summary>
+		[MapValue(Value = "Delete_RolePermission")]
+		ロール権限削除,
+		/// <summary>
+		/// 名称 : アカウント作成
+		/// 説明 : アカウントの新規作成
+		/// </summary>
+		[MapValue(Value = "Create_Account")]
+		アカウント作成,
+		/// <summary>
+		/// 名称 : アカウント表示
+		/// 説明 : アカウントの閲覧
+		/// </summary>
+		[MapValue(Value = "Read_Account")]
+		アカウント表示,
+		/// <summary>
+		/// 名称 : アカウント更新
+		/// 説明 : アカウントの変更
+		/// </summary>
+		[MapValue(Value = "Update_Account")]
+		アカウント更新,
+		/// <summary>
+		/// 名称 : アカウント削除
+		/// 説明 : アカウントの削除
+		/// </summary>
+		[MapValue(Value = "Delete_Account")]
+		アカウント削除,
+		/// <summary>
+		/// 名称 : アカウントロール作成
+		/// 説明 : アカウントロールの新規作成
+		/// </summary>
+		[MapValue(Value = "Create_AccountRole")]
+		アカウントロール作成,
+		/// <summary>
+		/// 名称 : アカウントロール表示
+		/// 説明 : アカウントロールの閲覧
+		/// </summary>
+		[MapValue(Value = "Read_AccountRole")]
+		アカウントロール表示,
+		/// <summary>
+		/// 名称 : アカウントロール更新
+		/// 説明 : アカウントロールの変更
+		/// </summary>
+		[MapValue(Value = "Update_AccountRole")]
+		アカウントロール更新,
+		/// <summary>
+		/// 名称 : アカウントロール削除
+		/// 説明 : アカウントロールの削除
+		/// </summary>
+		[MapValue(Value = "Delete_AccountRole")]
+		アカウントロール削除,
+		/// <summary>
+		/// 名称 : 職員作成
+		/// 説明 : 職員マスタの新規作成
+		/// </summary>
+		[MapValue(Value = "Create_Staff")]
+		職員作成,
+		/// <summary>
+		/// 名称 : 職員表示
+		/// 説明 : 職員マスタの閲覧
+		/// </summary>
+		[MapValue(Value = "Read_Staff")]
+		職員表示,
+		/// <summary>
+		/// 名称 : 職員更新
+		/// 説明 : 職員マスタの変更
+		/// </summary>
+		[MapValue(Value = "Update_Staff")]
+		職員更新,
+		/// <summary>
+		/// 名称 : 職員削除
+		/// 説明 : 職員マスタの削除
+		/// </summary>
+		[MapValue(Value = "Delete_Staff")]
+		職員削除,
+		/// <summary>
+		/// 名称 : 住所作成
+		/// 説明 : 住所の新規作成
+		/// </summary>
+		[MapValue(Value = "Create_Address")]
+		住所作成,
+		/// <summary>
+		/// 名称 : 住所表示
+		/// 説明 : 住所の閲覧
+		/// </summary>
+		[MapValue(Value = "Read_Address")]
+		住所表示,
+		/// <summary>
+		/// 名称 : 住所更新
+		/// 説明 : 住所の変更
+		/// </summary>
+		[MapValue(Value = "Update_Address")]
+		住所更新,
+		/// <summary>
+		/// 名称 : 住所削除
+		/// 説明 : 住所の削除
+		/// </summary>
+		[MapValue(Value = "Delete_Address")]
+		住所削除,
+		/// <summary>
+		/// 名称 : 住所種別作成
+		/// 説明 : 住所種別の新規作成
+		/// </summary>
+		[MapValue(Value = "Create_AddressType")]
+		住所種別作成,
+		/// <summary>
+		/// 名称 : 住所種別表示
+		/// 説明 : 住所種別の閲覧
+		/// </summary>
+		[MapValue(Value = "Read_AddressType")]
+		住所種別表示,
+		/// <summary>
+		/// 名称 : 住所種別更新
+		/// 説明 : 住所種別の変更
+		/// </summary>
+		[MapValue(Value = "Update_AddressType")]
+		住所種別更新,
+		/// <summary>
+		/// 名称 : 住所種別削除
+		/// 説明 : 住所種別の削除
+		/// </summary>
+		[MapValue(Value = "Delete_AddressType")]
+		住所種別削除,
+		/// <summary>
+		/// 名称 : 連絡先作成
+		/// 説明 : 連絡先の新規作成
+		/// </summary>
+		[MapValue(Value = "Create_Contact")]
+		連絡先作成,
+		/// <summary>
+		/// 名称 : 連絡先表示
+		/// 説明 : 連絡先の閲覧
+		/// </summary>
+		[MapValue(Value = "Read_Contact")]
+		連絡先表示,
+		/// <summary>
+		/// 名称 : 連絡先更新
+		/// 説明 : 連絡先の変更
+		/// </summary>
+		[MapValue(Value = "Update_Contact")]
+		連絡先更新,
+		/// <summary>
+		/// 名称 : 連絡先削除
+		/// 説明 : 連絡先の削除
+		/// </summary>
+		[MapValue(Value = "Delete_Contact")]
+		連絡先削除,
+		/// <summary>
+		/// 名称 : 連絡先種別作成
+		/// 説明 : 連絡先種別の新規作成
+		/// </summary>
+		[MapValue(Value = "Create_ContactType")]
+		連絡先種別作成,
+		/// <summary>
+		/// 名称 : 連絡先種別表示
+		/// 説明 : 連絡先種別の閲覧
+		/// </summary>
+		[MapValue(Value = "Read_ContactType")]
+		連絡先種別表示,
+		/// <summary>
+		/// 名称 : 連絡先種別更新
+		/// 説明 : 連絡先種別の変更
+		/// </summary>
+		[MapValue(Value = "Update_ContactType")]
+		連絡先種別更新,
+		/// <summary>
+		/// 名称 : 連絡先種別削除
+		/// 説明 : 連絡先種別の削除
+		/// </summary>
+		[MapValue(Value = "Delete_ContactType")]
+		連絡先種別削除,
+		/// <summary>
+		/// 名称 : エラーログ作成
+		/// 説明 : エラーログの新規作成
+		/// </summary>
+		[MapValue(Value = "Create_ErrorLog")]
+		エラーログ作成,
+		/// <summary>
+		/// 名称 : エラーログ表示
+		/// 説明 : エラーログの閲覧
+		/// </summary>
+		[MapValue(Value = "Read_ErrorLog")]
+		エラーログ表示,
+		/// <summary>
+		/// 名称 : エラーログ更新
+		/// 説明 : エラーログの変更
+		/// </summary>
+		[MapValue(Value = "Update_ErrorLog")]
+		エラーログ更新,
+		/// <summary>
+		/// 名称 : エラーログ削除
+		/// 説明 : エラーログの削除
+		/// </summary>
+		[MapValue(Value = "Delete_ErrorLog")]
+		エラーログ削除,
 	}
 	#endregion
 	#region enum拡張
@@ -970,6 +1216,776 @@ namespace peppa.Domain
 					return "P";
 				case UserType.他ユーザ:
 					return "U";
+				default:
+					return missing;
+			}
+		}
+		#endregion
+		#region PermissionType拡張メソッド
+		/// <summary>
+		/// PermissionTypeを列挙する
+		/// </summary>
+		/// <returns></returns>
+		public static IEnumerable<PermissionType> PermissionTypeEnumerator()
+		{
+			foreach (PermissionType v in Enum.GetValues(typeof(PermissionType)))
+				yield return v;
+		}
+
+		/// <summary>
+		/// 文字列値からPermissionTypeへの変換
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="missing"></param>
+		/// <returns></returns>
+		public static PermissionType? ToPermissionType(this string self, PermissionType? missing = null)
+		{
+			switch (self)
+			{
+				case "Create_Role":
+					return PermissionType.ロール作成;
+				case "Read_Role":
+					return PermissionType.ロール表示;
+				case "Update_Role":
+					return PermissionType.ロール更新;
+				case "Delete_Role":
+					return PermissionType.ロール削除;
+				case "Create_RolePermission":
+					return PermissionType.ロール権限作成;
+				case "Read_RolePermission":
+					return PermissionType.ロール権限表示;
+				case "Update_RolePermission":
+					return PermissionType.ロール権限更新;
+				case "Delete_RolePermission":
+					return PermissionType.ロール権限削除;
+				case "Create_Account":
+					return PermissionType.アカウント作成;
+				case "Read_Account":
+					return PermissionType.アカウント表示;
+				case "Update_Account":
+					return PermissionType.アカウント更新;
+				case "Delete_Account":
+					return PermissionType.アカウント削除;
+				case "Create_AccountRole":
+					return PermissionType.アカウントロール作成;
+				case "Read_AccountRole":
+					return PermissionType.アカウントロール表示;
+				case "Update_AccountRole":
+					return PermissionType.アカウントロール更新;
+				case "Delete_AccountRole":
+					return PermissionType.アカウントロール削除;
+				case "Create_Staff":
+					return PermissionType.職員作成;
+				case "Read_Staff":
+					return PermissionType.職員表示;
+				case "Update_Staff":
+					return PermissionType.職員更新;
+				case "Delete_Staff":
+					return PermissionType.職員削除;
+				case "Create_Address":
+					return PermissionType.住所作成;
+				case "Read_Address":
+					return PermissionType.住所表示;
+				case "Update_Address":
+					return PermissionType.住所更新;
+				case "Delete_Address":
+					return PermissionType.住所削除;
+				case "Create_AddressType":
+					return PermissionType.住所種別作成;
+				case "Read_AddressType":
+					return PermissionType.住所種別表示;
+				case "Update_AddressType":
+					return PermissionType.住所種別更新;
+				case "Delete_AddressType":
+					return PermissionType.住所種別削除;
+				case "Create_Contact":
+					return PermissionType.連絡先作成;
+				case "Read_Contact":
+					return PermissionType.連絡先表示;
+				case "Update_Contact":
+					return PermissionType.連絡先更新;
+				case "Delete_Contact":
+					return PermissionType.連絡先削除;
+				case "Create_ContactType":
+					return PermissionType.連絡先種別作成;
+				case "Read_ContactType":
+					return PermissionType.連絡先種別表示;
+				case "Update_ContactType":
+					return PermissionType.連絡先種別更新;
+				case "Delete_ContactType":
+					return PermissionType.連絡先種別削除;
+				case "Create_ErrorLog":
+					return PermissionType.エラーログ作成;
+				case "Read_ErrorLog":
+					return PermissionType.エラーログ表示;
+				case "Update_ErrorLog":
+					return PermissionType.エラーログ更新;
+				case "Delete_ErrorLog":
+					return PermissionType.エラーログ削除;
+				default:
+					return (PermissionType?)missing;
+			}
+		}
+
+		/// <summary>
+		/// PermissionTypeの値取得
+		/// </summary>
+		/// <param name="self"></param>
+		/// <returns></returns>
+		public static string Val(this PermissionType self)
+		{
+			switch (self)
+			{
+				case PermissionType.ロール作成:
+					return "Create_Role";
+				case PermissionType.ロール表示:
+					return "Read_Role";
+				case PermissionType.ロール更新:
+					return "Update_Role";
+				case PermissionType.ロール削除:
+					return "Delete_Role";
+				case PermissionType.ロール権限作成:
+					return "Create_RolePermission";
+				case PermissionType.ロール権限表示:
+					return "Read_RolePermission";
+				case PermissionType.ロール権限更新:
+					return "Update_RolePermission";
+				case PermissionType.ロール権限削除:
+					return "Delete_RolePermission";
+				case PermissionType.アカウント作成:
+					return "Create_Account";
+				case PermissionType.アカウント表示:
+					return "Read_Account";
+				case PermissionType.アカウント更新:
+					return "Update_Account";
+				case PermissionType.アカウント削除:
+					return "Delete_Account";
+				case PermissionType.アカウントロール作成:
+					return "Create_AccountRole";
+				case PermissionType.アカウントロール表示:
+					return "Read_AccountRole";
+				case PermissionType.アカウントロール更新:
+					return "Update_AccountRole";
+				case PermissionType.アカウントロール削除:
+					return "Delete_AccountRole";
+				case PermissionType.職員作成:
+					return "Create_Staff";
+				case PermissionType.職員表示:
+					return "Read_Staff";
+				case PermissionType.職員更新:
+					return "Update_Staff";
+				case PermissionType.職員削除:
+					return "Delete_Staff";
+				case PermissionType.住所作成:
+					return "Create_Address";
+				case PermissionType.住所表示:
+					return "Read_Address";
+				case PermissionType.住所更新:
+					return "Update_Address";
+				case PermissionType.住所削除:
+					return "Delete_Address";
+				case PermissionType.住所種別作成:
+					return "Create_AddressType";
+				case PermissionType.住所種別表示:
+					return "Read_AddressType";
+				case PermissionType.住所種別更新:
+					return "Update_AddressType";
+				case PermissionType.住所種別削除:
+					return "Delete_AddressType";
+				case PermissionType.連絡先作成:
+					return "Create_Contact";
+				case PermissionType.連絡先表示:
+					return "Read_Contact";
+				case PermissionType.連絡先更新:
+					return "Update_Contact";
+				case PermissionType.連絡先削除:
+					return "Delete_Contact";
+				case PermissionType.連絡先種別作成:
+					return "Create_ContactType";
+				case PermissionType.連絡先種別表示:
+					return "Read_ContactType";
+				case PermissionType.連絡先種別更新:
+					return "Update_ContactType";
+				case PermissionType.連絡先種別削除:
+					return "Delete_ContactType";
+				case PermissionType.エラーログ作成:
+					return "Create_ErrorLog";
+				case PermissionType.エラーログ表示:
+					return "Read_ErrorLog";
+				case PermissionType.エラーログ更新:
+					return "Update_ErrorLog";
+				case PermissionType.エラーログ削除:
+					return "Delete_ErrorLog";
+				default:
+					throw new Exception("Unknown PermissionType");
+			}
+		}
+
+		/// <summary>
+		/// PermissionType名称
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="missing">存在しないenum値だった場合の返り値指定</param>
+		/// <returns></returns>
+		public static string Name(this PermissionType self, string missing = null)
+		{
+			switch (self)
+			{
+				case PermissionType.ロール作成:
+					return "ロール作成";
+				case PermissionType.ロール表示:
+					return "ロール表示";
+				case PermissionType.ロール更新:
+					return "ロール更新";
+				case PermissionType.ロール削除:
+					return "ロール削除";
+				case PermissionType.ロール権限作成:
+					return "ロール権限作成";
+				case PermissionType.ロール権限表示:
+					return "ロール権限表示";
+				case PermissionType.ロール権限更新:
+					return "ロール権限更新";
+				case PermissionType.ロール権限削除:
+					return "ロール権限削除";
+				case PermissionType.アカウント作成:
+					return "アカウント作成";
+				case PermissionType.アカウント表示:
+					return "アカウント表示";
+				case PermissionType.アカウント更新:
+					return "アカウント更新";
+				case PermissionType.アカウント削除:
+					return "アカウント削除";
+				case PermissionType.アカウントロール作成:
+					return "アカウントロール作成";
+				case PermissionType.アカウントロール表示:
+					return "アカウントロール表示";
+				case PermissionType.アカウントロール更新:
+					return "アカウントロール更新";
+				case PermissionType.アカウントロール削除:
+					return "アカウントロール削除";
+				case PermissionType.職員作成:
+					return "職員作成";
+				case PermissionType.職員表示:
+					return "職員表示";
+				case PermissionType.職員更新:
+					return "職員更新";
+				case PermissionType.職員削除:
+					return "職員削除";
+				case PermissionType.住所作成:
+					return "住所作成";
+				case PermissionType.住所表示:
+					return "住所表示";
+				case PermissionType.住所更新:
+					return "住所更新";
+				case PermissionType.住所削除:
+					return "住所削除";
+				case PermissionType.住所種別作成:
+					return "住所種別作成";
+				case PermissionType.住所種別表示:
+					return "住所種別表示";
+				case PermissionType.住所種別更新:
+					return "住所種別更新";
+				case PermissionType.住所種別削除:
+					return "住所種別削除";
+				case PermissionType.連絡先作成:
+					return "連絡先作成";
+				case PermissionType.連絡先表示:
+					return "連絡先表示";
+				case PermissionType.連絡先更新:
+					return "連絡先更新";
+				case PermissionType.連絡先削除:
+					return "連絡先削除";
+				case PermissionType.連絡先種別作成:
+					return "連絡先種別作成";
+				case PermissionType.連絡先種別表示:
+					return "連絡先種別表示";
+				case PermissionType.連絡先種別更新:
+					return "連絡先種別更新";
+				case PermissionType.連絡先種別削除:
+					return "連絡先種別削除";
+				case PermissionType.エラーログ作成:
+					return "エラーログ作成";
+				case PermissionType.エラーログ表示:
+					return "エラーログ表示";
+				case PermissionType.エラーログ更新:
+					return "エラーログ更新";
+				case PermissionType.エラーログ削除:
+					return "エラーログ削除";
+				default:
+					return missing;
+			}
+		}
+
+		/// <summary>
+		/// PermissionType表示名
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="missing">存在しないenum値だった場合の返り値指定</param>
+		/// <returns></returns>
+		public static string DisplayName(this PermissionType self, string missing = null)
+		{
+			switch (self)
+			{
+				case PermissionType.ロール作成:
+					return "ロール作成";
+				case PermissionType.ロール表示:
+					return "ロール表示";
+				case PermissionType.ロール更新:
+					return "ロール更新";
+				case PermissionType.ロール削除:
+					return "ロール削除";
+				case PermissionType.ロール権限作成:
+					return "ロール権限作成";
+				case PermissionType.ロール権限表示:
+					return "ロール権限表示";
+				case PermissionType.ロール権限更新:
+					return "ロール権限更新";
+				case PermissionType.ロール権限削除:
+					return "ロール権限削除";
+				case PermissionType.アカウント作成:
+					return "アカウント作成";
+				case PermissionType.アカウント表示:
+					return "アカウント表示";
+				case PermissionType.アカウント更新:
+					return "アカウント更新";
+				case PermissionType.アカウント削除:
+					return "アカウント削除";
+				case PermissionType.アカウントロール作成:
+					return "アカウントロール作成";
+				case PermissionType.アカウントロール表示:
+					return "アカウントロール表示";
+				case PermissionType.アカウントロール更新:
+					return "アカウントロール更新";
+				case PermissionType.アカウントロール削除:
+					return "アカウントロール削除";
+				case PermissionType.職員作成:
+					return "職員作成";
+				case PermissionType.職員表示:
+					return "職員表示";
+				case PermissionType.職員更新:
+					return "職員更新";
+				case PermissionType.職員削除:
+					return "職員削除";
+				case PermissionType.住所作成:
+					return "住所作成";
+				case PermissionType.住所表示:
+					return "住所表示";
+				case PermissionType.住所更新:
+					return "住所更新";
+				case PermissionType.住所削除:
+					return "住所削除";
+				case PermissionType.住所種別作成:
+					return "住所種別作成";
+				case PermissionType.住所種別表示:
+					return "住所種別表示";
+				case PermissionType.住所種別更新:
+					return "住所種別更新";
+				case PermissionType.住所種別削除:
+					return "住所種別削除";
+				case PermissionType.連絡先作成:
+					return "連絡先作成";
+				case PermissionType.連絡先表示:
+					return "連絡先表示";
+				case PermissionType.連絡先更新:
+					return "連絡先更新";
+				case PermissionType.連絡先削除:
+					return "連絡先削除";
+				case PermissionType.連絡先種別作成:
+					return "連絡先種別作成";
+				case PermissionType.連絡先種別表示:
+					return "連絡先種別表示";
+				case PermissionType.連絡先種別更新:
+					return "連絡先種別更新";
+				case PermissionType.連絡先種別削除:
+					return "連絡先種別削除";
+				case PermissionType.エラーログ作成:
+					return "エラーログ作成";
+				case PermissionType.エラーログ表示:
+					return "エラーログ表示";
+				case PermissionType.エラーログ更新:
+					return "エラーログ更新";
+				case PermissionType.エラーログ削除:
+					return "エラーログ削除";
+				default:
+					return missing;
+			}
+		}
+
+		/// <summary>
+		/// PermissionType略称
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="missing">存在しないenum値だった場合の返り値指定</param>
+		/// <returns></returns>
+		public static string Abbrev(this PermissionType self, string missing = null)
+		{
+			switch (self)
+			{
+				case PermissionType.ロール作成:
+					return "ロ新";
+				case PermissionType.ロール表示:
+					return "ロ表";
+				case PermissionType.ロール更新:
+					return "ロ変";
+				case PermissionType.ロール削除:
+					return "ロ廃";
+				case PermissionType.ロール権限作成:
+					return "権新";
+				case PermissionType.ロール権限表示:
+					return "権表";
+				case PermissionType.ロール権限更新:
+					return "権変";
+				case PermissionType.ロール権限削除:
+					return "権廃";
+				case PermissionType.アカウント作成:
+					return "ア新";
+				case PermissionType.アカウント表示:
+					return "ア表";
+				case PermissionType.アカウント更新:
+					return "ア変";
+				case PermissionType.アカウント削除:
+					return "ア廃";
+				case PermissionType.アカウントロール作成:
+					return "アロ新";
+				case PermissionType.アカウントロール表示:
+					return "アロ表";
+				case PermissionType.アカウントロール更新:
+					return "アロ変";
+				case PermissionType.アカウントロール削除:
+					return "アロ廃";
+				case PermissionType.職員作成:
+					return "職新";
+				case PermissionType.職員表示:
+					return "職表";
+				case PermissionType.職員更新:
+					return "職変";
+				case PermissionType.職員削除:
+					return "職廃";
+				case PermissionType.住所作成:
+					return "住新";
+				case PermissionType.住所表示:
+					return "住表";
+				case PermissionType.住所更新:
+					return "住変";
+				case PermissionType.住所削除:
+					return "住廃";
+				case PermissionType.住所種別作成:
+					return "住種新";
+				case PermissionType.住所種別表示:
+					return "住種表";
+				case PermissionType.住所種別更新:
+					return "住種変";
+				case PermissionType.住所種別削除:
+					return "住種廃";
+				case PermissionType.連絡先作成:
+					return "連新";
+				case PermissionType.連絡先表示:
+					return "連表";
+				case PermissionType.連絡先更新:
+					return "連変";
+				case PermissionType.連絡先削除:
+					return "連廃";
+				case PermissionType.連絡先種別作成:
+					return "連種新";
+				case PermissionType.連絡先種別表示:
+					return "連種表";
+				case PermissionType.連絡先種別更新:
+					return "連種変";
+				case PermissionType.連絡先種別削除:
+					return "連種廃";
+				case PermissionType.エラーログ作成:
+					return "エ新";
+				case PermissionType.エラーログ表示:
+					return "エ表";
+				case PermissionType.エラーログ更新:
+					return "エ変";
+				case PermissionType.エラーログ削除:
+					return "エ廃";
+				default:
+					return missing;
+			}
+		}
+
+		/// <summary>
+		/// PermissionType英字名称
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="missing">存在しないenum値だった場合の返り値指定</param>
+		/// <returns></returns>
+		public static string NameEn(this PermissionType self, string missing = null)
+		{
+			switch (self)
+			{
+				case PermissionType.ロール作成:
+					return "Create Role";
+				case PermissionType.ロール表示:
+					return "Read Role";
+				case PermissionType.ロール更新:
+					return "Update Role";
+				case PermissionType.ロール削除:
+					return "Delete Role";
+				case PermissionType.ロール権限作成:
+					return "Create RolePermission";
+				case PermissionType.ロール権限表示:
+					return "Read RolePermission";
+				case PermissionType.ロール権限更新:
+					return "Update RolePermission";
+				case PermissionType.ロール権限削除:
+					return "Delete RolePermission";
+				case PermissionType.アカウント作成:
+					return "Create Account";
+				case PermissionType.アカウント表示:
+					return "Read Account";
+				case PermissionType.アカウント更新:
+					return "Update Account";
+				case PermissionType.アカウント削除:
+					return "Delete Account";
+				case PermissionType.アカウントロール作成:
+					return "Create AccountRole";
+				case PermissionType.アカウントロール表示:
+					return "Read AccountRole";
+				case PermissionType.アカウントロール更新:
+					return "Update AccountRole";
+				case PermissionType.アカウントロール削除:
+					return "Delete AccountRole";
+				case PermissionType.職員作成:
+					return "Create Staff";
+				case PermissionType.職員表示:
+					return "Read Staff";
+				case PermissionType.職員更新:
+					return "Update Staff";
+				case PermissionType.職員削除:
+					return "Delete Staff";
+				case PermissionType.住所作成:
+					return "Create Address";
+				case PermissionType.住所表示:
+					return "Read Address";
+				case PermissionType.住所更新:
+					return "Update Address";
+				case PermissionType.住所削除:
+					return "Delete Address";
+				case PermissionType.住所種別作成:
+					return "Create AddressType";
+				case PermissionType.住所種別表示:
+					return "Read AddressType";
+				case PermissionType.住所種別更新:
+					return "Update AddressType";
+				case PermissionType.住所種別削除:
+					return "Delete AddressType";
+				case PermissionType.連絡先作成:
+					return "Create Contact";
+				case PermissionType.連絡先表示:
+					return "Read Contact";
+				case PermissionType.連絡先更新:
+					return "Update Contact";
+				case PermissionType.連絡先削除:
+					return "Delete Contact";
+				case PermissionType.連絡先種別作成:
+					return "Create ContactType";
+				case PermissionType.連絡先種別表示:
+					return "Read ContactType";
+				case PermissionType.連絡先種別更新:
+					return "Update ContactType";
+				case PermissionType.連絡先種別削除:
+					return "Delete ContactType";
+				case PermissionType.エラーログ作成:
+					return "Create ErrorLog";
+				case PermissionType.エラーログ表示:
+					return "Read ErrorLog";
+				case PermissionType.エラーログ更新:
+					return "Update ErrorLog";
+				case PermissionType.エラーログ削除:
+					return "Delete ErrorLog";
+				default:
+					return missing;
+			}
+		}
+
+		/// <summary>
+		/// PermissionType英字表示名
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="missing">存在しないenum値だった場合の返り値指定</param>
+		/// <returns></returns>
+		public static string DisplayNameEn(this PermissionType self, string missing = null)
+		{
+			switch (self)
+			{
+				case PermissionType.ロール作成:
+					return "Create Role";
+				case PermissionType.ロール表示:
+					return "Read Role";
+				case PermissionType.ロール更新:
+					return "Update Role";
+				case PermissionType.ロール削除:
+					return "Delete Role";
+				case PermissionType.ロール権限作成:
+					return "Create RolePermission";
+				case PermissionType.ロール権限表示:
+					return "Read RolePermission";
+				case PermissionType.ロール権限更新:
+					return "Update RolePermission";
+				case PermissionType.ロール権限削除:
+					return "Delete RolePermission";
+				case PermissionType.アカウント作成:
+					return "Create Account";
+				case PermissionType.アカウント表示:
+					return "Read Account";
+				case PermissionType.アカウント更新:
+					return "Update Account";
+				case PermissionType.アカウント削除:
+					return "Delete Account";
+				case PermissionType.アカウントロール作成:
+					return "Create AccountRole";
+				case PermissionType.アカウントロール表示:
+					return "Read AccountRole";
+				case PermissionType.アカウントロール更新:
+					return "Update AccountRole";
+				case PermissionType.アカウントロール削除:
+					return "Delete AccountRole";
+				case PermissionType.職員作成:
+					return "Create Staff";
+				case PermissionType.職員表示:
+					return "Read Staff";
+				case PermissionType.職員更新:
+					return "Update Staff";
+				case PermissionType.職員削除:
+					return "Delete Staff";
+				case PermissionType.住所作成:
+					return "Create Address";
+				case PermissionType.住所表示:
+					return "Read Address";
+				case PermissionType.住所更新:
+					return "Update Address";
+				case PermissionType.住所削除:
+					return "Delete Address";
+				case PermissionType.住所種別作成:
+					return "Create AddressType";
+				case PermissionType.住所種別表示:
+					return "Read AddressType";
+				case PermissionType.住所種別更新:
+					return "Update AddressType";
+				case PermissionType.住所種別削除:
+					return "Delete AddressType";
+				case PermissionType.連絡先作成:
+					return "Create Contact";
+				case PermissionType.連絡先表示:
+					return "Read Contact";
+				case PermissionType.連絡先更新:
+					return "Update Contact";
+				case PermissionType.連絡先削除:
+					return "Delete Contact";
+				case PermissionType.連絡先種別作成:
+					return "Create ContactType";
+				case PermissionType.連絡先種別表示:
+					return "Read ContactType";
+				case PermissionType.連絡先種別更新:
+					return "Update ContactType";
+				case PermissionType.連絡先種別削除:
+					return "Delete ContactType";
+				case PermissionType.エラーログ作成:
+					return "Create ErrorLog";
+				case PermissionType.エラーログ表示:
+					return "Read ErrorLog";
+				case PermissionType.エラーログ更新:
+					return "Update ErrorLog";
+				case PermissionType.エラーログ削除:
+					return "Delete ErrorLog";
+				default:
+					return missing;
+			}
+		}
+
+		/// <summary>
+		/// PermissionType英字略称
+		/// </summary>
+		/// <param name="self"></param>
+		/// <param name="missing">存在しないenum値だった場合の返り値指定</param>
+		/// <returns></returns>
+		public static string AbbrevEn(this PermissionType self, string missing = null)
+		{
+			switch (self)
+			{
+				case PermissionType.ロール作成:
+					return "C Role";
+				case PermissionType.ロール表示:
+					return "R Role";
+				case PermissionType.ロール更新:
+					return "U Role";
+				case PermissionType.ロール削除:
+					return "D Role";
+				case PermissionType.ロール権限作成:
+					return "C RolePermission";
+				case PermissionType.ロール権限表示:
+					return "R RolePermission";
+				case PermissionType.ロール権限更新:
+					return "U RolePermission";
+				case PermissionType.ロール権限削除:
+					return "D RolePermission";
+				case PermissionType.アカウント作成:
+					return "C Account";
+				case PermissionType.アカウント表示:
+					return "R Account";
+				case PermissionType.アカウント更新:
+					return "U Account";
+				case PermissionType.アカウント削除:
+					return "D Account";
+				case PermissionType.アカウントロール作成:
+					return "C AccountRole";
+				case PermissionType.アカウントロール表示:
+					return "R AccountRole";
+				case PermissionType.アカウントロール更新:
+					return "U AccountRole";
+				case PermissionType.アカウントロール削除:
+					return "D AccountRole";
+				case PermissionType.職員作成:
+					return "C Staff";
+				case PermissionType.職員表示:
+					return "R Staff";
+				case PermissionType.職員更新:
+					return "U Staff";
+				case PermissionType.職員削除:
+					return "D Staff";
+				case PermissionType.住所作成:
+					return "C Address";
+				case PermissionType.住所表示:
+					return "R Address";
+				case PermissionType.住所更新:
+					return "U Address";
+				case PermissionType.住所削除:
+					return "D Address";
+				case PermissionType.住所種別作成:
+					return "C AddressType";
+				case PermissionType.住所種別表示:
+					return "R AddressType";
+				case PermissionType.住所種別更新:
+					return "U AddressType";
+				case PermissionType.住所種別削除:
+					return "D AddressType";
+				case PermissionType.連絡先作成:
+					return "C Contact";
+				case PermissionType.連絡先表示:
+					return "R Contact";
+				case PermissionType.連絡先更新:
+					return "U Contact";
+				case PermissionType.連絡先削除:
+					return "D Contact";
+				case PermissionType.連絡先種別作成:
+					return "C ContactType";
+				case PermissionType.連絡先種別表示:
+					return "R ContactType";
+				case PermissionType.連絡先種別更新:
+					return "U ContactType";
+				case PermissionType.連絡先種別削除:
+					return "D ContactType";
+				case PermissionType.エラーログ作成:
+					return "C ErrorLog";
+				case PermissionType.エラーログ表示:
+					return "R ErrorLog";
+				case PermissionType.エラーログ更新:
+					return "U ErrorLog";
+				case PermissionType.エラーログ削除:
+					return "D ErrorLog";
 				default:
 					return missing;
 			}
@@ -4403,795 +5419,6 @@ namespace peppa.Domain
 	}
 	#endregion
 	#endregion
-	#region エラーログ
-	/// <summary>
-	/// エラーログ
-	/// </summary>
-	[DataContract()]
-	[Table(Schema="dbo", Name="ErrorLog")]
-	public partial class ErrorLog : TableBase<ErrorLog>, INotifyPropertyChanged
-	{
-		#region uid : int
-
-		private int _uid;
-		/// <summary>
-		/// ユニークID
-		/// </summary>
-		[Column(DbType="int", DataType=DataType.Int32), NotNull, PrimaryKey, Identity]
-		public  int  uid
-		{
-			get { return _uid; }
-			set
-			{
-				if (_uid != value)
-				{
-					BeforeuidChanged(value);
-					_uid = value;
-					AfteruidChanged();
-
-					OnuidChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void BeforeuidChanged(int newValue);
-		partial void AfteruidChanged();
-
-		public const string NameOfuid = "uid";
-
-		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
-
-		private void OnuidChanged()
-		{
-			OnPropertyChanged(_uidChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-		#region category : string
-
-		private string _category;
-		/// <summary>
-		/// カテゴリ
-		/// </summary>
-		[Column(DbType="nvarchar(16)", DataType=DataType.NVarChar, Length=16), NotNull]
-		public  string  category
-		{
-			get { return _category; }
-			set
-			{
-				if (_category != value)
-				{
-					BeforecategoryChanged(value);
-					_category = value;
-					AftercategoryChanged();
-
-					OncategoryChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void BeforecategoryChanged(string newValue);
-		partial void AftercategoryChanged();
-
-		public const string NameOfcategory = "category";
-
-		private static readonly PropertyChangedEventArgs _categoryChangedEventArgs = new PropertyChangedEventArgs(NameOfcategory);
-
-		private void OncategoryChanged()
-		{
-			OnPropertyChanged(_categoryChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-		#region type : string
-
-		private string _type;
-		/// <summary>
-		/// 種別
-		/// </summary>
-		[Column(DbType="nvarchar(16)", DataType=DataType.NVarChar, Length=16), NotNull]
-		public  string  type
-		{
-			get { return _type; }
-			set
-			{
-				if (_type != value)
-				{
-					BeforetypeChanged(value);
-					_type = value;
-					AftertypeChanged();
-
-					OntypeChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void BeforetypeChanged(string newValue);
-		partial void AftertypeChanged();
-
-		public const string NameOftype = "type";
-
-		private static readonly PropertyChangedEventArgs _typeChangedEventArgs = new PropertyChangedEventArgs(NameOftype);
-
-		private void OntypeChanged()
-		{
-			OnPropertyChanged(_typeChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-		#region level : int
-
-		private int _level;
-		/// <summary>
-		/// レベル
-		/// </summary>
-		[Column(DbType="int", DataType=DataType.Int32), NotNull]
-		public  int  level
-		{
-			get { return _level; }
-			set
-			{
-				if (_level != value)
-				{
-					BeforelevelChanged(value);
-					_level = value;
-					AfterlevelChanged();
-
-					OnlevelChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void BeforelevelChanged(int newValue);
-		partial void AfterlevelChanged();
-
-		public const string NameOflevel = "level";
-
-		private static readonly PropertyChangedEventArgs _levelChangedEventArgs = new PropertyChangedEventArgs(NameOflevel);
-
-		private void OnlevelChanged()
-		{
-			OnPropertyChanged(_levelChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-		#region url : string
-
-		private string _url;
-		/// <summary>
-		/// URL
-		/// </summary>
-		[Column(DbType="nvarchar(1024)", DataType=DataType.NVarChar, Length=1024), NotNull]
-		public  string  url
-		{
-			get { return _url; }
-			set
-			{
-				if (_url != value)
-				{
-					BeforeurlChanged(value);
-					_url = value;
-					AfterurlChanged();
-
-					OnurlChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void BeforeurlChanged(string newValue);
-		partial void AfterurlChanged();
-
-		public const string NameOfurl = "url";
-
-		private static readonly PropertyChangedEventArgs _urlChangedEventArgs = new PropertyChangedEventArgs(NameOfurl);
-
-		private void OnurlChanged()
-		{
-			OnPropertyChanged(_urlChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-		#region methods : string
-
-		private string _methods;
-		/// <summary>
-		/// 処理
-		/// </summary>
-		[Column(DbType="varchar(200)", DataType=DataType.VarChar, Length=200), NotNull]
-		public  string  methods
-		{
-			get { return _methods; }
-			set
-			{
-				if (_methods != value)
-				{
-					BeforemethodsChanged(value);
-					_methods = value;
-					AftermethodsChanged();
-
-					OnmethodsChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void BeforemethodsChanged(string newValue);
-		partial void AftermethodsChanged();
-
-		public const string NameOfmethods = "methods";
-
-		private static readonly PropertyChangedEventArgs _methodsChangedEventArgs = new PropertyChangedEventArgs(NameOfmethods);
-
-		private void OnmethodsChanged()
-		{
-			OnPropertyChanged(_methodsChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-		#region created_at : DateTime
-
-		private DateTime _created_at;
-		/// <summary>
-		/// 作成日時
-		/// </summary>
-		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
-		public  DateTime  created_at
-		{
-			get { return _created_at; }
-			set
-			{
-				if (_created_at != value)
-				{
-					Beforecreated_atChanged(value);
-					_created_at = value;
-					Aftercreated_atChanged();
-
-					Oncreated_atChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforecreated_atChanged(DateTime newValue);
-		partial void Aftercreated_atChanged();
-
-		public const string NameOfcreated_at = "created_at";
-
-		private static readonly PropertyChangedEventArgs _created_atChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_at);
-
-		private void Oncreated_atChanged()
-		{
-			OnPropertyChanged(_created_atChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-		#region created_by : int?
-
-		private int? _created_by;
-		/// <summary>
-		/// 作成者
-		/// </summary>
-		[Column(DbType="int", DataType=DataType.Int32), Nullable]
-		public  int?  created_by
-		{
-			get { return _created_by; }
-			set
-			{
-				if (_created_by != value)
-				{
-					Beforecreated_byChanged(value);
-					_created_by = value;
-					Aftercreated_byChanged();
-
-					Oncreated_byChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforecreated_byChanged(int? newValue);
-		partial void Aftercreated_byChanged();
-
-		public const string NameOfcreated_by = "created_by";
-
-		private static readonly PropertyChangedEventArgs _created_byChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_by);
-
-		private void Oncreated_byChanged()
-		{
-			OnPropertyChanged(_created_byChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-		#region modified_at : DateTime
-
-		private DateTime _modified_at;
-		/// <summary>
-		/// 更新日時
-		/// </summary>
-		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
-		public  DateTime  modified_at
-		{
-			get { return _modified_at; }
-			set
-			{
-				if (_modified_at != value)
-				{
-					Beforemodified_atChanged(value);
-					_modified_at = value;
-					Aftermodified_atChanged();
-
-					Onmodified_atChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforemodified_atChanged(DateTime newValue);
-		partial void Aftermodified_atChanged();
-
-		public const string NameOfmodified_at = "modified_at";
-
-		private static readonly PropertyChangedEventArgs _modified_atChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_at);
-
-		private void Onmodified_atChanged()
-		{
-			OnPropertyChanged(_modified_atChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-		#region modified_by : int?
-
-		private int? _modified_by;
-		/// <summary>
-		/// 更新者
-		/// </summary>
-		[Column(DbType="int", DataType=DataType.Int32), Nullable]
-		public  int?  modified_by
-		{
-			get { return _modified_by; }
-			set
-			{
-				if (_modified_by != value)
-				{
-					Beforemodified_byChanged(value);
-					_modified_by = value;
-					Aftermodified_byChanged();
-
-					Onmodified_byChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforemodified_byChanged(int? newValue);
-		partial void Aftermodified_byChanged();
-
-		public const string NameOfmodified_by = "modified_by";
-
-		private static readonly PropertyChangedEventArgs _modified_byChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_by);
-
-		private void Onmodified_byChanged()
-		{
-			OnPropertyChanged(_modified_byChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-		#region removed_at : DateTime?
-
-		private DateTime? _removed_at;
-		/// <summary>
-		/// 削除日時
-		/// </summary>
-		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), Nullable]
-		public  DateTime?  removed_at
-		{
-			get { return _removed_at; }
-			set
-			{
-				if (_removed_at != value)
-				{
-					Beforeremoved_atChanged(value);
-					_removed_at = value;
-					Afterremoved_atChanged();
-
-					Onremoved_atChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforeremoved_atChanged(DateTime? newValue);
-		partial void Afterremoved_atChanged();
-
-		public const string NameOfremoved_at = "removed_at";
-
-		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
-
-		private void Onremoved_atChanged()
-		{
-			OnPropertyChanged(_removed_atChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-		#region row_version : byte[]
-
-		private byte[] _row_version;
-		/// <summary>
-		/// 版
-		/// </summary>
-		[Column(DbType="timestamp", DataType=DataType.Timestamp, SkipOnInsert=true, SkipOnUpdate=true), Nullable]
-		public  byte[]  row_version
-		{
-			get { return _row_version; }
-			set
-			{
-				if (_row_version != value)
-				{
-					Beforerow_versionChanged(value);
-					_row_version = value;
-					Afterrow_versionChanged();
-
-					Onrow_versionChanged();
-				}
-			}
-		}
-
-		#region INotifyPropertyChanged support
-
-		partial void Beforerow_versionChanged(byte[] newValue);
-		partial void Afterrow_versionChanged();
-
-		public const string NameOfrow_version = "row_version";
-
-		private static readonly PropertyChangedEventArgs _row_versionChangedEventArgs = new PropertyChangedEventArgs(NameOfrow_version);
-
-		private void Onrow_versionChanged()
-		{
-			OnPropertyChanged(_row_versionChangedEventArgs);
-		}
-
-		#endregion
-
-		#endregion
-
-		#region enum用アクセスラッパー
-		#endregion
-
-		#region Constructor
-
-		public ErrorLog()
-		{
-			#region フィールド初期化
-			uid = default(int);
-			category = "";
-			type = "";
-			level = 0;
-			url = "";
-			methods = "";
-			created_at = DateTime.UtcNow;
-			created_by = null;
-			modified_at = DateTime.UtcNow;
-			modified_by = null;
-			removed_at = null;
-			row_version = default(byte[]);
-			#endregion
-		}
-
-		#endregion
-
-		#region Association
-
-
-		#endregion
-
-		#region INotifyPropertyChanged support
-
-		[field : NonSerialized]
-		public virtual event PropertyChangedEventHandler PropertyChanged;
-
-		protected void OnPropertyChanged(string propertyName)
-		{
-			var propertyChanged = PropertyChanged;
-
-			if (propertyChanged != null)
-			{
-				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-
-		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
-		{
-			var propertyChanged = PropertyChanged;
-
-			if (propertyChanged != null)
-			{
-				propertyChanged(this, arg);
-			}
-		}
-
-		#endregion
-
-	}
-	#region エラーログ条件
-	/// <summary>
-	/// エラーログ条件
-	/// </summary>
-	public partial class ErrorLogCondition : ConditionBase<ErrorLog>
-	{
-		#region properties
-		#region uid
-		public int? uid_eq { get; set; }
-		public int? uid_ne { get; set; }
-		public int? uid_lt { get; set; }
-		public int? uid_gt { get; set; }
-		public int? uid_le { get; set; }
-		public int? uid_ge { get; set; }
-		public IEnumerable<int> uid_in { get; set; }
-		public IEnumerable<int> uid_ni { get; set; }
-		public (int? low, int? high)? uid_between { get; set; }
-		#endregion
-		#region category
-		public string category_eq { get; set; }
-		public string category_ne { get; set; }
-		public string category_lt { get; set; }
-		public string category_gt { get; set; }
-		public string category_le { get; set; }
-		public string category_ge { get; set; }
-		public IEnumerable<string> category_in { get; set; }
-		public IEnumerable<string> category_ni { get; set; }
-		public (string low, string high)? category_between { get; set; }
-		public string category_like { get; set; }
-		#endregion
-		#region type
-		public string type_eq { get; set; }
-		public string type_ne { get; set; }
-		public string type_lt { get; set; }
-		public string type_gt { get; set; }
-		public string type_le { get; set; }
-		public string type_ge { get; set; }
-		public IEnumerable<string> type_in { get; set; }
-		public IEnumerable<string> type_ni { get; set; }
-		public (string low, string high)? type_between { get; set; }
-		public string type_like { get; set; }
-		#endregion
-		#region level
-		public int? level_eq { get; set; }
-		public int? level_ne { get; set; }
-		public int? level_lt { get; set; }
-		public int? level_gt { get; set; }
-		public int? level_le { get; set; }
-		public int? level_ge { get; set; }
-		public IEnumerable<int> level_in { get; set; }
-		public IEnumerable<int> level_ni { get; set; }
-		public (int? low, int? high)? level_between { get; set; }
-		#endregion
-		#region url
-		public string url_eq { get; set; }
-		public string url_ne { get; set; }
-		public string url_lt { get; set; }
-		public string url_gt { get; set; }
-		public string url_le { get; set; }
-		public string url_ge { get; set; }
-		public IEnumerable<string> url_in { get; set; }
-		public IEnumerable<string> url_ni { get; set; }
-		public (string low, string high)? url_between { get; set; }
-		public string url_like { get; set; }
-		#endregion
-		#region methods
-		public string methods_eq { get; set; }
-		public string methods_ne { get; set; }
-		public string methods_lt { get; set; }
-		public string methods_gt { get; set; }
-		public string methods_le { get; set; }
-		public string methods_ge { get; set; }
-		public IEnumerable<string> methods_in { get; set; }
-		public IEnumerable<string> methods_ni { get; set; }
-		public (string low, string high)? methods_between { get; set; }
-		public string methods_like { get; set; }
-		#endregion
-		#region created_at
-		public DateTime? created_at_eq { get; set; }
-		public DateTime? created_at_ne { get; set; }
-		public DateTime? created_at_lt { get; set; }
-		public DateTime? created_at_gt { get; set; }
-		public DateTime? created_at_le { get; set; }
-		public DateTime? created_at_ge { get; set; }
-		public IEnumerable<DateTime> created_at_in { get; set; }
-		public IEnumerable<DateTime> created_at_ni { get; set; }
-		public (DateTime? low, DateTime? high)? created_at_between { get; set; }
-		#endregion
-		#region created_by
-		public int? created_by_eq { get; set; }
-		public int? created_by_ne { get; set; }
-		public int? created_by_lt { get; set; }
-		public int? created_by_gt { get; set; }
-		public int? created_by_le { get; set; }
-		public int? created_by_ge { get; set; }
-		public IEnumerable<int> created_by_in { get; set; }
-		public IEnumerable<int> created_by_ni { get; set; }
-		public (int? low, int? high)? created_by_between { get; set; }
-		#endregion
-		#region modified_at
-		public DateTime? modified_at_eq { get; set; }
-		public DateTime? modified_at_ne { get; set; }
-		public DateTime? modified_at_lt { get; set; }
-		public DateTime? modified_at_gt { get; set; }
-		public DateTime? modified_at_le { get; set; }
-		public DateTime? modified_at_ge { get; set; }
-		public IEnumerable<DateTime> modified_at_in { get; set; }
-		public IEnumerable<DateTime> modified_at_ni { get; set; }
-		public (DateTime? low, DateTime? high)? modified_at_between { get; set; }
-		#endregion
-		#region modified_by
-		public int? modified_by_eq { get; set; }
-		public int? modified_by_ne { get; set; }
-		public int? modified_by_lt { get; set; }
-		public int? modified_by_gt { get; set; }
-		public int? modified_by_le { get; set; }
-		public int? modified_by_ge { get; set; }
-		public IEnumerable<int> modified_by_in { get; set; }
-		public IEnumerable<int> modified_by_ni { get; set; }
-		public (int? low, int? high)? modified_by_between { get; set; }
-		#endregion
-		#region removed_at
-		public DateTime? removed_at_eq { get; set; }
-		public DateTime? removed_at_ne { get; set; }
-		public DateTime? removed_at_lt { get; set; }
-		public DateTime? removed_at_gt { get; set; }
-		public DateTime? removed_at_le { get; set; }
-		public DateTime? removed_at_ge { get; set; }
-		public IEnumerable<DateTime> removed_at_in { get; set; }
-		public IEnumerable<DateTime> removed_at_ni { get; set; }
-		public (DateTime? low, DateTime? high)? removed_at_between { get; set; }
-		#endregion
-		#region row_version
-		public byte[] row_version_eq { get; set; }
-		public byte[] row_version_ne { get; set; }
-		#endregion
-		#endregion
-
-		#region override
-		override public Expression<Func<ErrorLog, bool>> CreatePredicate()
-		{
-			var predicate = base.CreatePredicate();
-
-			#region uid
-			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
-			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
-			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
-			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
-			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
-			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
-			#endregion
-			#region category
-			if (category_eq != null) predicate = predicate.And(_ => _.category == category_eq);
-			if (category_ne != null) predicate = predicate.And(_ => _.category != category_ne);
-			if (category_lt != null) predicate = predicate.And(_ => category_lt.CompareTo(_.category) > 0);
-			if (category_gt != null) predicate = predicate.And(_ => category_gt.CompareTo(_.category) < 0);
-			if (category_le != null) predicate = predicate.And(_ => category_le.CompareTo(_.category) >= 0);
-			if (category_ge != null) predicate = predicate.And(_ => category_ge.CompareTo(_.category) <= 0);
-			#endregion
-			#region type
-			if (type_eq != null) predicate = predicate.And(_ => _.type == type_eq);
-			if (type_ne != null) predicate = predicate.And(_ => _.type != type_ne);
-			if (type_lt != null) predicate = predicate.And(_ => type_lt.CompareTo(_.type) > 0);
-			if (type_gt != null) predicate = predicate.And(_ => type_gt.CompareTo(_.type) < 0);
-			if (type_le != null) predicate = predicate.And(_ => type_le.CompareTo(_.type) >= 0);
-			if (type_ge != null) predicate = predicate.And(_ => type_ge.CompareTo(_.type) <= 0);
-			#endregion
-			#region level
-			if (level_eq != null) predicate = predicate.And(_ => _.level == level_eq);
-			if (level_ne != null) predicate = predicate.And(_ => _.level != level_ne);
-			if (level_lt != null) predicate = predicate.And(_ => _.level < level_lt);
-			if (level_gt != null) predicate = predicate.And(_ => _.level > level_gt);
-			if (level_le != null) predicate = predicate.And(_ => _.level <= level_le);
-			if (level_ge != null) predicate = predicate.And(_ => _.level >= level_ge);
-			#endregion
-			#region url
-			if (url_eq != null) predicate = predicate.And(_ => _.url == url_eq);
-			if (url_ne != null) predicate = predicate.And(_ => _.url != url_ne);
-			if (url_lt != null) predicate = predicate.And(_ => url_lt.CompareTo(_.url) > 0);
-			if (url_gt != null) predicate = predicate.And(_ => url_gt.CompareTo(_.url) < 0);
-			if (url_le != null) predicate = predicate.And(_ => url_le.CompareTo(_.url) >= 0);
-			if (url_ge != null) predicate = predicate.And(_ => url_ge.CompareTo(_.url) <= 0);
-			#endregion
-			#region methods
-			if (methods_eq != null) predicate = predicate.And(_ => _.methods == methods_eq);
-			if (methods_ne != null) predicate = predicate.And(_ => _.methods != methods_ne);
-			if (methods_lt != null) predicate = predicate.And(_ => methods_lt.CompareTo(_.methods) > 0);
-			if (methods_gt != null) predicate = predicate.And(_ => methods_gt.CompareTo(_.methods) < 0);
-			if (methods_le != null) predicate = predicate.And(_ => methods_le.CompareTo(_.methods) >= 0);
-			if (methods_ge != null) predicate = predicate.And(_ => methods_ge.CompareTo(_.methods) <= 0);
-			#endregion
-			#region created_at
-			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
-			if (created_at_ne != null) predicate = predicate.And(_ => _.created_at != created_at_ne);
-			if (created_at_lt != null) predicate = predicate.And(_ => _.created_at < created_at_lt);
-			if (created_at_gt != null) predicate = predicate.And(_ => _.created_at > created_at_gt);
-			if (created_at_le != null) predicate = predicate.And(_ => _.created_at <= created_at_le);
-			if (created_at_ge != null) predicate = predicate.And(_ => _.created_at >= created_at_ge);
-			#endregion
-			#region created_by
-			if (created_by_eq != null) predicate = predicate.And(_ => _.created_by == created_by_eq);
-			if (created_by_ne != null) predicate = predicate.And(_ => _.created_by != created_by_ne);
-			if (created_by_lt != null) predicate = predicate.And(_ => _.created_by < created_by_lt);
-			if (created_by_gt != null) predicate = predicate.And(_ => _.created_by > created_by_gt);
-			if (created_by_le != null) predicate = predicate.And(_ => _.created_by <= created_by_le);
-			if (created_by_ge != null) predicate = predicate.And(_ => _.created_by >= created_by_ge);
-			#endregion
-			#region modified_at
-			if (modified_at_eq != null) predicate = predicate.And(_ => _.modified_at == modified_at_eq);
-			if (modified_at_ne != null) predicate = predicate.And(_ => _.modified_at != modified_at_ne);
-			if (modified_at_lt != null) predicate = predicate.And(_ => _.modified_at < modified_at_lt);
-			if (modified_at_gt != null) predicate = predicate.And(_ => _.modified_at > modified_at_gt);
-			if (modified_at_le != null) predicate = predicate.And(_ => _.modified_at <= modified_at_le);
-			if (modified_at_ge != null) predicate = predicate.And(_ => _.modified_at >= modified_at_ge);
-			#endregion
-			#region modified_by
-			if (modified_by_eq != null) predicate = predicate.And(_ => _.modified_by == modified_by_eq);
-			if (modified_by_ne != null) predicate = predicate.And(_ => _.modified_by != modified_by_ne);
-			if (modified_by_lt != null) predicate = predicate.And(_ => _.modified_by < modified_by_lt);
-			if (modified_by_gt != null) predicate = predicate.And(_ => _.modified_by > modified_by_gt);
-			if (modified_by_le != null) predicate = predicate.And(_ => _.modified_by <= modified_by_le);
-			if (modified_by_ge != null) predicate = predicate.And(_ => _.modified_by >= modified_by_ge);
-			#endregion
-			#region removed_at
-			if (removed_at_eq != null) predicate = predicate.And(_ => _.removed_at == removed_at_eq);
-			if (removed_at_ne != null) predicate = predicate.And(_ => _.removed_at != removed_at_ne);
-			if (removed_at_lt != null) predicate = predicate.And(_ => _.removed_at < removed_at_lt);
-			if (removed_at_gt != null) predicate = predicate.And(_ => _.removed_at > removed_at_gt);
-			if (removed_at_le != null) predicate = predicate.And(_ => _.removed_at <= removed_at_le);
-			if (removed_at_ge != null) predicate = predicate.And(_ => _.removed_at >= removed_at_ge);
-			#endregion
-			#region row_version
-			if (row_version_eq != null) predicate = predicate.And(_ => _.row_version == row_version_eq);
-			if (row_version_ne != null) predicate = predicate.And(_ => _.row_version != row_version_ne);
-			#endregion
-
-			return predicate;
-		}
-		#endregion
-	}
-	#endregion
-	#endregion
 	#region ロールマスタ
 	/// <summary>
 	/// ロールマスタ
@@ -6352,6 +6579,228 @@ namespace peppa.Domain
 		#endregion
 
 		#region enum用アクセスラッパー
+		/// <summary>
+		/// permission_idのenumラッパー
+		/// </summary>
+		public PermissionType PermissionId
+		{
+			get
+			{
+				switch (permission_id)
+				{
+					case "Create_Role":
+						return PermissionType.ロール作成;
+					case "Read_Role":
+						return PermissionType.ロール表示;
+					case "Update_Role":
+						return PermissionType.ロール更新;
+					case "Delete_Role":
+						return PermissionType.ロール削除;
+					case "Create_RolePermission":
+						return PermissionType.ロール権限作成;
+					case "Read_RolePermission":
+						return PermissionType.ロール権限表示;
+					case "Update_RolePermission":
+						return PermissionType.ロール権限更新;
+					case "Delete_RolePermission":
+						return PermissionType.ロール権限削除;
+					case "Create_Account":
+						return PermissionType.アカウント作成;
+					case "Read_Account":
+						return PermissionType.アカウント表示;
+					case "Update_Account":
+						return PermissionType.アカウント更新;
+					case "Delete_Account":
+						return PermissionType.アカウント削除;
+					case "Create_AccountRole":
+						return PermissionType.アカウントロール作成;
+					case "Read_AccountRole":
+						return PermissionType.アカウントロール表示;
+					case "Update_AccountRole":
+						return PermissionType.アカウントロール更新;
+					case "Delete_AccountRole":
+						return PermissionType.アカウントロール削除;
+					case "Create_Staff":
+						return PermissionType.職員作成;
+					case "Read_Staff":
+						return PermissionType.職員表示;
+					case "Update_Staff":
+						return PermissionType.職員更新;
+					case "Delete_Staff":
+						return PermissionType.職員削除;
+					case "Create_Address":
+						return PermissionType.住所作成;
+					case "Read_Address":
+						return PermissionType.住所表示;
+					case "Update_Address":
+						return PermissionType.住所更新;
+					case "Delete_Address":
+						return PermissionType.住所削除;
+					case "Create_AddressType":
+						return PermissionType.住所種別作成;
+					case "Read_AddressType":
+						return PermissionType.住所種別表示;
+					case "Update_AddressType":
+						return PermissionType.住所種別更新;
+					case "Delete_AddressType":
+						return PermissionType.住所種別削除;
+					case "Create_Contact":
+						return PermissionType.連絡先作成;
+					case "Read_Contact":
+						return PermissionType.連絡先表示;
+					case "Update_Contact":
+						return PermissionType.連絡先更新;
+					case "Delete_Contact":
+						return PermissionType.連絡先削除;
+					case "Create_ContactType":
+						return PermissionType.連絡先種別作成;
+					case "Read_ContactType":
+						return PermissionType.連絡先種別表示;
+					case "Update_ContactType":
+						return PermissionType.連絡先種別更新;
+					case "Delete_ContactType":
+						return PermissionType.連絡先種別削除;
+					case "Create_ErrorLog":
+						return PermissionType.エラーログ作成;
+					case "Read_ErrorLog":
+						return PermissionType.エラーログ表示;
+					case "Update_ErrorLog":
+						return PermissionType.エラーログ更新;
+					case "Delete_ErrorLog":
+						return PermissionType.エラーログ削除;
+					default:
+						throw new Exception($"Unknown permission_id: {permission_id}");
+				}
+			}
+			set
+			{
+				switch (value)
+				{
+					case PermissionType.ロール作成:
+						permission_id = "Create_Role";
+						break;
+					case PermissionType.ロール表示:
+						permission_id = "Read_Role";
+						break;
+					case PermissionType.ロール更新:
+						permission_id = "Update_Role";
+						break;
+					case PermissionType.ロール削除:
+						permission_id = "Delete_Role";
+						break;
+					case PermissionType.ロール権限作成:
+						permission_id = "Create_RolePermission";
+						break;
+					case PermissionType.ロール権限表示:
+						permission_id = "Read_RolePermission";
+						break;
+					case PermissionType.ロール権限更新:
+						permission_id = "Update_RolePermission";
+						break;
+					case PermissionType.ロール権限削除:
+						permission_id = "Delete_RolePermission";
+						break;
+					case PermissionType.アカウント作成:
+						permission_id = "Create_Account";
+						break;
+					case PermissionType.アカウント表示:
+						permission_id = "Read_Account";
+						break;
+					case PermissionType.アカウント更新:
+						permission_id = "Update_Account";
+						break;
+					case PermissionType.アカウント削除:
+						permission_id = "Delete_Account";
+						break;
+					case PermissionType.アカウントロール作成:
+						permission_id = "Create_AccountRole";
+						break;
+					case PermissionType.アカウントロール表示:
+						permission_id = "Read_AccountRole";
+						break;
+					case PermissionType.アカウントロール更新:
+						permission_id = "Update_AccountRole";
+						break;
+					case PermissionType.アカウントロール削除:
+						permission_id = "Delete_AccountRole";
+						break;
+					case PermissionType.職員作成:
+						permission_id = "Create_Staff";
+						break;
+					case PermissionType.職員表示:
+						permission_id = "Read_Staff";
+						break;
+					case PermissionType.職員更新:
+						permission_id = "Update_Staff";
+						break;
+					case PermissionType.職員削除:
+						permission_id = "Delete_Staff";
+						break;
+					case PermissionType.住所作成:
+						permission_id = "Create_Address";
+						break;
+					case PermissionType.住所表示:
+						permission_id = "Read_Address";
+						break;
+					case PermissionType.住所更新:
+						permission_id = "Update_Address";
+						break;
+					case PermissionType.住所削除:
+						permission_id = "Delete_Address";
+						break;
+					case PermissionType.住所種別作成:
+						permission_id = "Create_AddressType";
+						break;
+					case PermissionType.住所種別表示:
+						permission_id = "Read_AddressType";
+						break;
+					case PermissionType.住所種別更新:
+						permission_id = "Update_AddressType";
+						break;
+					case PermissionType.住所種別削除:
+						permission_id = "Delete_AddressType";
+						break;
+					case PermissionType.連絡先作成:
+						permission_id = "Create_Contact";
+						break;
+					case PermissionType.連絡先表示:
+						permission_id = "Read_Contact";
+						break;
+					case PermissionType.連絡先更新:
+						permission_id = "Update_Contact";
+						break;
+					case PermissionType.連絡先削除:
+						permission_id = "Delete_Contact";
+						break;
+					case PermissionType.連絡先種別作成:
+						permission_id = "Create_ContactType";
+						break;
+					case PermissionType.連絡先種別表示:
+						permission_id = "Read_ContactType";
+						break;
+					case PermissionType.連絡先種別更新:
+						permission_id = "Update_ContactType";
+						break;
+					case PermissionType.連絡先種別削除:
+						permission_id = "Delete_ContactType";
+						break;
+					case PermissionType.エラーログ作成:
+						permission_id = "Create_ErrorLog";
+						break;
+					case PermissionType.エラーログ表示:
+						permission_id = "Read_ErrorLog";
+						break;
+					case PermissionType.エラーログ更新:
+						permission_id = "Update_ErrorLog";
+						break;
+					case PermissionType.エラーログ削除:
+						permission_id = "Delete_ErrorLog";
+						break;
+					default:
+						throw new Exception($"Unknown PermissionType: {value}");
+				}
+			}
+		}
 		#endregion
 
 		#region Constructor
@@ -6435,17 +6884,67 @@ namespace peppa.Domain
 		public (string low, string high)? role_id_between { get; set; }
 		public string role_id_like { get; set; }
 		#endregion
-		#region permission_id
-		public string permission_id_eq { get; set; }
-		public string permission_id_ne { get; set; }
-		public string permission_id_lt { get; set; }
-		public string permission_id_gt { get; set; }
-		public string permission_id_le { get; set; }
-		public string permission_id_ge { get; set; }
-		public IEnumerable<string> permission_id_in { get; set; }
-		public IEnumerable<string> permission_id_ni { get; set; }
-		public (string low, string high)? permission_id_between { get; set; }
-		public string permission_id_like { get; set; }
+		#region permission_id (PermissionId)
+		private string _permission_id_eq;
+		public PermissionType? PermissionId_eq
+		{
+			get => _permission_id_eq?.ToPermissionType();
+			set => _permission_id_eq = value.HasValue ? value.Value.Val() : (string)null;
+		}
+		private string _permission_id_ne;
+		public PermissionType? PermissionId_ne
+		{
+			get => _permission_id_ne?.ToPermissionType();
+			set => _permission_id_ne = value.HasValue ? value.Value.Val() : (string)null;
+		}
+		private string _permission_id_lt;
+		public PermissionType? PermissionId_lt
+		{
+			get => _permission_id_lt?.ToPermissionType();
+			set => _permission_id_lt = value.HasValue ? value.Value.Val() : (string)null;
+		}
+		private string _permission_id_gt;
+		public PermissionType? PermissionId_gt
+		{
+			get => _permission_id_gt?.ToPermissionType();
+			set => _permission_id_gt = value.HasValue ? value.Value.Val() : (string)null;
+		}
+		private string _permission_id_le;
+		public PermissionType? PermissionId_le
+		{
+			get => _permission_id_le?.ToPermissionType();
+			set => _permission_id_le = value.HasValue ? value.Value.Val() : (string)null;
+		}
+		private string _permission_id_ge;
+		public PermissionType? PermissionId_ge
+		{
+			get => _permission_id_ge?.ToPermissionType();
+			set => _permission_id_ge = value.HasValue ? value.Value.Val() : (string)null;
+		}
+		private IEnumerable<string> _permission_id_in;
+		public IEnumerable<PermissionType> PermissionId_in
+		{
+			get => _permission_id_in.Select(_ => _.ToPermissionType().Value);
+			set => _permission_id_in = value.Select(_ => _.Val());
+		}
+		private IEnumerable<string> _permission_id_ni;
+		public IEnumerable<PermissionType> PermissionId_ni
+		{
+			get => _permission_id_ni.Select(_ => _.ToPermissionType().Value);
+			set => _permission_id_ni = value.Select(_ => _.Val());
+		}
+		private (string low, string high)? _permission_id_between;
+		public (PermissionType low, PermissionType high)? PermissionId_between
+		{
+			get => _permission_id_between.HasValue ? (_permission_id_between.Value.low.ToPermissionType().Value, _permission_id_between.Value.high.ToPermissionType().Value) : ((PermissionType, PermissionType)?)null;
+			set => _permission_id_between = value.HasValue ? (value.Value.low.Val(), value.Value.high.Val()) : ((string, string)?)null;
+		}
+		private string _permission_id_like;
+		public PermissionType? PermissionId_like
+		{
+			get => _permission_id_like?.ToPermissionType();
+			set => _permission_id_like = value.HasValue ? value.Value.Val() : (string)null;
+		}
 		#endregion
 		#region created_at
 		public DateTime? created_at_eq { get; set; }
@@ -6519,12 +7018,12 @@ namespace peppa.Domain
 			if (role_id_ge != null) predicate = predicate.And(_ => role_id_ge.CompareTo(_.role_id) <= 0);
 			#endregion
 			#region permission_id
-			if (permission_id_eq != null) predicate = predicate.And(_ => _.permission_id == permission_id_eq);
-			if (permission_id_ne != null) predicate = predicate.And(_ => _.permission_id != permission_id_ne);
-			if (permission_id_lt != null) predicate = predicate.And(_ => permission_id_lt.CompareTo(_.permission_id) > 0);
-			if (permission_id_gt != null) predicate = predicate.And(_ => permission_id_gt.CompareTo(_.permission_id) < 0);
-			if (permission_id_le != null) predicate = predicate.And(_ => permission_id_le.CompareTo(_.permission_id) >= 0);
-			if (permission_id_ge != null) predicate = predicate.And(_ => permission_id_ge.CompareTo(_.permission_id) <= 0);
+			if (_permission_id_eq != null) predicate = predicate.And(_ => _.permission_id == _permission_id_eq);
+			if (_permission_id_ne != null) predicate = predicate.And(_ => _.permission_id != _permission_id_ne);
+			if (_permission_id_lt != null) predicate = predicate.And(_ => _permission_id_lt.CompareTo(_.permission_id) > 0);
+			if (_permission_id_gt != null) predicate = predicate.And(_ => _permission_id_gt.CompareTo(_.permission_id) < 0);
+			if (_permission_id_le != null) predicate = predicate.And(_ => _permission_id_le.CompareTo(_.permission_id) >= 0);
+			if (_permission_id_ge != null) predicate = predicate.And(_ => _permission_id_ge.CompareTo(_.permission_id) <= 0);
 			#endregion
 			#region created_at
 			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
@@ -13508,6 +14007,795 @@ namespace peppa.Domain
 	}
 	#endregion
 	#endregion
+	#region エラーログ
+	/// <summary>
+	/// エラーログ
+	/// </summary>
+	[DataContract()]
+	[Table(Schema="dbo", Name="ErrorLog")]
+	public partial class ErrorLog : TableBase<ErrorLog>, INotifyPropertyChanged
+	{
+		#region uid : int
+
+		private int _uid;
+		/// <summary>
+		/// ユニークID
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), NotNull, PrimaryKey, Identity]
+		public  int  uid
+		{
+			get { return _uid; }
+			set
+			{
+				if (_uid != value)
+				{
+					BeforeuidChanged(value);
+					_uid = value;
+					AfteruidChanged();
+
+					OnuidChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeuidChanged(int newValue);
+		partial void AfteruidChanged();
+
+		public const string NameOfuid = "uid";
+
+		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
+
+		private void OnuidChanged()
+		{
+			OnPropertyChanged(_uidChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region category : string
+
+		private string _category;
+		/// <summary>
+		/// カテゴリ
+		/// </summary>
+		[Column(DbType="nvarchar(16)", DataType=DataType.NVarChar, Length=16), NotNull]
+		public  string  category
+		{
+			get { return _category; }
+			set
+			{
+				if (_category != value)
+				{
+					BeforecategoryChanged(value);
+					_category = value;
+					AftercategoryChanged();
+
+					OncategoryChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforecategoryChanged(string newValue);
+		partial void AftercategoryChanged();
+
+		public const string NameOfcategory = "category";
+
+		private static readonly PropertyChangedEventArgs _categoryChangedEventArgs = new PropertyChangedEventArgs(NameOfcategory);
+
+		private void OncategoryChanged()
+		{
+			OnPropertyChanged(_categoryChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region type : string
+
+		private string _type;
+		/// <summary>
+		/// 種別
+		/// </summary>
+		[Column(DbType="nvarchar(16)", DataType=DataType.NVarChar, Length=16), NotNull]
+		public  string  type
+		{
+			get { return _type; }
+			set
+			{
+				if (_type != value)
+				{
+					BeforetypeChanged(value);
+					_type = value;
+					AftertypeChanged();
+
+					OntypeChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforetypeChanged(string newValue);
+		partial void AftertypeChanged();
+
+		public const string NameOftype = "type";
+
+		private static readonly PropertyChangedEventArgs _typeChangedEventArgs = new PropertyChangedEventArgs(NameOftype);
+
+		private void OntypeChanged()
+		{
+			OnPropertyChanged(_typeChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region level : int
+
+		private int _level;
+		/// <summary>
+		/// レベル
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), NotNull]
+		public  int  level
+		{
+			get { return _level; }
+			set
+			{
+				if (_level != value)
+				{
+					BeforelevelChanged(value);
+					_level = value;
+					AfterlevelChanged();
+
+					OnlevelChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforelevelChanged(int newValue);
+		partial void AfterlevelChanged();
+
+		public const string NameOflevel = "level";
+
+		private static readonly PropertyChangedEventArgs _levelChangedEventArgs = new PropertyChangedEventArgs(NameOflevel);
+
+		private void OnlevelChanged()
+		{
+			OnPropertyChanged(_levelChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region url : string
+
+		private string _url;
+		/// <summary>
+		/// URL
+		/// </summary>
+		[Column(DbType="nvarchar(1024)", DataType=DataType.NVarChar, Length=1024), NotNull]
+		public  string  url
+		{
+			get { return _url; }
+			set
+			{
+				if (_url != value)
+				{
+					BeforeurlChanged(value);
+					_url = value;
+					AfterurlChanged();
+
+					OnurlChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeurlChanged(string newValue);
+		partial void AfterurlChanged();
+
+		public const string NameOfurl = "url";
+
+		private static readonly PropertyChangedEventArgs _urlChangedEventArgs = new PropertyChangedEventArgs(NameOfurl);
+
+		private void OnurlChanged()
+		{
+			OnPropertyChanged(_urlChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region methods : string
+
+		private string _methods;
+		/// <summary>
+		/// 処理
+		/// </summary>
+		[Column(DbType="varchar(200)", DataType=DataType.VarChar, Length=200), NotNull]
+		public  string  methods
+		{
+			get { return _methods; }
+			set
+			{
+				if (_methods != value)
+				{
+					BeforemethodsChanged(value);
+					_methods = value;
+					AftermethodsChanged();
+
+					OnmethodsChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforemethodsChanged(string newValue);
+		partial void AftermethodsChanged();
+
+		public const string NameOfmethods = "methods";
+
+		private static readonly PropertyChangedEventArgs _methodsChangedEventArgs = new PropertyChangedEventArgs(NameOfmethods);
+
+		private void OnmethodsChanged()
+		{
+			OnPropertyChanged(_methodsChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region created_at : DateTime
+
+		private DateTime _created_at;
+		/// <summary>
+		/// 作成日時
+		/// </summary>
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  created_at
+		{
+			get { return _created_at; }
+			set
+			{
+				if (_created_at != value)
+				{
+					Beforecreated_atChanged(value);
+					_created_at = value;
+					Aftercreated_atChanged();
+
+					Oncreated_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_atChanged(DateTime newValue);
+		partial void Aftercreated_atChanged();
+
+		public const string NameOfcreated_at = "created_at";
+
+		private static readonly PropertyChangedEventArgs _created_atChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_at);
+
+		private void Oncreated_atChanged()
+		{
+			OnPropertyChanged(_created_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region created_by : int?
+
+		private int? _created_by;
+		/// <summary>
+		/// 作成者
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  created_by
+		{
+			get { return _created_by; }
+			set
+			{
+				if (_created_by != value)
+				{
+					Beforecreated_byChanged(value);
+					_created_by = value;
+					Aftercreated_byChanged();
+
+					Oncreated_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_byChanged(int? newValue);
+		partial void Aftercreated_byChanged();
+
+		public const string NameOfcreated_by = "created_by";
+
+		private static readonly PropertyChangedEventArgs _created_byChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_by);
+
+		private void Oncreated_byChanged()
+		{
+			OnPropertyChanged(_created_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region modified_at : DateTime
+
+		private DateTime _modified_at;
+		/// <summary>
+		/// 更新日時
+		/// </summary>
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  modified_at
+		{
+			get { return _modified_at; }
+			set
+			{
+				if (_modified_at != value)
+				{
+					Beforemodified_atChanged(value);
+					_modified_at = value;
+					Aftermodified_atChanged();
+
+					Onmodified_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_atChanged(DateTime newValue);
+		partial void Aftermodified_atChanged();
+
+		public const string NameOfmodified_at = "modified_at";
+
+		private static readonly PropertyChangedEventArgs _modified_atChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_at);
+
+		private void Onmodified_atChanged()
+		{
+			OnPropertyChanged(_modified_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region modified_by : int?
+
+		private int? _modified_by;
+		/// <summary>
+		/// 更新者
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  modified_by
+		{
+			get { return _modified_by; }
+			set
+			{
+				if (_modified_by != value)
+				{
+					Beforemodified_byChanged(value);
+					_modified_by = value;
+					Aftermodified_byChanged();
+
+					Onmodified_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_byChanged(int? newValue);
+		partial void Aftermodified_byChanged();
+
+		public const string NameOfmodified_by = "modified_by";
+
+		private static readonly PropertyChangedEventArgs _modified_byChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_by);
+
+		private void Onmodified_byChanged()
+		{
+			OnPropertyChanged(_modified_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region removed_at : DateTime?
+
+		private DateTime? _removed_at;
+		/// <summary>
+		/// 削除日時
+		/// </summary>
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), Nullable]
+		public  DateTime?  removed_at
+		{
+			get { return _removed_at; }
+			set
+			{
+				if (_removed_at != value)
+				{
+					Beforeremoved_atChanged(value);
+					_removed_at = value;
+					Afterremoved_atChanged();
+
+					Onremoved_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeremoved_atChanged(DateTime? newValue);
+		partial void Afterremoved_atChanged();
+
+		public const string NameOfremoved_at = "removed_at";
+
+		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
+
+		private void Onremoved_atChanged()
+		{
+			OnPropertyChanged(_removed_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region row_version : byte[]
+
+		private byte[] _row_version;
+		/// <summary>
+		/// 版
+		/// </summary>
+		[Column(DbType="timestamp", DataType=DataType.Timestamp, SkipOnInsert=true, SkipOnUpdate=true), Nullable]
+		public  byte[]  row_version
+		{
+			get { return _row_version; }
+			set
+			{
+				if (_row_version != value)
+				{
+					Beforerow_versionChanged(value);
+					_row_version = value;
+					Afterrow_versionChanged();
+
+					Onrow_versionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerow_versionChanged(byte[] newValue);
+		partial void Afterrow_versionChanged();
+
+		public const string NameOfrow_version = "row_version";
+
+		private static readonly PropertyChangedEventArgs _row_versionChangedEventArgs = new PropertyChangedEventArgs(NameOfrow_version);
+
+		private void Onrow_versionChanged()
+		{
+			OnPropertyChanged(_row_versionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region enum用アクセスラッパー
+		#endregion
+
+		#region Constructor
+
+		public ErrorLog()
+		{
+			#region フィールド初期化
+			uid = default(int);
+			category = "";
+			type = "";
+			level = 0;
+			url = "";
+			methods = "";
+			created_at = DateTime.UtcNow;
+			created_by = null;
+			modified_at = DateTime.UtcNow;
+			modified_by = null;
+			removed_at = null;
+			row_version = default(byte[]);
+			#endregion
+		}
+
+		#endregion
+
+		#region Association
+
+
+		#endregion
+
+		#region INotifyPropertyChanged support
+
+		[field : NonSerialized]
+		public virtual event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged(string propertyName)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+				propertyChanged(this, arg);
+			}
+		}
+
+		#endregion
+
+	}
+	#region エラーログ条件
+	/// <summary>
+	/// エラーログ条件
+	/// </summary>
+	public partial class ErrorLogCondition : ConditionBase<ErrorLog>
+	{
+		#region properties
+		#region uid
+		public int? uid_eq { get; set; }
+		public int? uid_ne { get; set; }
+		public int? uid_lt { get; set; }
+		public int? uid_gt { get; set; }
+		public int? uid_le { get; set; }
+		public int? uid_ge { get; set; }
+		public IEnumerable<int> uid_in { get; set; }
+		public IEnumerable<int> uid_ni { get; set; }
+		public (int? low, int? high)? uid_between { get; set; }
+		#endregion
+		#region category
+		public string category_eq { get; set; }
+		public string category_ne { get; set; }
+		public string category_lt { get; set; }
+		public string category_gt { get; set; }
+		public string category_le { get; set; }
+		public string category_ge { get; set; }
+		public IEnumerable<string> category_in { get; set; }
+		public IEnumerable<string> category_ni { get; set; }
+		public (string low, string high)? category_between { get; set; }
+		public string category_like { get; set; }
+		#endregion
+		#region type
+		public string type_eq { get; set; }
+		public string type_ne { get; set; }
+		public string type_lt { get; set; }
+		public string type_gt { get; set; }
+		public string type_le { get; set; }
+		public string type_ge { get; set; }
+		public IEnumerable<string> type_in { get; set; }
+		public IEnumerable<string> type_ni { get; set; }
+		public (string low, string high)? type_between { get; set; }
+		public string type_like { get; set; }
+		#endregion
+		#region level
+		public int? level_eq { get; set; }
+		public int? level_ne { get; set; }
+		public int? level_lt { get; set; }
+		public int? level_gt { get; set; }
+		public int? level_le { get; set; }
+		public int? level_ge { get; set; }
+		public IEnumerable<int> level_in { get; set; }
+		public IEnumerable<int> level_ni { get; set; }
+		public (int? low, int? high)? level_between { get; set; }
+		#endregion
+		#region url
+		public string url_eq { get; set; }
+		public string url_ne { get; set; }
+		public string url_lt { get; set; }
+		public string url_gt { get; set; }
+		public string url_le { get; set; }
+		public string url_ge { get; set; }
+		public IEnumerable<string> url_in { get; set; }
+		public IEnumerable<string> url_ni { get; set; }
+		public (string low, string high)? url_between { get; set; }
+		public string url_like { get; set; }
+		#endregion
+		#region methods
+		public string methods_eq { get; set; }
+		public string methods_ne { get; set; }
+		public string methods_lt { get; set; }
+		public string methods_gt { get; set; }
+		public string methods_le { get; set; }
+		public string methods_ge { get; set; }
+		public IEnumerable<string> methods_in { get; set; }
+		public IEnumerable<string> methods_ni { get; set; }
+		public (string low, string high)? methods_between { get; set; }
+		public string methods_like { get; set; }
+		#endregion
+		#region created_at
+		public DateTime? created_at_eq { get; set; }
+		public DateTime? created_at_ne { get; set; }
+		public DateTime? created_at_lt { get; set; }
+		public DateTime? created_at_gt { get; set; }
+		public DateTime? created_at_le { get; set; }
+		public DateTime? created_at_ge { get; set; }
+		public IEnumerable<DateTime> created_at_in { get; set; }
+		public IEnumerable<DateTime> created_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? created_at_between { get; set; }
+		#endregion
+		#region created_by
+		public int? created_by_eq { get; set; }
+		public int? created_by_ne { get; set; }
+		public int? created_by_lt { get; set; }
+		public int? created_by_gt { get; set; }
+		public int? created_by_le { get; set; }
+		public int? created_by_ge { get; set; }
+		public IEnumerable<int> created_by_in { get; set; }
+		public IEnumerable<int> created_by_ni { get; set; }
+		public (int? low, int? high)? created_by_between { get; set; }
+		#endregion
+		#region modified_at
+		public DateTime? modified_at_eq { get; set; }
+		public DateTime? modified_at_ne { get; set; }
+		public DateTime? modified_at_lt { get; set; }
+		public DateTime? modified_at_gt { get; set; }
+		public DateTime? modified_at_le { get; set; }
+		public DateTime? modified_at_ge { get; set; }
+		public IEnumerable<DateTime> modified_at_in { get; set; }
+		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? modified_at_between { get; set; }
+		#endregion
+		#region modified_by
+		public int? modified_by_eq { get; set; }
+		public int? modified_by_ne { get; set; }
+		public int? modified_by_lt { get; set; }
+		public int? modified_by_gt { get; set; }
+		public int? modified_by_le { get; set; }
+		public int? modified_by_ge { get; set; }
+		public IEnumerable<int> modified_by_in { get; set; }
+		public IEnumerable<int> modified_by_ni { get; set; }
+		public (int? low, int? high)? modified_by_between { get; set; }
+		#endregion
+		#region removed_at
+		public DateTime? removed_at_eq { get; set; }
+		public DateTime? removed_at_ne { get; set; }
+		public DateTime? removed_at_lt { get; set; }
+		public DateTime? removed_at_gt { get; set; }
+		public DateTime? removed_at_le { get; set; }
+		public DateTime? removed_at_ge { get; set; }
+		public IEnumerable<DateTime> removed_at_in { get; set; }
+		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? removed_at_between { get; set; }
+		#endregion
+		#region row_version
+		public byte[] row_version_eq { get; set; }
+		public byte[] row_version_ne { get; set; }
+		#endregion
+		#endregion
+
+		#region override
+		override public Expression<Func<ErrorLog, bool>> CreatePredicate()
+		{
+			var predicate = base.CreatePredicate();
+
+			#region uid
+			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
+			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
+			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
+			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
+			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
+			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
+			#endregion
+			#region category
+			if (category_eq != null) predicate = predicate.And(_ => _.category == category_eq);
+			if (category_ne != null) predicate = predicate.And(_ => _.category != category_ne);
+			if (category_lt != null) predicate = predicate.And(_ => category_lt.CompareTo(_.category) > 0);
+			if (category_gt != null) predicate = predicate.And(_ => category_gt.CompareTo(_.category) < 0);
+			if (category_le != null) predicate = predicate.And(_ => category_le.CompareTo(_.category) >= 0);
+			if (category_ge != null) predicate = predicate.And(_ => category_ge.CompareTo(_.category) <= 0);
+			#endregion
+			#region type
+			if (type_eq != null) predicate = predicate.And(_ => _.type == type_eq);
+			if (type_ne != null) predicate = predicate.And(_ => _.type != type_ne);
+			if (type_lt != null) predicate = predicate.And(_ => type_lt.CompareTo(_.type) > 0);
+			if (type_gt != null) predicate = predicate.And(_ => type_gt.CompareTo(_.type) < 0);
+			if (type_le != null) predicate = predicate.And(_ => type_le.CompareTo(_.type) >= 0);
+			if (type_ge != null) predicate = predicate.And(_ => type_ge.CompareTo(_.type) <= 0);
+			#endregion
+			#region level
+			if (level_eq != null) predicate = predicate.And(_ => _.level == level_eq);
+			if (level_ne != null) predicate = predicate.And(_ => _.level != level_ne);
+			if (level_lt != null) predicate = predicate.And(_ => _.level < level_lt);
+			if (level_gt != null) predicate = predicate.And(_ => _.level > level_gt);
+			if (level_le != null) predicate = predicate.And(_ => _.level <= level_le);
+			if (level_ge != null) predicate = predicate.And(_ => _.level >= level_ge);
+			#endregion
+			#region url
+			if (url_eq != null) predicate = predicate.And(_ => _.url == url_eq);
+			if (url_ne != null) predicate = predicate.And(_ => _.url != url_ne);
+			if (url_lt != null) predicate = predicate.And(_ => url_lt.CompareTo(_.url) > 0);
+			if (url_gt != null) predicate = predicate.And(_ => url_gt.CompareTo(_.url) < 0);
+			if (url_le != null) predicate = predicate.And(_ => url_le.CompareTo(_.url) >= 0);
+			if (url_ge != null) predicate = predicate.And(_ => url_ge.CompareTo(_.url) <= 0);
+			#endregion
+			#region methods
+			if (methods_eq != null) predicate = predicate.And(_ => _.methods == methods_eq);
+			if (methods_ne != null) predicate = predicate.And(_ => _.methods != methods_ne);
+			if (methods_lt != null) predicate = predicate.And(_ => methods_lt.CompareTo(_.methods) > 0);
+			if (methods_gt != null) predicate = predicate.And(_ => methods_gt.CompareTo(_.methods) < 0);
+			if (methods_le != null) predicate = predicate.And(_ => methods_le.CompareTo(_.methods) >= 0);
+			if (methods_ge != null) predicate = predicate.And(_ => methods_ge.CompareTo(_.methods) <= 0);
+			#endregion
+			#region created_at
+			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
+			if (created_at_ne != null) predicate = predicate.And(_ => _.created_at != created_at_ne);
+			if (created_at_lt != null) predicate = predicate.And(_ => _.created_at < created_at_lt);
+			if (created_at_gt != null) predicate = predicate.And(_ => _.created_at > created_at_gt);
+			if (created_at_le != null) predicate = predicate.And(_ => _.created_at <= created_at_le);
+			if (created_at_ge != null) predicate = predicate.And(_ => _.created_at >= created_at_ge);
+			#endregion
+			#region created_by
+			if (created_by_eq != null) predicate = predicate.And(_ => _.created_by == created_by_eq);
+			if (created_by_ne != null) predicate = predicate.And(_ => _.created_by != created_by_ne);
+			if (created_by_lt != null) predicate = predicate.And(_ => _.created_by < created_by_lt);
+			if (created_by_gt != null) predicate = predicate.And(_ => _.created_by > created_by_gt);
+			if (created_by_le != null) predicate = predicate.And(_ => _.created_by <= created_by_le);
+			if (created_by_ge != null) predicate = predicate.And(_ => _.created_by >= created_by_ge);
+			#endregion
+			#region modified_at
+			if (modified_at_eq != null) predicate = predicate.And(_ => _.modified_at == modified_at_eq);
+			if (modified_at_ne != null) predicate = predicate.And(_ => _.modified_at != modified_at_ne);
+			if (modified_at_lt != null) predicate = predicate.And(_ => _.modified_at < modified_at_lt);
+			if (modified_at_gt != null) predicate = predicate.And(_ => _.modified_at > modified_at_gt);
+			if (modified_at_le != null) predicate = predicate.And(_ => _.modified_at <= modified_at_le);
+			if (modified_at_ge != null) predicate = predicate.And(_ => _.modified_at >= modified_at_ge);
+			#endregion
+			#region modified_by
+			if (modified_by_eq != null) predicate = predicate.And(_ => _.modified_by == modified_by_eq);
+			if (modified_by_ne != null) predicate = predicate.And(_ => _.modified_by != modified_by_ne);
+			if (modified_by_lt != null) predicate = predicate.And(_ => _.modified_by < modified_by_lt);
+			if (modified_by_gt != null) predicate = predicate.And(_ => _.modified_by > modified_by_gt);
+			if (modified_by_le != null) predicate = predicate.And(_ => _.modified_by <= modified_by_le);
+			if (modified_by_ge != null) predicate = predicate.And(_ => _.modified_by >= modified_by_ge);
+			#endregion
+			#region removed_at
+			if (removed_at_eq != null) predicate = predicate.And(_ => _.removed_at == removed_at_eq);
+			if (removed_at_ne != null) predicate = predicate.And(_ => _.removed_at != removed_at_ne);
+			if (removed_at_lt != null) predicate = predicate.And(_ => _.removed_at < removed_at_lt);
+			if (removed_at_gt != null) predicate = predicate.And(_ => _.removed_at > removed_at_gt);
+			if (removed_at_le != null) predicate = predicate.And(_ => _.removed_at <= removed_at_le);
+			if (removed_at_ge != null) predicate = predicate.And(_ => _.removed_at >= removed_at_ge);
+			#endregion
+			#region row_version
+			if (row_version_eq != null) predicate = predicate.And(_ => _.row_version == row_version_eq);
+			if (row_version_ne != null) predicate = predicate.And(_ => _.row_version != row_version_ne);
+			#endregion
+
+			return predicate;
+		}
+		#endregion
+	}
+	#endregion
+	#endregion
 
 	#region peppaDB拡張
 	public static partial class peppaDBExtend
@@ -13520,16 +14808,6 @@ namespace peppa.Domain
 		/// <param name="p_uid">ユニークID(uid)</param>
 		/// <returns></returns>
 		public static Test Find(this ITable<Test> table, int p_uid)
-		{
-			return table.SingleOrDefault(_ => _.uid == p_uid);
-		}
-		/// <summary>
-		/// 主キーを指定してErrorLogデータ取得
-		/// </summary>
-		/// <param name="table"></param>
-		/// <param name="p_uid">ユニークID(uid)</param>
-		/// <returns></returns>
-		public static ErrorLog Find(this ITable<ErrorLog> table, int p_uid)
 		{
 			return table.SingleOrDefault(_ => _.uid == p_uid);
 		}
@@ -13628,6 +14906,16 @@ namespace peppa.Domain
 		public static ContactType Find(this ITable<ContactType> table, int p_contact_type_id)
 		{
 			return table.SingleOrDefault(_ => _.contact_type_id == p_contact_type_id);
+		}
+		/// <summary>
+		/// 主キーを指定してErrorLogデータ取得
+		/// </summary>
+		/// <param name="table"></param>
+		/// <param name="p_uid">ユニークID(uid)</param>
+		/// <returns></returns>
+		public static ErrorLog Find(this ITable<ErrorLog> table, int p_uid)
+		{
+			return table.SingleOrDefault(_ => _.uid == p_uid);
 		}
 		#endregion
 	}

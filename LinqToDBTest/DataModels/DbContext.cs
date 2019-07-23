@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using System.Text;
 
 using LinqToDB;
 using LinqToDB.Mapping;
@@ -60,9 +61,21 @@ namespace peppa.Domain
 		/// </summary>
 		public ITable<ErrorLog> ErrorLog => this.GetTable<ErrorLog>();
 		/// <summary>
+		/// ロールマスタ
+		/// </summary>
+		public ITable<Role> Role => this.GetTable<Role>();
+		/// <summary>
+		/// ロール権限
+		/// </summary>
+		public ITable<RolePermission> RolePermission => this.GetTable<RolePermission>();
+		/// <summary>
 		/// アカウント
 		/// </summary>
 		public ITable<Account> Account => this.GetTable<Account>();
+		/// <summary>
+		/// アカウントロール
+		/// </summary>
+		public ITable<AccountRole> AccountRole => this.GetTable<AccountRole>();
 		/// <summary>
 		/// 職員
 		/// </summary>
@@ -3297,6 +3310,74 @@ namespace peppa.Domain
 		#region enum用アクセスラッパー
 		#endregion
 
+		#region Constructor
+
+		public Test()
+		{
+			#region フィールド初期化
+			uid = default(int);
+			col01 = 'a';
+			col01_ = null;
+			col02 = "a";
+			col02_ = null;
+			col03 = "";
+			col03_ = null;
+			col04 = "";
+			col04_ = null;
+			col05 = 'あ';
+			col05_ = null;
+			col06 = "あ";
+			col06_ = null;
+			col07 = "";
+			col07_ = null;
+			col08 = "";
+			col08_ = null;
+			col09 = Encoding.GetEncoding("Shift_JIS").GetBytes("");
+			col09_ = null;
+			col10 = Encoding.GetEncoding("Shift_JIS").GetBytes("");
+			col10_ = null;
+			col11 = Encoding.GetEncoding("Shift_JIS").GetBytes("");
+			col11_ = null;
+			col12 = true;
+			col12_ = null;
+			col13 = Guid.NewGuid();
+			col13_ = null;
+			col14 = 0;
+			col14_ = null;
+			col15 = 0;
+			col15_ = null;
+			col16 = 0;
+			col16_ = null;
+			col17 = 0;
+			col17_ = null;
+			col18 = 0;
+			col18_ = null;
+			col19 = 0;
+			col19_ = null;
+			col20 = 0;
+			col20_ = null;
+			col21 = 0;
+			col21_ = null;
+			col22 = 0;
+			col22_ = null;
+			col23 = DateTime.UtcNow.Date;
+			col23_ = null;
+			col24 = TimeSpan.Parse("1970/01/01");
+			col24_ = null;
+			col25 = DateTime.UtcNow;
+			col25_ = null;
+			col26 = DateTime.UtcNow;
+			col26_ = null;
+			col27 = DateTime.UtcNow;
+			col27_ = null;
+			col28 = DateTimeOffset.UtcNow;
+			col28_ = null;
+			col29 = default(byte[]);
+			#endregion
+		}
+
+		#endregion
+
 		#region Association
 
 
@@ -3346,6 +3427,7 @@ namespace peppa.Domain
 		public int? uid_ge { get; set; }
 		public IEnumerable<int> uid_in { get; set; }
 		public IEnumerable<int> uid_ni { get; set; }
+		public (int? low, int? high)? uid_between { get; set; }
 		#endregion
 		#region col01
 		public char? col01_eq { get; set; }
@@ -3356,6 +3438,7 @@ namespace peppa.Domain
 		public char? col01_ge { get; set; }
 		public IEnumerable<char> col01_in { get; set; }
 		public IEnumerable<char> col01_ni { get; set; }
+		public (char? low, char? high)? col01_between { get; set; }
 		#endregion
 		#region col01_
 		public char? col01__eq { get; set; }
@@ -3366,6 +3449,7 @@ namespace peppa.Domain
 		public char? col01__ge { get; set; }
 		public IEnumerable<char> col01__in { get; set; }
 		public IEnumerable<char> col01__ni { get; set; }
+		public (char? low, char? high)? col01__between { get; set; }
 		#endregion
 		#region col02
 		public string col02_eq { get; set; }
@@ -3376,6 +3460,8 @@ namespace peppa.Domain
 		public string col02_ge { get; set; }
 		public IEnumerable<string> col02_in { get; set; }
 		public IEnumerable<string> col02_ni { get; set; }
+		public (string low, string high)? col02_between { get; set; }
+		public string col02_like { get; set; }
 		#endregion
 		#region col02_
 		public string col02__eq { get; set; }
@@ -3386,6 +3472,8 @@ namespace peppa.Domain
 		public string col02__ge { get; set; }
 		public IEnumerable<string> col02__in { get; set; }
 		public IEnumerable<string> col02__ni { get; set; }
+		public (string low, string high)? col02__between { get; set; }
+		public string col02__like { get; set; }
 		#endregion
 		#region col03
 		public string col03_eq { get; set; }
@@ -3396,6 +3484,8 @@ namespace peppa.Domain
 		public string col03_ge { get; set; }
 		public IEnumerable<string> col03_in { get; set; }
 		public IEnumerable<string> col03_ni { get; set; }
+		public (string low, string high)? col03_between { get; set; }
+		public string col03_like { get; set; }
 		#endregion
 		#region col03_
 		public string col03__eq { get; set; }
@@ -3406,6 +3496,8 @@ namespace peppa.Domain
 		public string col03__ge { get; set; }
 		public IEnumerable<string> col03__in { get; set; }
 		public IEnumerable<string> col03__ni { get; set; }
+		public (string low, string high)? col03__between { get; set; }
+		public string col03__like { get; set; }
 		#endregion
 		#region col04
 		public string col04_eq { get; set; }
@@ -3416,6 +3508,8 @@ namespace peppa.Domain
 		public string col04_ge { get; set; }
 		public IEnumerable<string> col04_in { get; set; }
 		public IEnumerable<string> col04_ni { get; set; }
+		public (string low, string high)? col04_between { get; set; }
+		public string col04_like { get; set; }
 		#endregion
 		#region col04_
 		public string col04__eq { get; set; }
@@ -3426,6 +3520,8 @@ namespace peppa.Domain
 		public string col04__ge { get; set; }
 		public IEnumerable<string> col04__in { get; set; }
 		public IEnumerable<string> col04__ni { get; set; }
+		public (string low, string high)? col04__between { get; set; }
+		public string col04__like { get; set; }
 		#endregion
 		#region col05
 		public char? col05_eq { get; set; }
@@ -3436,6 +3532,7 @@ namespace peppa.Domain
 		public char? col05_ge { get; set; }
 		public IEnumerable<char> col05_in { get; set; }
 		public IEnumerable<char> col05_ni { get; set; }
+		public (char? low, char? high)? col05_between { get; set; }
 		#endregion
 		#region col05_
 		public char? col05__eq { get; set; }
@@ -3446,6 +3543,7 @@ namespace peppa.Domain
 		public char? col05__ge { get; set; }
 		public IEnumerable<char> col05__in { get; set; }
 		public IEnumerable<char> col05__ni { get; set; }
+		public (char? low, char? high)? col05__between { get; set; }
 		#endregion
 		#region col06
 		public string col06_eq { get; set; }
@@ -3456,6 +3554,8 @@ namespace peppa.Domain
 		public string col06_ge { get; set; }
 		public IEnumerable<string> col06_in { get; set; }
 		public IEnumerable<string> col06_ni { get; set; }
+		public (string low, string high)? col06_between { get; set; }
+		public string col06_like { get; set; }
 		#endregion
 		#region col06_
 		public string col06__eq { get; set; }
@@ -3466,6 +3566,8 @@ namespace peppa.Domain
 		public string col06__ge { get; set; }
 		public IEnumerable<string> col06__in { get; set; }
 		public IEnumerable<string> col06__ni { get; set; }
+		public (string low, string high)? col06__between { get; set; }
+		public string col06__like { get; set; }
 		#endregion
 		#region col07
 		public string col07_eq { get; set; }
@@ -3476,6 +3578,8 @@ namespace peppa.Domain
 		public string col07_ge { get; set; }
 		public IEnumerable<string> col07_in { get; set; }
 		public IEnumerable<string> col07_ni { get; set; }
+		public (string low, string high)? col07_between { get; set; }
+		public string col07_like { get; set; }
 		#endregion
 		#region col07_
 		public string col07__eq { get; set; }
@@ -3486,6 +3590,8 @@ namespace peppa.Domain
 		public string col07__ge { get; set; }
 		public IEnumerable<string> col07__in { get; set; }
 		public IEnumerable<string> col07__ni { get; set; }
+		public (string low, string high)? col07__between { get; set; }
+		public string col07__like { get; set; }
 		#endregion
 		#region col08
 		public string col08_eq { get; set; }
@@ -3496,6 +3602,8 @@ namespace peppa.Domain
 		public string col08_ge { get; set; }
 		public IEnumerable<string> col08_in { get; set; }
 		public IEnumerable<string> col08_ni { get; set; }
+		public (string low, string high)? col08_between { get; set; }
+		public string col08_like { get; set; }
 		#endregion
 		#region col08_
 		public string col08__eq { get; set; }
@@ -3506,106 +3614,48 @@ namespace peppa.Domain
 		public string col08__ge { get; set; }
 		public IEnumerable<string> col08__in { get; set; }
 		public IEnumerable<string> col08__ni { get; set; }
+		public (string low, string high)? col08__between { get; set; }
+		public string col08__like { get; set; }
 		#endregion
 		#region col09
 		public byte[] col09_eq { get; set; }
 		public byte[] col09_ne { get; set; }
-		public byte[] col09_lt { get; set; }
-		public byte[] col09_gt { get; set; }
-		public byte[] col09_le { get; set; }
-		public byte[] col09_ge { get; set; }
-		public IEnumerable<byte[]> col09_in { get; set; }
-		public IEnumerable<byte[]> col09_ni { get; set; }
 		#endregion
 		#region col09_
 		public byte[] col09__eq { get; set; }
 		public byte[] col09__ne { get; set; }
-		public byte[] col09__lt { get; set; }
-		public byte[] col09__gt { get; set; }
-		public byte[] col09__le { get; set; }
-		public byte[] col09__ge { get; set; }
-		public IEnumerable<byte[]> col09__in { get; set; }
-		public IEnumerable<byte[]> col09__ni { get; set; }
 		#endregion
 		#region col10
 		public byte[] col10_eq { get; set; }
 		public byte[] col10_ne { get; set; }
-		public byte[] col10_lt { get; set; }
-		public byte[] col10_gt { get; set; }
-		public byte[] col10_le { get; set; }
-		public byte[] col10_ge { get; set; }
-		public IEnumerable<byte[]> col10_in { get; set; }
-		public IEnumerable<byte[]> col10_ni { get; set; }
 		#endregion
 		#region col10_
 		public byte[] col10__eq { get; set; }
 		public byte[] col10__ne { get; set; }
-		public byte[] col10__lt { get; set; }
-		public byte[] col10__gt { get; set; }
-		public byte[] col10__le { get; set; }
-		public byte[] col10__ge { get; set; }
-		public IEnumerable<byte[]> col10__in { get; set; }
-		public IEnumerable<byte[]> col10__ni { get; set; }
 		#endregion
 		#region col11
 		public byte[] col11_eq { get; set; }
 		public byte[] col11_ne { get; set; }
-		public byte[] col11_lt { get; set; }
-		public byte[] col11_gt { get; set; }
-		public byte[] col11_le { get; set; }
-		public byte[] col11_ge { get; set; }
-		public IEnumerable<byte[]> col11_in { get; set; }
-		public IEnumerable<byte[]> col11_ni { get; set; }
 		#endregion
 		#region col11_
 		public byte[] col11__eq { get; set; }
 		public byte[] col11__ne { get; set; }
-		public byte[] col11__lt { get; set; }
-		public byte[] col11__gt { get; set; }
-		public byte[] col11__le { get; set; }
-		public byte[] col11__ge { get; set; }
-		public IEnumerable<byte[]> col11__in { get; set; }
-		public IEnumerable<byte[]> col11__ni { get; set; }
 		#endregion
 		#region col12
 		public bool? col12_eq { get; set; }
 		public bool? col12_ne { get; set; }
-		public bool? col12_lt { get; set; }
-		public bool? col12_gt { get; set; }
-		public bool? col12_le { get; set; }
-		public bool? col12_ge { get; set; }
-		public IEnumerable<bool> col12_in { get; set; }
-		public IEnumerable<bool> col12_ni { get; set; }
 		#endregion
 		#region col12_
 		public bool? col12__eq { get; set; }
 		public bool? col12__ne { get; set; }
-		public bool? col12__lt { get; set; }
-		public bool? col12__gt { get; set; }
-		public bool? col12__le { get; set; }
-		public bool? col12__ge { get; set; }
-		public IEnumerable<bool> col12__in { get; set; }
-		public IEnumerable<bool> col12__ni { get; set; }
 		#endregion
 		#region col13
 		public Guid? col13_eq { get; set; }
 		public Guid? col13_ne { get; set; }
-		public Guid? col13_lt { get; set; }
-		public Guid? col13_gt { get; set; }
-		public Guid? col13_le { get; set; }
-		public Guid? col13_ge { get; set; }
-		public IEnumerable<Guid> col13_in { get; set; }
-		public IEnumerable<Guid> col13_ni { get; set; }
 		#endregion
 		#region col13_
 		public Guid? col13__eq { get; set; }
 		public Guid? col13__ne { get; set; }
-		public Guid? col13__lt { get; set; }
-		public Guid? col13__gt { get; set; }
-		public Guid? col13__le { get; set; }
-		public Guid? col13__ge { get; set; }
-		public IEnumerable<Guid> col13__in { get; set; }
-		public IEnumerable<Guid> col13__ni { get; set; }
 		#endregion
 		#region col14
 		public Int16? col14_eq { get; set; }
@@ -3616,6 +3666,7 @@ namespace peppa.Domain
 		public Int16? col14_ge { get; set; }
 		public IEnumerable<Int16> col14_in { get; set; }
 		public IEnumerable<Int16> col14_ni { get; set; }
+		public (Int16? low, Int16? high)? col14_between { get; set; }
 		#endregion
 		#region col14_
 		public Int16? col14__eq { get; set; }
@@ -3626,6 +3677,7 @@ namespace peppa.Domain
 		public Int16? col14__ge { get; set; }
 		public IEnumerable<Int16> col14__in { get; set; }
 		public IEnumerable<Int16> col14__ni { get; set; }
+		public (Int16? low, Int16? high)? col14__between { get; set; }
 		#endregion
 		#region col15
 		public int? col15_eq { get; set; }
@@ -3636,6 +3688,7 @@ namespace peppa.Domain
 		public int? col15_ge { get; set; }
 		public IEnumerable<int> col15_in { get; set; }
 		public IEnumerable<int> col15_ni { get; set; }
+		public (int? low, int? high)? col15_between { get; set; }
 		#endregion
 		#region col15_
 		public int? col15__eq { get; set; }
@@ -3646,6 +3699,7 @@ namespace peppa.Domain
 		public int? col15__ge { get; set; }
 		public IEnumerable<int> col15__in { get; set; }
 		public IEnumerable<int> col15__ni { get; set; }
+		public (int? low, int? high)? col15__between { get; set; }
 		#endregion
 		#region col16
 		public Int64? col16_eq { get; set; }
@@ -3656,6 +3710,7 @@ namespace peppa.Domain
 		public Int64? col16_ge { get; set; }
 		public IEnumerable<Int64> col16_in { get; set; }
 		public IEnumerable<Int64> col16_ni { get; set; }
+		public (Int64? low, Int64? high)? col16_between { get; set; }
 		#endregion
 		#region col16_
 		public Int64? col16__eq { get; set; }
@@ -3666,26 +3721,15 @@ namespace peppa.Domain
 		public Int64? col16__ge { get; set; }
 		public IEnumerable<Int64> col16__in { get; set; }
 		public IEnumerable<Int64> col16__ni { get; set; }
+		public (Int64? low, Int64? high)? col16__between { get; set; }
 		#endregion
 		#region col17
 		public byte? col17_eq { get; set; }
 		public byte? col17_ne { get; set; }
-		public byte? col17_lt { get; set; }
-		public byte? col17_gt { get; set; }
-		public byte? col17_le { get; set; }
-		public byte? col17_ge { get; set; }
-		public IEnumerable<byte> col17_in { get; set; }
-		public IEnumerable<byte> col17_ni { get; set; }
 		#endregion
 		#region col17_
 		public byte? col17__eq { get; set; }
 		public byte? col17__ne { get; set; }
-		public byte? col17__lt { get; set; }
-		public byte? col17__gt { get; set; }
-		public byte? col17__le { get; set; }
-		public byte? col17__ge { get; set; }
-		public IEnumerable<byte> col17__in { get; set; }
-		public IEnumerable<byte> col17__ni { get; set; }
 		#endregion
 		#region col18
 		public float? col18_eq { get; set; }
@@ -3696,6 +3740,7 @@ namespace peppa.Domain
 		public float? col18_ge { get; set; }
 		public IEnumerable<float> col18_in { get; set; }
 		public IEnumerable<float> col18_ni { get; set; }
+		public (float? low, float? high)? col18_between { get; set; }
 		#endregion
 		#region col18_
 		public float? col18__eq { get; set; }
@@ -3706,6 +3751,7 @@ namespace peppa.Domain
 		public float? col18__ge { get; set; }
 		public IEnumerable<float> col18__in { get; set; }
 		public IEnumerable<float> col18__ni { get; set; }
+		public (float? low, float? high)? col18__between { get; set; }
 		#endregion
 		#region col19
 		public decimal? col19_eq { get; set; }
@@ -3716,6 +3762,7 @@ namespace peppa.Domain
 		public decimal? col19_ge { get; set; }
 		public IEnumerable<decimal> col19_in { get; set; }
 		public IEnumerable<decimal> col19_ni { get; set; }
+		public (decimal? low, decimal? high)? col19_between { get; set; }
 		#endregion
 		#region col19_
 		public decimal? col19__eq { get; set; }
@@ -3726,6 +3773,7 @@ namespace peppa.Domain
 		public decimal? col19__ge { get; set; }
 		public IEnumerable<decimal> col19__in { get; set; }
 		public IEnumerable<decimal> col19__ni { get; set; }
+		public (decimal? low, decimal? high)? col19__between { get; set; }
 		#endregion
 		#region col20
 		public decimal? col20_eq { get; set; }
@@ -3736,6 +3784,7 @@ namespace peppa.Domain
 		public decimal? col20_ge { get; set; }
 		public IEnumerable<decimal> col20_in { get; set; }
 		public IEnumerable<decimal> col20_ni { get; set; }
+		public (decimal? low, decimal? high)? col20_between { get; set; }
 		#endregion
 		#region col20_
 		public decimal? col20__eq { get; set; }
@@ -3746,6 +3795,7 @@ namespace peppa.Domain
 		public decimal? col20__ge { get; set; }
 		public IEnumerable<decimal> col20__in { get; set; }
 		public IEnumerable<decimal> col20__ni { get; set; }
+		public (decimal? low, decimal? high)? col20__between { get; set; }
 		#endregion
 		#region col21
 		public decimal? col21_eq { get; set; }
@@ -3756,6 +3806,7 @@ namespace peppa.Domain
 		public decimal? col21_ge { get; set; }
 		public IEnumerable<decimal> col21_in { get; set; }
 		public IEnumerable<decimal> col21_ni { get; set; }
+		public (decimal? low, decimal? high)? col21_between { get; set; }
 		#endregion
 		#region col21_
 		public decimal? col21__eq { get; set; }
@@ -3766,6 +3817,7 @@ namespace peppa.Domain
 		public decimal? col21__ge { get; set; }
 		public IEnumerable<decimal> col21__in { get; set; }
 		public IEnumerable<decimal> col21__ni { get; set; }
+		public (decimal? low, decimal? high)? col21__between { get; set; }
 		#endregion
 		#region col22
 		public decimal? col22_eq { get; set; }
@@ -3776,6 +3828,7 @@ namespace peppa.Domain
 		public decimal? col22_ge { get; set; }
 		public IEnumerable<decimal> col22_in { get; set; }
 		public IEnumerable<decimal> col22_ni { get; set; }
+		public (decimal? low, decimal? high)? col22_between { get; set; }
 		#endregion
 		#region col22_
 		public decimal? col22__eq { get; set; }
@@ -3786,6 +3839,7 @@ namespace peppa.Domain
 		public decimal? col22__ge { get; set; }
 		public IEnumerable<decimal> col22__in { get; set; }
 		public IEnumerable<decimal> col22__ni { get; set; }
+		public (decimal? low, decimal? high)? col22__between { get; set; }
 		#endregion
 		#region col23
 		public DateTime? col23_eq { get; set; }
@@ -3796,6 +3850,7 @@ namespace peppa.Domain
 		public DateTime? col23_ge { get; set; }
 		public IEnumerable<DateTime> col23_in { get; set; }
 		public IEnumerable<DateTime> col23_ni { get; set; }
+		public (DateTime? low, DateTime? high)? col23_between { get; set; }
 		#endregion
 		#region col23_
 		public DateTime? col23__eq { get; set; }
@@ -3806,6 +3861,7 @@ namespace peppa.Domain
 		public DateTime? col23__ge { get; set; }
 		public IEnumerable<DateTime> col23__in { get; set; }
 		public IEnumerable<DateTime> col23__ni { get; set; }
+		public (DateTime? low, DateTime? high)? col23__between { get; set; }
 		#endregion
 		#region col24
 		public TimeSpan? col24_eq { get; set; }
@@ -3816,6 +3872,7 @@ namespace peppa.Domain
 		public TimeSpan? col24_ge { get; set; }
 		public IEnumerable<TimeSpan> col24_in { get; set; }
 		public IEnumerable<TimeSpan> col24_ni { get; set; }
+		public (TimeSpan? low, TimeSpan? high)? col24_between { get; set; }
 		#endregion
 		#region col24_
 		public TimeSpan? col24__eq { get; set; }
@@ -3826,6 +3883,7 @@ namespace peppa.Domain
 		public TimeSpan? col24__ge { get; set; }
 		public IEnumerable<TimeSpan> col24__in { get; set; }
 		public IEnumerable<TimeSpan> col24__ni { get; set; }
+		public (TimeSpan? low, TimeSpan? high)? col24__between { get; set; }
 		#endregion
 		#region col25
 		public DateTime? col25_eq { get; set; }
@@ -3836,6 +3894,7 @@ namespace peppa.Domain
 		public DateTime? col25_ge { get; set; }
 		public IEnumerable<DateTime> col25_in { get; set; }
 		public IEnumerable<DateTime> col25_ni { get; set; }
+		public (DateTime? low, DateTime? high)? col25_between { get; set; }
 		#endregion
 		#region col25_
 		public DateTime? col25__eq { get; set; }
@@ -3846,6 +3905,7 @@ namespace peppa.Domain
 		public DateTime? col25__ge { get; set; }
 		public IEnumerable<DateTime> col25__in { get; set; }
 		public IEnumerable<DateTime> col25__ni { get; set; }
+		public (DateTime? low, DateTime? high)? col25__between { get; set; }
 		#endregion
 		#region col26
 		public DateTime? col26_eq { get; set; }
@@ -3856,6 +3916,7 @@ namespace peppa.Domain
 		public DateTime? col26_ge { get; set; }
 		public IEnumerable<DateTime> col26_in { get; set; }
 		public IEnumerable<DateTime> col26_ni { get; set; }
+		public (DateTime? low, DateTime? high)? col26_between { get; set; }
 		#endregion
 		#region col26_
 		public DateTime? col26__eq { get; set; }
@@ -3866,6 +3927,7 @@ namespace peppa.Domain
 		public DateTime? col26__ge { get; set; }
 		public IEnumerable<DateTime> col26__in { get; set; }
 		public IEnumerable<DateTime> col26__ni { get; set; }
+		public (DateTime? low, DateTime? high)? col26__between { get; set; }
 		#endregion
 		#region col27
 		public DateTime? col27_eq { get; set; }
@@ -3876,6 +3938,7 @@ namespace peppa.Domain
 		public DateTime? col27_ge { get; set; }
 		public IEnumerable<DateTime> col27_in { get; set; }
 		public IEnumerable<DateTime> col27_ni { get; set; }
+		public (DateTime? low, DateTime? high)? col27_between { get; set; }
 		#endregion
 		#region col27_
 		public DateTime? col27__eq { get; set; }
@@ -3886,6 +3949,7 @@ namespace peppa.Domain
 		public DateTime? col27__ge { get; set; }
 		public IEnumerable<DateTime> col27__in { get; set; }
 		public IEnumerable<DateTime> col27__ni { get; set; }
+		public (DateTime? low, DateTime? high)? col27__between { get; set; }
 		#endregion
 		#region col28
 		public DateTimeOffset? col28_eq { get; set; }
@@ -3896,6 +3960,7 @@ namespace peppa.Domain
 		public DateTimeOffset? col28_ge { get; set; }
 		public IEnumerable<DateTimeOffset> col28_in { get; set; }
 		public IEnumerable<DateTimeOffset> col28_ni { get; set; }
+		public (DateTimeOffset? low, DateTimeOffset? high)? col28_between { get; set; }
 		#endregion
 		#region col28_
 		public DateTimeOffset? col28__eq { get; set; }
@@ -3906,139 +3971,430 @@ namespace peppa.Domain
 		public DateTimeOffset? col28__ge { get; set; }
 		public IEnumerable<DateTimeOffset> col28__in { get; set; }
 		public IEnumerable<DateTimeOffset> col28__ni { get; set; }
+		public (DateTimeOffset? low, DateTimeOffset? high)? col28__between { get; set; }
 		#endregion
 		#region col29
 		public byte[] col29_eq { get; set; }
 		public byte[] col29_ne { get; set; }
-		public byte[] col29_lt { get; set; }
-		public byte[] col29_gt { get; set; }
-		public byte[] col29_le { get; set; }
-		public byte[] col29_ge { get; set; }
-		public IEnumerable<byte[]> col29_in { get; set; }
-		public IEnumerable<byte[]> col29_ni { get; set; }
 		#endregion
 		#endregion
 
 		#region override
 		override public Expression<Func<Test, bool>> CreatePredicate()
 		{
-			var predicate = PredicateBuilder.True<Test>();
+			var predicate = base.CreatePredicate();
 
 			#region uid
+			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
+			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
+			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
+			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
+			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
+			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
 			#endregion
 			#region col01
+			if (col01_eq != null) predicate = predicate.And(_ => _.col01 == col01_eq);
+			if (col01_ne != null) predicate = predicate.And(_ => _.col01 != col01_ne);
+			if (col01_lt != null) predicate = predicate.And(_ => _.col01 < col01_lt);
+			if (col01_gt != null) predicate = predicate.And(_ => _.col01 > col01_gt);
+			if (col01_le != null) predicate = predicate.And(_ => _.col01 <= col01_le);
+			if (col01_ge != null) predicate = predicate.And(_ => _.col01 >= col01_ge);
 			#endregion
 			#region col01_
+			if (col01__eq != null) predicate = predicate.And(_ => _.col01_ == col01__eq);
+			if (col01__ne != null) predicate = predicate.And(_ => _.col01_ != col01__ne);
+			if (col01__lt != null) predicate = predicate.And(_ => _.col01_ < col01__lt);
+			if (col01__gt != null) predicate = predicate.And(_ => _.col01_ > col01__gt);
+			if (col01__le != null) predicate = predicate.And(_ => _.col01_ <= col01__le);
+			if (col01__ge != null) predicate = predicate.And(_ => _.col01_ >= col01__ge);
 			#endregion
 			#region col02
+			if (col02_eq != null) predicate = predicate.And(_ => _.col02 == col02_eq);
+			if (col02_ne != null) predicate = predicate.And(_ => _.col02 != col02_ne);
+			if (col02_lt != null) predicate = predicate.And(_ => col02_lt.CompareTo(_.col02) > 0);
+			if (col02_gt != null) predicate = predicate.And(_ => col02_gt.CompareTo(_.col02) < 0);
+			if (col02_le != null) predicate = predicate.And(_ => col02_le.CompareTo(_.col02) >= 0);
+			if (col02_ge != null) predicate = predicate.And(_ => col02_ge.CompareTo(_.col02) <= 0);
 			#endregion
 			#region col02_
+			if (col02__eq != null) predicate = predicate.And(_ => _.col02_ == col02__eq);
+			if (col02__ne != null) predicate = predicate.And(_ => _.col02_ != col02__ne);
+			if (col02__lt != null) predicate = predicate.And(_ => col02__lt.CompareTo(_.col02_) > 0);
+			if (col02__gt != null) predicate = predicate.And(_ => col02__gt.CompareTo(_.col02_) < 0);
+			if (col02__le != null) predicate = predicate.And(_ => col02__le.CompareTo(_.col02_) >= 0);
+			if (col02__ge != null) predicate = predicate.And(_ => col02__ge.CompareTo(_.col02_) <= 0);
 			#endregion
 			#region col03
+			if (col03_eq != null) predicate = predicate.And(_ => _.col03 == col03_eq);
+			if (col03_ne != null) predicate = predicate.And(_ => _.col03 != col03_ne);
+			if (col03_lt != null) predicate = predicate.And(_ => col03_lt.CompareTo(_.col03) > 0);
+			if (col03_gt != null) predicate = predicate.And(_ => col03_gt.CompareTo(_.col03) < 0);
+			if (col03_le != null) predicate = predicate.And(_ => col03_le.CompareTo(_.col03) >= 0);
+			if (col03_ge != null) predicate = predicate.And(_ => col03_ge.CompareTo(_.col03) <= 0);
 			#endregion
 			#region col03_
+			if (col03__eq != null) predicate = predicate.And(_ => _.col03_ == col03__eq);
+			if (col03__ne != null) predicate = predicate.And(_ => _.col03_ != col03__ne);
+			if (col03__lt != null) predicate = predicate.And(_ => col03__lt.CompareTo(_.col03_) > 0);
+			if (col03__gt != null) predicate = predicate.And(_ => col03__gt.CompareTo(_.col03_) < 0);
+			if (col03__le != null) predicate = predicate.And(_ => col03__le.CompareTo(_.col03_) >= 0);
+			if (col03__ge != null) predicate = predicate.And(_ => col03__ge.CompareTo(_.col03_) <= 0);
 			#endregion
 			#region col04
+			if (col04_eq != null) predicate = predicate.And(_ => _.col04 == col04_eq);
+			if (col04_ne != null) predicate = predicate.And(_ => _.col04 != col04_ne);
+			if (col04_lt != null) predicate = predicate.And(_ => col04_lt.CompareTo(_.col04) > 0);
+			if (col04_gt != null) predicate = predicate.And(_ => col04_gt.CompareTo(_.col04) < 0);
+			if (col04_le != null) predicate = predicate.And(_ => col04_le.CompareTo(_.col04) >= 0);
+			if (col04_ge != null) predicate = predicate.And(_ => col04_ge.CompareTo(_.col04) <= 0);
 			#endregion
 			#region col04_
+			if (col04__eq != null) predicate = predicate.And(_ => _.col04_ == col04__eq);
+			if (col04__ne != null) predicate = predicate.And(_ => _.col04_ != col04__ne);
+			if (col04__lt != null) predicate = predicate.And(_ => col04__lt.CompareTo(_.col04_) > 0);
+			if (col04__gt != null) predicate = predicate.And(_ => col04__gt.CompareTo(_.col04_) < 0);
+			if (col04__le != null) predicate = predicate.And(_ => col04__le.CompareTo(_.col04_) >= 0);
+			if (col04__ge != null) predicate = predicate.And(_ => col04__ge.CompareTo(_.col04_) <= 0);
 			#endregion
 			#region col05
+			if (col05_eq != null) predicate = predicate.And(_ => _.col05 == col05_eq);
+			if (col05_ne != null) predicate = predicate.And(_ => _.col05 != col05_ne);
+			if (col05_lt != null) predicate = predicate.And(_ => _.col05 < col05_lt);
+			if (col05_gt != null) predicate = predicate.And(_ => _.col05 > col05_gt);
+			if (col05_le != null) predicate = predicate.And(_ => _.col05 <= col05_le);
+			if (col05_ge != null) predicate = predicate.And(_ => _.col05 >= col05_ge);
 			#endregion
 			#region col05_
+			if (col05__eq != null) predicate = predicate.And(_ => _.col05_ == col05__eq);
+			if (col05__ne != null) predicate = predicate.And(_ => _.col05_ != col05__ne);
+			if (col05__lt != null) predicate = predicate.And(_ => _.col05_ < col05__lt);
+			if (col05__gt != null) predicate = predicate.And(_ => _.col05_ > col05__gt);
+			if (col05__le != null) predicate = predicate.And(_ => _.col05_ <= col05__le);
+			if (col05__ge != null) predicate = predicate.And(_ => _.col05_ >= col05__ge);
 			#endregion
 			#region col06
+			if (col06_eq != null) predicate = predicate.And(_ => _.col06 == col06_eq);
+			if (col06_ne != null) predicate = predicate.And(_ => _.col06 != col06_ne);
+			if (col06_lt != null) predicate = predicate.And(_ => col06_lt.CompareTo(_.col06) > 0);
+			if (col06_gt != null) predicate = predicate.And(_ => col06_gt.CompareTo(_.col06) < 0);
+			if (col06_le != null) predicate = predicate.And(_ => col06_le.CompareTo(_.col06) >= 0);
+			if (col06_ge != null) predicate = predicate.And(_ => col06_ge.CompareTo(_.col06) <= 0);
 			#endregion
 			#region col06_
+			if (col06__eq != null) predicate = predicate.And(_ => _.col06_ == col06__eq);
+			if (col06__ne != null) predicate = predicate.And(_ => _.col06_ != col06__ne);
+			if (col06__lt != null) predicate = predicate.And(_ => col06__lt.CompareTo(_.col06_) > 0);
+			if (col06__gt != null) predicate = predicate.And(_ => col06__gt.CompareTo(_.col06_) < 0);
+			if (col06__le != null) predicate = predicate.And(_ => col06__le.CompareTo(_.col06_) >= 0);
+			if (col06__ge != null) predicate = predicate.And(_ => col06__ge.CompareTo(_.col06_) <= 0);
 			#endregion
 			#region col07
+			if (col07_eq != null) predicate = predicate.And(_ => _.col07 == col07_eq);
+			if (col07_ne != null) predicate = predicate.And(_ => _.col07 != col07_ne);
+			if (col07_lt != null) predicate = predicate.And(_ => col07_lt.CompareTo(_.col07) > 0);
+			if (col07_gt != null) predicate = predicate.And(_ => col07_gt.CompareTo(_.col07) < 0);
+			if (col07_le != null) predicate = predicate.And(_ => col07_le.CompareTo(_.col07) >= 0);
+			if (col07_ge != null) predicate = predicate.And(_ => col07_ge.CompareTo(_.col07) <= 0);
 			#endregion
 			#region col07_
+			if (col07__eq != null) predicate = predicate.And(_ => _.col07_ == col07__eq);
+			if (col07__ne != null) predicate = predicate.And(_ => _.col07_ != col07__ne);
+			if (col07__lt != null) predicate = predicate.And(_ => col07__lt.CompareTo(_.col07_) > 0);
+			if (col07__gt != null) predicate = predicate.And(_ => col07__gt.CompareTo(_.col07_) < 0);
+			if (col07__le != null) predicate = predicate.And(_ => col07__le.CompareTo(_.col07_) >= 0);
+			if (col07__ge != null) predicate = predicate.And(_ => col07__ge.CompareTo(_.col07_) <= 0);
 			#endregion
 			#region col08
+			if (col08_eq != null) predicate = predicate.And(_ => _.col08 == col08_eq);
+			if (col08_ne != null) predicate = predicate.And(_ => _.col08 != col08_ne);
+			if (col08_lt != null) predicate = predicate.And(_ => col08_lt.CompareTo(_.col08) > 0);
+			if (col08_gt != null) predicate = predicate.And(_ => col08_gt.CompareTo(_.col08) < 0);
+			if (col08_le != null) predicate = predicate.And(_ => col08_le.CompareTo(_.col08) >= 0);
+			if (col08_ge != null) predicate = predicate.And(_ => col08_ge.CompareTo(_.col08) <= 0);
 			#endregion
 			#region col08_
+			if (col08__eq != null) predicate = predicate.And(_ => _.col08_ == col08__eq);
+			if (col08__ne != null) predicate = predicate.And(_ => _.col08_ != col08__ne);
+			if (col08__lt != null) predicate = predicate.And(_ => col08__lt.CompareTo(_.col08_) > 0);
+			if (col08__gt != null) predicate = predicate.And(_ => col08__gt.CompareTo(_.col08_) < 0);
+			if (col08__le != null) predicate = predicate.And(_ => col08__le.CompareTo(_.col08_) >= 0);
+			if (col08__ge != null) predicate = predicate.And(_ => col08__ge.CompareTo(_.col08_) <= 0);
 			#endregion
 			#region col09
+			if (col09_eq != null) predicate = predicate.And(_ => _.col09 == col09_eq);
+			if (col09_ne != null) predicate = predicate.And(_ => _.col09 != col09_ne);
 			#endregion
 			#region col09_
+			if (col09__eq != null) predicate = predicate.And(_ => _.col09_ == col09__eq);
+			if (col09__ne != null) predicate = predicate.And(_ => _.col09_ != col09__ne);
 			#endregion
 			#region col10
+			if (col10_eq != null) predicate = predicate.And(_ => _.col10 == col10_eq);
+			if (col10_ne != null) predicate = predicate.And(_ => _.col10 != col10_ne);
 			#endregion
 			#region col10_
+			if (col10__eq != null) predicate = predicate.And(_ => _.col10_ == col10__eq);
+			if (col10__ne != null) predicate = predicate.And(_ => _.col10_ != col10__ne);
 			#endregion
 			#region col11
+			if (col11_eq != null) predicate = predicate.And(_ => _.col11 == col11_eq);
+			if (col11_ne != null) predicate = predicate.And(_ => _.col11 != col11_ne);
 			#endregion
 			#region col11_
+			if (col11__eq != null) predicate = predicate.And(_ => _.col11_ == col11__eq);
+			if (col11__ne != null) predicate = predicate.And(_ => _.col11_ != col11__ne);
 			#endregion
 			#region col12
+			if (col12_eq != null) predicate = predicate.And(_ => _.col12 == col12_eq);
+			if (col12_ne != null) predicate = predicate.And(_ => _.col12 != col12_ne);
 			#endregion
 			#region col12_
+			if (col12__eq != null) predicate = predicate.And(_ => _.col12_ == col12__eq);
+			if (col12__ne != null) predicate = predicate.And(_ => _.col12_ != col12__ne);
 			#endregion
 			#region col13
+			if (col13_eq != null) predicate = predicate.And(_ => _.col13 == col13_eq);
+			if (col13_ne != null) predicate = predicate.And(_ => _.col13 != col13_ne);
 			#endregion
 			#region col13_
+			if (col13__eq != null) predicate = predicate.And(_ => _.col13_ == col13__eq);
+			if (col13__ne != null) predicate = predicate.And(_ => _.col13_ != col13__ne);
 			#endregion
 			#region col14
+			if (col14_eq != null) predicate = predicate.And(_ => _.col14 == col14_eq);
+			if (col14_ne != null) predicate = predicate.And(_ => _.col14 != col14_ne);
+			if (col14_lt != null) predicate = predicate.And(_ => _.col14 < col14_lt);
+			if (col14_gt != null) predicate = predicate.And(_ => _.col14 > col14_gt);
+			if (col14_le != null) predicate = predicate.And(_ => _.col14 <= col14_le);
+			if (col14_ge != null) predicate = predicate.And(_ => _.col14 >= col14_ge);
 			#endregion
 			#region col14_
+			if (col14__eq != null) predicate = predicate.And(_ => _.col14_ == col14__eq);
+			if (col14__ne != null) predicate = predicate.And(_ => _.col14_ != col14__ne);
+			if (col14__lt != null) predicate = predicate.And(_ => _.col14_ < col14__lt);
+			if (col14__gt != null) predicate = predicate.And(_ => _.col14_ > col14__gt);
+			if (col14__le != null) predicate = predicate.And(_ => _.col14_ <= col14__le);
+			if (col14__ge != null) predicate = predicate.And(_ => _.col14_ >= col14__ge);
 			#endregion
 			#region col15
+			if (col15_eq != null) predicate = predicate.And(_ => _.col15 == col15_eq);
+			if (col15_ne != null) predicate = predicate.And(_ => _.col15 != col15_ne);
+			if (col15_lt != null) predicate = predicate.And(_ => _.col15 < col15_lt);
+			if (col15_gt != null) predicate = predicate.And(_ => _.col15 > col15_gt);
+			if (col15_le != null) predicate = predicate.And(_ => _.col15 <= col15_le);
+			if (col15_ge != null) predicate = predicate.And(_ => _.col15 >= col15_ge);
 			#endregion
 			#region col15_
+			if (col15__eq != null) predicate = predicate.And(_ => _.col15_ == col15__eq);
+			if (col15__ne != null) predicate = predicate.And(_ => _.col15_ != col15__ne);
+			if (col15__lt != null) predicate = predicate.And(_ => _.col15_ < col15__lt);
+			if (col15__gt != null) predicate = predicate.And(_ => _.col15_ > col15__gt);
+			if (col15__le != null) predicate = predicate.And(_ => _.col15_ <= col15__le);
+			if (col15__ge != null) predicate = predicate.And(_ => _.col15_ >= col15__ge);
 			#endregion
 			#region col16
+			if (col16_eq != null) predicate = predicate.And(_ => _.col16 == col16_eq);
+			if (col16_ne != null) predicate = predicate.And(_ => _.col16 != col16_ne);
+			if (col16_lt != null) predicate = predicate.And(_ => _.col16 < col16_lt);
+			if (col16_gt != null) predicate = predicate.And(_ => _.col16 > col16_gt);
+			if (col16_le != null) predicate = predicate.And(_ => _.col16 <= col16_le);
+			if (col16_ge != null) predicate = predicate.And(_ => _.col16 >= col16_ge);
 			#endregion
 			#region col16_
+			if (col16__eq != null) predicate = predicate.And(_ => _.col16_ == col16__eq);
+			if (col16__ne != null) predicate = predicate.And(_ => _.col16_ != col16__ne);
+			if (col16__lt != null) predicate = predicate.And(_ => _.col16_ < col16__lt);
+			if (col16__gt != null) predicate = predicate.And(_ => _.col16_ > col16__gt);
+			if (col16__le != null) predicate = predicate.And(_ => _.col16_ <= col16__le);
+			if (col16__ge != null) predicate = predicate.And(_ => _.col16_ >= col16__ge);
 			#endregion
 			#region col17
+			if (col17_eq != null) predicate = predicate.And(_ => _.col17 == col17_eq);
+			if (col17_ne != null) predicate = predicate.And(_ => _.col17 != col17_ne);
 			#endregion
 			#region col17_
+			if (col17__eq != null) predicate = predicate.And(_ => _.col17_ == col17__eq);
+			if (col17__ne != null) predicate = predicate.And(_ => _.col17_ != col17__ne);
 			#endregion
 			#region col18
+			if (col18_eq != null) predicate = predicate.And(_ => _.col18 == col18_eq);
+			if (col18_ne != null) predicate = predicate.And(_ => _.col18 != col18_ne);
+			if (col18_lt != null) predicate = predicate.And(_ => _.col18 < col18_lt);
+			if (col18_gt != null) predicate = predicate.And(_ => _.col18 > col18_gt);
+			if (col18_le != null) predicate = predicate.And(_ => _.col18 <= col18_le);
+			if (col18_ge != null) predicate = predicate.And(_ => _.col18 >= col18_ge);
 			#endregion
 			#region col18_
+			if (col18__eq != null) predicate = predicate.And(_ => _.col18_ == col18__eq);
+			if (col18__ne != null) predicate = predicate.And(_ => _.col18_ != col18__ne);
+			if (col18__lt != null) predicate = predicate.And(_ => _.col18_ < col18__lt);
+			if (col18__gt != null) predicate = predicate.And(_ => _.col18_ > col18__gt);
+			if (col18__le != null) predicate = predicate.And(_ => _.col18_ <= col18__le);
+			if (col18__ge != null) predicate = predicate.And(_ => _.col18_ >= col18__ge);
 			#endregion
 			#region col19
+			if (col19_eq != null) predicate = predicate.And(_ => _.col19 == col19_eq);
+			if (col19_ne != null) predicate = predicate.And(_ => _.col19 != col19_ne);
+			if (col19_lt != null) predicate = predicate.And(_ => _.col19 < col19_lt);
+			if (col19_gt != null) predicate = predicate.And(_ => _.col19 > col19_gt);
+			if (col19_le != null) predicate = predicate.And(_ => _.col19 <= col19_le);
+			if (col19_ge != null) predicate = predicate.And(_ => _.col19 >= col19_ge);
 			#endregion
 			#region col19_
+			if (col19__eq != null) predicate = predicate.And(_ => _.col19_ == col19__eq);
+			if (col19__ne != null) predicate = predicate.And(_ => _.col19_ != col19__ne);
+			if (col19__lt != null) predicate = predicate.And(_ => _.col19_ < col19__lt);
+			if (col19__gt != null) predicate = predicate.And(_ => _.col19_ > col19__gt);
+			if (col19__le != null) predicate = predicate.And(_ => _.col19_ <= col19__le);
+			if (col19__ge != null) predicate = predicate.And(_ => _.col19_ >= col19__ge);
 			#endregion
 			#region col20
+			if (col20_eq != null) predicate = predicate.And(_ => _.col20 == col20_eq);
+			if (col20_ne != null) predicate = predicate.And(_ => _.col20 != col20_ne);
+			if (col20_lt != null) predicate = predicate.And(_ => _.col20 < col20_lt);
+			if (col20_gt != null) predicate = predicate.And(_ => _.col20 > col20_gt);
+			if (col20_le != null) predicate = predicate.And(_ => _.col20 <= col20_le);
+			if (col20_ge != null) predicate = predicate.And(_ => _.col20 >= col20_ge);
 			#endregion
 			#region col20_
+			if (col20__eq != null) predicate = predicate.And(_ => _.col20_ == col20__eq);
+			if (col20__ne != null) predicate = predicate.And(_ => _.col20_ != col20__ne);
+			if (col20__lt != null) predicate = predicate.And(_ => _.col20_ < col20__lt);
+			if (col20__gt != null) predicate = predicate.And(_ => _.col20_ > col20__gt);
+			if (col20__le != null) predicate = predicate.And(_ => _.col20_ <= col20__le);
+			if (col20__ge != null) predicate = predicate.And(_ => _.col20_ >= col20__ge);
 			#endregion
 			#region col21
+			if (col21_eq != null) predicate = predicate.And(_ => _.col21 == col21_eq);
+			if (col21_ne != null) predicate = predicate.And(_ => _.col21 != col21_ne);
+			if (col21_lt != null) predicate = predicate.And(_ => _.col21 < col21_lt);
+			if (col21_gt != null) predicate = predicate.And(_ => _.col21 > col21_gt);
+			if (col21_le != null) predicate = predicate.And(_ => _.col21 <= col21_le);
+			if (col21_ge != null) predicate = predicate.And(_ => _.col21 >= col21_ge);
 			#endregion
 			#region col21_
+			if (col21__eq != null) predicate = predicate.And(_ => _.col21_ == col21__eq);
+			if (col21__ne != null) predicate = predicate.And(_ => _.col21_ != col21__ne);
+			if (col21__lt != null) predicate = predicate.And(_ => _.col21_ < col21__lt);
+			if (col21__gt != null) predicate = predicate.And(_ => _.col21_ > col21__gt);
+			if (col21__le != null) predicate = predicate.And(_ => _.col21_ <= col21__le);
+			if (col21__ge != null) predicate = predicate.And(_ => _.col21_ >= col21__ge);
 			#endregion
 			#region col22
+			if (col22_eq != null) predicate = predicate.And(_ => _.col22 == col22_eq);
+			if (col22_ne != null) predicate = predicate.And(_ => _.col22 != col22_ne);
+			if (col22_lt != null) predicate = predicate.And(_ => _.col22 < col22_lt);
+			if (col22_gt != null) predicate = predicate.And(_ => _.col22 > col22_gt);
+			if (col22_le != null) predicate = predicate.And(_ => _.col22 <= col22_le);
+			if (col22_ge != null) predicate = predicate.And(_ => _.col22 >= col22_ge);
 			#endregion
 			#region col22_
+			if (col22__eq != null) predicate = predicate.And(_ => _.col22_ == col22__eq);
+			if (col22__ne != null) predicate = predicate.And(_ => _.col22_ != col22__ne);
+			if (col22__lt != null) predicate = predicate.And(_ => _.col22_ < col22__lt);
+			if (col22__gt != null) predicate = predicate.And(_ => _.col22_ > col22__gt);
+			if (col22__le != null) predicate = predicate.And(_ => _.col22_ <= col22__le);
+			if (col22__ge != null) predicate = predicate.And(_ => _.col22_ >= col22__ge);
 			#endregion
 			#region col23
+			if (col23_eq != null) predicate = predicate.And(_ => _.col23 == col23_eq);
+			if (col23_ne != null) predicate = predicate.And(_ => _.col23 != col23_ne);
+			if (col23_lt != null) predicate = predicate.And(_ => _.col23 < col23_lt);
+			if (col23_gt != null) predicate = predicate.And(_ => _.col23 > col23_gt);
+			if (col23_le != null) predicate = predicate.And(_ => _.col23 <= col23_le);
+			if (col23_ge != null) predicate = predicate.And(_ => _.col23 >= col23_ge);
 			#endregion
 			#region col23_
+			if (col23__eq != null) predicate = predicate.And(_ => _.col23_ == col23__eq);
+			if (col23__ne != null) predicate = predicate.And(_ => _.col23_ != col23__ne);
+			if (col23__lt != null) predicate = predicate.And(_ => _.col23_ < col23__lt);
+			if (col23__gt != null) predicate = predicate.And(_ => _.col23_ > col23__gt);
+			if (col23__le != null) predicate = predicate.And(_ => _.col23_ <= col23__le);
+			if (col23__ge != null) predicate = predicate.And(_ => _.col23_ >= col23__ge);
 			#endregion
 			#region col24
+			if (col24_eq != null) predicate = predicate.And(_ => _.col24 == col24_eq);
+			if (col24_ne != null) predicate = predicate.And(_ => _.col24 != col24_ne);
+			if (col24_lt != null) predicate = predicate.And(_ => _.col24 < col24_lt);
+			if (col24_gt != null) predicate = predicate.And(_ => _.col24 > col24_gt);
+			if (col24_le != null) predicate = predicate.And(_ => _.col24 <= col24_le);
+			if (col24_ge != null) predicate = predicate.And(_ => _.col24 >= col24_ge);
 			#endregion
 			#region col24_
+			if (col24__eq != null) predicate = predicate.And(_ => _.col24_ == col24__eq);
+			if (col24__ne != null) predicate = predicate.And(_ => _.col24_ != col24__ne);
+			if (col24__lt != null) predicate = predicate.And(_ => _.col24_ < col24__lt);
+			if (col24__gt != null) predicate = predicate.And(_ => _.col24_ > col24__gt);
+			if (col24__le != null) predicate = predicate.And(_ => _.col24_ <= col24__le);
+			if (col24__ge != null) predicate = predicate.And(_ => _.col24_ >= col24__ge);
 			#endregion
 			#region col25
+			if (col25_eq != null) predicate = predicate.And(_ => _.col25 == col25_eq);
+			if (col25_ne != null) predicate = predicate.And(_ => _.col25 != col25_ne);
+			if (col25_lt != null) predicate = predicate.And(_ => _.col25 < col25_lt);
+			if (col25_gt != null) predicate = predicate.And(_ => _.col25 > col25_gt);
+			if (col25_le != null) predicate = predicate.And(_ => _.col25 <= col25_le);
+			if (col25_ge != null) predicate = predicate.And(_ => _.col25 >= col25_ge);
 			#endregion
 			#region col25_
+			if (col25__eq != null) predicate = predicate.And(_ => _.col25_ == col25__eq);
+			if (col25__ne != null) predicate = predicate.And(_ => _.col25_ != col25__ne);
+			if (col25__lt != null) predicate = predicate.And(_ => _.col25_ < col25__lt);
+			if (col25__gt != null) predicate = predicate.And(_ => _.col25_ > col25__gt);
+			if (col25__le != null) predicate = predicate.And(_ => _.col25_ <= col25__le);
+			if (col25__ge != null) predicate = predicate.And(_ => _.col25_ >= col25__ge);
 			#endregion
 			#region col26
+			if (col26_eq != null) predicate = predicate.And(_ => _.col26 == col26_eq);
+			if (col26_ne != null) predicate = predicate.And(_ => _.col26 != col26_ne);
+			if (col26_lt != null) predicate = predicate.And(_ => _.col26 < col26_lt);
+			if (col26_gt != null) predicate = predicate.And(_ => _.col26 > col26_gt);
+			if (col26_le != null) predicate = predicate.And(_ => _.col26 <= col26_le);
+			if (col26_ge != null) predicate = predicate.And(_ => _.col26 >= col26_ge);
 			#endregion
 			#region col26_
+			if (col26__eq != null) predicate = predicate.And(_ => _.col26_ == col26__eq);
+			if (col26__ne != null) predicate = predicate.And(_ => _.col26_ != col26__ne);
+			if (col26__lt != null) predicate = predicate.And(_ => _.col26_ < col26__lt);
+			if (col26__gt != null) predicate = predicate.And(_ => _.col26_ > col26__gt);
+			if (col26__le != null) predicate = predicate.And(_ => _.col26_ <= col26__le);
+			if (col26__ge != null) predicate = predicate.And(_ => _.col26_ >= col26__ge);
 			#endregion
 			#region col27
+			if (col27_eq != null) predicate = predicate.And(_ => _.col27 == col27_eq);
+			if (col27_ne != null) predicate = predicate.And(_ => _.col27 != col27_ne);
+			if (col27_lt != null) predicate = predicate.And(_ => _.col27 < col27_lt);
+			if (col27_gt != null) predicate = predicate.And(_ => _.col27 > col27_gt);
+			if (col27_le != null) predicate = predicate.And(_ => _.col27 <= col27_le);
+			if (col27_ge != null) predicate = predicate.And(_ => _.col27 >= col27_ge);
 			#endregion
 			#region col27_
+			if (col27__eq != null) predicate = predicate.And(_ => _.col27_ == col27__eq);
+			if (col27__ne != null) predicate = predicate.And(_ => _.col27_ != col27__ne);
+			if (col27__lt != null) predicate = predicate.And(_ => _.col27_ < col27__lt);
+			if (col27__gt != null) predicate = predicate.And(_ => _.col27_ > col27__gt);
+			if (col27__le != null) predicate = predicate.And(_ => _.col27_ <= col27__le);
+			if (col27__ge != null) predicate = predicate.And(_ => _.col27_ >= col27__ge);
 			#endregion
 			#region col28
+			if (col28_eq != null) predicate = predicate.And(_ => _.col28 == col28_eq);
+			if (col28_ne != null) predicate = predicate.And(_ => _.col28 != col28_ne);
+			if (col28_lt != null) predicate = predicate.And(_ => _.col28 < col28_lt);
+			if (col28_gt != null) predicate = predicate.And(_ => _.col28 > col28_gt);
+			if (col28_le != null) predicate = predicate.And(_ => _.col28 <= col28_le);
+			if (col28_ge != null) predicate = predicate.And(_ => _.col28 >= col28_ge);
 			#endregion
 			#region col28_
+			if (col28__eq != null) predicate = predicate.And(_ => _.col28_ == col28__eq);
+			if (col28__ne != null) predicate = predicate.And(_ => _.col28_ != col28__ne);
+			if (col28__lt != null) predicate = predicate.And(_ => _.col28_ < col28__lt);
+			if (col28__gt != null) predicate = predicate.And(_ => _.col28_ > col28__gt);
+			if (col28__le != null) predicate = predicate.And(_ => _.col28_ <= col28__le);
+			if (col28__ge != null) predicate = predicate.And(_ => _.col28_ >= col28__ge);
 			#endregion
 			#region col29
+			if (col29_eq != null) predicate = predicate.And(_ => _.col29 == col29_eq);
+			if (col29_ne != null) predicate = predicate.And(_ => _.col29 != col29_ne);
 			#endregion
 
 			return predicate;
@@ -4335,14 +4691,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region created_by : string
+		#region created_by : int?
 
-		private string _created_by;
+		private int? _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  created_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  created_by
 		{
 			get { return _created_by; }
 			set
@@ -4360,7 +4716,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforecreated_byChanged(string newValue);
+		partial void Beforecreated_byChanged(int? newValue);
 		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
@@ -4415,14 +4771,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region modified_by : string
+		#region modified_by : int?
 
-		private string _modified_by;
+		private int? _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  modified_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  modified_by
 		{
 			get { return _modified_by; }
 			set
@@ -4440,7 +4796,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforemodified_byChanged(string newValue);
+		partial void Beforemodified_byChanged(int? newValue);
 		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
@@ -4539,6 +4895,28 @@ namespace peppa.Domain
 		#region enum用アクセスラッパー
 		#endregion
 
+		#region Constructor
+
+		public ErrorLog()
+		{
+			#region フィールド初期化
+			uid = default(int);
+			category = "";
+			type = "";
+			level = 0;
+			url = "";
+			methods = "";
+			created_at = DateTime.UtcNow;
+			created_by = null;
+			modified_at = DateTime.UtcNow;
+			modified_by = null;
+			removed_at = null;
+			row_version = default(byte[]);
+			#endregion
+		}
+
+		#endregion
+
 		#region Association
 
 
@@ -4588,6 +4966,7 @@ namespace peppa.Domain
 		public int? uid_ge { get; set; }
 		public IEnumerable<int> uid_in { get; set; }
 		public IEnumerable<int> uid_ni { get; set; }
+		public (int? low, int? high)? uid_between { get; set; }
 		#endregion
 		#region category
 		public string category_eq { get; set; }
@@ -4598,6 +4977,8 @@ namespace peppa.Domain
 		public string category_ge { get; set; }
 		public IEnumerable<string> category_in { get; set; }
 		public IEnumerable<string> category_ni { get; set; }
+		public (string low, string high)? category_between { get; set; }
+		public string category_like { get; set; }
 		#endregion
 		#region type
 		public string type_eq { get; set; }
@@ -4608,6 +4989,8 @@ namespace peppa.Domain
 		public string type_ge { get; set; }
 		public IEnumerable<string> type_in { get; set; }
 		public IEnumerable<string> type_ni { get; set; }
+		public (string low, string high)? type_between { get; set; }
+		public string type_like { get; set; }
 		#endregion
 		#region level
 		public int? level_eq { get; set; }
@@ -4618,6 +5001,7 @@ namespace peppa.Domain
 		public int? level_ge { get; set; }
 		public IEnumerable<int> level_in { get; set; }
 		public IEnumerable<int> level_ni { get; set; }
+		public (int? low, int? high)? level_between { get; set; }
 		#endregion
 		#region url
 		public string url_eq { get; set; }
@@ -4628,6 +5012,8 @@ namespace peppa.Domain
 		public string url_ge { get; set; }
 		public IEnumerable<string> url_in { get; set; }
 		public IEnumerable<string> url_ni { get; set; }
+		public (string low, string high)? url_between { get; set; }
+		public string url_like { get; set; }
 		#endregion
 		#region methods
 		public string methods_eq { get; set; }
@@ -4638,6 +5024,8 @@ namespace peppa.Domain
 		public string methods_ge { get; set; }
 		public IEnumerable<string> methods_in { get; set; }
 		public IEnumerable<string> methods_ni { get; set; }
+		public (string low, string high)? methods_between { get; set; }
+		public string methods_like { get; set; }
 		#endregion
 		#region created_at
 		public DateTime? created_at_eq { get; set; }
@@ -4648,16 +5036,18 @@ namespace peppa.Domain
 		public DateTime? created_at_ge { get; set; }
 		public IEnumerable<DateTime> created_at_in { get; set; }
 		public IEnumerable<DateTime> created_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? created_at_between { get; set; }
 		#endregion
 		#region created_by
-		public string created_by_eq { get; set; }
-		public string created_by_ne { get; set; }
-		public string created_by_lt { get; set; }
-		public string created_by_gt { get; set; }
-		public string created_by_le { get; set; }
-		public string created_by_ge { get; set; }
-		public IEnumerable<string> created_by_in { get; set; }
-		public IEnumerable<string> created_by_ni { get; set; }
+		public int? created_by_eq { get; set; }
+		public int? created_by_ne { get; set; }
+		public int? created_by_lt { get; set; }
+		public int? created_by_gt { get; set; }
+		public int? created_by_le { get; set; }
+		public int? created_by_ge { get; set; }
+		public IEnumerable<int> created_by_in { get; set; }
+		public IEnumerable<int> created_by_ni { get; set; }
+		public (int? low, int? high)? created_by_between { get; set; }
 		#endregion
 		#region modified_at
 		public DateTime? modified_at_eq { get; set; }
@@ -4668,16 +5058,18 @@ namespace peppa.Domain
 		public DateTime? modified_at_ge { get; set; }
 		public IEnumerable<DateTime> modified_at_in { get; set; }
 		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? modified_at_between { get; set; }
 		#endregion
 		#region modified_by
-		public string modified_by_eq { get; set; }
-		public string modified_by_ne { get; set; }
-		public string modified_by_lt { get; set; }
-		public string modified_by_gt { get; set; }
-		public string modified_by_le { get; set; }
-		public string modified_by_ge { get; set; }
-		public IEnumerable<string> modified_by_in { get; set; }
-		public IEnumerable<string> modified_by_ni { get; set; }
+		public int? modified_by_eq { get; set; }
+		public int? modified_by_ne { get; set; }
+		public int? modified_by_lt { get; set; }
+		public int? modified_by_gt { get; set; }
+		public int? modified_by_le { get; set; }
+		public int? modified_by_ge { get; set; }
+		public IEnumerable<int> modified_by_in { get; set; }
+		public IEnumerable<int> modified_by_ni { get; set; }
+		public (int? low, int? high)? modified_by_between { get; set; }
 		#endregion
 		#region removed_at
 		public DateTime? removed_at_eq { get; set; }
@@ -4688,47 +5080,1487 @@ namespace peppa.Domain
 		public DateTime? removed_at_ge { get; set; }
 		public IEnumerable<DateTime> removed_at_in { get; set; }
 		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? removed_at_between { get; set; }
 		#endregion
 		#region row_version
 		public byte[] row_version_eq { get; set; }
 		public byte[] row_version_ne { get; set; }
-		public byte[] row_version_lt { get; set; }
-		public byte[] row_version_gt { get; set; }
-		public byte[] row_version_le { get; set; }
-		public byte[] row_version_ge { get; set; }
-		public IEnumerable<byte[]> row_version_in { get; set; }
-		public IEnumerable<byte[]> row_version_ni { get; set; }
 		#endregion
 		#endregion
 
 		#region override
 		override public Expression<Func<ErrorLog, bool>> CreatePredicate()
 		{
-			var predicate = PredicateBuilder.True<ErrorLog>();
+			var predicate = base.CreatePredicate();
 
 			#region uid
+			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
+			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
+			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
+			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
+			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
+			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
 			#endregion
 			#region category
+			if (category_eq != null) predicate = predicate.And(_ => _.category == category_eq);
+			if (category_ne != null) predicate = predicate.And(_ => _.category != category_ne);
+			if (category_lt != null) predicate = predicate.And(_ => category_lt.CompareTo(_.category) > 0);
+			if (category_gt != null) predicate = predicate.And(_ => category_gt.CompareTo(_.category) < 0);
+			if (category_le != null) predicate = predicate.And(_ => category_le.CompareTo(_.category) >= 0);
+			if (category_ge != null) predicate = predicate.And(_ => category_ge.CompareTo(_.category) <= 0);
 			#endregion
 			#region type
+			if (type_eq != null) predicate = predicate.And(_ => _.type == type_eq);
+			if (type_ne != null) predicate = predicate.And(_ => _.type != type_ne);
+			if (type_lt != null) predicate = predicate.And(_ => type_lt.CompareTo(_.type) > 0);
+			if (type_gt != null) predicate = predicate.And(_ => type_gt.CompareTo(_.type) < 0);
+			if (type_le != null) predicate = predicate.And(_ => type_le.CompareTo(_.type) >= 0);
+			if (type_ge != null) predicate = predicate.And(_ => type_ge.CompareTo(_.type) <= 0);
 			#endregion
 			#region level
+			if (level_eq != null) predicate = predicate.And(_ => _.level == level_eq);
+			if (level_ne != null) predicate = predicate.And(_ => _.level != level_ne);
+			if (level_lt != null) predicate = predicate.And(_ => _.level < level_lt);
+			if (level_gt != null) predicate = predicate.And(_ => _.level > level_gt);
+			if (level_le != null) predicate = predicate.And(_ => _.level <= level_le);
+			if (level_ge != null) predicate = predicate.And(_ => _.level >= level_ge);
 			#endregion
 			#region url
+			if (url_eq != null) predicate = predicate.And(_ => _.url == url_eq);
+			if (url_ne != null) predicate = predicate.And(_ => _.url != url_ne);
+			if (url_lt != null) predicate = predicate.And(_ => url_lt.CompareTo(_.url) > 0);
+			if (url_gt != null) predicate = predicate.And(_ => url_gt.CompareTo(_.url) < 0);
+			if (url_le != null) predicate = predicate.And(_ => url_le.CompareTo(_.url) >= 0);
+			if (url_ge != null) predicate = predicate.And(_ => url_ge.CompareTo(_.url) <= 0);
 			#endregion
 			#region methods
+			if (methods_eq != null) predicate = predicate.And(_ => _.methods == methods_eq);
+			if (methods_ne != null) predicate = predicate.And(_ => _.methods != methods_ne);
+			if (methods_lt != null) predicate = predicate.And(_ => methods_lt.CompareTo(_.methods) > 0);
+			if (methods_gt != null) predicate = predicate.And(_ => methods_gt.CompareTo(_.methods) < 0);
+			if (methods_le != null) predicate = predicate.And(_ => methods_le.CompareTo(_.methods) >= 0);
+			if (methods_ge != null) predicate = predicate.And(_ => methods_ge.CompareTo(_.methods) <= 0);
 			#endregion
 			#region created_at
+			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
+			if (created_at_ne != null) predicate = predicate.And(_ => _.created_at != created_at_ne);
+			if (created_at_lt != null) predicate = predicate.And(_ => _.created_at < created_at_lt);
+			if (created_at_gt != null) predicate = predicate.And(_ => _.created_at > created_at_gt);
+			if (created_at_le != null) predicate = predicate.And(_ => _.created_at <= created_at_le);
+			if (created_at_ge != null) predicate = predicate.And(_ => _.created_at >= created_at_ge);
 			#endregion
 			#region created_by
+			if (created_by_eq != null) predicate = predicate.And(_ => _.created_by == created_by_eq);
+			if (created_by_ne != null) predicate = predicate.And(_ => _.created_by != created_by_ne);
+			if (created_by_lt != null) predicate = predicate.And(_ => _.created_by < created_by_lt);
+			if (created_by_gt != null) predicate = predicate.And(_ => _.created_by > created_by_gt);
+			if (created_by_le != null) predicate = predicate.And(_ => _.created_by <= created_by_le);
+			if (created_by_ge != null) predicate = predicate.And(_ => _.created_by >= created_by_ge);
 			#endregion
 			#region modified_at
+			if (modified_at_eq != null) predicate = predicate.And(_ => _.modified_at == modified_at_eq);
+			if (modified_at_ne != null) predicate = predicate.And(_ => _.modified_at != modified_at_ne);
+			if (modified_at_lt != null) predicate = predicate.And(_ => _.modified_at < modified_at_lt);
+			if (modified_at_gt != null) predicate = predicate.And(_ => _.modified_at > modified_at_gt);
+			if (modified_at_le != null) predicate = predicate.And(_ => _.modified_at <= modified_at_le);
+			if (modified_at_ge != null) predicate = predicate.And(_ => _.modified_at >= modified_at_ge);
 			#endregion
 			#region modified_by
+			if (modified_by_eq != null) predicate = predicate.And(_ => _.modified_by == modified_by_eq);
+			if (modified_by_ne != null) predicate = predicate.And(_ => _.modified_by != modified_by_ne);
+			if (modified_by_lt != null) predicate = predicate.And(_ => _.modified_by < modified_by_lt);
+			if (modified_by_gt != null) predicate = predicate.And(_ => _.modified_by > modified_by_gt);
+			if (modified_by_le != null) predicate = predicate.And(_ => _.modified_by <= modified_by_le);
+			if (modified_by_ge != null) predicate = predicate.And(_ => _.modified_by >= modified_by_ge);
 			#endregion
 			#region removed_at
+			if (removed_at_eq != null) predicate = predicate.And(_ => _.removed_at == removed_at_eq);
+			if (removed_at_ne != null) predicate = predicate.And(_ => _.removed_at != removed_at_ne);
+			if (removed_at_lt != null) predicate = predicate.And(_ => _.removed_at < removed_at_lt);
+			if (removed_at_gt != null) predicate = predicate.And(_ => _.removed_at > removed_at_gt);
+			if (removed_at_le != null) predicate = predicate.And(_ => _.removed_at <= removed_at_le);
+			if (removed_at_ge != null) predicate = predicate.And(_ => _.removed_at >= removed_at_ge);
 			#endregion
 			#region row_version
+			if (row_version_eq != null) predicate = predicate.And(_ => _.row_version == row_version_eq);
+			if (row_version_ne != null) predicate = predicate.And(_ => _.row_version != row_version_ne);
+			#endregion
+
+			return predicate;
+		}
+		#endregion
+	}
+	#endregion
+	#endregion
+	#region ロールマスタ
+	/// <summary>
+	/// ロールマスタ
+	/// </summary>
+	[DataContract()]
+	[Table(Schema="Common", Name="Role")]
+	public partial class Role : TableBase<Role>, INotifyPropertyChanged
+	{
+		#region uid : int
+
+		private int _uid;
+		/// <summary>
+		/// ユニークID
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), NotNull, Identity]
+		public  int  uid
+		{
+			get { return _uid; }
+			set
+			{
+				if (_uid != value)
+				{
+					BeforeuidChanged(value);
+					_uid = value;
+					AfteruidChanged();
+
+					OnuidChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeuidChanged(int newValue);
+		partial void AfteruidChanged();
+
+		public const string NameOfuid = "uid";
+
+		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
+
+		private void OnuidChanged()
+		{
+			OnPropertyChanged(_uidChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region role_id : string
+
+		private string _role_id;
+		/// <summary>
+		/// ロールID
+		/// </summary>
+		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull, PrimaryKey]
+		public  string  role_id
+		{
+			get { return _role_id; }
+			set
+			{
+				if (_role_id != value)
+				{
+					Beforerole_idChanged(value);
+					_role_id = value;
+					Afterrole_idChanged();
+
+					Onrole_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerole_idChanged(string newValue);
+		partial void Afterrole_idChanged();
+
+		public const string NameOfrole_id = "role_id";
+
+		private static readonly PropertyChangedEventArgs _role_idChangedEventArgs = new PropertyChangedEventArgs(NameOfrole_id);
+
+		private void Onrole_idChanged()
+		{
+			OnPropertyChanged(_role_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region name : string
+
+		private string _name;
+		/// <summary>
+		/// 名称
+		/// </summary>
+		[Column(DbType="varchar(20)", DataType=DataType.VarChar, Length=20), NotNull]
+		public  string  name
+		{
+			get { return _name; }
+			set
+			{
+				if (_name != value)
+				{
+					BeforenameChanged(value);
+					_name = value;
+					AfternameChanged();
+
+					OnnameChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforenameChanged(string newValue);
+		partial void AfternameChanged();
+
+		public const string NameOfname = "name";
+
+		private static readonly PropertyChangedEventArgs _nameChangedEventArgs = new PropertyChangedEventArgs(NameOfname);
+
+		private void OnnameChanged()
+		{
+			OnPropertyChanged(_nameChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region abbrev : string
+
+		private string _abbrev;
+		/// <summary>
+		/// 略称
+		/// </summary>
+		[Column(DbType="varchar(2)", DataType=DataType.VarChar, Length=2), NotNull]
+		public  string  abbrev
+		{
+			get { return _abbrev; }
+			set
+			{
+				if (_abbrev != value)
+				{
+					BeforeabbrevChanged(value);
+					_abbrev = value;
+					AfterabbrevChanged();
+
+					OnabbrevChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeabbrevChanged(string newValue);
+		partial void AfterabbrevChanged();
+
+		public const string NameOfabbrev = "abbrev";
+
+		private static readonly PropertyChangedEventArgs _abbrevChangedEventArgs = new PropertyChangedEventArgs(NameOfabbrev);
+
+		private void OnabbrevChanged()
+		{
+			OnPropertyChanged(_abbrevChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region name_en : string
+
+		private string _name_en;
+		/// <summary>
+		/// 英字名称
+		/// </summary>
+		[Column(DbType="varchar(20)", DataType=DataType.VarChar, Length=20), NotNull]
+		public  string  name_en
+		{
+			get { return _name_en; }
+			set
+			{
+				if (_name_en != value)
+				{
+					Beforename_enChanged(value);
+					_name_en = value;
+					Aftername_enChanged();
+
+					Onname_enChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforename_enChanged(string newValue);
+		partial void Aftername_enChanged();
+
+		public const string NameOfname_en = "name_en";
+
+		private static readonly PropertyChangedEventArgs _name_enChangedEventArgs = new PropertyChangedEventArgs(NameOfname_en);
+
+		private void Onname_enChanged()
+		{
+			OnPropertyChanged(_name_enChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region abbrev_en : string
+
+		private string _abbrev_en;
+		/// <summary>
+		/// 英字略称
+		/// </summary>
+		[Column(DbType="varchar(2)", DataType=DataType.VarChar, Length=2), NotNull]
+		public  string  abbrev_en
+		{
+			get { return _abbrev_en; }
+			set
+			{
+				if (_abbrev_en != value)
+				{
+					Beforeabbrev_enChanged(value);
+					_abbrev_en = value;
+					Afterabbrev_enChanged();
+
+					Onabbrev_enChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeabbrev_enChanged(string newValue);
+		partial void Afterabbrev_enChanged();
+
+		public const string NameOfabbrev_en = "abbrev_en";
+
+		private static readonly PropertyChangedEventArgs _abbrev_enChangedEventArgs = new PropertyChangedEventArgs(NameOfabbrev_en);
+
+		private void Onabbrev_enChanged()
+		{
+			OnPropertyChanged(_abbrev_enChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region created_at : DateTime
+
+		private DateTime _created_at;
+		/// <summary>
+		/// 作成日時
+		/// </summary>
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  created_at
+		{
+			get { return _created_at; }
+			set
+			{
+				if (_created_at != value)
+				{
+					Beforecreated_atChanged(value);
+					_created_at = value;
+					Aftercreated_atChanged();
+
+					Oncreated_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_atChanged(DateTime newValue);
+		partial void Aftercreated_atChanged();
+
+		public const string NameOfcreated_at = "created_at";
+
+		private static readonly PropertyChangedEventArgs _created_atChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_at);
+
+		private void Oncreated_atChanged()
+		{
+			OnPropertyChanged(_created_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region created_by : int?
+
+		private int? _created_by;
+		/// <summary>
+		/// 作成者
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  created_by
+		{
+			get { return _created_by; }
+			set
+			{
+				if (_created_by != value)
+				{
+					Beforecreated_byChanged(value);
+					_created_by = value;
+					Aftercreated_byChanged();
+
+					Oncreated_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_byChanged(int? newValue);
+		partial void Aftercreated_byChanged();
+
+		public const string NameOfcreated_by = "created_by";
+
+		private static readonly PropertyChangedEventArgs _created_byChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_by);
+
+		private void Oncreated_byChanged()
+		{
+			OnPropertyChanged(_created_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region modified_at : DateTime
+
+		private DateTime _modified_at;
+		/// <summary>
+		/// 更新日時
+		/// </summary>
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  modified_at
+		{
+			get { return _modified_at; }
+			set
+			{
+				if (_modified_at != value)
+				{
+					Beforemodified_atChanged(value);
+					_modified_at = value;
+					Aftermodified_atChanged();
+
+					Onmodified_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_atChanged(DateTime newValue);
+		partial void Aftermodified_atChanged();
+
+		public const string NameOfmodified_at = "modified_at";
+
+		private static readonly PropertyChangedEventArgs _modified_atChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_at);
+
+		private void Onmodified_atChanged()
+		{
+			OnPropertyChanged(_modified_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region modified_by : int?
+
+		private int? _modified_by;
+		/// <summary>
+		/// 更新者
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  modified_by
+		{
+			get { return _modified_by; }
+			set
+			{
+				if (_modified_by != value)
+				{
+					Beforemodified_byChanged(value);
+					_modified_by = value;
+					Aftermodified_byChanged();
+
+					Onmodified_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_byChanged(int? newValue);
+		partial void Aftermodified_byChanged();
+
+		public const string NameOfmodified_by = "modified_by";
+
+		private static readonly PropertyChangedEventArgs _modified_byChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_by);
+
+		private void Onmodified_byChanged()
+		{
+			OnPropertyChanged(_modified_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region removed_at : DateTime?
+
+		private DateTime? _removed_at;
+		/// <summary>
+		/// 削除日時
+		/// </summary>
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), Nullable]
+		public  DateTime?  removed_at
+		{
+			get { return _removed_at; }
+			set
+			{
+				if (_removed_at != value)
+				{
+					Beforeremoved_atChanged(value);
+					_removed_at = value;
+					Afterremoved_atChanged();
+
+					Onremoved_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeremoved_atChanged(DateTime? newValue);
+		partial void Afterremoved_atChanged();
+
+		public const string NameOfremoved_at = "removed_at";
+
+		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
+
+		private void Onremoved_atChanged()
+		{
+			OnPropertyChanged(_removed_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region row_version : byte[]
+
+		private byte[] _row_version;
+		/// <summary>
+		/// 版
+		/// </summary>
+		[Column(DbType="timestamp", DataType=DataType.Timestamp, SkipOnInsert=true, SkipOnUpdate=true), Nullable]
+		public  byte[]  row_version
+		{
+			get { return _row_version; }
+			set
+			{
+				if (_row_version != value)
+				{
+					Beforerow_versionChanged(value);
+					_row_version = value;
+					Afterrow_versionChanged();
+
+					Onrow_versionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerow_versionChanged(byte[] newValue);
+		partial void Afterrow_versionChanged();
+
+		public const string NameOfrow_version = "row_version";
+
+		private static readonly PropertyChangedEventArgs _row_versionChangedEventArgs = new PropertyChangedEventArgs(NameOfrow_version);
+
+		private void Onrow_versionChanged()
+		{
+			OnPropertyChanged(_row_versionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region enum用アクセスラッパー
+		#endregion
+
+		#region Constructor
+
+		public Role()
+		{
+			#region フィールド初期化
+			uid = default(int);
+			role_id = "";
+			name = "";
+			abbrev = "";
+			name_en = "";
+			abbrev_en = "";
+			created_at = DateTime.UtcNow;
+			created_by = null;
+			modified_at = DateTime.UtcNow;
+			modified_by = null;
+			removed_at = null;
+			row_version = default(byte[]);
+			#endregion
+		}
+
+		#endregion
+
+		#region Association
+
+		#region IEnumerable<RolePermission> : role_id to RolePermission : role_id (FK_Role_RolePermission)
+
+		private IEnumerable<RolePermission> _RolePermissionList;
+		/// <summary>
+		/// FK_Role_RolePermission_BackReference
+		/// </summary>
+		[Association(ThisKey="role_id", OtherKey="role_id", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public  IEnumerable<RolePermission>  RolePermissionList
+		{
+			get { return _RolePermissionList; }
+			set
+			{
+				if (_RolePermissionList != value)
+				{
+					BeforeRolePermissionListChanged(value);
+					_RolePermissionList = value;
+					AfterRolePermissionListChanged();
+
+					OnRolePermissionListChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeRolePermissionListChanged(IEnumerable<RolePermission> newValue);
+		partial void AfterRolePermissionListChanged ();
+
+		public const string NameOfRolePermissionList = "RolePermissionList";
+
+		private static readonly PropertyChangedEventArgs _RolePermissionListChangedEventArgs = new PropertyChangedEventArgs(NameOfRolePermissionList);
+
+		private void OnRolePermissionListChanged()
+		{
+			OnPropertyChanged(_RolePermissionListChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#endregion
+
+		#region INotifyPropertyChanged support
+
+		[field : NonSerialized]
+		public virtual event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged(string propertyName)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+				propertyChanged(this, arg);
+			}
+		}
+
+		#endregion
+
+	}
+	#region ロールマスタ条件
+	/// <summary>
+	/// ロールマスタ条件
+	/// </summary>
+	public partial class RoleCondition : ConditionBase<Role>
+	{
+		#region properties
+		#region uid
+		public int? uid_eq { get; set; }
+		public int? uid_ne { get; set; }
+		public int? uid_lt { get; set; }
+		public int? uid_gt { get; set; }
+		public int? uid_le { get; set; }
+		public int? uid_ge { get; set; }
+		public IEnumerable<int> uid_in { get; set; }
+		public IEnumerable<int> uid_ni { get; set; }
+		public (int? low, int? high)? uid_between { get; set; }
+		#endregion
+		#region role_id
+		public string role_id_eq { get; set; }
+		public string role_id_ne { get; set; }
+		public string role_id_lt { get; set; }
+		public string role_id_gt { get; set; }
+		public string role_id_le { get; set; }
+		public string role_id_ge { get; set; }
+		public IEnumerable<string> role_id_in { get; set; }
+		public IEnumerable<string> role_id_ni { get; set; }
+		public (string low, string high)? role_id_between { get; set; }
+		public string role_id_like { get; set; }
+		#endregion
+		#region name
+		public string name_eq { get; set; }
+		public string name_ne { get; set; }
+		public string name_lt { get; set; }
+		public string name_gt { get; set; }
+		public string name_le { get; set; }
+		public string name_ge { get; set; }
+		public IEnumerable<string> name_in { get; set; }
+		public IEnumerable<string> name_ni { get; set; }
+		public (string low, string high)? name_between { get; set; }
+		public string name_like { get; set; }
+		#endregion
+		#region abbrev
+		public string abbrev_eq { get; set; }
+		public string abbrev_ne { get; set; }
+		public string abbrev_lt { get; set; }
+		public string abbrev_gt { get; set; }
+		public string abbrev_le { get; set; }
+		public string abbrev_ge { get; set; }
+		public IEnumerable<string> abbrev_in { get; set; }
+		public IEnumerable<string> abbrev_ni { get; set; }
+		public (string low, string high)? abbrev_between { get; set; }
+		public string abbrev_like { get; set; }
+		#endregion
+		#region name_en
+		public string name_en_eq { get; set; }
+		public string name_en_ne { get; set; }
+		public string name_en_lt { get; set; }
+		public string name_en_gt { get; set; }
+		public string name_en_le { get; set; }
+		public string name_en_ge { get; set; }
+		public IEnumerable<string> name_en_in { get; set; }
+		public IEnumerable<string> name_en_ni { get; set; }
+		public (string low, string high)? name_en_between { get; set; }
+		public string name_en_like { get; set; }
+		#endregion
+		#region abbrev_en
+		public string abbrev_en_eq { get; set; }
+		public string abbrev_en_ne { get; set; }
+		public string abbrev_en_lt { get; set; }
+		public string abbrev_en_gt { get; set; }
+		public string abbrev_en_le { get; set; }
+		public string abbrev_en_ge { get; set; }
+		public IEnumerable<string> abbrev_en_in { get; set; }
+		public IEnumerable<string> abbrev_en_ni { get; set; }
+		public (string low, string high)? abbrev_en_between { get; set; }
+		public string abbrev_en_like { get; set; }
+		#endregion
+		#region created_at
+		public DateTime? created_at_eq { get; set; }
+		public DateTime? created_at_ne { get; set; }
+		public DateTime? created_at_lt { get; set; }
+		public DateTime? created_at_gt { get; set; }
+		public DateTime? created_at_le { get; set; }
+		public DateTime? created_at_ge { get; set; }
+		public IEnumerable<DateTime> created_at_in { get; set; }
+		public IEnumerable<DateTime> created_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? created_at_between { get; set; }
+		#endregion
+		#region created_by
+		public int? created_by_eq { get; set; }
+		public int? created_by_ne { get; set; }
+		public int? created_by_lt { get; set; }
+		public int? created_by_gt { get; set; }
+		public int? created_by_le { get; set; }
+		public int? created_by_ge { get; set; }
+		public IEnumerable<int> created_by_in { get; set; }
+		public IEnumerable<int> created_by_ni { get; set; }
+		public (int? low, int? high)? created_by_between { get; set; }
+		#endregion
+		#region modified_at
+		public DateTime? modified_at_eq { get; set; }
+		public DateTime? modified_at_ne { get; set; }
+		public DateTime? modified_at_lt { get; set; }
+		public DateTime? modified_at_gt { get; set; }
+		public DateTime? modified_at_le { get; set; }
+		public DateTime? modified_at_ge { get; set; }
+		public IEnumerable<DateTime> modified_at_in { get; set; }
+		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? modified_at_between { get; set; }
+		#endregion
+		#region modified_by
+		public int? modified_by_eq { get; set; }
+		public int? modified_by_ne { get; set; }
+		public int? modified_by_lt { get; set; }
+		public int? modified_by_gt { get; set; }
+		public int? modified_by_le { get; set; }
+		public int? modified_by_ge { get; set; }
+		public IEnumerable<int> modified_by_in { get; set; }
+		public IEnumerable<int> modified_by_ni { get; set; }
+		public (int? low, int? high)? modified_by_between { get; set; }
+		#endregion
+		#region removed_at
+		public DateTime? removed_at_eq { get; set; }
+		public DateTime? removed_at_ne { get; set; }
+		public DateTime? removed_at_lt { get; set; }
+		public DateTime? removed_at_gt { get; set; }
+		public DateTime? removed_at_le { get; set; }
+		public DateTime? removed_at_ge { get; set; }
+		public IEnumerable<DateTime> removed_at_in { get; set; }
+		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? removed_at_between { get; set; }
+		#endregion
+		#region row_version
+		public byte[] row_version_eq { get; set; }
+		public byte[] row_version_ne { get; set; }
+		#endregion
+		#endregion
+
+		#region override
+		override public Expression<Func<Role, bool>> CreatePredicate()
+		{
+			var predicate = base.CreatePredicate();
+
+			#region uid
+			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
+			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
+			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
+			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
+			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
+			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
+			#endregion
+			#region role_id
+			if (role_id_eq != null) predicate = predicate.And(_ => _.role_id == role_id_eq);
+			if (role_id_ne != null) predicate = predicate.And(_ => _.role_id != role_id_ne);
+			if (role_id_lt != null) predicate = predicate.And(_ => role_id_lt.CompareTo(_.role_id) > 0);
+			if (role_id_gt != null) predicate = predicate.And(_ => role_id_gt.CompareTo(_.role_id) < 0);
+			if (role_id_le != null) predicate = predicate.And(_ => role_id_le.CompareTo(_.role_id) >= 0);
+			if (role_id_ge != null) predicate = predicate.And(_ => role_id_ge.CompareTo(_.role_id) <= 0);
+			#endregion
+			#region name
+			if (name_eq != null) predicate = predicate.And(_ => _.name == name_eq);
+			if (name_ne != null) predicate = predicate.And(_ => _.name != name_ne);
+			if (name_lt != null) predicate = predicate.And(_ => name_lt.CompareTo(_.name) > 0);
+			if (name_gt != null) predicate = predicate.And(_ => name_gt.CompareTo(_.name) < 0);
+			if (name_le != null) predicate = predicate.And(_ => name_le.CompareTo(_.name) >= 0);
+			if (name_ge != null) predicate = predicate.And(_ => name_ge.CompareTo(_.name) <= 0);
+			#endregion
+			#region abbrev
+			if (abbrev_eq != null) predicate = predicate.And(_ => _.abbrev == abbrev_eq);
+			if (abbrev_ne != null) predicate = predicate.And(_ => _.abbrev != abbrev_ne);
+			if (abbrev_lt != null) predicate = predicate.And(_ => abbrev_lt.CompareTo(_.abbrev) > 0);
+			if (abbrev_gt != null) predicate = predicate.And(_ => abbrev_gt.CompareTo(_.abbrev) < 0);
+			if (abbrev_le != null) predicate = predicate.And(_ => abbrev_le.CompareTo(_.abbrev) >= 0);
+			if (abbrev_ge != null) predicate = predicate.And(_ => abbrev_ge.CompareTo(_.abbrev) <= 0);
+			#endregion
+			#region name_en
+			if (name_en_eq != null) predicate = predicate.And(_ => _.name_en == name_en_eq);
+			if (name_en_ne != null) predicate = predicate.And(_ => _.name_en != name_en_ne);
+			if (name_en_lt != null) predicate = predicate.And(_ => name_en_lt.CompareTo(_.name_en) > 0);
+			if (name_en_gt != null) predicate = predicate.And(_ => name_en_gt.CompareTo(_.name_en) < 0);
+			if (name_en_le != null) predicate = predicate.And(_ => name_en_le.CompareTo(_.name_en) >= 0);
+			if (name_en_ge != null) predicate = predicate.And(_ => name_en_ge.CompareTo(_.name_en) <= 0);
+			#endregion
+			#region abbrev_en
+			if (abbrev_en_eq != null) predicate = predicate.And(_ => _.abbrev_en == abbrev_en_eq);
+			if (abbrev_en_ne != null) predicate = predicate.And(_ => _.abbrev_en != abbrev_en_ne);
+			if (abbrev_en_lt != null) predicate = predicate.And(_ => abbrev_en_lt.CompareTo(_.abbrev_en) > 0);
+			if (abbrev_en_gt != null) predicate = predicate.And(_ => abbrev_en_gt.CompareTo(_.abbrev_en) < 0);
+			if (abbrev_en_le != null) predicate = predicate.And(_ => abbrev_en_le.CompareTo(_.abbrev_en) >= 0);
+			if (abbrev_en_ge != null) predicate = predicate.And(_ => abbrev_en_ge.CompareTo(_.abbrev_en) <= 0);
+			#endregion
+			#region created_at
+			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
+			if (created_at_ne != null) predicate = predicate.And(_ => _.created_at != created_at_ne);
+			if (created_at_lt != null) predicate = predicate.And(_ => _.created_at < created_at_lt);
+			if (created_at_gt != null) predicate = predicate.And(_ => _.created_at > created_at_gt);
+			if (created_at_le != null) predicate = predicate.And(_ => _.created_at <= created_at_le);
+			if (created_at_ge != null) predicate = predicate.And(_ => _.created_at >= created_at_ge);
+			#endregion
+			#region created_by
+			if (created_by_eq != null) predicate = predicate.And(_ => _.created_by == created_by_eq);
+			if (created_by_ne != null) predicate = predicate.And(_ => _.created_by != created_by_ne);
+			if (created_by_lt != null) predicate = predicate.And(_ => _.created_by < created_by_lt);
+			if (created_by_gt != null) predicate = predicate.And(_ => _.created_by > created_by_gt);
+			if (created_by_le != null) predicate = predicate.And(_ => _.created_by <= created_by_le);
+			if (created_by_ge != null) predicate = predicate.And(_ => _.created_by >= created_by_ge);
+			#endregion
+			#region modified_at
+			if (modified_at_eq != null) predicate = predicate.And(_ => _.modified_at == modified_at_eq);
+			if (modified_at_ne != null) predicate = predicate.And(_ => _.modified_at != modified_at_ne);
+			if (modified_at_lt != null) predicate = predicate.And(_ => _.modified_at < modified_at_lt);
+			if (modified_at_gt != null) predicate = predicate.And(_ => _.modified_at > modified_at_gt);
+			if (modified_at_le != null) predicate = predicate.And(_ => _.modified_at <= modified_at_le);
+			if (modified_at_ge != null) predicate = predicate.And(_ => _.modified_at >= modified_at_ge);
+			#endregion
+			#region modified_by
+			if (modified_by_eq != null) predicate = predicate.And(_ => _.modified_by == modified_by_eq);
+			if (modified_by_ne != null) predicate = predicate.And(_ => _.modified_by != modified_by_ne);
+			if (modified_by_lt != null) predicate = predicate.And(_ => _.modified_by < modified_by_lt);
+			if (modified_by_gt != null) predicate = predicate.And(_ => _.modified_by > modified_by_gt);
+			if (modified_by_le != null) predicate = predicate.And(_ => _.modified_by <= modified_by_le);
+			if (modified_by_ge != null) predicate = predicate.And(_ => _.modified_by >= modified_by_ge);
+			#endregion
+			#region removed_at
+			if (removed_at_eq != null) predicate = predicate.And(_ => _.removed_at == removed_at_eq);
+			if (removed_at_ne != null) predicate = predicate.And(_ => _.removed_at != removed_at_ne);
+			if (removed_at_lt != null) predicate = predicate.And(_ => _.removed_at < removed_at_lt);
+			if (removed_at_gt != null) predicate = predicate.And(_ => _.removed_at > removed_at_gt);
+			if (removed_at_le != null) predicate = predicate.And(_ => _.removed_at <= removed_at_le);
+			if (removed_at_ge != null) predicate = predicate.And(_ => _.removed_at >= removed_at_ge);
+			#endregion
+			#region row_version
+			if (row_version_eq != null) predicate = predicate.And(_ => _.row_version == row_version_eq);
+			if (row_version_ne != null) predicate = predicate.And(_ => _.row_version != row_version_ne);
+			#endregion
+
+			return predicate;
+		}
+		#endregion
+	}
+	#endregion
+	#endregion
+	#region ロール権限
+	/// <summary>
+	/// ロール権限
+	/// </summary>
+	[DataContract()]
+	[Table(Schema="Common", Name="RolePermission")]
+	public partial class RolePermission : TableBase<RolePermission>, INotifyPropertyChanged
+	{
+		#region uid : int
+
+		private int _uid;
+		/// <summary>
+		/// ユニークID
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), NotNull, Identity]
+		public  int  uid
+		{
+			get { return _uid; }
+			set
+			{
+				if (_uid != value)
+				{
+					BeforeuidChanged(value);
+					_uid = value;
+					AfteruidChanged();
+
+					OnuidChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeuidChanged(int newValue);
+		partial void AfteruidChanged();
+
+		public const string NameOfuid = "uid";
+
+		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
+
+		private void OnuidChanged()
+		{
+			OnPropertyChanged(_uidChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region role_id : string
+
+		private string _role_id;
+		/// <summary>
+		/// ロールID
+		/// </summary>
+		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull, PrimaryKey]
+		public  string  role_id
+		{
+			get { return _role_id; }
+			set
+			{
+				if (_role_id != value)
+				{
+					Beforerole_idChanged(value);
+					_role_id = value;
+					Afterrole_idChanged();
+
+					Onrole_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerole_idChanged(string newValue);
+		partial void Afterrole_idChanged();
+
+		public const string NameOfrole_id = "role_id";
+
+		private static readonly PropertyChangedEventArgs _role_idChangedEventArgs = new PropertyChangedEventArgs(NameOfrole_id);
+
+		private void Onrole_idChanged()
+		{
+			OnPropertyChanged(_role_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region permission_id : string
+
+		private string _permission_id;
+		/// <summary>
+		/// 権限ID
+		/// </summary>
+		[Column(DbType="varchar(40)", DataType=DataType.VarChar, Length=40), NotNull, PrimaryKey]
+		public  string  permission_id
+		{
+			get { return _permission_id; }
+			set
+			{
+				if (_permission_id != value)
+				{
+					Beforepermission_idChanged(value);
+					_permission_id = value;
+					Afterpermission_idChanged();
+
+					Onpermission_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforepermission_idChanged(string newValue);
+		partial void Afterpermission_idChanged();
+
+		public const string NameOfpermission_id = "permission_id";
+
+		private static readonly PropertyChangedEventArgs _permission_idChangedEventArgs = new PropertyChangedEventArgs(NameOfpermission_id);
+
+		private void Onpermission_idChanged()
+		{
+			OnPropertyChanged(_permission_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region created_at : DateTime
+
+		private DateTime _created_at;
+		/// <summary>
+		/// 作成日時
+		/// </summary>
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  created_at
+		{
+			get { return _created_at; }
+			set
+			{
+				if (_created_at != value)
+				{
+					Beforecreated_atChanged(value);
+					_created_at = value;
+					Aftercreated_atChanged();
+
+					Oncreated_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_atChanged(DateTime newValue);
+		partial void Aftercreated_atChanged();
+
+		public const string NameOfcreated_at = "created_at";
+
+		private static readonly PropertyChangedEventArgs _created_atChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_at);
+
+		private void Oncreated_atChanged()
+		{
+			OnPropertyChanged(_created_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region created_by : int?
+
+		private int? _created_by;
+		/// <summary>
+		/// 作成者
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  created_by
+		{
+			get { return _created_by; }
+			set
+			{
+				if (_created_by != value)
+				{
+					Beforecreated_byChanged(value);
+					_created_by = value;
+					Aftercreated_byChanged();
+
+					Oncreated_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_byChanged(int? newValue);
+		partial void Aftercreated_byChanged();
+
+		public const string NameOfcreated_by = "created_by";
+
+		private static readonly PropertyChangedEventArgs _created_byChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_by);
+
+		private void Oncreated_byChanged()
+		{
+			OnPropertyChanged(_created_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region modified_at : DateTime
+
+		private DateTime _modified_at;
+		/// <summary>
+		/// 更新日時
+		/// </summary>
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  modified_at
+		{
+			get { return _modified_at; }
+			set
+			{
+				if (_modified_at != value)
+				{
+					Beforemodified_atChanged(value);
+					_modified_at = value;
+					Aftermodified_atChanged();
+
+					Onmodified_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_atChanged(DateTime newValue);
+		partial void Aftermodified_atChanged();
+
+		public const string NameOfmodified_at = "modified_at";
+
+		private static readonly PropertyChangedEventArgs _modified_atChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_at);
+
+		private void Onmodified_atChanged()
+		{
+			OnPropertyChanged(_modified_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region modified_by : int?
+
+		private int? _modified_by;
+		/// <summary>
+		/// 更新者
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  modified_by
+		{
+			get { return _modified_by; }
+			set
+			{
+				if (_modified_by != value)
+				{
+					Beforemodified_byChanged(value);
+					_modified_by = value;
+					Aftermodified_byChanged();
+
+					Onmodified_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_byChanged(int? newValue);
+		partial void Aftermodified_byChanged();
+
+		public const string NameOfmodified_by = "modified_by";
+
+		private static readonly PropertyChangedEventArgs _modified_byChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_by);
+
+		private void Onmodified_byChanged()
+		{
+			OnPropertyChanged(_modified_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region row_version : byte[]
+
+		private byte[] _row_version;
+		/// <summary>
+		/// 版
+		/// </summary>
+		[Column(DbType="timestamp", DataType=DataType.Timestamp, SkipOnInsert=true, SkipOnUpdate=true), Nullable]
+		public  byte[]  row_version
+		{
+			get { return _row_version; }
+			set
+			{
+				if (_row_version != value)
+				{
+					Beforerow_versionChanged(value);
+					_row_version = value;
+					Afterrow_versionChanged();
+
+					Onrow_versionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerow_versionChanged(byte[] newValue);
+		partial void Afterrow_versionChanged();
+
+		public const string NameOfrow_version = "row_version";
+
+		private static readonly PropertyChangedEventArgs _row_versionChangedEventArgs = new PropertyChangedEventArgs(NameOfrow_version);
+
+		private void Onrow_versionChanged()
+		{
+			OnPropertyChanged(_row_versionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region enum用アクセスラッパー
+		#endregion
+
+		#region Constructor
+
+		public RolePermission()
+		{
+			#region フィールド初期化
+			uid = default(int);
+			role_id = "";
+			permission_id = "";
+			created_at = DateTime.UtcNow;
+			created_by = null;
+			modified_at = DateTime.UtcNow;
+			modified_by = null;
+			row_version = default(byte[]);
+			#endregion
+		}
+
+		#endregion
+
+		#region Association
+
+
+		#endregion
+
+		#region INotifyPropertyChanged support
+
+		[field : NonSerialized]
+		public virtual event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged(string propertyName)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+				propertyChanged(this, arg);
+			}
+		}
+
+		#endregion
+
+	}
+	#region ロール権限条件
+	/// <summary>
+	/// ロール権限条件
+	/// </summary>
+	public partial class RolePermissionCondition : ConditionBase<RolePermission>
+	{
+		#region properties
+		#region uid
+		public int? uid_eq { get; set; }
+		public int? uid_ne { get; set; }
+		public int? uid_lt { get; set; }
+		public int? uid_gt { get; set; }
+		public int? uid_le { get; set; }
+		public int? uid_ge { get; set; }
+		public IEnumerable<int> uid_in { get; set; }
+		public IEnumerable<int> uid_ni { get; set; }
+		public (int? low, int? high)? uid_between { get; set; }
+		#endregion
+		#region role_id
+		public string role_id_eq { get; set; }
+		public string role_id_ne { get; set; }
+		public string role_id_lt { get; set; }
+		public string role_id_gt { get; set; }
+		public string role_id_le { get; set; }
+		public string role_id_ge { get; set; }
+		public IEnumerable<string> role_id_in { get; set; }
+		public IEnumerable<string> role_id_ni { get; set; }
+		public (string low, string high)? role_id_between { get; set; }
+		public string role_id_like { get; set; }
+		#endregion
+		#region permission_id
+		public string permission_id_eq { get; set; }
+		public string permission_id_ne { get; set; }
+		public string permission_id_lt { get; set; }
+		public string permission_id_gt { get; set; }
+		public string permission_id_le { get; set; }
+		public string permission_id_ge { get; set; }
+		public IEnumerable<string> permission_id_in { get; set; }
+		public IEnumerable<string> permission_id_ni { get; set; }
+		public (string low, string high)? permission_id_between { get; set; }
+		public string permission_id_like { get; set; }
+		#endregion
+		#region created_at
+		public DateTime? created_at_eq { get; set; }
+		public DateTime? created_at_ne { get; set; }
+		public DateTime? created_at_lt { get; set; }
+		public DateTime? created_at_gt { get; set; }
+		public DateTime? created_at_le { get; set; }
+		public DateTime? created_at_ge { get; set; }
+		public IEnumerable<DateTime> created_at_in { get; set; }
+		public IEnumerable<DateTime> created_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? created_at_between { get; set; }
+		#endregion
+		#region created_by
+		public int? created_by_eq { get; set; }
+		public int? created_by_ne { get; set; }
+		public int? created_by_lt { get; set; }
+		public int? created_by_gt { get; set; }
+		public int? created_by_le { get; set; }
+		public int? created_by_ge { get; set; }
+		public IEnumerable<int> created_by_in { get; set; }
+		public IEnumerable<int> created_by_ni { get; set; }
+		public (int? low, int? high)? created_by_between { get; set; }
+		#endregion
+		#region modified_at
+		public DateTime? modified_at_eq { get; set; }
+		public DateTime? modified_at_ne { get; set; }
+		public DateTime? modified_at_lt { get; set; }
+		public DateTime? modified_at_gt { get; set; }
+		public DateTime? modified_at_le { get; set; }
+		public DateTime? modified_at_ge { get; set; }
+		public IEnumerable<DateTime> modified_at_in { get; set; }
+		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? modified_at_between { get; set; }
+		#endregion
+		#region modified_by
+		public int? modified_by_eq { get; set; }
+		public int? modified_by_ne { get; set; }
+		public int? modified_by_lt { get; set; }
+		public int? modified_by_gt { get; set; }
+		public int? modified_by_le { get; set; }
+		public int? modified_by_ge { get; set; }
+		public IEnumerable<int> modified_by_in { get; set; }
+		public IEnumerable<int> modified_by_ni { get; set; }
+		public (int? low, int? high)? modified_by_between { get; set; }
+		#endregion
+		#region row_version
+		public byte[] row_version_eq { get; set; }
+		public byte[] row_version_ne { get; set; }
+		#endregion
+		#endregion
+
+		#region override
+		override public Expression<Func<RolePermission, bool>> CreatePredicate()
+		{
+			var predicate = base.CreatePredicate();
+
+			#region uid
+			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
+			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
+			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
+			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
+			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
+			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
+			#endregion
+			#region role_id
+			if (role_id_eq != null) predicate = predicate.And(_ => _.role_id == role_id_eq);
+			if (role_id_ne != null) predicate = predicate.And(_ => _.role_id != role_id_ne);
+			if (role_id_lt != null) predicate = predicate.And(_ => role_id_lt.CompareTo(_.role_id) > 0);
+			if (role_id_gt != null) predicate = predicate.And(_ => role_id_gt.CompareTo(_.role_id) < 0);
+			if (role_id_le != null) predicate = predicate.And(_ => role_id_le.CompareTo(_.role_id) >= 0);
+			if (role_id_ge != null) predicate = predicate.And(_ => role_id_ge.CompareTo(_.role_id) <= 0);
+			#endregion
+			#region permission_id
+			if (permission_id_eq != null) predicate = predicate.And(_ => _.permission_id == permission_id_eq);
+			if (permission_id_ne != null) predicate = predicate.And(_ => _.permission_id != permission_id_ne);
+			if (permission_id_lt != null) predicate = predicate.And(_ => permission_id_lt.CompareTo(_.permission_id) > 0);
+			if (permission_id_gt != null) predicate = predicate.And(_ => permission_id_gt.CompareTo(_.permission_id) < 0);
+			if (permission_id_le != null) predicate = predicate.And(_ => permission_id_le.CompareTo(_.permission_id) >= 0);
+			if (permission_id_ge != null) predicate = predicate.And(_ => permission_id_ge.CompareTo(_.permission_id) <= 0);
+			#endregion
+			#region created_at
+			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
+			if (created_at_ne != null) predicate = predicate.And(_ => _.created_at != created_at_ne);
+			if (created_at_lt != null) predicate = predicate.And(_ => _.created_at < created_at_lt);
+			if (created_at_gt != null) predicate = predicate.And(_ => _.created_at > created_at_gt);
+			if (created_at_le != null) predicate = predicate.And(_ => _.created_at <= created_at_le);
+			if (created_at_ge != null) predicate = predicate.And(_ => _.created_at >= created_at_ge);
+			#endregion
+			#region created_by
+			if (created_by_eq != null) predicate = predicate.And(_ => _.created_by == created_by_eq);
+			if (created_by_ne != null) predicate = predicate.And(_ => _.created_by != created_by_ne);
+			if (created_by_lt != null) predicate = predicate.And(_ => _.created_by < created_by_lt);
+			if (created_by_gt != null) predicate = predicate.And(_ => _.created_by > created_by_gt);
+			if (created_by_le != null) predicate = predicate.And(_ => _.created_by <= created_by_le);
+			if (created_by_ge != null) predicate = predicate.And(_ => _.created_by >= created_by_ge);
+			#endregion
+			#region modified_at
+			if (modified_at_eq != null) predicate = predicate.And(_ => _.modified_at == modified_at_eq);
+			if (modified_at_ne != null) predicate = predicate.And(_ => _.modified_at != modified_at_ne);
+			if (modified_at_lt != null) predicate = predicate.And(_ => _.modified_at < modified_at_lt);
+			if (modified_at_gt != null) predicate = predicate.And(_ => _.modified_at > modified_at_gt);
+			if (modified_at_le != null) predicate = predicate.And(_ => _.modified_at <= modified_at_le);
+			if (modified_at_ge != null) predicate = predicate.And(_ => _.modified_at >= modified_at_ge);
+			#endregion
+			#region modified_by
+			if (modified_by_eq != null) predicate = predicate.And(_ => _.modified_by == modified_by_eq);
+			if (modified_by_ne != null) predicate = predicate.And(_ => _.modified_by != modified_by_ne);
+			if (modified_by_lt != null) predicate = predicate.And(_ => _.modified_by < modified_by_lt);
+			if (modified_by_gt != null) predicate = predicate.And(_ => _.modified_by > modified_by_gt);
+			if (modified_by_le != null) predicate = predicate.And(_ => _.modified_by <= modified_by_le);
+			if (modified_by_ge != null) predicate = predicate.And(_ => _.modified_by >= modified_by_ge);
+			#endregion
+			#region row_version
+			if (row_version_eq != null) predicate = predicate.And(_ => _.row_version == row_version_eq);
+			if (row_version_ne != null) predicate = predicate.And(_ => _.row_version != row_version_ne);
 			#endregion
 
 			return predicate;
@@ -5185,14 +7017,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region created_by : string
+		#region created_by : int?
 
-		private string _created_by;
+		private int? _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  created_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  created_by
 		{
 			get { return _created_by; }
 			set
@@ -5210,7 +7042,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforecreated_byChanged(string newValue);
+		partial void Beforecreated_byChanged(int? newValue);
 		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
@@ -5265,14 +7097,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region modified_by : string
+		#region modified_by : int?
 
-		private string _modified_by;
+		private int? _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  modified_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  modified_by
 		{
 			get { return _modified_by; }
 			set
@@ -5290,7 +7122,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforemodified_byChanged(string newValue);
+		partial void Beforemodified_byChanged(int? newValue);
 		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
@@ -5439,6 +7271,32 @@ namespace peppa.Domain
 		}
 		#endregion
 
+		#region Constructor
+
+		public Account()
+		{
+			#region フィールド初期化
+			uid = default(int);
+			account_id = 0;
+			staff_no = null;
+			teacher_no = null;
+			student_no = null;
+			out_student_no = null;
+			parent_no = null;
+			user_no = null;
+			auth_method_type = "None";
+			is_valid = 1;
+			created_at = DateTime.UtcNow;
+			created_by = null;
+			modified_at = DateTime.UtcNow;
+			modified_by = null;
+			removed_at = null;
+			row_version = default(byte[]);
+			#endregion
+		}
+
+		#endregion
+
 		#region Association
 
 		#region Staff : staff_no (FK_Account_Staff)
@@ -5476,6 +7334,46 @@ namespace peppa.Domain
 		private void OnStaffChanged()
 		{
 			OnPropertyChanged(_StaffChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region IEnumerable<AccountRole> : account_id to AccountRole : account_id (FK_Account_AccountRole)
+
+		private IEnumerable<AccountRole> _AccountRoleList;
+		/// <summary>
+		/// FK_Account_AccountRole_BackReference
+		/// </summary>
+		[Association(ThisKey="account_id", OtherKey="account_id", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public  IEnumerable<AccountRole>  AccountRoleList
+		{
+			get { return _AccountRoleList; }
+			set
+			{
+				if (_AccountRoleList != value)
+				{
+					BeforeAccountRoleListChanged(value);
+					_AccountRoleList = value;
+					AfterAccountRoleListChanged();
+
+					OnAccountRoleListChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeAccountRoleListChanged(IEnumerable<AccountRole> newValue);
+		partial void AfterAccountRoleListChanged ();
+
+		public const string NameOfAccountRoleList = "AccountRoleList";
+
+		private static readonly PropertyChangedEventArgs _AccountRoleListChangedEventArgs = new PropertyChangedEventArgs(NameOfAccountRoleList);
+
+		private void OnAccountRoleListChanged()
+		{
+			OnPropertyChanged(_AccountRoleListChangedEventArgs);
 		}
 
 		#endregion
@@ -5528,6 +7426,7 @@ namespace peppa.Domain
 		public int? uid_ge { get; set; }
 		public IEnumerable<int> uid_in { get; set; }
 		public IEnumerable<int> uid_ni { get; set; }
+		public (int? low, int? high)? uid_between { get; set; }
 		#endregion
 		#region account_id
 		public int? account_id_eq { get; set; }
@@ -5538,6 +7437,7 @@ namespace peppa.Domain
 		public int? account_id_ge { get; set; }
 		public IEnumerable<int> account_id_in { get; set; }
 		public IEnumerable<int> account_id_ni { get; set; }
+		public (int? low, int? high)? account_id_between { get; set; }
 		#endregion
 		#region staff_no
 		public string staff_no_eq { get; set; }
@@ -5548,6 +7448,8 @@ namespace peppa.Domain
 		public string staff_no_ge { get; set; }
 		public IEnumerable<string> staff_no_in { get; set; }
 		public IEnumerable<string> staff_no_ni { get; set; }
+		public (string low, string high)? staff_no_between { get; set; }
+		public string staff_no_like { get; set; }
 		#endregion
 		#region teacher_no
 		public string teacher_no_eq { get; set; }
@@ -5558,6 +7460,8 @@ namespace peppa.Domain
 		public string teacher_no_ge { get; set; }
 		public IEnumerable<string> teacher_no_in { get; set; }
 		public IEnumerable<string> teacher_no_ni { get; set; }
+		public (string low, string high)? teacher_no_between { get; set; }
+		public string teacher_no_like { get; set; }
 		#endregion
 		#region student_no
 		public string student_no_eq { get; set; }
@@ -5568,6 +7472,8 @@ namespace peppa.Domain
 		public string student_no_ge { get; set; }
 		public IEnumerable<string> student_no_in { get; set; }
 		public IEnumerable<string> student_no_ni { get; set; }
+		public (string low, string high)? student_no_between { get; set; }
+		public string student_no_like { get; set; }
 		#endregion
 		#region out_student_no
 		public string out_student_no_eq { get; set; }
@@ -5578,6 +7484,8 @@ namespace peppa.Domain
 		public string out_student_no_ge { get; set; }
 		public IEnumerable<string> out_student_no_in { get; set; }
 		public IEnumerable<string> out_student_no_ni { get; set; }
+		public (string low, string high)? out_student_no_between { get; set; }
+		public string out_student_no_like { get; set; }
 		#endregion
 		#region parent_no
 		public string parent_no_eq { get; set; }
@@ -5588,6 +7496,8 @@ namespace peppa.Domain
 		public string parent_no_ge { get; set; }
 		public IEnumerable<string> parent_no_in { get; set; }
 		public IEnumerable<string> parent_no_ni { get; set; }
+		public (string low, string high)? parent_no_between { get; set; }
+		public string parent_no_like { get; set; }
 		#endregion
 		#region user_no
 		public string user_no_eq { get; set; }
@@ -5598,6 +7508,8 @@ namespace peppa.Domain
 		public string user_no_ge { get; set; }
 		public IEnumerable<string> user_no_in { get; set; }
 		public IEnumerable<string> user_no_ni { get; set; }
+		public (string low, string high)? user_no_between { get; set; }
+		public string user_no_like { get; set; }
 		#endregion
 		#region auth_method_type (AuthMethodType)
 		private string _auth_method_type_eq;
@@ -5647,6 +7559,18 @@ namespace peppa.Domain
 		{
 			get => _auth_method_type_ni.Select(_ => _.ToAuthMethod().Value);
 			set => _auth_method_type_ni = value.Select(_ => _.Val());
+		}
+		private (string low, string high)? _auth_method_type_between;
+		public (AuthMethod low, AuthMethod high)? AuthMethodType_between
+		{
+			get => _auth_method_type_between.HasValue ? (_auth_method_type_between.Value.low.ToAuthMethod().Value, _auth_method_type_between.Value.high.ToAuthMethod().Value) : ((AuthMethod, AuthMethod)?)null;
+			set => _auth_method_type_between = value.HasValue ? (value.Value.low.Val(), value.Value.high.Val()) : ((string, string)?)null;
+		}
+		private string _auth_method_type_like;
+		public AuthMethod? AuthMethodType_like
+		{
+			get => _auth_method_type_like?.ToAuthMethod();
+			set => _auth_method_type_like = value.HasValue ? value.Value.Val() : (string)null;
 		}
 		#endregion
 		#region is_valid (IsValid)
@@ -5698,6 +7622,12 @@ namespace peppa.Domain
 			get => _is_valid_ni.Select(_ => _.ToValidityFlag().Value);
 			set => _is_valid_ni = value.Select(_ => _.Val());
 		}
+		private (int low, int high)? _is_valid_between;
+		public (ValidityFlag low, ValidityFlag high)? IsValid_between
+		{
+			get => _is_valid_between.HasValue ? (_is_valid_between.Value.low.ToValidityFlag().Value, _is_valid_between.Value.high.ToValidityFlag().Value) : ((ValidityFlag, ValidityFlag)?)null;
+			set => _is_valid_between = value.HasValue ? (value.Value.low.Val(), value.Value.high.Val()) : ((int, int)?)null;
+		}
 		#endregion
 		#region created_at
 		public DateTime? created_at_eq { get; set; }
@@ -5708,16 +7638,18 @@ namespace peppa.Domain
 		public DateTime? created_at_ge { get; set; }
 		public IEnumerable<DateTime> created_at_in { get; set; }
 		public IEnumerable<DateTime> created_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? created_at_between { get; set; }
 		#endregion
 		#region created_by
-		public string created_by_eq { get; set; }
-		public string created_by_ne { get; set; }
-		public string created_by_lt { get; set; }
-		public string created_by_gt { get; set; }
-		public string created_by_le { get; set; }
-		public string created_by_ge { get; set; }
-		public IEnumerable<string> created_by_in { get; set; }
-		public IEnumerable<string> created_by_ni { get; set; }
+		public int? created_by_eq { get; set; }
+		public int? created_by_ne { get; set; }
+		public int? created_by_lt { get; set; }
+		public int? created_by_gt { get; set; }
+		public int? created_by_le { get; set; }
+		public int? created_by_ge { get; set; }
+		public IEnumerable<int> created_by_in { get; set; }
+		public IEnumerable<int> created_by_ni { get; set; }
+		public (int? low, int? high)? created_by_between { get; set; }
 		#endregion
 		#region modified_at
 		public DateTime? modified_at_eq { get; set; }
@@ -5728,16 +7660,18 @@ namespace peppa.Domain
 		public DateTime? modified_at_ge { get; set; }
 		public IEnumerable<DateTime> modified_at_in { get; set; }
 		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? modified_at_between { get; set; }
 		#endregion
 		#region modified_by
-		public string modified_by_eq { get; set; }
-		public string modified_by_ne { get; set; }
-		public string modified_by_lt { get; set; }
-		public string modified_by_gt { get; set; }
-		public string modified_by_le { get; set; }
-		public string modified_by_ge { get; set; }
-		public IEnumerable<string> modified_by_in { get; set; }
-		public IEnumerable<string> modified_by_ni { get; set; }
+		public int? modified_by_eq { get; set; }
+		public int? modified_by_ne { get; set; }
+		public int? modified_by_lt { get; set; }
+		public int? modified_by_gt { get; set; }
+		public int? modified_by_le { get; set; }
+		public int? modified_by_ge { get; set; }
+		public IEnumerable<int> modified_by_in { get; set; }
+		public IEnumerable<int> modified_by_ni { get; set; }
+		public (int? low, int? high)? modified_by_between { get; set; }
 		#endregion
 		#region removed_at
 		public DateTime? removed_at_eq { get; set; }
@@ -5748,55 +7682,849 @@ namespace peppa.Domain
 		public DateTime? removed_at_ge { get; set; }
 		public IEnumerable<DateTime> removed_at_in { get; set; }
 		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? removed_at_between { get; set; }
 		#endregion
 		#region row_version
 		public byte[] row_version_eq { get; set; }
 		public byte[] row_version_ne { get; set; }
-		public byte[] row_version_lt { get; set; }
-		public byte[] row_version_gt { get; set; }
-		public byte[] row_version_le { get; set; }
-		public byte[] row_version_ge { get; set; }
-		public IEnumerable<byte[]> row_version_in { get; set; }
-		public IEnumerable<byte[]> row_version_ni { get; set; }
 		#endregion
 		#endregion
 
 		#region override
 		override public Expression<Func<Account, bool>> CreatePredicate()
 		{
-			var predicate = PredicateBuilder.True<Account>();
+			var predicate = base.CreatePredicate();
 
 			#region uid
+			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
+			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
+			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
+			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
+			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
+			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
 			#endregion
 			#region account_id
+			if (account_id_eq != null) predicate = predicate.And(_ => _.account_id == account_id_eq);
+			if (account_id_ne != null) predicate = predicate.And(_ => _.account_id != account_id_ne);
+			if (account_id_lt != null) predicate = predicate.And(_ => _.account_id < account_id_lt);
+			if (account_id_gt != null) predicate = predicate.And(_ => _.account_id > account_id_gt);
+			if (account_id_le != null) predicate = predicate.And(_ => _.account_id <= account_id_le);
+			if (account_id_ge != null) predicate = predicate.And(_ => _.account_id >= account_id_ge);
 			#endregion
 			#region staff_no
+			if (staff_no_eq != null) predicate = predicate.And(_ => _.staff_no == staff_no_eq);
+			if (staff_no_ne != null) predicate = predicate.And(_ => _.staff_no != staff_no_ne);
+			if (staff_no_lt != null) predicate = predicate.And(_ => staff_no_lt.CompareTo(_.staff_no) > 0);
+			if (staff_no_gt != null) predicate = predicate.And(_ => staff_no_gt.CompareTo(_.staff_no) < 0);
+			if (staff_no_le != null) predicate = predicate.And(_ => staff_no_le.CompareTo(_.staff_no) >= 0);
+			if (staff_no_ge != null) predicate = predicate.And(_ => staff_no_ge.CompareTo(_.staff_no) <= 0);
 			#endregion
 			#region teacher_no
+			if (teacher_no_eq != null) predicate = predicate.And(_ => _.teacher_no == teacher_no_eq);
+			if (teacher_no_ne != null) predicate = predicate.And(_ => _.teacher_no != teacher_no_ne);
+			if (teacher_no_lt != null) predicate = predicate.And(_ => teacher_no_lt.CompareTo(_.teacher_no) > 0);
+			if (teacher_no_gt != null) predicate = predicate.And(_ => teacher_no_gt.CompareTo(_.teacher_no) < 0);
+			if (teacher_no_le != null) predicate = predicate.And(_ => teacher_no_le.CompareTo(_.teacher_no) >= 0);
+			if (teacher_no_ge != null) predicate = predicate.And(_ => teacher_no_ge.CompareTo(_.teacher_no) <= 0);
 			#endregion
 			#region student_no
+			if (student_no_eq != null) predicate = predicate.And(_ => _.student_no == student_no_eq);
+			if (student_no_ne != null) predicate = predicate.And(_ => _.student_no != student_no_ne);
+			if (student_no_lt != null) predicate = predicate.And(_ => student_no_lt.CompareTo(_.student_no) > 0);
+			if (student_no_gt != null) predicate = predicate.And(_ => student_no_gt.CompareTo(_.student_no) < 0);
+			if (student_no_le != null) predicate = predicate.And(_ => student_no_le.CompareTo(_.student_no) >= 0);
+			if (student_no_ge != null) predicate = predicate.And(_ => student_no_ge.CompareTo(_.student_no) <= 0);
 			#endregion
 			#region out_student_no
+			if (out_student_no_eq != null) predicate = predicate.And(_ => _.out_student_no == out_student_no_eq);
+			if (out_student_no_ne != null) predicate = predicate.And(_ => _.out_student_no != out_student_no_ne);
+			if (out_student_no_lt != null) predicate = predicate.And(_ => out_student_no_lt.CompareTo(_.out_student_no) > 0);
+			if (out_student_no_gt != null) predicate = predicate.And(_ => out_student_no_gt.CompareTo(_.out_student_no) < 0);
+			if (out_student_no_le != null) predicate = predicate.And(_ => out_student_no_le.CompareTo(_.out_student_no) >= 0);
+			if (out_student_no_ge != null) predicate = predicate.And(_ => out_student_no_ge.CompareTo(_.out_student_no) <= 0);
 			#endregion
 			#region parent_no
+			if (parent_no_eq != null) predicate = predicate.And(_ => _.parent_no == parent_no_eq);
+			if (parent_no_ne != null) predicate = predicate.And(_ => _.parent_no != parent_no_ne);
+			if (parent_no_lt != null) predicate = predicate.And(_ => parent_no_lt.CompareTo(_.parent_no) > 0);
+			if (parent_no_gt != null) predicate = predicate.And(_ => parent_no_gt.CompareTo(_.parent_no) < 0);
+			if (parent_no_le != null) predicate = predicate.And(_ => parent_no_le.CompareTo(_.parent_no) >= 0);
+			if (parent_no_ge != null) predicate = predicate.And(_ => parent_no_ge.CompareTo(_.parent_no) <= 0);
 			#endregion
 			#region user_no
+			if (user_no_eq != null) predicate = predicate.And(_ => _.user_no == user_no_eq);
+			if (user_no_ne != null) predicate = predicate.And(_ => _.user_no != user_no_ne);
+			if (user_no_lt != null) predicate = predicate.And(_ => user_no_lt.CompareTo(_.user_no) > 0);
+			if (user_no_gt != null) predicate = predicate.And(_ => user_no_gt.CompareTo(_.user_no) < 0);
+			if (user_no_le != null) predicate = predicate.And(_ => user_no_le.CompareTo(_.user_no) >= 0);
+			if (user_no_ge != null) predicate = predicate.And(_ => user_no_ge.CompareTo(_.user_no) <= 0);
 			#endregion
 			#region auth_method_type
+			if (_auth_method_type_eq != null) predicate = predicate.And(_ => _.auth_method_type == _auth_method_type_eq);
+			if (_auth_method_type_ne != null) predicate = predicate.And(_ => _.auth_method_type != _auth_method_type_ne);
+			if (_auth_method_type_lt != null) predicate = predicate.And(_ => _auth_method_type_lt.CompareTo(_.auth_method_type) > 0);
+			if (_auth_method_type_gt != null) predicate = predicate.And(_ => _auth_method_type_gt.CompareTo(_.auth_method_type) < 0);
+			if (_auth_method_type_le != null) predicate = predicate.And(_ => _auth_method_type_le.CompareTo(_.auth_method_type) >= 0);
+			if (_auth_method_type_ge != null) predicate = predicate.And(_ => _auth_method_type_ge.CompareTo(_.auth_method_type) <= 0);
 			#endregion
 			#region is_valid
+			if (_is_valid_eq != null) predicate = predicate.And(_ => _.is_valid == _is_valid_eq);
+			if (_is_valid_ne != null) predicate = predicate.And(_ => _.is_valid != _is_valid_ne);
+			if (_is_valid_lt != null) predicate = predicate.And(_ => _.is_valid < _is_valid_lt);
+			if (_is_valid_gt != null) predicate = predicate.And(_ => _.is_valid > _is_valid_gt);
+			if (_is_valid_le != null) predicate = predicate.And(_ => _.is_valid <= _is_valid_le);
+			if (_is_valid_ge != null) predicate = predicate.And(_ => _.is_valid >= _is_valid_ge);
 			#endregion
 			#region created_at
+			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
+			if (created_at_ne != null) predicate = predicate.And(_ => _.created_at != created_at_ne);
+			if (created_at_lt != null) predicate = predicate.And(_ => _.created_at < created_at_lt);
+			if (created_at_gt != null) predicate = predicate.And(_ => _.created_at > created_at_gt);
+			if (created_at_le != null) predicate = predicate.And(_ => _.created_at <= created_at_le);
+			if (created_at_ge != null) predicate = predicate.And(_ => _.created_at >= created_at_ge);
 			#endregion
 			#region created_by
+			if (created_by_eq != null) predicate = predicate.And(_ => _.created_by == created_by_eq);
+			if (created_by_ne != null) predicate = predicate.And(_ => _.created_by != created_by_ne);
+			if (created_by_lt != null) predicate = predicate.And(_ => _.created_by < created_by_lt);
+			if (created_by_gt != null) predicate = predicate.And(_ => _.created_by > created_by_gt);
+			if (created_by_le != null) predicate = predicate.And(_ => _.created_by <= created_by_le);
+			if (created_by_ge != null) predicate = predicate.And(_ => _.created_by >= created_by_ge);
 			#endregion
 			#region modified_at
+			if (modified_at_eq != null) predicate = predicate.And(_ => _.modified_at == modified_at_eq);
+			if (modified_at_ne != null) predicate = predicate.And(_ => _.modified_at != modified_at_ne);
+			if (modified_at_lt != null) predicate = predicate.And(_ => _.modified_at < modified_at_lt);
+			if (modified_at_gt != null) predicate = predicate.And(_ => _.modified_at > modified_at_gt);
+			if (modified_at_le != null) predicate = predicate.And(_ => _.modified_at <= modified_at_le);
+			if (modified_at_ge != null) predicate = predicate.And(_ => _.modified_at >= modified_at_ge);
 			#endregion
 			#region modified_by
+			if (modified_by_eq != null) predicate = predicate.And(_ => _.modified_by == modified_by_eq);
+			if (modified_by_ne != null) predicate = predicate.And(_ => _.modified_by != modified_by_ne);
+			if (modified_by_lt != null) predicate = predicate.And(_ => _.modified_by < modified_by_lt);
+			if (modified_by_gt != null) predicate = predicate.And(_ => _.modified_by > modified_by_gt);
+			if (modified_by_le != null) predicate = predicate.And(_ => _.modified_by <= modified_by_le);
+			if (modified_by_ge != null) predicate = predicate.And(_ => _.modified_by >= modified_by_ge);
 			#endregion
 			#region removed_at
+			if (removed_at_eq != null) predicate = predicate.And(_ => _.removed_at == removed_at_eq);
+			if (removed_at_ne != null) predicate = predicate.And(_ => _.removed_at != removed_at_ne);
+			if (removed_at_lt != null) predicate = predicate.And(_ => _.removed_at < removed_at_lt);
+			if (removed_at_gt != null) predicate = predicate.And(_ => _.removed_at > removed_at_gt);
+			if (removed_at_le != null) predicate = predicate.And(_ => _.removed_at <= removed_at_le);
+			if (removed_at_ge != null) predicate = predicate.And(_ => _.removed_at >= removed_at_ge);
 			#endregion
 			#region row_version
+			if (row_version_eq != null) predicate = predicate.And(_ => _.row_version == row_version_eq);
+			if (row_version_ne != null) predicate = predicate.And(_ => _.row_version != row_version_ne);
+			#endregion
+
+			return predicate;
+		}
+		#endregion
+	}
+	#endregion
+	#endregion
+	#region アカウントロール
+	/// <summary>
+	/// アカウントロール
+	/// </summary>
+	[DataContract()]
+	[Table(Schema="Common", Name="AccountRole")]
+	public partial class AccountRole : TableBase<AccountRole>, INotifyPropertyChanged
+	{
+		#region uid : int
+
+		private int _uid;
+		/// <summary>
+		/// ユニークID
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), NotNull, Identity]
+		public  int  uid
+		{
+			get { return _uid; }
+			set
+			{
+				if (_uid != value)
+				{
+					BeforeuidChanged(value);
+					_uid = value;
+					AfteruidChanged();
+
+					OnuidChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeuidChanged(int newValue);
+		partial void AfteruidChanged();
+
+		public const string NameOfuid = "uid";
+
+		private static readonly PropertyChangedEventArgs _uidChangedEventArgs = new PropertyChangedEventArgs(NameOfuid);
+
+		private void OnuidChanged()
+		{
+			OnPropertyChanged(_uidChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region account_id : int
+
+		private int _account_id;
+		/// <summary>
+		/// アカウントID
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), NotNull, PrimaryKey]
+		public  int  account_id
+		{
+			get { return _account_id; }
+			set
+			{
+				if (_account_id != value)
+				{
+					Beforeaccount_idChanged(value);
+					_account_id = value;
+					Afteraccount_idChanged();
+
+					Onaccount_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeaccount_idChanged(int newValue);
+		partial void Afteraccount_idChanged();
+
+		public const string NameOfaccount_id = "account_id";
+
+		private static readonly PropertyChangedEventArgs _account_idChangedEventArgs = new PropertyChangedEventArgs(NameOfaccount_id);
+
+		private void Onaccount_idChanged()
+		{
+			OnPropertyChanged(_account_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region role_id : string
+
+		private string _role_id;
+		/// <summary>
+		/// ロールID
+		/// </summary>
+		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull, PrimaryKey]
+		public  string  role_id
+		{
+			get { return _role_id; }
+			set
+			{
+				if (_role_id != value)
+				{
+					Beforerole_idChanged(value);
+					_role_id = value;
+					Afterrole_idChanged();
+
+					Onrole_idChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerole_idChanged(string newValue);
+		partial void Afterrole_idChanged();
+
+		public const string NameOfrole_id = "role_id";
+
+		private static readonly PropertyChangedEventArgs _role_idChangedEventArgs = new PropertyChangedEventArgs(NameOfrole_id);
+
+		private void Onrole_idChanged()
+		{
+			OnPropertyChanged(_role_idChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region note : string
+
+		private string _note;
+		/// <summary>
+		/// 備考
+		/// </summary>
+		[Column(DbType="nvarchar(100)", DataType=DataType.NVarChar, Length=100), NotNull]
+		public  string  note
+		{
+			get { return _note; }
+			set
+			{
+				if (_note != value)
+				{
+					BeforenoteChanged(value);
+					_note = value;
+					AfternoteChanged();
+
+					OnnoteChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforenoteChanged(string newValue);
+		partial void AfternoteChanged();
+
+		public const string NameOfnote = "note";
+
+		private static readonly PropertyChangedEventArgs _noteChangedEventArgs = new PropertyChangedEventArgs(NameOfnote);
+
+		private void OnnoteChanged()
+		{
+			OnPropertyChanged(_noteChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region created_at : DateTime
+
+		private DateTime _created_at;
+		/// <summary>
+		/// 作成日時
+		/// </summary>
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  created_at
+		{
+			get { return _created_at; }
+			set
+			{
+				if (_created_at != value)
+				{
+					Beforecreated_atChanged(value);
+					_created_at = value;
+					Aftercreated_atChanged();
+
+					Oncreated_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_atChanged(DateTime newValue);
+		partial void Aftercreated_atChanged();
+
+		public const string NameOfcreated_at = "created_at";
+
+		private static readonly PropertyChangedEventArgs _created_atChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_at);
+
+		private void Oncreated_atChanged()
+		{
+			OnPropertyChanged(_created_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region created_by : int?
+
+		private int? _created_by;
+		/// <summary>
+		/// 作成者
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  created_by
+		{
+			get { return _created_by; }
+			set
+			{
+				if (_created_by != value)
+				{
+					Beforecreated_byChanged(value);
+					_created_by = value;
+					Aftercreated_byChanged();
+
+					Oncreated_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforecreated_byChanged(int? newValue);
+		partial void Aftercreated_byChanged();
+
+		public const string NameOfcreated_by = "created_by";
+
+		private static readonly PropertyChangedEventArgs _created_byChangedEventArgs = new PropertyChangedEventArgs(NameOfcreated_by);
+
+		private void Oncreated_byChanged()
+		{
+			OnPropertyChanged(_created_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region modified_at : DateTime
+
+		private DateTime _modified_at;
+		/// <summary>
+		/// 更新日時
+		/// </summary>
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), NotNull]
+		public  DateTime  modified_at
+		{
+			get { return _modified_at; }
+			set
+			{
+				if (_modified_at != value)
+				{
+					Beforemodified_atChanged(value);
+					_modified_at = value;
+					Aftermodified_atChanged();
+
+					Onmodified_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_atChanged(DateTime newValue);
+		partial void Aftermodified_atChanged();
+
+		public const string NameOfmodified_at = "modified_at";
+
+		private static readonly PropertyChangedEventArgs _modified_atChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_at);
+
+		private void Onmodified_atChanged()
+		{
+			OnPropertyChanged(_modified_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region modified_by : int?
+
+		private int? _modified_by;
+		/// <summary>
+		/// 更新者
+		/// </summary>
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  modified_by
+		{
+			get { return _modified_by; }
+			set
+			{
+				if (_modified_by != value)
+				{
+					Beforemodified_byChanged(value);
+					_modified_by = value;
+					Aftermodified_byChanged();
+
+					Onmodified_byChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforemodified_byChanged(int? newValue);
+		partial void Aftermodified_byChanged();
+
+		public const string NameOfmodified_by = "modified_by";
+
+		private static readonly PropertyChangedEventArgs _modified_byChangedEventArgs = new PropertyChangedEventArgs(NameOfmodified_by);
+
+		private void Onmodified_byChanged()
+		{
+			OnPropertyChanged(_modified_byChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region removed_at : DateTime?
+
+		private DateTime? _removed_at;
+		/// <summary>
+		/// 削除日時
+		/// </summary>
+		[Column(DbType="datetime2(7)", DataType=DataType.DateTime2, Precision=7), Nullable]
+		public  DateTime?  removed_at
+		{
+			get { return _removed_at; }
+			set
+			{
+				if (_removed_at != value)
+				{
+					Beforeremoved_atChanged(value);
+					_removed_at = value;
+					Afterremoved_atChanged();
+
+					Onremoved_atChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforeremoved_atChanged(DateTime? newValue);
+		partial void Afterremoved_atChanged();
+
+		public const string NameOfremoved_at = "removed_at";
+
+		private static readonly PropertyChangedEventArgs _removed_atChangedEventArgs = new PropertyChangedEventArgs(NameOfremoved_at);
+
+		private void Onremoved_atChanged()
+		{
+			OnPropertyChanged(_removed_atChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+		#region row_version : byte[]
+
+		private byte[] _row_version;
+		/// <summary>
+		/// 版
+		/// </summary>
+		[Column(DbType="timestamp", DataType=DataType.Timestamp, SkipOnInsert=true, SkipOnUpdate=true), Nullable]
+		public  byte[]  row_version
+		{
+			get { return _row_version; }
+			set
+			{
+				if (_row_version != value)
+				{
+					Beforerow_versionChanged(value);
+					_row_version = value;
+					Afterrow_versionChanged();
+
+					Onrow_versionChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void Beforerow_versionChanged(byte[] newValue);
+		partial void Afterrow_versionChanged();
+
+		public const string NameOfrow_version = "row_version";
+
+		private static readonly PropertyChangedEventArgs _row_versionChangedEventArgs = new PropertyChangedEventArgs(NameOfrow_version);
+
+		private void Onrow_versionChanged()
+		{
+			OnPropertyChanged(_row_versionChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#region enum用アクセスラッパー
+		#endregion
+
+		#region Constructor
+
+		public AccountRole()
+		{
+			#region フィールド初期化
+			uid = default(int);
+			account_id = 0;
+			role_id = "";
+			note = "";
+			created_at = DateTime.UtcNow;
+			created_by = null;
+			modified_at = DateTime.UtcNow;
+			modified_by = null;
+			removed_at = null;
+			row_version = default(byte[]);
+			#endregion
+		}
+
+		#endregion
+
+		#region Association
+
+		#region Role : role_id (FK_AccountRole_Role)
+
+		private Role _Role;
+		/// <summary>
+		/// FK_AccountRole_Role
+		/// </summary>
+		[Association(ThisKey="role_id", OtherKey="role_id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_AccountRole_Role", BackReferenceName="AccountRole")]
+		public  Role  Role
+		{
+			get { return _Role; }
+			set
+			{
+				if (_Role != value)
+				{
+					BeforeRoleChanged(value);
+					_Role = value;
+					AfterRoleChanged();
+
+					OnRoleChanged();
+				}
+			}
+		}
+
+		#region INotifyPropertyChanged support
+
+		partial void BeforeRoleChanged(Role newValue);
+		partial void AfterRoleChanged ();
+
+		public const string NameOfRole = "Role";
+
+		private static readonly PropertyChangedEventArgs _RoleChangedEventArgs = new PropertyChangedEventArgs(NameOfRole);
+
+		private void OnRoleChanged()
+		{
+			OnPropertyChanged(_RoleChangedEventArgs);
+		}
+
+		#endregion
+
+		#endregion
+
+		#endregion
+
+		#region INotifyPropertyChanged support
+
+		[field : NonSerialized]
+		public virtual event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged(string propertyName)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+				propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		protected void OnPropertyChanged(PropertyChangedEventArgs arg)
+		{
+			var propertyChanged = PropertyChanged;
+
+			if (propertyChanged != null)
+			{
+				propertyChanged(this, arg);
+			}
+		}
+
+		#endregion
+
+	}
+	#region アカウントロール条件
+	/// <summary>
+	/// アカウントロール条件
+	/// </summary>
+	public partial class AccountRoleCondition : ConditionBase<AccountRole>
+	{
+		#region properties
+		#region uid
+		public int? uid_eq { get; set; }
+		public int? uid_ne { get; set; }
+		public int? uid_lt { get; set; }
+		public int? uid_gt { get; set; }
+		public int? uid_le { get; set; }
+		public int? uid_ge { get; set; }
+		public IEnumerable<int> uid_in { get; set; }
+		public IEnumerable<int> uid_ni { get; set; }
+		public (int? low, int? high)? uid_between { get; set; }
+		#endregion
+		#region account_id
+		public int? account_id_eq { get; set; }
+		public int? account_id_ne { get; set; }
+		public int? account_id_lt { get; set; }
+		public int? account_id_gt { get; set; }
+		public int? account_id_le { get; set; }
+		public int? account_id_ge { get; set; }
+		public IEnumerable<int> account_id_in { get; set; }
+		public IEnumerable<int> account_id_ni { get; set; }
+		public (int? low, int? high)? account_id_between { get; set; }
+		#endregion
+		#region role_id
+		public string role_id_eq { get; set; }
+		public string role_id_ne { get; set; }
+		public string role_id_lt { get; set; }
+		public string role_id_gt { get; set; }
+		public string role_id_le { get; set; }
+		public string role_id_ge { get; set; }
+		public IEnumerable<string> role_id_in { get; set; }
+		public IEnumerable<string> role_id_ni { get; set; }
+		public (string low, string high)? role_id_between { get; set; }
+		public string role_id_like { get; set; }
+		#endregion
+		#region note
+		public string note_eq { get; set; }
+		public string note_ne { get; set; }
+		public string note_lt { get; set; }
+		public string note_gt { get; set; }
+		public string note_le { get; set; }
+		public string note_ge { get; set; }
+		public IEnumerable<string> note_in { get; set; }
+		public IEnumerable<string> note_ni { get; set; }
+		public (string low, string high)? note_between { get; set; }
+		public string note_like { get; set; }
+		#endregion
+		#region created_at
+		public DateTime? created_at_eq { get; set; }
+		public DateTime? created_at_ne { get; set; }
+		public DateTime? created_at_lt { get; set; }
+		public DateTime? created_at_gt { get; set; }
+		public DateTime? created_at_le { get; set; }
+		public DateTime? created_at_ge { get; set; }
+		public IEnumerable<DateTime> created_at_in { get; set; }
+		public IEnumerable<DateTime> created_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? created_at_between { get; set; }
+		#endregion
+		#region created_by
+		public int? created_by_eq { get; set; }
+		public int? created_by_ne { get; set; }
+		public int? created_by_lt { get; set; }
+		public int? created_by_gt { get; set; }
+		public int? created_by_le { get; set; }
+		public int? created_by_ge { get; set; }
+		public IEnumerable<int> created_by_in { get; set; }
+		public IEnumerable<int> created_by_ni { get; set; }
+		public (int? low, int? high)? created_by_between { get; set; }
+		#endregion
+		#region modified_at
+		public DateTime? modified_at_eq { get; set; }
+		public DateTime? modified_at_ne { get; set; }
+		public DateTime? modified_at_lt { get; set; }
+		public DateTime? modified_at_gt { get; set; }
+		public DateTime? modified_at_le { get; set; }
+		public DateTime? modified_at_ge { get; set; }
+		public IEnumerable<DateTime> modified_at_in { get; set; }
+		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? modified_at_between { get; set; }
+		#endregion
+		#region modified_by
+		public int? modified_by_eq { get; set; }
+		public int? modified_by_ne { get; set; }
+		public int? modified_by_lt { get; set; }
+		public int? modified_by_gt { get; set; }
+		public int? modified_by_le { get; set; }
+		public int? modified_by_ge { get; set; }
+		public IEnumerable<int> modified_by_in { get; set; }
+		public IEnumerable<int> modified_by_ni { get; set; }
+		public (int? low, int? high)? modified_by_between { get; set; }
+		#endregion
+		#region removed_at
+		public DateTime? removed_at_eq { get; set; }
+		public DateTime? removed_at_ne { get; set; }
+		public DateTime? removed_at_lt { get; set; }
+		public DateTime? removed_at_gt { get; set; }
+		public DateTime? removed_at_le { get; set; }
+		public DateTime? removed_at_ge { get; set; }
+		public IEnumerable<DateTime> removed_at_in { get; set; }
+		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? removed_at_between { get; set; }
+		#endregion
+		#region row_version
+		public byte[] row_version_eq { get; set; }
+		public byte[] row_version_ne { get; set; }
+		#endregion
+		#endregion
+
+		#region override
+		override public Expression<Func<AccountRole, bool>> CreatePredicate()
+		{
+			var predicate = base.CreatePredicate();
+
+			#region uid
+			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
+			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
+			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
+			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
+			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
+			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
+			#endregion
+			#region account_id
+			if (account_id_eq != null) predicate = predicate.And(_ => _.account_id == account_id_eq);
+			if (account_id_ne != null) predicate = predicate.And(_ => _.account_id != account_id_ne);
+			if (account_id_lt != null) predicate = predicate.And(_ => _.account_id < account_id_lt);
+			if (account_id_gt != null) predicate = predicate.And(_ => _.account_id > account_id_gt);
+			if (account_id_le != null) predicate = predicate.And(_ => _.account_id <= account_id_le);
+			if (account_id_ge != null) predicate = predicate.And(_ => _.account_id >= account_id_ge);
+			#endregion
+			#region role_id
+			if (role_id_eq != null) predicate = predicate.And(_ => _.role_id == role_id_eq);
+			if (role_id_ne != null) predicate = predicate.And(_ => _.role_id != role_id_ne);
+			if (role_id_lt != null) predicate = predicate.And(_ => role_id_lt.CompareTo(_.role_id) > 0);
+			if (role_id_gt != null) predicate = predicate.And(_ => role_id_gt.CompareTo(_.role_id) < 0);
+			if (role_id_le != null) predicate = predicate.And(_ => role_id_le.CompareTo(_.role_id) >= 0);
+			if (role_id_ge != null) predicate = predicate.And(_ => role_id_ge.CompareTo(_.role_id) <= 0);
+			#endregion
+			#region note
+			if (note_eq != null) predicate = predicate.And(_ => _.note == note_eq);
+			if (note_ne != null) predicate = predicate.And(_ => _.note != note_ne);
+			if (note_lt != null) predicate = predicate.And(_ => note_lt.CompareTo(_.note) > 0);
+			if (note_gt != null) predicate = predicate.And(_ => note_gt.CompareTo(_.note) < 0);
+			if (note_le != null) predicate = predicate.And(_ => note_le.CompareTo(_.note) >= 0);
+			if (note_ge != null) predicate = predicate.And(_ => note_ge.CompareTo(_.note) <= 0);
+			#endregion
+			#region created_at
+			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
+			if (created_at_ne != null) predicate = predicate.And(_ => _.created_at != created_at_ne);
+			if (created_at_lt != null) predicate = predicate.And(_ => _.created_at < created_at_lt);
+			if (created_at_gt != null) predicate = predicate.And(_ => _.created_at > created_at_gt);
+			if (created_at_le != null) predicate = predicate.And(_ => _.created_at <= created_at_le);
+			if (created_at_ge != null) predicate = predicate.And(_ => _.created_at >= created_at_ge);
+			#endregion
+			#region created_by
+			if (created_by_eq != null) predicate = predicate.And(_ => _.created_by == created_by_eq);
+			if (created_by_ne != null) predicate = predicate.And(_ => _.created_by != created_by_ne);
+			if (created_by_lt != null) predicate = predicate.And(_ => _.created_by < created_by_lt);
+			if (created_by_gt != null) predicate = predicate.And(_ => _.created_by > created_by_gt);
+			if (created_by_le != null) predicate = predicate.And(_ => _.created_by <= created_by_le);
+			if (created_by_ge != null) predicate = predicate.And(_ => _.created_by >= created_by_ge);
+			#endregion
+			#region modified_at
+			if (modified_at_eq != null) predicate = predicate.And(_ => _.modified_at == modified_at_eq);
+			if (modified_at_ne != null) predicate = predicate.And(_ => _.modified_at != modified_at_ne);
+			if (modified_at_lt != null) predicate = predicate.And(_ => _.modified_at < modified_at_lt);
+			if (modified_at_gt != null) predicate = predicate.And(_ => _.modified_at > modified_at_gt);
+			if (modified_at_le != null) predicate = predicate.And(_ => _.modified_at <= modified_at_le);
+			if (modified_at_ge != null) predicate = predicate.And(_ => _.modified_at >= modified_at_ge);
+			#endregion
+			#region modified_by
+			if (modified_by_eq != null) predicate = predicate.And(_ => _.modified_by == modified_by_eq);
+			if (modified_by_ne != null) predicate = predicate.And(_ => _.modified_by != modified_by_ne);
+			if (modified_by_lt != null) predicate = predicate.And(_ => _.modified_by < modified_by_lt);
+			if (modified_by_gt != null) predicate = predicate.And(_ => _.modified_by > modified_by_gt);
+			if (modified_by_le != null) predicate = predicate.And(_ => _.modified_by <= modified_by_le);
+			if (modified_by_ge != null) predicate = predicate.And(_ => _.modified_by >= modified_by_ge);
+			#endregion
+			#region removed_at
+			if (removed_at_eq != null) predicate = predicate.And(_ => _.removed_at == removed_at_eq);
+			if (removed_at_ne != null) predicate = predicate.And(_ => _.removed_at != removed_at_ne);
+			if (removed_at_lt != null) predicate = predicate.And(_ => _.removed_at < removed_at_lt);
+			if (removed_at_gt != null) predicate = predicate.And(_ => _.removed_at > removed_at_gt);
+			if (removed_at_le != null) predicate = predicate.And(_ => _.removed_at <= removed_at_le);
+			if (removed_at_ge != null) predicate = predicate.And(_ => _.removed_at >= removed_at_ge);
+			#endregion
+			#region row_version
+			if (row_version_eq != null) predicate = predicate.And(_ => _.row_version == row_version_eq);
+			if (row_version_ne != null) predicate = predicate.And(_ => _.row_version != row_version_ne);
 			#endregion
 
 			return predicate;
@@ -6253,14 +8981,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region created_by : string
+		#region created_by : int?
 
-		private string _created_by;
+		private int? _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  created_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  created_by
 		{
 			get { return _created_by; }
 			set
@@ -6278,7 +9006,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforecreated_byChanged(string newValue);
+		partial void Beforecreated_byChanged(int? newValue);
 		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
@@ -6333,14 +9061,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region modified_by : string
+		#region modified_by : int?
 
-		private string _modified_by;
+		private int? _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  modified_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  modified_by
 		{
 			get { return _modified_by; }
 			set
@@ -6358,7 +9086,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforemodified_byChanged(string newValue);
+		partial void Beforemodified_byChanged(int? newValue);
 		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
@@ -6471,6 +9199,32 @@ namespace peppa.Domain
 			get => (Gender?)gender;
 			set => gender = value?.Val();
 		}
+		#endregion
+
+		#region Constructor
+
+		public Staff()
+		{
+			#region フィールド初期化
+			uid = default(int);
+			user_type = 1;
+			staff_no = "";
+			name = "";
+			kana = "";
+			name_abbrev = "";
+			name_eng = "";
+			name_eng_abbrev = "";
+			gender = null;
+			birth_date = null;
+			created_at = DateTime.UtcNow;
+			created_by = null;
+			modified_at = DateTime.UtcNow;
+			modified_by = null;
+			removed_at = null;
+			row_version = default(byte[]);
+			#endregion
+		}
+
 		#endregion
 
 		#region Association
@@ -6642,6 +9396,7 @@ namespace peppa.Domain
 		public int? uid_ge { get; set; }
 		public IEnumerable<int> uid_in { get; set; }
 		public IEnumerable<int> uid_ni { get; set; }
+		public (int? low, int? high)? uid_between { get; set; }
 		#endregion
 		#region user_type (UserType)
 		private int? _user_type_eq;
@@ -6692,6 +9447,12 @@ namespace peppa.Domain
 			get => _user_type_ni.Select(_ => _.ToUserType().Value);
 			set => _user_type_ni = value.Select(_ => _.Val());
 		}
+		private (int low, int high)? _user_type_between;
+		public (UserType low, UserType high)? UserType_between
+		{
+			get => _user_type_between.HasValue ? (_user_type_between.Value.low.ToUserType().Value, _user_type_between.Value.high.ToUserType().Value) : ((UserType, UserType)?)null;
+			set => _user_type_between = value.HasValue ? (value.Value.low.Val(), value.Value.high.Val()) : ((int, int)?)null;
+		}
 		#endregion
 		#region staff_no
 		public string staff_no_eq { get; set; }
@@ -6702,6 +9463,8 @@ namespace peppa.Domain
 		public string staff_no_ge { get; set; }
 		public IEnumerable<string> staff_no_in { get; set; }
 		public IEnumerable<string> staff_no_ni { get; set; }
+		public (string low, string high)? staff_no_between { get; set; }
+		public string staff_no_like { get; set; }
 		#endregion
 		#region name
 		public string name_eq { get; set; }
@@ -6712,6 +9475,8 @@ namespace peppa.Domain
 		public string name_ge { get; set; }
 		public IEnumerable<string> name_in { get; set; }
 		public IEnumerable<string> name_ni { get; set; }
+		public (string low, string high)? name_between { get; set; }
+		public string name_like { get; set; }
 		#endregion
 		#region kana
 		public string kana_eq { get; set; }
@@ -6722,6 +9487,8 @@ namespace peppa.Domain
 		public string kana_ge { get; set; }
 		public IEnumerable<string> kana_in { get; set; }
 		public IEnumerable<string> kana_ni { get; set; }
+		public (string low, string high)? kana_between { get; set; }
+		public string kana_like { get; set; }
 		#endregion
 		#region name_abbrev
 		public string name_abbrev_eq { get; set; }
@@ -6732,6 +9499,8 @@ namespace peppa.Domain
 		public string name_abbrev_ge { get; set; }
 		public IEnumerable<string> name_abbrev_in { get; set; }
 		public IEnumerable<string> name_abbrev_ni { get; set; }
+		public (string low, string high)? name_abbrev_between { get; set; }
+		public string name_abbrev_like { get; set; }
 		#endregion
 		#region name_eng
 		public string name_eng_eq { get; set; }
@@ -6742,6 +9511,8 @@ namespace peppa.Domain
 		public string name_eng_ge { get; set; }
 		public IEnumerable<string> name_eng_in { get; set; }
 		public IEnumerable<string> name_eng_ni { get; set; }
+		public (string low, string high)? name_eng_between { get; set; }
+		public string name_eng_like { get; set; }
 		#endregion
 		#region name_eng_abbrev
 		public string name_eng_abbrev_eq { get; set; }
@@ -6752,6 +9523,8 @@ namespace peppa.Domain
 		public string name_eng_abbrev_ge { get; set; }
 		public IEnumerable<string> name_eng_abbrev_in { get; set; }
 		public IEnumerable<string> name_eng_abbrev_ni { get; set; }
+		public (string low, string high)? name_eng_abbrev_between { get; set; }
+		public string name_eng_abbrev_like { get; set; }
 		#endregion
 		#region gender (Gender)
 		private int? _gender_eq;
@@ -6802,6 +9575,12 @@ namespace peppa.Domain
 			get => _gender_ni.Select(_ => _.ToGender().Value);
 			set => _gender_ni = value.Select(_ => _.Val());
 		}
+		private (int low, int high)? _gender_between;
+		public (Gender low, Gender high)? Gender_between
+		{
+			get => _gender_between.HasValue ? (_gender_between.Value.low.ToGender().Value, _gender_between.Value.high.ToGender().Value) : ((Gender, Gender)?)null;
+			set => _gender_between = value.HasValue ? (value.Value.low.Val(), value.Value.high.Val()) : ((int, int)?)null;
+		}
 		#endregion
 		#region birth_date
 		public DateTime? birth_date_eq { get; set; }
@@ -6812,6 +9591,7 @@ namespace peppa.Domain
 		public DateTime? birth_date_ge { get; set; }
 		public IEnumerable<DateTime> birth_date_in { get; set; }
 		public IEnumerable<DateTime> birth_date_ni { get; set; }
+		public (DateTime? low, DateTime? high)? birth_date_between { get; set; }
 		#endregion
 		#region created_at
 		public DateTime? created_at_eq { get; set; }
@@ -6822,16 +9602,18 @@ namespace peppa.Domain
 		public DateTime? created_at_ge { get; set; }
 		public IEnumerable<DateTime> created_at_in { get; set; }
 		public IEnumerable<DateTime> created_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? created_at_between { get; set; }
 		#endregion
 		#region created_by
-		public string created_by_eq { get; set; }
-		public string created_by_ne { get; set; }
-		public string created_by_lt { get; set; }
-		public string created_by_gt { get; set; }
-		public string created_by_le { get; set; }
-		public string created_by_ge { get; set; }
-		public IEnumerable<string> created_by_in { get; set; }
-		public IEnumerable<string> created_by_ni { get; set; }
+		public int? created_by_eq { get; set; }
+		public int? created_by_ne { get; set; }
+		public int? created_by_lt { get; set; }
+		public int? created_by_gt { get; set; }
+		public int? created_by_le { get; set; }
+		public int? created_by_ge { get; set; }
+		public IEnumerable<int> created_by_in { get; set; }
+		public IEnumerable<int> created_by_ni { get; set; }
+		public (int? low, int? high)? created_by_between { get; set; }
 		#endregion
 		#region modified_at
 		public DateTime? modified_at_eq { get; set; }
@@ -6842,16 +9624,18 @@ namespace peppa.Domain
 		public DateTime? modified_at_ge { get; set; }
 		public IEnumerable<DateTime> modified_at_in { get; set; }
 		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? modified_at_between { get; set; }
 		#endregion
 		#region modified_by
-		public string modified_by_eq { get; set; }
-		public string modified_by_ne { get; set; }
-		public string modified_by_lt { get; set; }
-		public string modified_by_gt { get; set; }
-		public string modified_by_le { get; set; }
-		public string modified_by_ge { get; set; }
-		public IEnumerable<string> modified_by_in { get; set; }
-		public IEnumerable<string> modified_by_ni { get; set; }
+		public int? modified_by_eq { get; set; }
+		public int? modified_by_ne { get; set; }
+		public int? modified_by_lt { get; set; }
+		public int? modified_by_gt { get; set; }
+		public int? modified_by_le { get; set; }
+		public int? modified_by_ge { get; set; }
+		public IEnumerable<int> modified_by_in { get; set; }
+		public IEnumerable<int> modified_by_ni { get; set; }
+		public (int? low, int? high)? modified_by_between { get; set; }
 		#endregion
 		#region removed_at
 		public DateTime? removed_at_eq { get; set; }
@@ -6862,55 +9646,142 @@ namespace peppa.Domain
 		public DateTime? removed_at_ge { get; set; }
 		public IEnumerable<DateTime> removed_at_in { get; set; }
 		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? removed_at_between { get; set; }
 		#endregion
 		#region row_version
 		public byte[] row_version_eq { get; set; }
 		public byte[] row_version_ne { get; set; }
-		public byte[] row_version_lt { get; set; }
-		public byte[] row_version_gt { get; set; }
-		public byte[] row_version_le { get; set; }
-		public byte[] row_version_ge { get; set; }
-		public IEnumerable<byte[]> row_version_in { get; set; }
-		public IEnumerable<byte[]> row_version_ni { get; set; }
 		#endregion
 		#endregion
 
 		#region override
 		override public Expression<Func<Staff, bool>> CreatePredicate()
 		{
-			var predicate = PredicateBuilder.True<Staff>();
+			var predicate = base.CreatePredicate();
 
 			#region uid
+			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
+			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
+			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
+			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
+			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
+			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
 			#endregion
 			#region user_type
+			if (_user_type_eq != null) predicate = predicate.And(_ => _.user_type == _user_type_eq);
+			if (_user_type_ne != null) predicate = predicate.And(_ => _.user_type != _user_type_ne);
+			if (_user_type_lt != null) predicate = predicate.And(_ => _.user_type < _user_type_lt);
+			if (_user_type_gt != null) predicate = predicate.And(_ => _.user_type > _user_type_gt);
+			if (_user_type_le != null) predicate = predicate.And(_ => _.user_type <= _user_type_le);
+			if (_user_type_ge != null) predicate = predicate.And(_ => _.user_type >= _user_type_ge);
 			#endregion
 			#region staff_no
+			if (staff_no_eq != null) predicate = predicate.And(_ => _.staff_no == staff_no_eq);
+			if (staff_no_ne != null) predicate = predicate.And(_ => _.staff_no != staff_no_ne);
+			if (staff_no_lt != null) predicate = predicate.And(_ => staff_no_lt.CompareTo(_.staff_no) > 0);
+			if (staff_no_gt != null) predicate = predicate.And(_ => staff_no_gt.CompareTo(_.staff_no) < 0);
+			if (staff_no_le != null) predicate = predicate.And(_ => staff_no_le.CompareTo(_.staff_no) >= 0);
+			if (staff_no_ge != null) predicate = predicate.And(_ => staff_no_ge.CompareTo(_.staff_no) <= 0);
 			#endregion
 			#region name
+			if (name_eq != null) predicate = predicate.And(_ => _.name == name_eq);
+			if (name_ne != null) predicate = predicate.And(_ => _.name != name_ne);
+			if (name_lt != null) predicate = predicate.And(_ => name_lt.CompareTo(_.name) > 0);
+			if (name_gt != null) predicate = predicate.And(_ => name_gt.CompareTo(_.name) < 0);
+			if (name_le != null) predicate = predicate.And(_ => name_le.CompareTo(_.name) >= 0);
+			if (name_ge != null) predicate = predicate.And(_ => name_ge.CompareTo(_.name) <= 0);
 			#endregion
 			#region kana
+			if (kana_eq != null) predicate = predicate.And(_ => _.kana == kana_eq);
+			if (kana_ne != null) predicate = predicate.And(_ => _.kana != kana_ne);
+			if (kana_lt != null) predicate = predicate.And(_ => kana_lt.CompareTo(_.kana) > 0);
+			if (kana_gt != null) predicate = predicate.And(_ => kana_gt.CompareTo(_.kana) < 0);
+			if (kana_le != null) predicate = predicate.And(_ => kana_le.CompareTo(_.kana) >= 0);
+			if (kana_ge != null) predicate = predicate.And(_ => kana_ge.CompareTo(_.kana) <= 0);
 			#endregion
 			#region name_abbrev
+			if (name_abbrev_eq != null) predicate = predicate.And(_ => _.name_abbrev == name_abbrev_eq);
+			if (name_abbrev_ne != null) predicate = predicate.And(_ => _.name_abbrev != name_abbrev_ne);
+			if (name_abbrev_lt != null) predicate = predicate.And(_ => name_abbrev_lt.CompareTo(_.name_abbrev) > 0);
+			if (name_abbrev_gt != null) predicate = predicate.And(_ => name_abbrev_gt.CompareTo(_.name_abbrev) < 0);
+			if (name_abbrev_le != null) predicate = predicate.And(_ => name_abbrev_le.CompareTo(_.name_abbrev) >= 0);
+			if (name_abbrev_ge != null) predicate = predicate.And(_ => name_abbrev_ge.CompareTo(_.name_abbrev) <= 0);
 			#endregion
 			#region name_eng
+			if (name_eng_eq != null) predicate = predicate.And(_ => _.name_eng == name_eng_eq);
+			if (name_eng_ne != null) predicate = predicate.And(_ => _.name_eng != name_eng_ne);
+			if (name_eng_lt != null) predicate = predicate.And(_ => name_eng_lt.CompareTo(_.name_eng) > 0);
+			if (name_eng_gt != null) predicate = predicate.And(_ => name_eng_gt.CompareTo(_.name_eng) < 0);
+			if (name_eng_le != null) predicate = predicate.And(_ => name_eng_le.CompareTo(_.name_eng) >= 0);
+			if (name_eng_ge != null) predicate = predicate.And(_ => name_eng_ge.CompareTo(_.name_eng) <= 0);
 			#endregion
 			#region name_eng_abbrev
+			if (name_eng_abbrev_eq != null) predicate = predicate.And(_ => _.name_eng_abbrev == name_eng_abbrev_eq);
+			if (name_eng_abbrev_ne != null) predicate = predicate.And(_ => _.name_eng_abbrev != name_eng_abbrev_ne);
+			if (name_eng_abbrev_lt != null) predicate = predicate.And(_ => name_eng_abbrev_lt.CompareTo(_.name_eng_abbrev) > 0);
+			if (name_eng_abbrev_gt != null) predicate = predicate.And(_ => name_eng_abbrev_gt.CompareTo(_.name_eng_abbrev) < 0);
+			if (name_eng_abbrev_le != null) predicate = predicate.And(_ => name_eng_abbrev_le.CompareTo(_.name_eng_abbrev) >= 0);
+			if (name_eng_abbrev_ge != null) predicate = predicate.And(_ => name_eng_abbrev_ge.CompareTo(_.name_eng_abbrev) <= 0);
 			#endregion
 			#region gender
+			if (_gender_eq != null) predicate = predicate.And(_ => _.gender == _gender_eq);
+			if (_gender_ne != null) predicate = predicate.And(_ => _.gender != _gender_ne);
+			if (_gender_lt != null) predicate = predicate.And(_ => _.gender < _gender_lt);
+			if (_gender_gt != null) predicate = predicate.And(_ => _.gender > _gender_gt);
+			if (_gender_le != null) predicate = predicate.And(_ => _.gender <= _gender_le);
+			if (_gender_ge != null) predicate = predicate.And(_ => _.gender >= _gender_ge);
 			#endregion
 			#region birth_date
+			if (birth_date_eq != null) predicate = predicate.And(_ => _.birth_date == birth_date_eq);
+			if (birth_date_ne != null) predicate = predicate.And(_ => _.birth_date != birth_date_ne);
+			if (birth_date_lt != null) predicate = predicate.And(_ => _.birth_date < birth_date_lt);
+			if (birth_date_gt != null) predicate = predicate.And(_ => _.birth_date > birth_date_gt);
+			if (birth_date_le != null) predicate = predicate.And(_ => _.birth_date <= birth_date_le);
+			if (birth_date_ge != null) predicate = predicate.And(_ => _.birth_date >= birth_date_ge);
 			#endregion
 			#region created_at
+			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
+			if (created_at_ne != null) predicate = predicate.And(_ => _.created_at != created_at_ne);
+			if (created_at_lt != null) predicate = predicate.And(_ => _.created_at < created_at_lt);
+			if (created_at_gt != null) predicate = predicate.And(_ => _.created_at > created_at_gt);
+			if (created_at_le != null) predicate = predicate.And(_ => _.created_at <= created_at_le);
+			if (created_at_ge != null) predicate = predicate.And(_ => _.created_at >= created_at_ge);
 			#endregion
 			#region created_by
+			if (created_by_eq != null) predicate = predicate.And(_ => _.created_by == created_by_eq);
+			if (created_by_ne != null) predicate = predicate.And(_ => _.created_by != created_by_ne);
+			if (created_by_lt != null) predicate = predicate.And(_ => _.created_by < created_by_lt);
+			if (created_by_gt != null) predicate = predicate.And(_ => _.created_by > created_by_gt);
+			if (created_by_le != null) predicate = predicate.And(_ => _.created_by <= created_by_le);
+			if (created_by_ge != null) predicate = predicate.And(_ => _.created_by >= created_by_ge);
 			#endregion
 			#region modified_at
+			if (modified_at_eq != null) predicate = predicate.And(_ => _.modified_at == modified_at_eq);
+			if (modified_at_ne != null) predicate = predicate.And(_ => _.modified_at != modified_at_ne);
+			if (modified_at_lt != null) predicate = predicate.And(_ => _.modified_at < modified_at_lt);
+			if (modified_at_gt != null) predicate = predicate.And(_ => _.modified_at > modified_at_gt);
+			if (modified_at_le != null) predicate = predicate.And(_ => _.modified_at <= modified_at_le);
+			if (modified_at_ge != null) predicate = predicate.And(_ => _.modified_at >= modified_at_ge);
 			#endregion
 			#region modified_by
+			if (modified_by_eq != null) predicate = predicate.And(_ => _.modified_by == modified_by_eq);
+			if (modified_by_ne != null) predicate = predicate.And(_ => _.modified_by != modified_by_ne);
+			if (modified_by_lt != null) predicate = predicate.And(_ => _.modified_by < modified_by_lt);
+			if (modified_by_gt != null) predicate = predicate.And(_ => _.modified_by > modified_by_gt);
+			if (modified_by_le != null) predicate = predicate.And(_ => _.modified_by <= modified_by_le);
+			if (modified_by_ge != null) predicate = predicate.And(_ => _.modified_by >= modified_by_ge);
 			#endregion
 			#region removed_at
+			if (removed_at_eq != null) predicate = predicate.And(_ => _.removed_at == removed_at_eq);
+			if (removed_at_ne != null) predicate = predicate.And(_ => _.removed_at != removed_at_ne);
+			if (removed_at_lt != null) predicate = predicate.And(_ => _.removed_at < removed_at_lt);
+			if (removed_at_gt != null) predicate = predicate.And(_ => _.removed_at > removed_at_gt);
+			if (removed_at_le != null) predicate = predicate.And(_ => _.removed_at <= removed_at_le);
+			if (removed_at_ge != null) predicate = predicate.And(_ => _.removed_at >= removed_at_ge);
 			#endregion
 			#region row_version
+			if (row_version_eq != null) predicate = predicate.And(_ => _.row_version == row_version_eq);
+			if (row_version_ne != null) predicate = predicate.And(_ => _.row_version != row_version_ne);
 			#endregion
 
 			return predicate;
@@ -7527,14 +10398,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region created_by : string
+		#region created_by : int?
 
-		private string _created_by;
+		private int? _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  created_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  created_by
 		{
 			get { return _created_by; }
 			set
@@ -7552,7 +10423,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforecreated_byChanged(string newValue);
+		partial void Beforecreated_byChanged(int? newValue);
 		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
@@ -7607,14 +10478,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region modified_by : string
+		#region modified_by : int?
 
-		private string _modified_by;
+		private int? _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  modified_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  modified_by
 		{
 			get { return _modified_by; }
 			set
@@ -7632,7 +10503,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforemodified_byChanged(string newValue);
+		partial void Beforemodified_byChanged(int? newValue);
 		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
@@ -7697,6 +10568,35 @@ namespace peppa.Domain
 			get => (UserType)user_type;
 			set => user_type = value.Val();
 		}
+		#endregion
+
+		#region Constructor
+
+		public Address()
+		{
+			#region フィールド初期化
+			uid = default(int);
+			user_type = 99;
+			generic_user_no = null;
+			seq = 0;
+			address_type_id = 0;
+			postal_code = "";
+			prefecture_code = 1;
+			address1 = "";
+			address2 = "";
+			address3 = "";
+			latitude = null;
+			longitude = null;
+			enter_date = null;
+			leave_date = null;
+			created_at = DateTime.UtcNow;
+			created_by = null;
+			modified_at = DateTime.UtcNow;
+			modified_by = null;
+			row_version = default(byte[]);
+			#endregion
+		}
+
 		#endregion
 
 		#region Association
@@ -7828,6 +10728,7 @@ namespace peppa.Domain
 		public int? uid_ge { get; set; }
 		public IEnumerable<int> uid_in { get; set; }
 		public IEnumerable<int> uid_ni { get; set; }
+		public (int? low, int? high)? uid_between { get; set; }
 		#endregion
 		#region user_type (UserType)
 		private int? _user_type_eq;
@@ -7878,6 +10779,12 @@ namespace peppa.Domain
 			get => _user_type_ni.Select(_ => _.ToUserType().Value);
 			set => _user_type_ni = value.Select(_ => _.Val());
 		}
+		private (int low, int high)? _user_type_between;
+		public (UserType low, UserType high)? UserType_between
+		{
+			get => _user_type_between.HasValue ? (_user_type_between.Value.low.ToUserType().Value, _user_type_between.Value.high.ToUserType().Value) : ((UserType, UserType)?)null;
+			set => _user_type_between = value.HasValue ? (value.Value.low.Val(), value.Value.high.Val()) : ((int, int)?)null;
+		}
 		#endregion
 		#region generic_user_no
 		public string generic_user_no_eq { get; set; }
@@ -7888,6 +10795,8 @@ namespace peppa.Domain
 		public string generic_user_no_ge { get; set; }
 		public IEnumerable<string> generic_user_no_in { get; set; }
 		public IEnumerable<string> generic_user_no_ni { get; set; }
+		public (string low, string high)? generic_user_no_between { get; set; }
+		public string generic_user_no_like { get; set; }
 		#endregion
 		#region seq
 		public int? seq_eq { get; set; }
@@ -7898,6 +10807,7 @@ namespace peppa.Domain
 		public int? seq_ge { get; set; }
 		public IEnumerable<int> seq_in { get; set; }
 		public IEnumerable<int> seq_ni { get; set; }
+		public (int? low, int? high)? seq_between { get; set; }
 		#endregion
 		#region address_type_id
 		public int? address_type_id_eq { get; set; }
@@ -7908,6 +10818,7 @@ namespace peppa.Domain
 		public int? address_type_id_ge { get; set; }
 		public IEnumerable<int> address_type_id_in { get; set; }
 		public IEnumerable<int> address_type_id_ni { get; set; }
+		public (int? low, int? high)? address_type_id_between { get; set; }
 		#endregion
 		#region postal_code
 		public string postal_code_eq { get; set; }
@@ -7918,6 +10829,8 @@ namespace peppa.Domain
 		public string postal_code_ge { get; set; }
 		public IEnumerable<string> postal_code_in { get; set; }
 		public IEnumerable<string> postal_code_ni { get; set; }
+		public (string low, string high)? postal_code_between { get; set; }
+		public string postal_code_like { get; set; }
 		#endregion
 		#region prefecture_code
 		public int? prefecture_code_eq { get; set; }
@@ -7928,6 +10841,7 @@ namespace peppa.Domain
 		public int? prefecture_code_ge { get; set; }
 		public IEnumerable<int> prefecture_code_in { get; set; }
 		public IEnumerable<int> prefecture_code_ni { get; set; }
+		public (int? low, int? high)? prefecture_code_between { get; set; }
 		#endregion
 		#region address1
 		public string address1_eq { get; set; }
@@ -7938,6 +10852,8 @@ namespace peppa.Domain
 		public string address1_ge { get; set; }
 		public IEnumerable<string> address1_in { get; set; }
 		public IEnumerable<string> address1_ni { get; set; }
+		public (string low, string high)? address1_between { get; set; }
+		public string address1_like { get; set; }
 		#endregion
 		#region address2
 		public string address2_eq { get; set; }
@@ -7948,6 +10864,8 @@ namespace peppa.Domain
 		public string address2_ge { get; set; }
 		public IEnumerable<string> address2_in { get; set; }
 		public IEnumerable<string> address2_ni { get; set; }
+		public (string low, string high)? address2_between { get; set; }
+		public string address2_like { get; set; }
 		#endregion
 		#region address3
 		public string address3_eq { get; set; }
@@ -7958,6 +10876,8 @@ namespace peppa.Domain
 		public string address3_ge { get; set; }
 		public IEnumerable<string> address3_in { get; set; }
 		public IEnumerable<string> address3_ni { get; set; }
+		public (string low, string high)? address3_between { get; set; }
+		public string address3_like { get; set; }
 		#endregion
 		#region latitude
 		public decimal? latitude_eq { get; set; }
@@ -7968,6 +10888,7 @@ namespace peppa.Domain
 		public decimal? latitude_ge { get; set; }
 		public IEnumerable<decimal> latitude_in { get; set; }
 		public IEnumerable<decimal> latitude_ni { get; set; }
+		public (decimal? low, decimal? high)? latitude_between { get; set; }
 		#endregion
 		#region longitude
 		public decimal? longitude_eq { get; set; }
@@ -7978,6 +10899,7 @@ namespace peppa.Domain
 		public decimal? longitude_ge { get; set; }
 		public IEnumerable<decimal> longitude_in { get; set; }
 		public IEnumerable<decimal> longitude_ni { get; set; }
+		public (decimal? low, decimal? high)? longitude_between { get; set; }
 		#endregion
 		#region enter_date
 		public DateTime? enter_date_eq { get; set; }
@@ -7988,6 +10910,7 @@ namespace peppa.Domain
 		public DateTime? enter_date_ge { get; set; }
 		public IEnumerable<DateTime> enter_date_in { get; set; }
 		public IEnumerable<DateTime> enter_date_ni { get; set; }
+		public (DateTime? low, DateTime? high)? enter_date_between { get; set; }
 		#endregion
 		#region leave_date
 		public DateTime? leave_date_eq { get; set; }
@@ -7998,6 +10921,7 @@ namespace peppa.Domain
 		public DateTime? leave_date_ge { get; set; }
 		public IEnumerable<DateTime> leave_date_in { get; set; }
 		public IEnumerable<DateTime> leave_date_ni { get; set; }
+		public (DateTime? low, DateTime? high)? leave_date_between { get; set; }
 		#endregion
 		#region created_at
 		public DateTime? created_at_eq { get; set; }
@@ -8008,16 +10932,18 @@ namespace peppa.Domain
 		public DateTime? created_at_ge { get; set; }
 		public IEnumerable<DateTime> created_at_in { get; set; }
 		public IEnumerable<DateTime> created_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? created_at_between { get; set; }
 		#endregion
 		#region created_by
-		public string created_by_eq { get; set; }
-		public string created_by_ne { get; set; }
-		public string created_by_lt { get; set; }
-		public string created_by_gt { get; set; }
-		public string created_by_le { get; set; }
-		public string created_by_ge { get; set; }
-		public IEnumerable<string> created_by_in { get; set; }
-		public IEnumerable<string> created_by_ni { get; set; }
+		public int? created_by_eq { get; set; }
+		public int? created_by_ne { get; set; }
+		public int? created_by_lt { get; set; }
+		public int? created_by_gt { get; set; }
+		public int? created_by_le { get; set; }
+		public int? created_by_ge { get; set; }
+		public IEnumerable<int> created_by_in { get; set; }
+		public IEnumerable<int> created_by_ni { get; set; }
+		public (int? low, int? high)? created_by_between { get; set; }
 		#endregion
 		#region modified_at
 		public DateTime? modified_at_eq { get; set; }
@@ -8028,71 +10954,177 @@ namespace peppa.Domain
 		public DateTime? modified_at_ge { get; set; }
 		public IEnumerable<DateTime> modified_at_in { get; set; }
 		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? modified_at_between { get; set; }
 		#endregion
 		#region modified_by
-		public string modified_by_eq { get; set; }
-		public string modified_by_ne { get; set; }
-		public string modified_by_lt { get; set; }
-		public string modified_by_gt { get; set; }
-		public string modified_by_le { get; set; }
-		public string modified_by_ge { get; set; }
-		public IEnumerable<string> modified_by_in { get; set; }
-		public IEnumerable<string> modified_by_ni { get; set; }
+		public int? modified_by_eq { get; set; }
+		public int? modified_by_ne { get; set; }
+		public int? modified_by_lt { get; set; }
+		public int? modified_by_gt { get; set; }
+		public int? modified_by_le { get; set; }
+		public int? modified_by_ge { get; set; }
+		public IEnumerable<int> modified_by_in { get; set; }
+		public IEnumerable<int> modified_by_ni { get; set; }
+		public (int? low, int? high)? modified_by_between { get; set; }
 		#endregion
 		#region row_version
 		public byte[] row_version_eq { get; set; }
 		public byte[] row_version_ne { get; set; }
-		public byte[] row_version_lt { get; set; }
-		public byte[] row_version_gt { get; set; }
-		public byte[] row_version_le { get; set; }
-		public byte[] row_version_ge { get; set; }
-		public IEnumerable<byte[]> row_version_in { get; set; }
-		public IEnumerable<byte[]> row_version_ni { get; set; }
 		#endregion
 		#endregion
 
 		#region override
 		override public Expression<Func<Address, bool>> CreatePredicate()
 		{
-			var predicate = PredicateBuilder.True<Address>();
+			var predicate = base.CreatePredicate();
 
 			#region uid
+			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
+			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
+			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
+			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
+			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
+			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
 			#endregion
 			#region user_type
+			if (_user_type_eq != null) predicate = predicate.And(_ => _.user_type == _user_type_eq);
+			if (_user_type_ne != null) predicate = predicate.And(_ => _.user_type != _user_type_ne);
+			if (_user_type_lt != null) predicate = predicate.And(_ => _.user_type < _user_type_lt);
+			if (_user_type_gt != null) predicate = predicate.And(_ => _.user_type > _user_type_gt);
+			if (_user_type_le != null) predicate = predicate.And(_ => _.user_type <= _user_type_le);
+			if (_user_type_ge != null) predicate = predicate.And(_ => _.user_type >= _user_type_ge);
 			#endregion
 			#region generic_user_no
+			if (generic_user_no_eq != null) predicate = predicate.And(_ => _.generic_user_no == generic_user_no_eq);
+			if (generic_user_no_ne != null) predicate = predicate.And(_ => _.generic_user_no != generic_user_no_ne);
+			if (generic_user_no_lt != null) predicate = predicate.And(_ => generic_user_no_lt.CompareTo(_.generic_user_no) > 0);
+			if (generic_user_no_gt != null) predicate = predicate.And(_ => generic_user_no_gt.CompareTo(_.generic_user_no) < 0);
+			if (generic_user_no_le != null) predicate = predicate.And(_ => generic_user_no_le.CompareTo(_.generic_user_no) >= 0);
+			if (generic_user_no_ge != null) predicate = predicate.And(_ => generic_user_no_ge.CompareTo(_.generic_user_no) <= 0);
 			#endregion
 			#region seq
+			if (seq_eq != null) predicate = predicate.And(_ => _.seq == seq_eq);
+			if (seq_ne != null) predicate = predicate.And(_ => _.seq != seq_ne);
+			if (seq_lt != null) predicate = predicate.And(_ => _.seq < seq_lt);
+			if (seq_gt != null) predicate = predicate.And(_ => _.seq > seq_gt);
+			if (seq_le != null) predicate = predicate.And(_ => _.seq <= seq_le);
+			if (seq_ge != null) predicate = predicate.And(_ => _.seq >= seq_ge);
 			#endregion
 			#region address_type_id
+			if (address_type_id_eq != null) predicate = predicate.And(_ => _.address_type_id == address_type_id_eq);
+			if (address_type_id_ne != null) predicate = predicate.And(_ => _.address_type_id != address_type_id_ne);
+			if (address_type_id_lt != null) predicate = predicate.And(_ => _.address_type_id < address_type_id_lt);
+			if (address_type_id_gt != null) predicate = predicate.And(_ => _.address_type_id > address_type_id_gt);
+			if (address_type_id_le != null) predicate = predicate.And(_ => _.address_type_id <= address_type_id_le);
+			if (address_type_id_ge != null) predicate = predicate.And(_ => _.address_type_id >= address_type_id_ge);
 			#endregion
 			#region postal_code
+			if (postal_code_eq != null) predicate = predicate.And(_ => _.postal_code == postal_code_eq);
+			if (postal_code_ne != null) predicate = predicate.And(_ => _.postal_code != postal_code_ne);
+			if (postal_code_lt != null) predicate = predicate.And(_ => postal_code_lt.CompareTo(_.postal_code) > 0);
+			if (postal_code_gt != null) predicate = predicate.And(_ => postal_code_gt.CompareTo(_.postal_code) < 0);
+			if (postal_code_le != null) predicate = predicate.And(_ => postal_code_le.CompareTo(_.postal_code) >= 0);
+			if (postal_code_ge != null) predicate = predicate.And(_ => postal_code_ge.CompareTo(_.postal_code) <= 0);
 			#endregion
 			#region prefecture_code
+			if (prefecture_code_eq != null) predicate = predicate.And(_ => _.prefecture_code == prefecture_code_eq);
+			if (prefecture_code_ne != null) predicate = predicate.And(_ => _.prefecture_code != prefecture_code_ne);
+			if (prefecture_code_lt != null) predicate = predicate.And(_ => _.prefecture_code < prefecture_code_lt);
+			if (prefecture_code_gt != null) predicate = predicate.And(_ => _.prefecture_code > prefecture_code_gt);
+			if (prefecture_code_le != null) predicate = predicate.And(_ => _.prefecture_code <= prefecture_code_le);
+			if (prefecture_code_ge != null) predicate = predicate.And(_ => _.prefecture_code >= prefecture_code_ge);
 			#endregion
 			#region address1
+			if (address1_eq != null) predicate = predicate.And(_ => _.address1 == address1_eq);
+			if (address1_ne != null) predicate = predicate.And(_ => _.address1 != address1_ne);
+			if (address1_lt != null) predicate = predicate.And(_ => address1_lt.CompareTo(_.address1) > 0);
+			if (address1_gt != null) predicate = predicate.And(_ => address1_gt.CompareTo(_.address1) < 0);
+			if (address1_le != null) predicate = predicate.And(_ => address1_le.CompareTo(_.address1) >= 0);
+			if (address1_ge != null) predicate = predicate.And(_ => address1_ge.CompareTo(_.address1) <= 0);
 			#endregion
 			#region address2
+			if (address2_eq != null) predicate = predicate.And(_ => _.address2 == address2_eq);
+			if (address2_ne != null) predicate = predicate.And(_ => _.address2 != address2_ne);
+			if (address2_lt != null) predicate = predicate.And(_ => address2_lt.CompareTo(_.address2) > 0);
+			if (address2_gt != null) predicate = predicate.And(_ => address2_gt.CompareTo(_.address2) < 0);
+			if (address2_le != null) predicate = predicate.And(_ => address2_le.CompareTo(_.address2) >= 0);
+			if (address2_ge != null) predicate = predicate.And(_ => address2_ge.CompareTo(_.address2) <= 0);
 			#endregion
 			#region address3
+			if (address3_eq != null) predicate = predicate.And(_ => _.address3 == address3_eq);
+			if (address3_ne != null) predicate = predicate.And(_ => _.address3 != address3_ne);
+			if (address3_lt != null) predicate = predicate.And(_ => address3_lt.CompareTo(_.address3) > 0);
+			if (address3_gt != null) predicate = predicate.And(_ => address3_gt.CompareTo(_.address3) < 0);
+			if (address3_le != null) predicate = predicate.And(_ => address3_le.CompareTo(_.address3) >= 0);
+			if (address3_ge != null) predicate = predicate.And(_ => address3_ge.CompareTo(_.address3) <= 0);
 			#endregion
 			#region latitude
+			if (latitude_eq != null) predicate = predicate.And(_ => _.latitude == latitude_eq);
+			if (latitude_ne != null) predicate = predicate.And(_ => _.latitude != latitude_ne);
+			if (latitude_lt != null) predicate = predicate.And(_ => _.latitude < latitude_lt);
+			if (latitude_gt != null) predicate = predicate.And(_ => _.latitude > latitude_gt);
+			if (latitude_le != null) predicate = predicate.And(_ => _.latitude <= latitude_le);
+			if (latitude_ge != null) predicate = predicate.And(_ => _.latitude >= latitude_ge);
 			#endregion
 			#region longitude
+			if (longitude_eq != null) predicate = predicate.And(_ => _.longitude == longitude_eq);
+			if (longitude_ne != null) predicate = predicate.And(_ => _.longitude != longitude_ne);
+			if (longitude_lt != null) predicate = predicate.And(_ => _.longitude < longitude_lt);
+			if (longitude_gt != null) predicate = predicate.And(_ => _.longitude > longitude_gt);
+			if (longitude_le != null) predicate = predicate.And(_ => _.longitude <= longitude_le);
+			if (longitude_ge != null) predicate = predicate.And(_ => _.longitude >= longitude_ge);
 			#endregion
 			#region enter_date
+			if (enter_date_eq != null) predicate = predicate.And(_ => _.enter_date == enter_date_eq);
+			if (enter_date_ne != null) predicate = predicate.And(_ => _.enter_date != enter_date_ne);
+			if (enter_date_lt != null) predicate = predicate.And(_ => _.enter_date < enter_date_lt);
+			if (enter_date_gt != null) predicate = predicate.And(_ => _.enter_date > enter_date_gt);
+			if (enter_date_le != null) predicate = predicate.And(_ => _.enter_date <= enter_date_le);
+			if (enter_date_ge != null) predicate = predicate.And(_ => _.enter_date >= enter_date_ge);
 			#endregion
 			#region leave_date
+			if (leave_date_eq != null) predicate = predicate.And(_ => _.leave_date == leave_date_eq);
+			if (leave_date_ne != null) predicate = predicate.And(_ => _.leave_date != leave_date_ne);
+			if (leave_date_lt != null) predicate = predicate.And(_ => _.leave_date < leave_date_lt);
+			if (leave_date_gt != null) predicate = predicate.And(_ => _.leave_date > leave_date_gt);
+			if (leave_date_le != null) predicate = predicate.And(_ => _.leave_date <= leave_date_le);
+			if (leave_date_ge != null) predicate = predicate.And(_ => _.leave_date >= leave_date_ge);
 			#endregion
 			#region created_at
+			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
+			if (created_at_ne != null) predicate = predicate.And(_ => _.created_at != created_at_ne);
+			if (created_at_lt != null) predicate = predicate.And(_ => _.created_at < created_at_lt);
+			if (created_at_gt != null) predicate = predicate.And(_ => _.created_at > created_at_gt);
+			if (created_at_le != null) predicate = predicate.And(_ => _.created_at <= created_at_le);
+			if (created_at_ge != null) predicate = predicate.And(_ => _.created_at >= created_at_ge);
 			#endregion
 			#region created_by
+			if (created_by_eq != null) predicate = predicate.And(_ => _.created_by == created_by_eq);
+			if (created_by_ne != null) predicate = predicate.And(_ => _.created_by != created_by_ne);
+			if (created_by_lt != null) predicate = predicate.And(_ => _.created_by < created_by_lt);
+			if (created_by_gt != null) predicate = predicate.And(_ => _.created_by > created_by_gt);
+			if (created_by_le != null) predicate = predicate.And(_ => _.created_by <= created_by_le);
+			if (created_by_ge != null) predicate = predicate.And(_ => _.created_by >= created_by_ge);
 			#endregion
 			#region modified_at
+			if (modified_at_eq != null) predicate = predicate.And(_ => _.modified_at == modified_at_eq);
+			if (modified_at_ne != null) predicate = predicate.And(_ => _.modified_at != modified_at_ne);
+			if (modified_at_lt != null) predicate = predicate.And(_ => _.modified_at < modified_at_lt);
+			if (modified_at_gt != null) predicate = predicate.And(_ => _.modified_at > modified_at_gt);
+			if (modified_at_le != null) predicate = predicate.And(_ => _.modified_at <= modified_at_le);
+			if (modified_at_ge != null) predicate = predicate.And(_ => _.modified_at >= modified_at_ge);
 			#endregion
 			#region modified_by
+			if (modified_by_eq != null) predicate = predicate.And(_ => _.modified_by == modified_by_eq);
+			if (modified_by_ne != null) predicate = predicate.And(_ => _.modified_by != modified_by_ne);
+			if (modified_by_lt != null) predicate = predicate.And(_ => _.modified_by < modified_by_lt);
+			if (modified_by_gt != null) predicate = predicate.And(_ => _.modified_by > modified_by_gt);
+			if (modified_by_le != null) predicate = predicate.And(_ => _.modified_by <= modified_by_le);
+			if (modified_by_ge != null) predicate = predicate.And(_ => _.modified_by >= modified_by_ge);
 			#endregion
 			#region row_version
+			if (row_version_eq != null) predicate = predicate.And(_ => _.row_version == row_version_eq);
+			if (row_version_ne != null) predicate = predicate.And(_ => _.row_version != row_version_ne);
 			#endregion
 
 			return predicate;
@@ -8349,14 +11381,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region created_by : string
+		#region created_by : int?
 
-		private string _created_by;
+		private int? _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  created_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  created_by
 		{
 			get { return _created_by; }
 			set
@@ -8374,7 +11406,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforecreated_byChanged(string newValue);
+		partial void Beforecreated_byChanged(int? newValue);
 		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
@@ -8429,14 +11461,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region modified_by : string
+		#region modified_by : int?
 
-		private string _modified_by;
+		private int? _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  modified_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  modified_by
 		{
 			get { return _modified_by; }
 			set
@@ -8454,7 +11486,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforemodified_byChanged(string newValue);
+		partial void Beforemodified_byChanged(int? newValue);
 		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
@@ -8553,6 +11585,27 @@ namespace peppa.Domain
 		#region enum用アクセスラッパー
 		#endregion
 
+		#region Constructor
+
+		public AddressType()
+		{
+			#region フィールド初期化
+			uid = default(int);
+			address_type_id = 0;
+			name = "";
+			description = "";
+			display_order = 0;
+			created_at = DateTime.UtcNow;
+			created_by = null;
+			modified_at = DateTime.UtcNow;
+			modified_by = null;
+			removed_at = null;
+			row_version = default(byte[]);
+			#endregion
+		}
+
+		#endregion
+
 		#region Association
 
 
@@ -8602,6 +11655,7 @@ namespace peppa.Domain
 		public int? uid_ge { get; set; }
 		public IEnumerable<int> uid_in { get; set; }
 		public IEnumerable<int> uid_ni { get; set; }
+		public (int? low, int? high)? uid_between { get; set; }
 		#endregion
 		#region address_type_id
 		public int? address_type_id_eq { get; set; }
@@ -8612,6 +11666,7 @@ namespace peppa.Domain
 		public int? address_type_id_ge { get; set; }
 		public IEnumerable<int> address_type_id_in { get; set; }
 		public IEnumerable<int> address_type_id_ni { get; set; }
+		public (int? low, int? high)? address_type_id_between { get; set; }
 		#endregion
 		#region name
 		public string name_eq { get; set; }
@@ -8622,6 +11677,8 @@ namespace peppa.Domain
 		public string name_ge { get; set; }
 		public IEnumerable<string> name_in { get; set; }
 		public IEnumerable<string> name_ni { get; set; }
+		public (string low, string high)? name_between { get; set; }
+		public string name_like { get; set; }
 		#endregion
 		#region description
 		public string description_eq { get; set; }
@@ -8632,6 +11689,8 @@ namespace peppa.Domain
 		public string description_ge { get; set; }
 		public IEnumerable<string> description_in { get; set; }
 		public IEnumerable<string> description_ni { get; set; }
+		public (string low, string high)? description_between { get; set; }
+		public string description_like { get; set; }
 		#endregion
 		#region display_order
 		public int? display_order_eq { get; set; }
@@ -8642,6 +11701,7 @@ namespace peppa.Domain
 		public int? display_order_ge { get; set; }
 		public IEnumerable<int> display_order_in { get; set; }
 		public IEnumerable<int> display_order_ni { get; set; }
+		public (int? low, int? high)? display_order_between { get; set; }
 		#endregion
 		#region created_at
 		public DateTime? created_at_eq { get; set; }
@@ -8652,16 +11712,18 @@ namespace peppa.Domain
 		public DateTime? created_at_ge { get; set; }
 		public IEnumerable<DateTime> created_at_in { get; set; }
 		public IEnumerable<DateTime> created_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? created_at_between { get; set; }
 		#endregion
 		#region created_by
-		public string created_by_eq { get; set; }
-		public string created_by_ne { get; set; }
-		public string created_by_lt { get; set; }
-		public string created_by_gt { get; set; }
-		public string created_by_le { get; set; }
-		public string created_by_ge { get; set; }
-		public IEnumerable<string> created_by_in { get; set; }
-		public IEnumerable<string> created_by_ni { get; set; }
+		public int? created_by_eq { get; set; }
+		public int? created_by_ne { get; set; }
+		public int? created_by_lt { get; set; }
+		public int? created_by_gt { get; set; }
+		public int? created_by_le { get; set; }
+		public int? created_by_ge { get; set; }
+		public IEnumerable<int> created_by_in { get; set; }
+		public IEnumerable<int> created_by_ni { get; set; }
+		public (int? low, int? high)? created_by_between { get; set; }
 		#endregion
 		#region modified_at
 		public DateTime? modified_at_eq { get; set; }
@@ -8672,16 +11734,18 @@ namespace peppa.Domain
 		public DateTime? modified_at_ge { get; set; }
 		public IEnumerable<DateTime> modified_at_in { get; set; }
 		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? modified_at_between { get; set; }
 		#endregion
 		#region modified_by
-		public string modified_by_eq { get; set; }
-		public string modified_by_ne { get; set; }
-		public string modified_by_lt { get; set; }
-		public string modified_by_gt { get; set; }
-		public string modified_by_le { get; set; }
-		public string modified_by_ge { get; set; }
-		public IEnumerable<string> modified_by_in { get; set; }
-		public IEnumerable<string> modified_by_ni { get; set; }
+		public int? modified_by_eq { get; set; }
+		public int? modified_by_ne { get; set; }
+		public int? modified_by_lt { get; set; }
+		public int? modified_by_gt { get; set; }
+		public int? modified_by_le { get; set; }
+		public int? modified_by_ge { get; set; }
+		public IEnumerable<int> modified_by_in { get; set; }
+		public IEnumerable<int> modified_by_ni { get; set; }
+		public (int? low, int? high)? modified_by_between { get; set; }
 		#endregion
 		#region removed_at
 		public DateTime? removed_at_eq { get; set; }
@@ -8692,45 +11756,102 @@ namespace peppa.Domain
 		public DateTime? removed_at_ge { get; set; }
 		public IEnumerable<DateTime> removed_at_in { get; set; }
 		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? removed_at_between { get; set; }
 		#endregion
 		#region row_version
 		public byte[] row_version_eq { get; set; }
 		public byte[] row_version_ne { get; set; }
-		public byte[] row_version_lt { get; set; }
-		public byte[] row_version_gt { get; set; }
-		public byte[] row_version_le { get; set; }
-		public byte[] row_version_ge { get; set; }
-		public IEnumerable<byte[]> row_version_in { get; set; }
-		public IEnumerable<byte[]> row_version_ni { get; set; }
 		#endregion
 		#endregion
 
 		#region override
 		override public Expression<Func<AddressType, bool>> CreatePredicate()
 		{
-			var predicate = PredicateBuilder.True<AddressType>();
+			var predicate = base.CreatePredicate();
 
 			#region uid
+			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
+			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
+			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
+			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
+			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
+			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
 			#endregion
 			#region address_type_id
+			if (address_type_id_eq != null) predicate = predicate.And(_ => _.address_type_id == address_type_id_eq);
+			if (address_type_id_ne != null) predicate = predicate.And(_ => _.address_type_id != address_type_id_ne);
+			if (address_type_id_lt != null) predicate = predicate.And(_ => _.address_type_id < address_type_id_lt);
+			if (address_type_id_gt != null) predicate = predicate.And(_ => _.address_type_id > address_type_id_gt);
+			if (address_type_id_le != null) predicate = predicate.And(_ => _.address_type_id <= address_type_id_le);
+			if (address_type_id_ge != null) predicate = predicate.And(_ => _.address_type_id >= address_type_id_ge);
 			#endregion
 			#region name
+			if (name_eq != null) predicate = predicate.And(_ => _.name == name_eq);
+			if (name_ne != null) predicate = predicate.And(_ => _.name != name_ne);
+			if (name_lt != null) predicate = predicate.And(_ => name_lt.CompareTo(_.name) > 0);
+			if (name_gt != null) predicate = predicate.And(_ => name_gt.CompareTo(_.name) < 0);
+			if (name_le != null) predicate = predicate.And(_ => name_le.CompareTo(_.name) >= 0);
+			if (name_ge != null) predicate = predicate.And(_ => name_ge.CompareTo(_.name) <= 0);
 			#endregion
 			#region description
+			if (description_eq != null) predicate = predicate.And(_ => _.description == description_eq);
+			if (description_ne != null) predicate = predicate.And(_ => _.description != description_ne);
+			if (description_lt != null) predicate = predicate.And(_ => description_lt.CompareTo(_.description) > 0);
+			if (description_gt != null) predicate = predicate.And(_ => description_gt.CompareTo(_.description) < 0);
+			if (description_le != null) predicate = predicate.And(_ => description_le.CompareTo(_.description) >= 0);
+			if (description_ge != null) predicate = predicate.And(_ => description_ge.CompareTo(_.description) <= 0);
 			#endregion
 			#region display_order
+			if (display_order_eq != null) predicate = predicate.And(_ => _.display_order == display_order_eq);
+			if (display_order_ne != null) predicate = predicate.And(_ => _.display_order != display_order_ne);
+			if (display_order_lt != null) predicate = predicate.And(_ => _.display_order < display_order_lt);
+			if (display_order_gt != null) predicate = predicate.And(_ => _.display_order > display_order_gt);
+			if (display_order_le != null) predicate = predicate.And(_ => _.display_order <= display_order_le);
+			if (display_order_ge != null) predicate = predicate.And(_ => _.display_order >= display_order_ge);
 			#endregion
 			#region created_at
+			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
+			if (created_at_ne != null) predicate = predicate.And(_ => _.created_at != created_at_ne);
+			if (created_at_lt != null) predicate = predicate.And(_ => _.created_at < created_at_lt);
+			if (created_at_gt != null) predicate = predicate.And(_ => _.created_at > created_at_gt);
+			if (created_at_le != null) predicate = predicate.And(_ => _.created_at <= created_at_le);
+			if (created_at_ge != null) predicate = predicate.And(_ => _.created_at >= created_at_ge);
 			#endregion
 			#region created_by
+			if (created_by_eq != null) predicate = predicate.And(_ => _.created_by == created_by_eq);
+			if (created_by_ne != null) predicate = predicate.And(_ => _.created_by != created_by_ne);
+			if (created_by_lt != null) predicate = predicate.And(_ => _.created_by < created_by_lt);
+			if (created_by_gt != null) predicate = predicate.And(_ => _.created_by > created_by_gt);
+			if (created_by_le != null) predicate = predicate.And(_ => _.created_by <= created_by_le);
+			if (created_by_ge != null) predicate = predicate.And(_ => _.created_by >= created_by_ge);
 			#endregion
 			#region modified_at
+			if (modified_at_eq != null) predicate = predicate.And(_ => _.modified_at == modified_at_eq);
+			if (modified_at_ne != null) predicate = predicate.And(_ => _.modified_at != modified_at_ne);
+			if (modified_at_lt != null) predicate = predicate.And(_ => _.modified_at < modified_at_lt);
+			if (modified_at_gt != null) predicate = predicate.And(_ => _.modified_at > modified_at_gt);
+			if (modified_at_le != null) predicate = predicate.And(_ => _.modified_at <= modified_at_le);
+			if (modified_at_ge != null) predicate = predicate.And(_ => _.modified_at >= modified_at_ge);
 			#endregion
 			#region modified_by
+			if (modified_by_eq != null) predicate = predicate.And(_ => _.modified_by == modified_by_eq);
+			if (modified_by_ne != null) predicate = predicate.And(_ => _.modified_by != modified_by_ne);
+			if (modified_by_lt != null) predicate = predicate.And(_ => _.modified_by < modified_by_lt);
+			if (modified_by_gt != null) predicate = predicate.And(_ => _.modified_by > modified_by_gt);
+			if (modified_by_le != null) predicate = predicate.And(_ => _.modified_by <= modified_by_le);
+			if (modified_by_ge != null) predicate = predicate.And(_ => _.modified_by >= modified_by_ge);
 			#endregion
 			#region removed_at
+			if (removed_at_eq != null) predicate = predicate.And(_ => _.removed_at == removed_at_eq);
+			if (removed_at_ne != null) predicate = predicate.And(_ => _.removed_at != removed_at_ne);
+			if (removed_at_lt != null) predicate = predicate.And(_ => _.removed_at < removed_at_lt);
+			if (removed_at_gt != null) predicate = predicate.And(_ => _.removed_at > removed_at_gt);
+			if (removed_at_le != null) predicate = predicate.And(_ => _.removed_at <= removed_at_le);
+			if (removed_at_ge != null) predicate = predicate.And(_ => _.removed_at >= removed_at_ge);
 			#endregion
 			#region row_version
+			if (row_version_eq != null) predicate = predicate.And(_ => _.row_version == row_version_eq);
+			if (row_version_ne != null) predicate = predicate.And(_ => _.row_version != row_version_ne);
 			#endregion
 
 			return predicate;
@@ -9067,14 +12188,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region created_by : string
+		#region created_by : int?
 
-		private string _created_by;
+		private int? _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  created_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  created_by
 		{
 			get { return _created_by; }
 			set
@@ -9092,7 +12213,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforecreated_byChanged(string newValue);
+		partial void Beforecreated_byChanged(int? newValue);
 		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
@@ -9147,14 +12268,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region modified_by : string
+		#region modified_by : int?
 
-		private string _modified_by;
+		private int? _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  modified_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  modified_by
 		{
 			get { return _modified_by; }
 			set
@@ -9172,7 +12293,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforemodified_byChanged(string newValue);
+		partial void Beforemodified_byChanged(int? newValue);
 		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
@@ -9237,6 +12358,28 @@ namespace peppa.Domain
 			get => (UserType)user_type;
 			set => user_type = value.Val();
 		}
+		#endregion
+
+		#region Constructor
+
+		public Contact()
+		{
+			#region フィールド初期化
+			uid = default(int);
+			user_type = 99;
+			generic_user_no = null;
+			seq = 0;
+			contact_type_id = 0;
+			contact = "";
+			note = "";
+			created_at = DateTime.UtcNow;
+			created_by = null;
+			modified_at = DateTime.UtcNow;
+			modified_by = null;
+			row_version = default(byte[]);
+			#endregion
+		}
+
 		#endregion
 
 		#region Association
@@ -9368,6 +12511,7 @@ namespace peppa.Domain
 		public int? uid_ge { get; set; }
 		public IEnumerable<int> uid_in { get; set; }
 		public IEnumerable<int> uid_ni { get; set; }
+		public (int? low, int? high)? uid_between { get; set; }
 		#endregion
 		#region user_type (UserType)
 		private int? _user_type_eq;
@@ -9418,6 +12562,12 @@ namespace peppa.Domain
 			get => _user_type_ni.Select(_ => _.ToUserType().Value);
 			set => _user_type_ni = value.Select(_ => _.Val());
 		}
+		private (int low, int high)? _user_type_between;
+		public (UserType low, UserType high)? UserType_between
+		{
+			get => _user_type_between.HasValue ? (_user_type_between.Value.low.ToUserType().Value, _user_type_between.Value.high.ToUserType().Value) : ((UserType, UserType)?)null;
+			set => _user_type_between = value.HasValue ? (value.Value.low.Val(), value.Value.high.Val()) : ((int, int)?)null;
+		}
 		#endregion
 		#region generic_user_no
 		public string generic_user_no_eq { get; set; }
@@ -9428,6 +12578,8 @@ namespace peppa.Domain
 		public string generic_user_no_ge { get; set; }
 		public IEnumerable<string> generic_user_no_in { get; set; }
 		public IEnumerable<string> generic_user_no_ni { get; set; }
+		public (string low, string high)? generic_user_no_between { get; set; }
+		public string generic_user_no_like { get; set; }
 		#endregion
 		#region seq
 		public int? seq_eq { get; set; }
@@ -9438,6 +12590,7 @@ namespace peppa.Domain
 		public int? seq_ge { get; set; }
 		public IEnumerable<int> seq_in { get; set; }
 		public IEnumerable<int> seq_ni { get; set; }
+		public (int? low, int? high)? seq_between { get; set; }
 		#endregion
 		#region contact_type_id
 		public int? contact_type_id_eq { get; set; }
@@ -9448,6 +12601,7 @@ namespace peppa.Domain
 		public int? contact_type_id_ge { get; set; }
 		public IEnumerable<int> contact_type_id_in { get; set; }
 		public IEnumerable<int> contact_type_id_ni { get; set; }
+		public (int? low, int? high)? contact_type_id_between { get; set; }
 		#endregion
 		#region contact
 		public string contact_eq { get; set; }
@@ -9458,6 +12612,8 @@ namespace peppa.Domain
 		public string contact_ge { get; set; }
 		public IEnumerable<string> contact_in { get; set; }
 		public IEnumerable<string> contact_ni { get; set; }
+		public (string low, string high)? contact_between { get; set; }
+		public string contact_like { get; set; }
 		#endregion
 		#region note
 		public string note_eq { get; set; }
@@ -9468,6 +12624,8 @@ namespace peppa.Domain
 		public string note_ge { get; set; }
 		public IEnumerable<string> note_in { get; set; }
 		public IEnumerable<string> note_ni { get; set; }
+		public (string low, string high)? note_between { get; set; }
+		public string note_like { get; set; }
 		#endregion
 		#region created_at
 		public DateTime? created_at_eq { get; set; }
@@ -9478,16 +12636,18 @@ namespace peppa.Domain
 		public DateTime? created_at_ge { get; set; }
 		public IEnumerable<DateTime> created_at_in { get; set; }
 		public IEnumerable<DateTime> created_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? created_at_between { get; set; }
 		#endregion
 		#region created_by
-		public string created_by_eq { get; set; }
-		public string created_by_ne { get; set; }
-		public string created_by_lt { get; set; }
-		public string created_by_gt { get; set; }
-		public string created_by_le { get; set; }
-		public string created_by_ge { get; set; }
-		public IEnumerable<string> created_by_in { get; set; }
-		public IEnumerable<string> created_by_ni { get; set; }
+		public int? created_by_eq { get; set; }
+		public int? created_by_ne { get; set; }
+		public int? created_by_lt { get; set; }
+		public int? created_by_gt { get; set; }
+		public int? created_by_le { get; set; }
+		public int? created_by_ge { get; set; }
+		public IEnumerable<int> created_by_in { get; set; }
+		public IEnumerable<int> created_by_ni { get; set; }
+		public (int? low, int? high)? created_by_between { get; set; }
 		#endregion
 		#region modified_at
 		public DateTime? modified_at_eq { get; set; }
@@ -9498,57 +12658,121 @@ namespace peppa.Domain
 		public DateTime? modified_at_ge { get; set; }
 		public IEnumerable<DateTime> modified_at_in { get; set; }
 		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? modified_at_between { get; set; }
 		#endregion
 		#region modified_by
-		public string modified_by_eq { get; set; }
-		public string modified_by_ne { get; set; }
-		public string modified_by_lt { get; set; }
-		public string modified_by_gt { get; set; }
-		public string modified_by_le { get; set; }
-		public string modified_by_ge { get; set; }
-		public IEnumerable<string> modified_by_in { get; set; }
-		public IEnumerable<string> modified_by_ni { get; set; }
+		public int? modified_by_eq { get; set; }
+		public int? modified_by_ne { get; set; }
+		public int? modified_by_lt { get; set; }
+		public int? modified_by_gt { get; set; }
+		public int? modified_by_le { get; set; }
+		public int? modified_by_ge { get; set; }
+		public IEnumerable<int> modified_by_in { get; set; }
+		public IEnumerable<int> modified_by_ni { get; set; }
+		public (int? low, int? high)? modified_by_between { get; set; }
 		#endregion
 		#region row_version
 		public byte[] row_version_eq { get; set; }
 		public byte[] row_version_ne { get; set; }
-		public byte[] row_version_lt { get; set; }
-		public byte[] row_version_gt { get; set; }
-		public byte[] row_version_le { get; set; }
-		public byte[] row_version_ge { get; set; }
-		public IEnumerable<byte[]> row_version_in { get; set; }
-		public IEnumerable<byte[]> row_version_ni { get; set; }
 		#endregion
 		#endregion
 
 		#region override
 		override public Expression<Func<Contact, bool>> CreatePredicate()
 		{
-			var predicate = PredicateBuilder.True<Contact>();
+			var predicate = base.CreatePredicate();
 
 			#region uid
+			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
+			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
+			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
+			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
+			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
+			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
 			#endregion
 			#region user_type
+			if (_user_type_eq != null) predicate = predicate.And(_ => _.user_type == _user_type_eq);
+			if (_user_type_ne != null) predicate = predicate.And(_ => _.user_type != _user_type_ne);
+			if (_user_type_lt != null) predicate = predicate.And(_ => _.user_type < _user_type_lt);
+			if (_user_type_gt != null) predicate = predicate.And(_ => _.user_type > _user_type_gt);
+			if (_user_type_le != null) predicate = predicate.And(_ => _.user_type <= _user_type_le);
+			if (_user_type_ge != null) predicate = predicate.And(_ => _.user_type >= _user_type_ge);
 			#endregion
 			#region generic_user_no
+			if (generic_user_no_eq != null) predicate = predicate.And(_ => _.generic_user_no == generic_user_no_eq);
+			if (generic_user_no_ne != null) predicate = predicate.And(_ => _.generic_user_no != generic_user_no_ne);
+			if (generic_user_no_lt != null) predicate = predicate.And(_ => generic_user_no_lt.CompareTo(_.generic_user_no) > 0);
+			if (generic_user_no_gt != null) predicate = predicate.And(_ => generic_user_no_gt.CompareTo(_.generic_user_no) < 0);
+			if (generic_user_no_le != null) predicate = predicate.And(_ => generic_user_no_le.CompareTo(_.generic_user_no) >= 0);
+			if (generic_user_no_ge != null) predicate = predicate.And(_ => generic_user_no_ge.CompareTo(_.generic_user_no) <= 0);
 			#endregion
 			#region seq
+			if (seq_eq != null) predicate = predicate.And(_ => _.seq == seq_eq);
+			if (seq_ne != null) predicate = predicate.And(_ => _.seq != seq_ne);
+			if (seq_lt != null) predicate = predicate.And(_ => _.seq < seq_lt);
+			if (seq_gt != null) predicate = predicate.And(_ => _.seq > seq_gt);
+			if (seq_le != null) predicate = predicate.And(_ => _.seq <= seq_le);
+			if (seq_ge != null) predicate = predicate.And(_ => _.seq >= seq_ge);
 			#endregion
 			#region contact_type_id
+			if (contact_type_id_eq != null) predicate = predicate.And(_ => _.contact_type_id == contact_type_id_eq);
+			if (contact_type_id_ne != null) predicate = predicate.And(_ => _.contact_type_id != contact_type_id_ne);
+			if (contact_type_id_lt != null) predicate = predicate.And(_ => _.contact_type_id < contact_type_id_lt);
+			if (contact_type_id_gt != null) predicate = predicate.And(_ => _.contact_type_id > contact_type_id_gt);
+			if (contact_type_id_le != null) predicate = predicate.And(_ => _.contact_type_id <= contact_type_id_le);
+			if (contact_type_id_ge != null) predicate = predicate.And(_ => _.contact_type_id >= contact_type_id_ge);
 			#endregion
 			#region contact
+			if (contact_eq != null) predicate = predicate.And(_ => _.contact == contact_eq);
+			if (contact_ne != null) predicate = predicate.And(_ => _.contact != contact_ne);
+			if (contact_lt != null) predicate = predicate.And(_ => contact_lt.CompareTo(_.contact) > 0);
+			if (contact_gt != null) predicate = predicate.And(_ => contact_gt.CompareTo(_.contact) < 0);
+			if (contact_le != null) predicate = predicate.And(_ => contact_le.CompareTo(_.contact) >= 0);
+			if (contact_ge != null) predicate = predicate.And(_ => contact_ge.CompareTo(_.contact) <= 0);
 			#endregion
 			#region note
+			if (note_eq != null) predicate = predicate.And(_ => _.note == note_eq);
+			if (note_ne != null) predicate = predicate.And(_ => _.note != note_ne);
+			if (note_lt != null) predicate = predicate.And(_ => note_lt.CompareTo(_.note) > 0);
+			if (note_gt != null) predicate = predicate.And(_ => note_gt.CompareTo(_.note) < 0);
+			if (note_le != null) predicate = predicate.And(_ => note_le.CompareTo(_.note) >= 0);
+			if (note_ge != null) predicate = predicate.And(_ => note_ge.CompareTo(_.note) <= 0);
 			#endregion
 			#region created_at
+			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
+			if (created_at_ne != null) predicate = predicate.And(_ => _.created_at != created_at_ne);
+			if (created_at_lt != null) predicate = predicate.And(_ => _.created_at < created_at_lt);
+			if (created_at_gt != null) predicate = predicate.And(_ => _.created_at > created_at_gt);
+			if (created_at_le != null) predicate = predicate.And(_ => _.created_at <= created_at_le);
+			if (created_at_ge != null) predicate = predicate.And(_ => _.created_at >= created_at_ge);
 			#endregion
 			#region created_by
+			if (created_by_eq != null) predicate = predicate.And(_ => _.created_by == created_by_eq);
+			if (created_by_ne != null) predicate = predicate.And(_ => _.created_by != created_by_ne);
+			if (created_by_lt != null) predicate = predicate.And(_ => _.created_by < created_by_lt);
+			if (created_by_gt != null) predicate = predicate.And(_ => _.created_by > created_by_gt);
+			if (created_by_le != null) predicate = predicate.And(_ => _.created_by <= created_by_le);
+			if (created_by_ge != null) predicate = predicate.And(_ => _.created_by >= created_by_ge);
 			#endregion
 			#region modified_at
+			if (modified_at_eq != null) predicate = predicate.And(_ => _.modified_at == modified_at_eq);
+			if (modified_at_ne != null) predicate = predicate.And(_ => _.modified_at != modified_at_ne);
+			if (modified_at_lt != null) predicate = predicate.And(_ => _.modified_at < modified_at_lt);
+			if (modified_at_gt != null) predicate = predicate.And(_ => _.modified_at > modified_at_gt);
+			if (modified_at_le != null) predicate = predicate.And(_ => _.modified_at <= modified_at_le);
+			if (modified_at_ge != null) predicate = predicate.And(_ => _.modified_at >= modified_at_ge);
 			#endregion
 			#region modified_by
+			if (modified_by_eq != null) predicate = predicate.And(_ => _.modified_by == modified_by_eq);
+			if (modified_by_ne != null) predicate = predicate.And(_ => _.modified_by != modified_by_ne);
+			if (modified_by_lt != null) predicate = predicate.And(_ => _.modified_by < modified_by_lt);
+			if (modified_by_gt != null) predicate = predicate.And(_ => _.modified_by > modified_by_gt);
+			if (modified_by_le != null) predicate = predicate.And(_ => _.modified_by <= modified_by_le);
+			if (modified_by_ge != null) predicate = predicate.And(_ => _.modified_by >= modified_by_ge);
 			#endregion
 			#region row_version
+			if (row_version_eq != null) predicate = predicate.And(_ => _.row_version == row_version_eq);
+			if (row_version_ne != null) predicate = predicate.And(_ => _.row_version != row_version_ne);
 			#endregion
 
 			return predicate;
@@ -9805,14 +13029,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region created_by : string
+		#region created_by : int?
 
-		private string _created_by;
+		private int? _created_by;
 		/// <summary>
 		/// 作成者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  created_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  created_by
 		{
 			get { return _created_by; }
 			set
@@ -9830,7 +13054,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforecreated_byChanged(string newValue);
+		partial void Beforecreated_byChanged(int? newValue);
 		partial void Aftercreated_byChanged();
 
 		public const string NameOfcreated_by = "created_by";
@@ -9885,14 +13109,14 @@ namespace peppa.Domain
 		#endregion
 
 		#endregion
-		#region modified_by : string
+		#region modified_by : int?
 
-		private string _modified_by;
+		private int? _modified_by;
 		/// <summary>
 		/// 更新者
 		/// </summary>
-		[Column(DbType="varchar(16)", DataType=DataType.VarChar, Length=16), NotNull]
-		public  string  modified_by
+		[Column(DbType="int", DataType=DataType.Int32), Nullable]
+		public  int?  modified_by
 		{
 			get { return _modified_by; }
 			set
@@ -9910,7 +13134,7 @@ namespace peppa.Domain
 
 		#region INotifyPropertyChanged support
 
-		partial void Beforemodified_byChanged(string newValue);
+		partial void Beforemodified_byChanged(int? newValue);
 		partial void Aftermodified_byChanged();
 
 		public const string NameOfmodified_by = "modified_by";
@@ -10009,6 +13233,27 @@ namespace peppa.Domain
 		#region enum用アクセスラッパー
 		#endregion
 
+		#region Constructor
+
+		public ContactType()
+		{
+			#region フィールド初期化
+			uid = default(int);
+			contact_type_id = 0;
+			name = "";
+			description = "";
+			display_order = 0;
+			created_at = DateTime.UtcNow;
+			created_by = null;
+			modified_at = DateTime.UtcNow;
+			modified_by = null;
+			removed_at = null;
+			row_version = default(byte[]);
+			#endregion
+		}
+
+		#endregion
+
 		#region Association
 
 
@@ -10058,6 +13303,7 @@ namespace peppa.Domain
 		public int? uid_ge { get; set; }
 		public IEnumerable<int> uid_in { get; set; }
 		public IEnumerable<int> uid_ni { get; set; }
+		public (int? low, int? high)? uid_between { get; set; }
 		#endregion
 		#region contact_type_id
 		public int? contact_type_id_eq { get; set; }
@@ -10068,6 +13314,7 @@ namespace peppa.Domain
 		public int? contact_type_id_ge { get; set; }
 		public IEnumerable<int> contact_type_id_in { get; set; }
 		public IEnumerable<int> contact_type_id_ni { get; set; }
+		public (int? low, int? high)? contact_type_id_between { get; set; }
 		#endregion
 		#region name
 		public string name_eq { get; set; }
@@ -10078,6 +13325,8 @@ namespace peppa.Domain
 		public string name_ge { get; set; }
 		public IEnumerable<string> name_in { get; set; }
 		public IEnumerable<string> name_ni { get; set; }
+		public (string low, string high)? name_between { get; set; }
+		public string name_like { get; set; }
 		#endregion
 		#region description
 		public string description_eq { get; set; }
@@ -10088,6 +13337,8 @@ namespace peppa.Domain
 		public string description_ge { get; set; }
 		public IEnumerable<string> description_in { get; set; }
 		public IEnumerable<string> description_ni { get; set; }
+		public (string low, string high)? description_between { get; set; }
+		public string description_like { get; set; }
 		#endregion
 		#region display_order
 		public int? display_order_eq { get; set; }
@@ -10098,6 +13349,7 @@ namespace peppa.Domain
 		public int? display_order_ge { get; set; }
 		public IEnumerable<int> display_order_in { get; set; }
 		public IEnumerable<int> display_order_ni { get; set; }
+		public (int? low, int? high)? display_order_between { get; set; }
 		#endregion
 		#region created_at
 		public DateTime? created_at_eq { get; set; }
@@ -10108,16 +13360,18 @@ namespace peppa.Domain
 		public DateTime? created_at_ge { get; set; }
 		public IEnumerable<DateTime> created_at_in { get; set; }
 		public IEnumerable<DateTime> created_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? created_at_between { get; set; }
 		#endregion
 		#region created_by
-		public string created_by_eq { get; set; }
-		public string created_by_ne { get; set; }
-		public string created_by_lt { get; set; }
-		public string created_by_gt { get; set; }
-		public string created_by_le { get; set; }
-		public string created_by_ge { get; set; }
-		public IEnumerable<string> created_by_in { get; set; }
-		public IEnumerable<string> created_by_ni { get; set; }
+		public int? created_by_eq { get; set; }
+		public int? created_by_ne { get; set; }
+		public int? created_by_lt { get; set; }
+		public int? created_by_gt { get; set; }
+		public int? created_by_le { get; set; }
+		public int? created_by_ge { get; set; }
+		public IEnumerable<int> created_by_in { get; set; }
+		public IEnumerable<int> created_by_ni { get; set; }
+		public (int? low, int? high)? created_by_between { get; set; }
 		#endregion
 		#region modified_at
 		public DateTime? modified_at_eq { get; set; }
@@ -10128,16 +13382,18 @@ namespace peppa.Domain
 		public DateTime? modified_at_ge { get; set; }
 		public IEnumerable<DateTime> modified_at_in { get; set; }
 		public IEnumerable<DateTime> modified_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? modified_at_between { get; set; }
 		#endregion
 		#region modified_by
-		public string modified_by_eq { get; set; }
-		public string modified_by_ne { get; set; }
-		public string modified_by_lt { get; set; }
-		public string modified_by_gt { get; set; }
-		public string modified_by_le { get; set; }
-		public string modified_by_ge { get; set; }
-		public IEnumerable<string> modified_by_in { get; set; }
-		public IEnumerable<string> modified_by_ni { get; set; }
+		public int? modified_by_eq { get; set; }
+		public int? modified_by_ne { get; set; }
+		public int? modified_by_lt { get; set; }
+		public int? modified_by_gt { get; set; }
+		public int? modified_by_le { get; set; }
+		public int? modified_by_ge { get; set; }
+		public IEnumerable<int> modified_by_in { get; set; }
+		public IEnumerable<int> modified_by_ni { get; set; }
+		public (int? low, int? high)? modified_by_between { get; set; }
 		#endregion
 		#region removed_at
 		public DateTime? removed_at_eq { get; set; }
@@ -10148,45 +13404,102 @@ namespace peppa.Domain
 		public DateTime? removed_at_ge { get; set; }
 		public IEnumerable<DateTime> removed_at_in { get; set; }
 		public IEnumerable<DateTime> removed_at_ni { get; set; }
+		public (DateTime? low, DateTime? high)? removed_at_between { get; set; }
 		#endregion
 		#region row_version
 		public byte[] row_version_eq { get; set; }
 		public byte[] row_version_ne { get; set; }
-		public byte[] row_version_lt { get; set; }
-		public byte[] row_version_gt { get; set; }
-		public byte[] row_version_le { get; set; }
-		public byte[] row_version_ge { get; set; }
-		public IEnumerable<byte[]> row_version_in { get; set; }
-		public IEnumerable<byte[]> row_version_ni { get; set; }
 		#endregion
 		#endregion
 
 		#region override
 		override public Expression<Func<ContactType, bool>> CreatePredicate()
 		{
-			var predicate = PredicateBuilder.True<ContactType>();
+			var predicate = base.CreatePredicate();
 
 			#region uid
+			if (uid_eq != null) predicate = predicate.And(_ => _.uid == uid_eq);
+			if (uid_ne != null) predicate = predicate.And(_ => _.uid != uid_ne);
+			if (uid_lt != null) predicate = predicate.And(_ => _.uid < uid_lt);
+			if (uid_gt != null) predicate = predicate.And(_ => _.uid > uid_gt);
+			if (uid_le != null) predicate = predicate.And(_ => _.uid <= uid_le);
+			if (uid_ge != null) predicate = predicate.And(_ => _.uid >= uid_ge);
 			#endregion
 			#region contact_type_id
+			if (contact_type_id_eq != null) predicate = predicate.And(_ => _.contact_type_id == contact_type_id_eq);
+			if (contact_type_id_ne != null) predicate = predicate.And(_ => _.contact_type_id != contact_type_id_ne);
+			if (contact_type_id_lt != null) predicate = predicate.And(_ => _.contact_type_id < contact_type_id_lt);
+			if (contact_type_id_gt != null) predicate = predicate.And(_ => _.contact_type_id > contact_type_id_gt);
+			if (contact_type_id_le != null) predicate = predicate.And(_ => _.contact_type_id <= contact_type_id_le);
+			if (contact_type_id_ge != null) predicate = predicate.And(_ => _.contact_type_id >= contact_type_id_ge);
 			#endregion
 			#region name
+			if (name_eq != null) predicate = predicate.And(_ => _.name == name_eq);
+			if (name_ne != null) predicate = predicate.And(_ => _.name != name_ne);
+			if (name_lt != null) predicate = predicate.And(_ => name_lt.CompareTo(_.name) > 0);
+			if (name_gt != null) predicate = predicate.And(_ => name_gt.CompareTo(_.name) < 0);
+			if (name_le != null) predicate = predicate.And(_ => name_le.CompareTo(_.name) >= 0);
+			if (name_ge != null) predicate = predicate.And(_ => name_ge.CompareTo(_.name) <= 0);
 			#endregion
 			#region description
+			if (description_eq != null) predicate = predicate.And(_ => _.description == description_eq);
+			if (description_ne != null) predicate = predicate.And(_ => _.description != description_ne);
+			if (description_lt != null) predicate = predicate.And(_ => description_lt.CompareTo(_.description) > 0);
+			if (description_gt != null) predicate = predicate.And(_ => description_gt.CompareTo(_.description) < 0);
+			if (description_le != null) predicate = predicate.And(_ => description_le.CompareTo(_.description) >= 0);
+			if (description_ge != null) predicate = predicate.And(_ => description_ge.CompareTo(_.description) <= 0);
 			#endregion
 			#region display_order
+			if (display_order_eq != null) predicate = predicate.And(_ => _.display_order == display_order_eq);
+			if (display_order_ne != null) predicate = predicate.And(_ => _.display_order != display_order_ne);
+			if (display_order_lt != null) predicate = predicate.And(_ => _.display_order < display_order_lt);
+			if (display_order_gt != null) predicate = predicate.And(_ => _.display_order > display_order_gt);
+			if (display_order_le != null) predicate = predicate.And(_ => _.display_order <= display_order_le);
+			if (display_order_ge != null) predicate = predicate.And(_ => _.display_order >= display_order_ge);
 			#endregion
 			#region created_at
+			if (created_at_eq != null) predicate = predicate.And(_ => _.created_at == created_at_eq);
+			if (created_at_ne != null) predicate = predicate.And(_ => _.created_at != created_at_ne);
+			if (created_at_lt != null) predicate = predicate.And(_ => _.created_at < created_at_lt);
+			if (created_at_gt != null) predicate = predicate.And(_ => _.created_at > created_at_gt);
+			if (created_at_le != null) predicate = predicate.And(_ => _.created_at <= created_at_le);
+			if (created_at_ge != null) predicate = predicate.And(_ => _.created_at >= created_at_ge);
 			#endregion
 			#region created_by
+			if (created_by_eq != null) predicate = predicate.And(_ => _.created_by == created_by_eq);
+			if (created_by_ne != null) predicate = predicate.And(_ => _.created_by != created_by_ne);
+			if (created_by_lt != null) predicate = predicate.And(_ => _.created_by < created_by_lt);
+			if (created_by_gt != null) predicate = predicate.And(_ => _.created_by > created_by_gt);
+			if (created_by_le != null) predicate = predicate.And(_ => _.created_by <= created_by_le);
+			if (created_by_ge != null) predicate = predicate.And(_ => _.created_by >= created_by_ge);
 			#endregion
 			#region modified_at
+			if (modified_at_eq != null) predicate = predicate.And(_ => _.modified_at == modified_at_eq);
+			if (modified_at_ne != null) predicate = predicate.And(_ => _.modified_at != modified_at_ne);
+			if (modified_at_lt != null) predicate = predicate.And(_ => _.modified_at < modified_at_lt);
+			if (modified_at_gt != null) predicate = predicate.And(_ => _.modified_at > modified_at_gt);
+			if (modified_at_le != null) predicate = predicate.And(_ => _.modified_at <= modified_at_le);
+			if (modified_at_ge != null) predicate = predicate.And(_ => _.modified_at >= modified_at_ge);
 			#endregion
 			#region modified_by
+			if (modified_by_eq != null) predicate = predicate.And(_ => _.modified_by == modified_by_eq);
+			if (modified_by_ne != null) predicate = predicate.And(_ => _.modified_by != modified_by_ne);
+			if (modified_by_lt != null) predicate = predicate.And(_ => _.modified_by < modified_by_lt);
+			if (modified_by_gt != null) predicate = predicate.And(_ => _.modified_by > modified_by_gt);
+			if (modified_by_le != null) predicate = predicate.And(_ => _.modified_by <= modified_by_le);
+			if (modified_by_ge != null) predicate = predicate.And(_ => _.modified_by >= modified_by_ge);
 			#endregion
 			#region removed_at
+			if (removed_at_eq != null) predicate = predicate.And(_ => _.removed_at == removed_at_eq);
+			if (removed_at_ne != null) predicate = predicate.And(_ => _.removed_at != removed_at_ne);
+			if (removed_at_lt != null) predicate = predicate.And(_ => _.removed_at < removed_at_lt);
+			if (removed_at_gt != null) predicate = predicate.And(_ => _.removed_at > removed_at_gt);
+			if (removed_at_le != null) predicate = predicate.And(_ => _.removed_at <= removed_at_le);
+			if (removed_at_ge != null) predicate = predicate.And(_ => _.removed_at >= removed_at_ge);
 			#endregion
 			#region row_version
+			if (row_version_eq != null) predicate = predicate.And(_ => _.row_version == row_version_eq);
+			if (row_version_ne != null) predicate = predicate.And(_ => _.row_version != row_version_ne);
 			#endregion
 
 			return predicate;
@@ -10221,6 +13534,27 @@ namespace peppa.Domain
 			return table.SingleOrDefault(_ => _.uid == p_uid);
 		}
 		/// <summary>
+		/// 主キーを指定してRoleデータ取得
+		/// </summary>
+		/// <param name="table"></param>
+		/// <param name="p_role_id">ロールID(role_id)</param>
+		/// <returns></returns>
+		public static Role Find(this ITable<Role> table, string p_role_id)
+		{
+			return table.SingleOrDefault(_ => _.role_id == p_role_id);
+		}
+		/// <summary>
+		/// 主キーを指定してRolePermissionデータ取得
+		/// </summary>
+		/// <param name="table"></param>
+		/// <param name="p_role_id">ロールID(role_id)</param>
+		/// <param name="p_permission_id">権限ID(permission_id)</param>
+		/// <returns></returns>
+		public static RolePermission Find(this ITable<RolePermission> table, string p_role_id, string p_permission_id)
+		{
+			return table.SingleOrDefault(_ => _.role_id == p_role_id && _.permission_id == p_permission_id);
+		}
+		/// <summary>
 		/// 主キーを指定してAccountデータ取得
 		/// </summary>
 		/// <param name="table"></param>
@@ -10229,6 +13563,17 @@ namespace peppa.Domain
 		public static Account Find(this ITable<Account> table, int p_account_id)
 		{
 			return table.SingleOrDefault(_ => _.account_id == p_account_id);
+		}
+		/// <summary>
+		/// 主キーを指定してAccountRoleデータ取得
+		/// </summary>
+		/// <param name="table"></param>
+		/// <param name="p_account_id">アカウントID(account_id)</param>
+		/// <param name="p_role_id">ロールID(role_id)</param>
+		/// <returns></returns>
+		public static AccountRole Find(this ITable<AccountRole> table, int p_account_id, string p_role_id)
+		{
+			return table.SingleOrDefault(_ => _.account_id == p_account_id && _.role_id == p_role_id);
 		}
 		/// <summary>
 		/// 主キーを指定してStaffデータ取得
